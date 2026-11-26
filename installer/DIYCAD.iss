@@ -15,7 +15,7 @@ DefaultDirName={localappdata}\Programs\{#AppName}
 DefaultGroupName={#AppName}
 PrivilegesRequired=lowest
 OutputDir=..\build\installer
-OutputBaseFilename=DIY.CAD-{#AppVersion}-kurulum
+OutputBaseFilename=DIY.CAD-{#AppVersion}-setup
 SetupIconFile=..\icon.ico
 UninstallDisplayIcon={app}\{#AppExe}
 Compression=lzma2
@@ -43,6 +43,7 @@ Source: "..\plugins\*.gd"; DestDir: "{app}\plugins"; Flags: ignoreversion
 Source: "..\OCC_Kur.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\README.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\CHANGELOG.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]

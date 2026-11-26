@@ -9,7 +9,20 @@ Goals and phases: [ROADMAP.md](ROADMAP.md)
 
 The user interface is Turkish by default; switch to English under **Tools → Options → General → Language** (applies instantly) or start with `--lang=en`. Menu and tool names below are given as they appear in the English UI.
 
-## Running
+## Download (Windows, no Godot needed)
+
+Get the latest version from the **[Releases](https://github.com/emirrdumann729-ui/DIY.CAD/releases/latest)** page:
+
+| File | What it is |
+|---|---|
+| `DIY.CAD-<version>-setup.exe` | Installer (recommended): per-user install, no admin rights, Start menu / desktop shortcut, `.dcad` / `.dasm` file association, optional OpenCASCADE setup |
+| `DIY.CAD-<version>-portable.zip` | Portable: unzip anywhere and run `DIY.CAD.exe` |
+
+The program runs right away with the built-in CSG kernel (sketches, extrude / revolve / cut, STL export...). Features that need the OpenCASCADE kernel (fillet, shell, STEP, drawings, sheet metal...) require Python 3.11–3.13: tick "Install the OpenCASCADE kernel" in the installer, or run `OCC_Kur.bat` once. The executables are not code-signed, so Windows SmartScreen may warn on first launch ("More info → Run anyway").
+
+Godot is only needed to run from source or to change the code (see below).
+
+## Running from source
 
 | File | What it does |
 |---|---|
@@ -17,7 +30,7 @@ The user interface is Turkish by default; switch to English under **Tools → Op
 | `Editor.bat` | Opens the project in the Godot editor (to change the code) |
 | `Test.bat` | Runs the automated tests (unit, constraint solver, sketch operations, end-to-end UI; B-rep tests too when OCC is installed) |
 | `OCC_Kur.bat` | Installs the OpenCASCADE (B-rep) kernel (once) |
-| `Paketle.bat` | Windows package: `build\DIY.CAD.exe` (portable) and, if Inno Setup 6 is installed, `build\installer\DIY.CAD-<version>-kurulum.exe`. Requires the Godot 4.7.1 export templates (editor: Editor → Manage Export Templates) |
+| `Paketle.bat` | Windows package: `build\DIY.CAD.exe` (portable) and, if Inno Setup 6 is installed, `build\installer\DIY.CAD-<version>-setup.exe`. Requires the Godot 4.7.1 export templates (editor: Editor → Manage Export Templates) |
 
 Godot is expected at `Godot\Godot_v4.7.1-stable_win64.exe` in the parent folder.
 

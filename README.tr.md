@@ -7,7 +7,20 @@ Hedef ve aşamalar için: [ROADMAP.md](ROADMAP.md)
 
 **Şu anki sürüm: 0.9.3 — STL içe aktarma (eksen bazlı ölçek, bölgesel uzatma, kademeli büyütme, koruma bölgesi) + Faz 9 (tamamlandı): arka planda ağ işleme, büyük montajlar için LOD, eklentiler, İngilizce arayüz, Windows paketleme, otomatik kaydetme, kısayollar, fare hareketleri, makrolar** (önceki: Faz 8). Sürüm notları: [CHANGELOG.md](CHANGELOG.md)
 
-## Çalıştırma
+## İndir (Windows, Godot gerekmez)
+
+Son sürüm **[Releases](https://github.com/emirrdumann729-ui/DIY.CAD/releases/latest)** sayfasında:
+
+| Dosya | Nedir |
+|---|---|
+| `DIY.CAD-<sürüm>-setup.exe` | Kurulum (önerilen): kullanıcı klasörüne kurar, yönetici izni gerekmez, Başlat menüsü / masaüstü kısayolu, `.dcad` / `.dasm` ilişkilendirme, isteğe bağlı OpenCASCADE kurulumu |
+| `DIY.CAD-<sürüm>-portable.zip` | Taşınabilir: istediğin yere aç, `DIY.CAD.exe`'yi çalıştır |
+
+Program dahili CSG çekirdeğiyle hemen çalışır (taslak, ekstrüzyon / döndürme / kesme, STL çıktısı...). OpenCASCADE çekirdeği isteyen özellikler (köşe yuvarlatma, kabuk, STEP, teknik resim, sac metal...) için Python 3.11–3.13 gerekir: kurulumda "OpenCASCADE çekirdeğini kur" kutusunu işaretle ya da `OCC_Kur.bat`'ı bir kez çalıştır. Dosyalar kod imzalı olmadığı için Windows SmartScreen ilk açılışta uyarabilir ("Ek bilgi → Yine de çalıştır").
+
+Godot yalnızca kaynak koddan çalıştırmak veya kodu değiştirmek için gerekir (aşağıda).
+
+## Kaynak koddan çalıştırma
 
 | Dosya | Ne yapar |
 |---|---|
@@ -15,7 +28,7 @@ Hedef ve aşamalar için: [ROADMAP.md](ROADMAP.md)
 | `Editor.bat` | Projeyi Godot editöründe açar (kodu değiştirmek için) |
 | `Test.bat` | Otomatik testleri çalıştırır (birim, kısıt çözücü, taslak işlemleri, uçtan uca arayüz; OCC kuruluysa B-rep testleri de) |
 | `OCC_Kur.bat` | OpenCASCADE (B-rep) çekirdeğini kurar (bir kez) |
-| `Paketle.bat` | Windows paketi: `build\DIY.CAD.exe` (taşınabilir) ve Inno Setup 6 kuruluysa `build\installer\DIY.CAD-<sürüm>-kurulum.exe`. Godot 4.7.1 dışa aktarma şablonları gerekir (editör: Editor → Manage Export Templates) |
+| `Paketle.bat` | Windows paketi: `build\DIY.CAD.exe` (taşınabilir) ve Inno Setup 6 kuruluysa `build\installer\DIY.CAD-<sürüm>-setup.exe`. Godot 4.7.1 dışa aktarma şablonları gerekir (editör: Editor → Manage Export Templates) |
 
 Godot, bir üst klasördeki `Godot\Godot_v4.7.1-stable_win64.exe` olarak beklenir.
 
