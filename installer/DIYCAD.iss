@@ -1,6 +1,6 @@
-﻿; DIY.CAD Windows kurulum betiği (Inno Setup 6). Paketle.bat tarafından derlenir.
-; Kullanıcı klasörüne kurar (yönetici izni gerekmez); OpenCASCADE ortamı (occ_env) kurulum klasörüne
-; OCC_Kur.bat ile isteğe bağlı kurulur.
+﻿; DIY.CAD Windows installer script (Inno Setup 6). Compiled by Paketle.bat.
+; Installs per user (no admin rights needed); the OpenCASCADE environment (occ_env) is optionally set up in the
+; install folder with OCC_Kur.bat.
 
 #define AppName "DIY.CAD"
 #define AppVersion "0.9.3"
@@ -31,8 +31,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
-Name: "assoc"; Description: ".dcad / .dasm dosyalarını DIY.CAD ile aç"; GroupDescription: "Dosya ilişkilendirme"
-Name: "occ"; Description: "OpenCASCADE (B-rep) çekirdeğini kur — Python 3.11–3.13 gerekli, ~240 MB indirir"; GroupDescription: "İsteğe bağlı"; Flags: unchecked
+Name: "assoc"; Description: "Open .dcad / .dasm files with DIY.CAD"; GroupDescription: "File association"
+Name: "occ"; Description: "Install the OpenCASCADE (B-rep) kernel — requires Python 3.11–3.13, downloads ~240 MB"; GroupDescription: "Optional"; Flags: unchecked
 
 [Files]
 Source: "..\build\{#AppExe}"; DestDir: "{app}"; Flags: ignoreversion
@@ -47,22 +47,22 @@ Source: "..\icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#AppName}"; Filename: "{app}\{#AppExe}"
-Name: "{group}\OpenCASCADE çekirdeğini kur"; Filename: "{app}\OCC_Kur.bat"; WorkingDir: "{app}"
+Name: "{group}\Install OpenCASCADE kernel"; Filename: "{app}\OCC_Kur.bat"; WorkingDir: "{app}"
 Name: "{group}\{cm:UninstallProgram,{#AppName}}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; Tasks: desktopicon
 
 [Registry]
 Root: HKCU; Subkey: "Software\Classes\.dcad"; ValueType: string; ValueName: ""; ValueData: "DIYCAD.Part"; Flags: uninsdeletevalue; Tasks: assoc
-Root: HKCU; Subkey: "Software\Classes\DIYCAD.Part"; ValueType: string; ValueName: ""; ValueData: "DIY.CAD Parça"; Flags: uninsdeletekey; Tasks: assoc
+Root: HKCU; Subkey: "Software\Classes\DIYCAD.Part"; ValueType: string; ValueName: ""; ValueData: "DIY.CAD Part"; Flags: uninsdeletekey; Tasks: assoc
 Root: HKCU; Subkey: "Software\Classes\DIYCAD.Part\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#AppExe},0"; Tasks: assoc
 Root: HKCU; Subkey: "Software\Classes\DIYCAD.Part\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#AppExe}"" ""%1"""; Tasks: assoc
 Root: HKCU; Subkey: "Software\Classes\.dasm"; ValueType: string; ValueName: ""; ValueData: "DIYCAD.Assembly"; Flags: uninsdeletevalue; Tasks: assoc
-Root: HKCU; Subkey: "Software\Classes\DIYCAD.Assembly"; ValueType: string; ValueName: ""; ValueData: "DIY.CAD Montaj"; Flags: uninsdeletekey; Tasks: assoc
+Root: HKCU; Subkey: "Software\Classes\DIYCAD.Assembly"; ValueType: string; ValueName: ""; ValueData: "DIY.CAD Assembly"; Flags: uninsdeletekey; Tasks: assoc
 Root: HKCU; Subkey: "Software\Classes\DIYCAD.Assembly\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#AppExe},0"; Tasks: assoc
 Root: HKCU; Subkey: "Software\Classes\DIYCAD.Assembly\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#AppExe}"" ""%1"""; Tasks: assoc
 
 [Run]
-Filename: "{app}\OCC_Kur.bat"; WorkingDir: "{app}"; Description: "OpenCASCADE kurulumu"; Tasks: occ; Flags: shellexec waituntilterminated
+Filename: "{app}\OCC_Kur.bat"; WorkingDir: "{app}"; Description: "OpenCASCADE setup"; Tasks: occ; Flags: shellexec waituntilterminated
 Filename: "{app}\{#AppExe}"; Description: "{cm:LaunchProgram,{#AppName}}"; Flags: nowait postinstall skipifsilent
 
 [UninstallDelete]

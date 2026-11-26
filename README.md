@@ -1,291 +1,295 @@
 # DIY.CAD
 
-Godot 4.7 ile yazılmış, **parametrik ve özellik tabanlı** bir CAD programı.
-Hedef ve aşamalar için: [ROADMAP.md](ROADMAP.md)
+**English** | [Türkçe](README.tr.md)
 
-**Şu anki sürüm: 0.9.3 — STL içe aktarma (eksen bazlı ölçek, bölgesel uzatma, kademeli büyütme, koruma bölgesi) + Faz 9 (tamamlandı): arka planda ağ işleme, büyük montajlar için LOD, eklentiler, İngilizce arayüz, Windows paketleme, otomatik kaydetme, kısayollar, fare hareketleri, makrolar** (önceki: Faz 8). Sürüm notları: [CHANGELOG.md](CHANGELOG.md)
+A **parametric, feature-based** CAD program written in Godot 4.7.
+Goals and phases: [ROADMAP.md](ROADMAP.md)
 
-## Çalıştırma
+**Current version: 0.9.3 — STL import (per-axis scale, regional stretch, tapered growth, protected region) + Phase 9 (complete): background mesh processing, LOD for large assemblies, plugins, English UI, Windows packaging, auto-save, keyboard shortcuts, mouse gestures, macros** (previous: Phase 8). Release notes: [CHANGELOG.md](CHANGELOG.md)
 
-| Dosya | Ne yapar |
+The user interface is Turkish by default; switch to English under **Tools → Options → General → Language** (applies instantly) or start with `--lang=en`. Menu and tool names below are given as they appear in the English UI.
+
+## Running
+
+| File | What it does |
 |---|---|
-| `DIY.CAD.bat` | Programı açar |
-| `Editor.bat` | Projeyi Godot editöründe açar (kodu değiştirmek için) |
-| `Test.bat` | Otomatik testleri çalıştırır (birim, kısıt çözücü, taslak işlemleri, uçtan uca arayüz; OCC kuruluysa B-rep testleri de) |
-| `OCC_Kur.bat` | OpenCASCADE (B-rep) çekirdeğini kurar (bir kez) |
-| `Paketle.bat` | Windows paketi: `build\DIY.CAD.exe` (taşınabilir) ve Inno Setup 6 kuruluysa `build\installer\DIY.CAD-<sürüm>-kurulum.exe`. Godot 4.7.1 dışa aktarma şablonları gerekir (editör: Editor → Manage Export Templates) |
+| `DIY.CAD.bat` | Starts the program |
+| `Editor.bat` | Opens the project in the Godot editor (to change the code) |
+| `Test.bat` | Runs the automated tests (unit, constraint solver, sketch operations, end-to-end UI; B-rep tests too when OCC is installed) |
+| `OCC_Kur.bat` | Installs the OpenCASCADE (B-rep) kernel (once) |
+| `Paketle.bat` | Windows package: `build\DIY.CAD.exe` (portable) and, if Inno Setup 6 is installed, `build\installer\DIY.CAD-<version>-kurulum.exe`. Requires the Godot 4.7.1 export templates (editor: Editor → Manage Export Templates) |
 
-Godot, bir üst klasördeki `Godot\Godot_v4.7.1-stable_win64.exe` olarak beklenir.
+Godot is expected at `Godot\Godot_v4.7.1-stable_win64.exe` in the parent folder.
 
-Komut satırı seçenekleri (`--` işaretinden sonra):
-- `--demo` örnek parçayla, `--demo2` isim plakası örneğiyle açılır
-- `--open=yol\parca.dcad` dosya açar
-- `--uitest` uçtan uca arayüz testini çalıştırır
-- `--kernel=auto|occ|csg` geometri çekirdeğini seçer (kayıtlı ayarı geçersiz kılar)
-- `--macro=dosya.gd` açılışta makro çalıştırır; `--lang=en|tr`, `--theme=light|dark` ayarı o oturum için geçersiz kılar; `--no-plugins` eklentileri yüklemez
-- Komut satırında `.dcad` / `.dasm` dosya yolu verilirse (dosya ilişkilendirme) açılır
+Command-line options (after `--`):
+- `--demo` opens with a sample part, `--demo2` with the name-plate sample
+- `--open=path\part.dcad` opens a file
+- `--uitest` runs the end-to-end UI test
+- `--kernel=auto|occ|csg` selects the geometry kernel (overrides the saved setting)
+- `--macro=file.gd` runs a macro at startup; `--lang=en|tr` and `--theme=light|dark` override the setting for that session; `--no-plugins` skips loading plugins
+- A `.dcad` / `.dasm` path given on the command line (file association) is opened
 
-## İlk parçanı yap
+## Make your first part
 
-1. Soldaki ağaçta **Üst Düzlem**'e tıkla, üstteki **Taslak** düğmesine bas.
-2. **Köşe Dikdörtgen** (R) aracıyla iki tıkla bir dikdörtgen çiz. Kenarlar otomatik olarak yatay/dikey ilişki alır.
-3. **Akıllı Boyut** (D): üst kenara tıkla, yukarıya yerleştir, açılan kutuya `60` yaz, Enter. Sol kenar için `40`.
-4. Taslak hâlâ **mavi** ise eksik tanımlıdır: köşeden orijine boyut ver ya da köşegen merkez çizgisi çizip
-   orijinle birlikte seçerek **Orta Nokta** ilişkisi ekle. Her şey **siyah** olunca durum çubuğunda *Tam Tanımlı* yazar.
-5. **Daire** (C) çiz, Akıllı Boyut ile çapını ver.
-6. **Ekstrüzyon** düğmesine bas, derinliği gir, **Tamam**.
-7. **Değerlendir → Malzeme** ile malzeme seç, **Kütle Özellikleri** ile ağırlığı gör.
-8. **Dosya → STL olarak dışa aktar** ile 3B yazıcıya hazır dosyayı al.
+1. Click **Top Plane** in the tree on the left and press **Sketch** at the top.
+2. Draw a rectangle with **Corner Rectangle** (R) using two clicks. The edges get horizontal/vertical relations automatically.
+3. **Smart Dimension** (D): click the top edge, place it above, type `60` in the box, Enter. `40` for the left edge.
+4. If the sketch is still **blue** it is under-defined: dimension a corner to the origin, or draw a diagonal centerline
+   and select it together with the origin to add a **Midpoint** relation. When everything is **black** the status bar says *Fully Defined*.
+5. Draw a **Circle** (C) and give its diameter with Smart Dimension.
+6. Press **Extrude**, enter the depth, **OK**.
+7. Pick a material with **Evaluate → Material** and see the weight with **Mass Properties**.
+8. Get a 3D-printable file with **File → Export as STL**.
 
-Bir yüzeye tıklayıp tekrar **Taslak** dersen o yüzeyin üzerine çizersin (patron/kesme eklemek için).
+Click a face and press **Sketch** again to draw on that face (to add a boss or a cut).
 
-## Taslak ipuçları
+## Sketch tips
 
-- **Renkler:** mavi = eksik tanımlı, siyah = tam tanımlı, kırmızı = aşırı tanımlı.
-- **Boyut değiştirme:** etikete çift tıkla. Taslak tüm ilişkileri koruyarak kendini günceller.
-- **İlişki ekleme:** öğeleri Shift/Ctrl ile seç; soldaki panelde uygun ilişkiler (paralel, dik, teğet, eşit...) listelenir.
-- **İlişki silme:** yeşil simgeye tıklayıp Delete'e bas veya paneldeki "Mevcut ilişkiler" listesinden sil.
-- **Çelişki:** imkânsız bir boyut ya da ilişki girersen işlem otomatik geri alınır ve durum çubuğunda uyarı çıkar.
-  Fazladan (gereksiz) bir boyut eklersen güdümlü (referans, parantez içinde) boyut olur.
+- **Colors:** blue = under-defined, black = fully defined, red = over-defined.
+- **Changing a dimension:** double-click its label. The sketch updates itself while keeping all relations.
+- **Adding relations:** select entities with Shift/Ctrl; the panel on the left lists the applicable relations (parallel, perpendicular, tangent, equal...).
+- **Deleting relations:** click the green icon and press Delete, or delete it from the "Existing relations" list in the panel.
+- **Conflicts:** an impossible dimension or relation is undone automatically and a warning appears in the status bar.
+  An extra (redundant) dimension becomes a driven (reference, in parentheses) dimension.
 
-## Faz 3 araçları
+## Phase 3 tools
 
-| Araç | Kullanım |
+| Tool | Usage |
 |---|---|
-| Kırp (T) | Silinecek parçaya tıkla; en yakın kesişimler arası silinir |
-| Uzat (E) | Çizginin ucuna yakın tıkla; ilk kesiştiği öğeye uzar |
-| Köşe Yuvarlat / Pah | Aracı seç, yarıçapı panelden ver, köşeye tıkla |
-| Ofset | Öğeleri seç → Ofset → mesafe + yön → Tamam (önizlemeli) |
-| Aynala | Öğeleri ve bir merkez çizgisini birlikte seç → Aynala |
-| Taşı / Çoğalt | Öğeleri seç → taşı, döndür, ölçekle, doğrusal veya dairesel çoğalt |
-| Çokgen (P), Kanal, Spline, Metin | Taslak çubuğundan; metnin yazısı ve boyutu panelden |
-| Elips | Merkez → büyük eksen ucu → küçük eksen genişliği; yarı eksenler Akıllı Boyut ile ölçülendirilir |
-| Parabol | Tepe → odak → başlangıç ucu → bitiş ucu; uçları bir çizgiyle birleştirirsen kapalı kontur olur |
-| Varlıkları Dönüştür | Taslaktayken model yüzüne tıkla; yüzün kenarları sabit çizgi/yay olarak taslağa gelir |
-| Blok | Öğeleri seç → Blok: rijit bütün olur (sürükleyince birlikte taşınır/döner); panelden patlat veya kopyala |
-| Bölge seç | Ekstrüzyon/döndürme panelinde "Bölge seç" → kesişen eğrilerin oluşturduğu alanlara tıkla |
-| 3B Taslak | Özellikler → 3B Taslak: noktaları tıkla, **Tab** ile çizim düzlemini (XY/XZ/YZ) değiştir; eksene yakın çizim X/Y/Z'ye kilitlenir |
+| Trim (T) | Click the piece to delete; the part between the nearest intersections is removed |
+| Extend (E) | Click near the end of a line; it extends to the first entity it meets |
+| Sketch Fillet / Chamfer | Pick the tool, set the radius in the panel, click the corner |
+| Offset | Select entities → Offset → distance + direction → OK (with preview) |
+| Mirror | Select entities together with a centerline → Mirror |
+| Move / Pattern | Select entities → move, rotate, scale, linear or circular pattern |
+| Polygon (P), Slot, Spline, Text | From the sketch toolbar; text content and size in the panel |
+| Ellipse | Center → major axis end → minor axis width; semi-axes are dimensioned with Smart Dimension |
+| Parabola | Vertex → focus → start end → end point; joining the ends with a line gives a closed contour |
+| Convert Entities | While sketching, click a model face; its edges come into the sketch as fixed lines/arcs |
+| Block | Select entities → Block: they become a rigid unit (drag to move/rotate together); explode or copy from the panel |
+| Select regions | "Select regions" in the extrude/revolve panel → click the areas formed by intersecting curves |
+| 3D Sketch | Features → 3D Sketch: click points, switch the drawing plane (XY/XZ/YZ) with **Tab**; drawing near an axis locks to X/Y/Z |
 
-**Denklemler:** Özellikler → Denklemler panelinden global değişken ekle (ör. `genislik = 100`).
-Bir boyutun değer kutusuna `=genislik/2` yaz; boyut Σ ile işaretlenir ve değişken değişince her şey güncellenir.
-Başka boyuta `"D1@Taslak1" * 2` şeklinde başvurulabilir; ekstrüzyon derinliğine de `=kalinlik` yazılabilir.
-Örnek için **Dosya → Örnek: isim plakası**.
+**Equations:** add global variables in the Features → Equations panel (e.g. `width = 100`).
+Type `=width/2` in a dimension's value box; the dimension is marked with Σ and everything updates when the variable changes.
+Other dimensions can be referenced as `"D1@Sketch1" * 2`; an extrude depth can also be `=thickness`.
+See **File → Sample: name plate** for an example.
 
-## Faz 4: OpenCASCADE (B-rep) çekirdeği
+## Phase 4: OpenCASCADE (B-rep) kernel
 
-Gerçek yüzey/kenar topolojisi için program, projeye özel bir Python ortamında çalışan OpenCASCADE
-sunucusunu (`occ/occ_server.py`) arka planda başlatır. Kurulum (bir kez, ~240 MB):
+For true face/edge topology the program starts an OpenCASCADE server (`occ/occ_server.py`) in the background,
+running in a project-local Python environment. Setup (once, ~240 MB):
 
-1. Python 3.11–3.13 kurulu olmalı (`python --version`).
-2. `OCC_Kur.bat` dosyasını çalıştır (`occ_env` klasörünü oluşturur, `cadquery-ocp-novtk` ile statik analiz için `numpy` + `scipy` paketlerini kurar; eski kurulumlarda bir kez daha çalıştırmak yeterli).
+1. Python 3.11–3.13 must be installed (`python --version`).
+2. Run `OCC_Kur.bat` (creates the `occ_env` folder and installs `cadquery-ocp-novtk` plus `numpy` + `scipy` for static analysis; re-run it once on older installs).
 
-Kurulu değilse program otomatik olarak CSG çekirdeğiyle çalışır. Sağ alttaki çekirdek düğmesi veya
-**Araçlar → Geometri çekirdeği** ile Otomatik / OpenCASCADE / CSG seçilir; STL kalitesi de buradan ayarlanır.
+Without it the program falls back to the CSG kernel automatically. Choose Auto / OpenCASCADE / CSG with the kernel button at the
+bottom right or **Tools → Geometry kernel**; STL quality is set there as well.
 
-| Komut | Kullanım |
+| Command | Usage |
 |---|---|
-| Köşe Yuvarlatma | Kenarlara tıkla (yüze tıklamak tüm kenarlarını ekler, tekrar tıklamak kaldırır), yarıçapı gir; "Değişken yarıçap" ile başlangıç/bitiş yarıçapı |
-| Pah | Aynı seçim; eşit mesafe, iki mesafe veya açı-mesafe |
-| Kabuk | Açık kalacak yüzlere tıkla, kalınlığı gir (yüz seçmezsen içi boş kapalı gövde) |
-| Eğim | "Tarafsız yüzü seç" ile düzlemsel yüzü, sonra eğim verilecek yüzleri tıkla; açıyı gir |
-| Kaburga | Taslağa açık bir çizgi çiz (gövdeye değmesi gerekmez, uçlar uzatılır) → Kaburga → kalınlık |
-| Sonucu birleştir | Ekstrüzyon/döndürme panelinde kapatılırsa yeni gövde oluşur |
-| Gövdeleri Birleştir | Gövdelere tıkla (ilki ana gövde), işlemi seç: ekle / çıkar / kesiştir |
-| Gövde Taşı/Kopyala | Gövdeye tıkla, ΔX/ΔY/ΔZ ve dönme eksen/açısını gir; "Kopyala" orijinali korur |
-| Böl | Ana düzlem + ofset seç; her iki taraf ayrı gövde olur ya da yalnızca bir taraf kalır |
-| STEP / IGES çıktısı | Dosya menüsü veya STEP düğmesi — diğer CAD programlarına aktarım |
-| İçe aktar | STEP/IGES dosyasını gövde olarak ekler; üzerine taslak çizip kesme/ekstrüzyon yapılabilir |
+| Fillet | Click edges (clicking a face adds all its edges, clicking again removes them), enter the radius; "Variable radius" for start/end radii |
+| Chamfer | Same selection; equal distance, two distances or angle-distance |
+| Shell | Click the faces to leave open, enter the thickness (no face selected = hollow closed body) |
+| Draft | Pick the planar neutral face with "Select neutral face", then click the faces to draft; enter the angle |
+| Rib | Draw an open line in a sketch (it need not touch the body, the ends are extended) → Rib → thickness |
+| Merge result | When unchecked in the extrude/revolve panel a new body is created |
+| Combine Bodies | Click bodies (the first is the main body), choose the operation: add / subtract / common |
+| Move/Copy Body | Click a body, enter ΔX/ΔY/ΔZ and the rotation axis/angle; "Copy" keeps the original |
+| Split | Pick a main plane + offset; both sides become separate bodies or only one side is kept |
+| STEP / IGES export | File menu or the STEP button — transfer to other CAD programs |
+| Import | Adds a STEP/IGES file as a body; you can sketch on it and cut/extrude |
 
-Seçim sırasında model, düzenlenen özellikten önceki hâliyle gösterilir; "Sonucu önizle" kutusu sonucu gösterir.
-Kütle özellikleri ve ölçülen hacimler B-rep'ten kesin olarak hesaplanır.
+While selecting, the model is shown as it was before the edited feature; the "Preview result" box shows the result.
+Mass properties and measured volumes are computed exactly from the B-rep.
 
-**Topolojik adlandırma:** yüzler onları üreten özellik ve taslak öğesinden kalıcı ad alır; seçtiğin kenarlar/yüzler
-bu adlarla saklanır. Parçanın ölçüleri büyük ölçüde değişse de yuvarlatma doğru kenarda kalır, yüzeye çizilen
-taslak da destek yüzüyle birlikte kayar (ör. taban yüksekliği artınca üstteki çıkıntı yeni üst yüze taşınır).
+**Topological naming:** faces get persistent names from the feature and sketch entity that created them; the edges/faces you
+select are stored by these names. Even when the part's dimensions change a lot, a fillet stays on the right edge and a sketch
+drawn on a face moves with its support face (e.g. when the base gets taller, the boss on top moves to the new top face).
 
-## Faz 5 araçları
+## Phase 5 tools
 
-| Araç | Kullanım |
+| Tool | Usage |
 |---|---|
-| Referans Geometri ▾ | Düzlem (ofset / açılı / 3 nokta / yüzeye teğet), Eksen, Nokta, Koordinat Sistemi, Helis / Spiral (konik de olabilir), Projeksiyon Eğrisi. Düzlem kenarına tıklayıp "Taslak" ile üzerine çiz |
-| Ekstrüzyon bitişleri | Sonrakine Kadar, Köşeye Kadar, Yüzeye Kadar, Yüzeyden Ofset ("Hedef yüzü seç" ile modele tıkla); İki yön, Eğim açısı, İnce özellik |
-| Süpürme / Süpürme Kesme | Profil taslağı + yol (taslak zinciri, 3B taslak, helis veya projeksiyon eğrisi); isteğe bağlı kılavuz eğrisi veya bükme açısı |
-| Loft / Loft Kesme | Kapalı profilli taslakları işaretle; isteğe bağlı kılavuz eğrisi |
-| Çoğaltma ▾ | Doğrusal (2 yön), Dairesel, Aynala, Tablo, Eğri Güdümlü; ağaçtan seçili özellik otomatik eklenir, yön/eksen modelden seçilebilir |
-| Sarma | Silindire teğet bir düzleme taslak (ör. metin) çiz → Sarma → silindirik yüzü seç → kabartma / oyma / çizgi |
-| Kabartma | Taslak profilini gövdenin yüzeyine (eğri de olabilir) sabit kalınlıkta kabart veya oy |
-| Kütle özellikleri | Koordinat sistemi varsa sonuçlar ona göre raporlanabilir |
-| Delik Sihirbazı | Standart (ISO/ANSI), tür, ölçü, geçme seç; düzlemsel yüzde her tıklama bir delik |
-| Kubbe | Düzlemsel yüze tıkla, yüksekliği gir |
-| Geri alma çubuğu | Ağaçta sürükle veya özelliğe sağ tık → "Geri alma çubuğunu bunun altına taşı" |
-| Sıralama | Özelliği ağaçta sürükle-bırak veya sağ tık → Yukarı/Aşağı taşı; sağ tık → Ebeveyn / Çocuk |
+| Reference Geometry ▾ | Plane (offset / angled / 3 points / tangent to face), Axis, Point, Coordinate System, Helix / Spiral (can be tapered), Projected Curve. Click a plane's edge and use "Sketch" to draw on it |
+| Extrude end conditions | Up To Next, Up To Vertex, Up To Surface, Offset From Surface (click the model with "Select target face"); Two directions, Draft angle, Thin feature |
+| Sweep / Swept Cut | Profile sketch + path (sketch chain, 3D sketch, helix or projected curve); optional guide curve or twist angle |
+| Loft / Lofted Cut | Tick the sketches with closed profiles; optional guide curve |
+| Pattern ▾ | Linear (2 directions), Circular, Mirror, Table, Curve-driven; the feature selected in the tree is added automatically, direction/axis can be picked on the model |
+| Wrap | Draw a sketch (e.g. text) on a plane tangent to a cylinder → Wrap → pick the cylindrical face → emboss / deboss / scribe |
+| Emboss | Raise or engrave the sketch profile onto the body surface (may be curved) at constant thickness |
+| Mass properties | Results can be reported relative to a coordinate system if one exists |
+| Hole Wizard | Pick the standard (ISO/ANSI), type, size and fit; each click on a planar face places a hole |
+| Dome | Click a planar face, enter the height |
+| Rollback bar | Drag it in the tree, or right-click a feature → "Move rollback bar below this" |
+| Reordering | Drag and drop a feature in the tree, or right-click → Move up/down; right-click → Parent / Child |
 
-## Faz 6: Teknik resim
+## Phase 6: Drawings
 
-Üstteki **Teknik Resim** sekmesine geçince parçanın A3 sayfası (ISO, 1. açı) standart 3 görünüş ve
-izometrik görünüşle otomatik oluşur; resim parça dosyasıyla birlikte kaydedilir. Görünüşler OpenCASCADE'in
-gizli çizgi kaldırma (HLR) algoritmasıyla hesaplanır ve model değişince kendiliğinden güncellenir.
+Switching to the **Drawing** tab creates an A3 sheet (ISO, first angle) for the part with the standard 3 views and
+an isometric view automatically; the drawing is saved together with the part file. Views are computed with
+OpenCASCADE's hidden-line removal (HLR) and update automatically when the model changes.
 
-| Araç | Kullanım |
+| Tool | Usage |
 |---|---|
-| Seç | Görünüşe / açıklamaya tıkla → sol panelde özellikleri (ölçek, gizli çizgi, teğet kenar, tolerans...). Sürükleyerek taşı; izdüşüm görünüşleri hizalı kalır |
-| Sayfa | Boyut (A4–A0, ANSI A–E), dikey/yatay, ISO/ANSI, 1./3. açı, sayfa ölçeği, antet alanları, yeni sayfa |
-| Standart 3 Görünüş / Model Görünüşü | Ön-üst-yan-izometrik; ya da panelden yönelim seçip sayfaya tıkla |
-| İzdüşüm Görünüşü | Bir görünüş seç → sağına/soluna/üstüne/altına tıkla |
-| Kesit Görünüşü | Görünüş seç → kesit çizgisinin iki ucuna tıkla (taramalı A-A görünüşü; panelden bakış yönü çevrilir) |
-| Detay Görünüşü | Görünüş seç → merkeze, sonra daire kenarına tıkla (büyütme panelden) |
-| Yardımcı / Kırık Görünüş | Kenara tıkla (ona dik bakış) / kaldırılacak bölgenin iki sınırına tıkla |
-| Akıllı Boyut | İki köşe (yerleşime göre yatay/dikey/hizalı), daire (çap), kenar (uzunluk), iki kenar (açı); toleranslar panelden |
-| Model Boyutları | Taslak boyutlarını, taslak düzlemine paralel görünüşlere ilişkili olarak aktarır |
-| Merkez İşareti / Çizgisi, Not, Balon | Daireye tıkla / iki nokta / yere tıkla / hedef + balon yeri |
-| Yüzey Pürüzlülüğü, Geometrik Tolerans, Datum, Kaynak Sembolü | Sembolü yerleştir (gerekirse önce hedef noktası), değerleri panelden düzenle |
-| Malzeme Listesi, Revizyon Ekle | BOM tablosunu aç/kapat, revizyon tablosuna satır ekle |
-| PDF / SVG / DXF / Yazdır | Vektörel çıktı; PDF'e Türkçe karakterler için yazı tipi gömülür. DWG için DXF'i AutoCAD veya ücretsiz ODA File Converter ile dönüştürün |
+| Select | Click a view / annotation → its properties in the left panel (scale, hidden lines, tangent edges, tolerance...). Drag to move; projected views stay aligned |
+| Sheet | Size (A4–A0, ANSI A–E), portrait/landscape, ISO/ANSI, first/third angle, sheet scale, title block fields, new sheet |
+| Standard 3 Views / Model View | Front-top-side-isometric; or pick an orientation in the panel and click the sheet |
+| Projected View | Select a view → click to its right/left/top/bottom |
+| Section View | Select a view → click both ends of the section line (hatched A-A view; flip the viewing direction in the panel) |
+| Detail View | Select a view → click the center, then the circle edge (magnification in the panel) |
+| Auxiliary / Broken View | Click an edge (view perpendicular to it) / click the two limits of the region to remove |
+| Smart Dimension | Two vertices (horizontal/vertical/aligned depending on placement), circle (diameter), edge (length), two edges (angle); tolerances in the panel |
+| Model Items | Brings sketch dimensions into views parallel to the sketch plane, associatively |
+| Center Mark / Centerline, Note, Balloon | Click a circle / two points / a location / target + balloon position |
+| Surface Finish, Geometric Tolerance, Datum, Weld Symbol | Place the symbol (target point first if needed), edit values in the panel |
+| Bill of Materials, Add Revision | Toggle the BOM table, add a row to the revision table |
+| PDF / SVG / DXF / Print | Vector output; a font is embedded in PDFs for Turkish characters. For DWG, convert the DXF with AutoCAD or the free ODA File Converter |
 
-Tuvalde tekerlek yakınlaştırır, sağ/orta tuş kaydırır, **F** sayfayı sığdırır, **Delete** seçileni siler, **Esc** aracı bırakır.
+On the canvas the wheel zooms, right/middle button pans, **F** fits the sheet, **Delete** deletes the selection, **Esc** releases the tool.
 
-## Faz 7: Montaj
+## Phase 7: Assemblies
 
-**Dosya → Yeni Montaj** (veya *Örnek montajı aç*) ile montaj moduna geçilir; montaj `.dasm` dosyasına kaydedilir,
-parça dosyalarına göreli yolla başvurur. Üstte yalnızca **Montaj** sekmesi görünür.
+**File → New Assembly** (or *Open sample assembly*) switches to assembly mode; the assembly is saved to a `.dasm` file
+that references part files by relative path. Only the **Assembly** tab is shown at the top.
 
-| Araç | Kullanım |
+| Tool | Usage |
 |---|---|
-| Bileşen Ekle | Parça dosyası (.dcad) seç; ilk bileşen sabittir (f), sonrakiler yanına yerleşir |
-| Bağlantı Elemanları | Cıvata (ISO 4017), somun (ISO 4032), pul (ISO 7089), pim, rulman — ölçü ve uzunluk seçip ekle |
-| Eşleştir | Yüzlere / kenarlara tıkla (ağaçtan bileşenin ana düzlemleri de seçilebilir) → türü seç; ★ önerilenler. Standart: çakışık, paralel, dik, teğet, eş merkezli, mesafe, açı, kilit. Gelişmiş: genişlik, simetrik, mesafe/açı sınırı, kanal. Mekanik: menteşe, dişli, kremayer-pinyon, vida |
-| Sürükleme | Bileşeni sol tuşla sürükle: eşleştirmelere uyarak hareket eder. Taşı / Döndür araçlarında sayısal giriş |
-| Sabitle / Serbest, Gizle / Göster | Seçili bileşen için; ağaçta (-) eksik tanımlı, ⚠ sağlanamayan eşleştirme |
-| Girişim Tespiti | Çakışan hacimler kırmızı gösterilir, hacimleri listelenir (OpenCASCADE) |
-| Patlatılmış Görünüm, Patlat / Topla | Adım ekle (bileşen + yön + mesafe) veya otomatik patlat; animasyonlu aç/kapat |
-| Hareket Etüdü | Döndürülecek bileşenin silindirik yüzüne tıkla, dev/dk ve süre gir → Oynat; dişli/vida eşleştirmeleri hareketi aktarır |
-| Malzeme Listesi, Kütle Özellikleri | Adet / malzeme / kütle tablosu (CSV), toplam kütle ve ağırlık merkezi |
-| Parçayı Aç | Bileşenin parçasını düzenle; **Montaj** sekmesine tıklayınca parça kaydedilip montaja dönülür |
-| STEP Çıktısı | Tüm montajı tek STEP dosyası olarak dışa aktar |
-| Yeni Parça | Montaj içinde yeni parça: diğer bileşenler yarı saydam görünür, düzlemsel yüzlerine tıklayıp taslak açılır; bitince Montaj sekmesi |
-| Bileşen Çoğaltma | Bileşenlere tıkla → doğrusal (yön + aralık) veya dairesel (eksen + toplam açı); örnekler çekirdeği izler |
-| Alt montaj | Bileşen Ekle ile `.dasm` seç: rijit grup olarak eklenir; BOM'da alt montajlar açılabilir |
-| Kam (mekanik eşleştirme) | 1: izleyici (silindir / nokta), 2: kamın yan yüzü — profil otomatik çıkarılır |
-| Çarpışmada dur | Montaj panelinde veya Taşı aracında işaretle: sürüklenen bileşen çarpışmadan önce durur (OpenCASCADE) |
-| Teknik Resim (montajda) | Montajın resmi: görünüşler, malzeme listesi tablosu, **Otomatik Balon** |
+| Insert Component | Pick a part file (.dcad); the first component is fixed (f), the next ones are placed next to it |
+| Fasteners | Bolt (ISO 4017), nut (ISO 4032), washer (ISO 7089), pin, bearing — choose size and length and insert |
+| Mate | Click faces / edges (a component's main planes can also be picked in the tree) → choose the type; ★ marks suggestions. Standard: coincident, parallel, perpendicular, tangent, concentric, distance, angle, lock. Advanced: width, symmetric, distance/angle limit, slot. Mechanical: hinge, gear, rack and pinion, screw |
+| Dragging | Drag a component with the left button: it moves while respecting the mates. Numeric input in the Move / Rotate tools |
+| Fix / Float, Hide / Show | For the selected component; in the tree (-) means under-defined, ⚠ an unsatisfied mate |
+| Interference Detection | Overlapping volumes are shown in red and listed with their volumes (OpenCASCADE) |
+| Exploded View, Explode / Collapse | Add steps (component + direction + distance) or explode automatically; animated toggle |
+| Motion Study | Click the cylindrical face of the component to rotate, enter rpm and duration → Play; gear/screw mates transfer the motion |
+| Bill of Materials, Mass Properties | Quantity / material / mass table (CSV), total mass and center of gravity |
+| Open Part | Edit the component's part; clicking the **Assembly** tab saves the part and returns to the assembly |
+| STEP Export | Export the whole assembly as a single STEP file |
+| New Part | New part in context: other components are semi-transparent, click their planar faces to start a sketch; use the Assembly tab when done |
+| Component Pattern | Click components → linear (direction + spacing) or circular (axis + total angle); instances follow the seed |
+| Sub-assembly | Pick a `.dasm` with Insert Component: it is added as a rigid group; sub-assemblies can be expanded in the BOM |
+| Cam (mechanical mate) | 1: follower (cylinder / point), 2: the cam's side face — the profile is extracted automatically |
+| Stop at collision | Tick in the assembly panel or the Move tool: the dragged component stops before colliding (OpenCASCADE) |
+| Drawing (in assembly) | Assembly drawing: views, bill of materials table, **Auto Balloon** |
 
-## Faz 8: Sac metal, kaynaklı konstrüksiyon, konfigürasyonlar
+## Phase 8: Sheet metal, weldments, configurations
 
-| Araç (sekme) | Kullanım |
+| Tool (tab) | Usage |
 |---|---|
-| Taban Flanş (Sac Metal) | Kapalı profilli taslak → sac plaka; açık çizgi zinciri → bükümlü sac (L, U, Z...). Kalınlık, büküm yarıçapı, K-faktörü panelden |
-| Kenar Flanş (Sac Metal) | Taban plakanın üst veya alt kenarlarına tıkla (birden çok); boy, açı, yarıçap, yön ve uç boşlukları |
-| Açınım / Açınım DXF | Düz sac görünümünü aç/kapat; açınımı büküm çizgileri ve "YUKARI 90° R2" notlarıyla DXF'e kaydet (lazer, abkant) |
-| Yapısal Üye (Kaynaklar) | Taslak veya 3B taslak çizgileri + profil (kare/dikdörtgen kutu, boru, köşebent, UPN, IPE, lama); köşe birleşimi gönye veya alın; T birleşimleri otomatik kırpılır |
-| Kesim Listesi (Kaynaklar) | Profil, boy, kesim açıları, adet ve kütle tablosu; CSV |
-| Konfigürasyon (Değerlendir) | Boyut / derinlik değerleri ve bastırma durumlarından oluşan konfigürasyonlar; tasarım tablosu CSV içe / dışa aktarma (`D1@Taslak1`, `D1@Ekstrüzyon1`, `$BASTIR@Özellik`) |
+| Base Flange (Sheet Metal) | Closed-profile sketch → sheet plate; open line chain → bent sheet (L, U, Z...). Thickness, bend radius, K-factor in the panel |
+| Edge Flange (Sheet Metal) | Click the top or bottom edges of the base plate (several allowed); length, angle, radius, direction and end gaps |
+| Flat Pattern / Flat Pattern DXF | Toggle the flat sheet view; save the flat pattern to DXF with bend lines and "UP 90° R2" notes (laser, press brake) |
+| Structural Member (Weldments) | Sketch or 3D-sketch lines + profile (square/rectangular tube, pipe, angle, UPN, IPE, flat bar); corner treatment miter or butt; T-joints are trimmed automatically |
+| Cut List (Weldments) | Profile, length, cut angles, quantity and mass table; CSV |
+| Configuration (Evaluate) | Configurations made of dimension / depth values and suppression states; design table CSV import / export (`D1@Taslak1`, `D1@Ekstrüzyon1`, `$BASTIR@Özellik` — keys use the Turkish feature names) |
 
-### Faz 8 (devam): yüzeyler, analiz, CAM, görselleştirme
+### Phase 8 (continued): surfaces, analysis, CAM, visualization
 
-| Araç (sekme) | Kullanım |
+| Tool (tab) | Usage |
 |---|---|
-| Ekstrüde / Döndürülmüş / Loft Yüzey (Yüzeyler) | Açık ya da kapalı taslak eğrilerinden kalınlıksız yüzey; döndürmede ilk merkez çizgisi eksendir; loft son iki taslağı birleştirir |
-| Düzlemsel Yüzey (Yüzeyler) | Kapalı konturlu taslaktan düz yüzey (iç konturlar delik olur) |
-| Ofset Yüzey / Yüzey Dikme (Yüzeyler) | Yüzeyi ofsetle; çakışan kenarlı yüzeyleri dik — kapalıysa katıya çevrilir |
-| Kalınlaştır / Yüzey Kırp (Yüzeyler) | Yüzeyden kalınlıklı katı (tek yön / orta, katıyla birleştir); standart düzlem (+ofset) ile kırp |
-| Kıvırma (Sac Metal) | 180° kenar flanşı (hem): taban kenarına tıkla |
-| Statik Analiz (Analiz) | "Tıklama: Sabit yüz" ile yüzlere tıkla, sonra "Yük yüzü" ile yük yüzlerine; kuvvet ve yönü panelden; Çalıştır → von Mises / yer değiştirme haritası, şekil değiştirme, güvenlik katsayısı |
-| Eğim Analizi (Analiz) | Çekme yönü ve en az eğim açısı: yeşil pozitif, kırmızı negatif, sarı eğim gerekli; mavi çizgi olası ayırma çizgisi |
-| CAM G-kod (Analiz) | Taslak + işlem (dış / iç kontur, cep), takım çapı, derinlik, paso, ilerleme, Z0 referansı → turuncu takım yolları ve `.nc` G-kod |
-| Görselleştirme (Analiz) | Ortam (stüdyo / gün / gece / HDRI dosyası), gölge, zemin, SSAO, yüzey (PBR), pozlama, çıkartma ekle (görüntü seç → yüze tıkla), Render kaydet (2×) |
+| Extruded / Revolved / Loft Surface (Surfaces) | Zero-thickness surface from open or closed sketch curves; the first centerline is the revolve axis; loft joins the last two sketches |
+| Planar Surface (Surfaces) | Flat surface from a closed-contour sketch (inner contours become holes) |
+| Offset Surface / Knit Surface (Surfaces) | Offset a surface; knit surfaces with coincident edges — converted to a solid if closed |
+| Thicken / Trim Surface (Surfaces) | Solid with thickness from a surface (one side / mid, merge with solid); trim with a standard plane (+offset) |
+| Hem (Sheet Metal) | 180° edge flange (hem): click a base edge |
+| Static Analysis (Analysis) | Click faces with "Click: Fixed face", then load faces with "Load face"; force and direction in the panel; Run → von Mises / displacement map, deformed shape, factor of safety |
+| Draft Analysis (Analysis) | Pull direction and minimum draft angle: green positive, red negative, yellow draft needed; the blue line is the possible parting line |
+| CAM G-code (Analysis) | Sketch + operation (outer / inner contour, pocket), tool diameter, depth, step-down, feed, Z0 reference → orange toolpaths and `.nc` G-code |
+| Visualization (Analysis) | Environment (studio / day / night / HDRI file), shadows, floor, SSAO, surface (PBR), exposure, decals (pick an image → click a face), save render (2×) |
 
-## Faz 9: Profesyonelleşme
+## Phase 9: Professional features
 
-| Özellik | Kullanım |
+| Feature | Usage |
 |---|---|
-| Otomatik kaydetme | Kirli parça / montaj her 5 dakikada (Seçenekler'den değişir) kullanıcı klasörüne yazılır; kaydedince, yeni belgede ve düzgün çıkışta silinir |
-| Çökme kurtarma | Program beklenmedik kapanırsa sonraki açılışta "Belge kurtarma" penceresi: Kurtar (kirli olarak açılır) veya Kaydı sil |
-| Son dosyalar | Dosya → Son Dosyalar (en çok 10, parça ve montaj); boş parçada sol panelde de listelenir |
-| Yedek | Seçenekler → "Kaydederken önceki sürümü yedekle": üzerine yazmadan önce `dosya.dcad.bak` |
-| Klavye kısayolları | Araçlar → Seçenekler → Klavye kısayolları: 170'ten fazla komut (menüler, tüm araç çubukları, taslak araçları); satıra çift tıkla, tuşa bas. Taslak bağlamı (L, C, R...) ayrıdır; menüler yeni kısayolu gösterir |
-| Fare hareketleri | Seçenekler → Fare hareketleri → "Sağ tuşla sürükleme: Fare hareketleri": sağ tuşu basılı tutup bir yöne çek → 8 yönlü halkada komut (parça: görünümler, taslak: çizim araçları, montaj); her yön atanabilir. Döndürme orta tuşa geçer, Ctrl + sağ tuş kaydırır |
-| Tema / ölçek | Koyu veya açık tema (yeniden başlatınca), arayüz ölçeği %75–%200 (anında) |
-| Dil | Türkçe / English (anında): menüler, sekmeler, araç çubukları, ipuçları, panel etiketleri, seçenekler; sözlük `i18n/en.txt` (`türkçe<TAB>english`) |
-| Makro çalıştır | Araçlar → Makro çalıştır: `func run(m: MacroApi)` içeren `.gd` dosyası. Örnekler `macros/` klasöründe (parametrik flanş, delikli plaka, toplu çıktı). Komut satırı: `DIY.CAD.bat -- --macro=dosya.gd` |
-| Makro kaydı | Araçlar → Makro kaydını başlat / durdur: aradaki özellikler makroya dönüşür (dolu parçaya oynatılırsa kimlikler eşlenir). "Parçayı makro olarak kaydet" tüm parçayı yeniden kuran makro üretir |
-| STL içe aktarma | Özellikler → İçe Aktar: `.stl` (ikili / ASCII) gövde olur (OpenCASCADE: dikilmiş katı; CSG: ağ gövdesi). Panelde **Ölçek X / Y / Z**, ölçek merkezi, öteleme ve **bölgesel uzatma** (eksen, bölge başı / sonu özgün koordinatta, eklenecek boy mm): bölgedeki geometri orantılı uzar, dışı bozulmaz. **Koruma bölgesi**: seçilen aralık (ve makrodan verilen kesit bantları) ölçeklenmeden yalnızca taşınır — delik / yuva / geçme gibi ayrıntılar özgün ölçüde kalır, çevresi büyür. Makrodan **kademeli kesit büyütme** (`taper`: bölge boyunca kesite doğrusal artan mm), çok bölgeli uzatma (`stretch` listesi) ve koruma bantları (`protect.bands`) da verilebilir. Sonra Dosya → STL ile dışa aktar — mevcut STL'leri yeniden boyutlandırmak için |
-| Eklentiler | `plugins/` (program klasörü) veya kullanıcı klasöründeki `plugins/` içine `setup(api: PluginApi)` içeren `.gd` dosyası: komutlar **Eklentiler** sekmesinde düğme olur (kısayol / fare hareketi atanabilir), özel panel açabilir, model / belge değişince haber alır. Seçenekler → Eklentiler: aç / kapat, klasörü aç. Örnekler: **Hızlı Kutu** (ölçülerle kutu / profil), **Parça Bilgisi** (canlı parça özeti) |
-| Arka planda ağ işleme | Çekirdekten gelen modelin işlenmesi (komşuluk, kenarlar, yumuşatılmış normaller) iş parçacığında yapılır; büyük modellerde arayüz donmaz (120 bin üçgende en uzun donma 1,07 sn → 0,23 sn) |
-| Büyük montajlar | Bileşen ağlarına otomatik ayrıntı seviyesi (LOD): uzaktaki / küçük görünen bileşenler sadeleştirilmiş ağla çizilir. Montaj panelinde **Büyük montaj modu** (otomatik: 400 bin üçgen veya 80 bileşen üstü): kenarlar yalnız seçili bileşende |
+| Auto-save | A modified part / assembly is written to the user folder every 5 minutes (configurable in Options); deleted on save, on a new document and on a clean exit |
+| Crash recovery | If the program closes unexpectedly, the next start shows a "Document recovery" window: Recover (opens as modified) or Delete record |
+| Recent files | File → Recent Files (up to 10, parts and assemblies); also listed in the left panel of an empty part |
+| Backup | Options → "Back up the previous version when saving": `file.dcad.bak` before overwriting |
+| Keyboard shortcuts | Tools → Options → Keyboard shortcuts: more than 170 commands (menus, all toolbars, sketch tools); double-click a row and press a key. The sketch context (L, C, R...) is separate; menus show the new shortcut |
+| Mouse gestures | Options → Mouse gestures → "Right-drag: Mouse gestures": hold the right button and pull in a direction → command on an 8-way ring (part: views, sketch: drawing tools, assembly); each direction is assignable. Rotation moves to the middle button, Ctrl + right button pans |
+| Theme / scale | Dark or light theme (after restart), UI scale 75–200% (instant) |
+| Language | Türkçe / English (instant): menus, tabs, toolbars, tooltips, panel labels, options; dictionary `i18n/en.txt` (`turkish<TAB>english`) |
+| Run macro | Tools → Run macro: a `.gd` file containing `func run(m: MacroApi)`. Samples are in `macros/` (parametric flange, plate with holes, batch export). Command line: `DIY.CAD.bat -- --macro=file.gd` |
+| Macro recording | Tools → Start / stop macro recording: the features added in between become a macro (ids are remapped when played on a non-empty part). "Save part as macro" generates a macro that rebuilds the whole part |
+| STL import | Features → Import: an `.stl` (binary / ASCII) becomes a body (OpenCASCADE: sewn solid; CSG: mesh body). The panel has **Scale X / Y / Z**, scale center, translation and **regional stretch** (axis, region start / end in original coordinates, length to add in mm): geometry in the region stretches proportionally, the rest is not distorted. **Protected region**: the selected range (and the section bands given from a macro) is only moved, not scaled — details such as holes / slots / joints keep their original size while the surroundings grow. **Tapered section growth** (`taper`: mm added to the section, increasing linearly along the region), multi-region stretch (`stretch` list) and protection bands (`protect.bands`) can be given from a macro. Then File → STL to export — for resizing existing STLs |
+| Plugins | A `.gd` file with `setup(api: PluginApi)` in `plugins/` (program folder) or `plugins/` in the user folder: its commands become buttons on the **Plugins** tab (shortcuts / mouse gestures assignable), it can open custom panels and get notified when the model / document changes. Options → Plugins: enable / disable, open folder. Samples: **Quick Box** (box / profile from dimensions), **Part Info** (live part summary) |
+| Background mesh processing | Processing of the model from the kernel (adjacency, edges, smoothed normals) runs on a worker thread; the UI does not freeze on large models (longest freeze with 120k triangles 1.07 s → 0.23 s) |
+| Large assemblies | Automatic level of detail (LOD) for component meshes: distant / small components are drawn with simplified meshes. **Large assembly mode** in the assembly panel (auto: above 400k triangles or 80 components): edges only on the selected component |
 
-Makro API'si (`src/core/macro_api.gd`): `new_part`, `sketch("front"|"top"|"right", ofset)`, `sketch_at(nokta, normal)`,
-taslakta `line / polyline / rect / center_rect / circle / arc / polygon / slot / spline`, `extrude`, `cut`, `cut_through`,
-`revolve`, `feature(tür, parametreler)`, `set_material`, `set_variable`, `suppress`, `await rebuild()`, `volume()`, `area()`,
-`view()`, `cmd(komut)`, `export(yol)` (STL / OBJ / STEP / IGES / PNG), `save()`, `message()`; tüm uygulamaya `m.app`, `m.doc` ile erişilir.
+Macro API (`src/core/macro_api.gd`): `new_part`, `sketch("front"|"top"|"right", offset)`, `sketch_at(point, normal)`,
+in a sketch `line / polyline / rect / center_rect / circle / arc / polygon / slot / spline`, `extrude`, `cut`, `cut_through`,
+`revolve`, `feature(type, params)`, `set_material`, `set_variable`, `suppress`, `await rebuild()`, `volume()`, `area()`,
+`view()`, `cmd(command)`, `export(path)` (STL / OBJ / STEP / IGES / PNG), `save()`, `message()`; the whole application is reachable through `m.app`, `m.doc`.
 
 ```gdscript
 extends RefCounted
 func run(m: MacroApi) -> void:
-	m.new_part("Pul")
+	m.new_part("Washer")
 	var s := m.sketch("top")
 	s.circle(Vector2.ZERO, 12)
 	s.circle(Vector2.ZERO, 6.5)
 	m.extrude(s, 2)
 	await m.rebuild()
-	m.message("Hacim: %.1f mm³" % m.volume())
+	m.message("Volume: %.1f mm³" % m.volume())
 ```
 
-Eklenti örneği:
+Plugin example:
 
 ```gdscript
 extends RefCounted
-const NAME := "Selam"
-const DESCRIPTION := "Durum çubuğuna parça adını yazar"
+const NAME := "Hello"
+const DESCRIPTION := "Writes the part name to the status bar"
 
 func setup(api: PluginApi) -> void:
-	api.add_command("selam", "Selam", "Parça adını göster", "part", func(): api.status("Parça: " + api.doc().part_name))
+	api.add_command("hello", "Hello", "Show the part name", "part", func(): api.status("Part: " + api.doc().part_name))
 ```
 
-## Birimler
+## Units
 
-Sağ alttaki birim düğmesinden **MMGS / CGS / MKS / IPS** seçilir; **Araçlar → Belge Özellikleri** ile
-uzunluk/kütle birimi ve ondalık basamak ayrı ayrı ayarlanır. Birimler parça dosyasıyla birlikte kaydedilir.
-Sayı alanlarına ifade ve birim yazılabilir: `25.4*2`, `12,5`, `1in + 3mm`, `100/3`.
+Choose **MMGS / CGS / MKS / IPS** with the unit button at the bottom right; length/mass units and decimal places are set
+separately with **Tools → Document Properties**. Units are saved with the part file.
+Number fields accept expressions and units: `25.4*2`, `12,5`, `1in + 3mm`, `100/3`.
 
-## Fare ve klavye
+## Mouse and keyboard
 
 | | |
 |---|---|
-| Orta tuş veya sağ tuş sürükle | Döndür |
-| Ctrl + orta/sağ tuş sürükle | Kaydır |
-| Tekerlek | İmlece doğru yakınlaştır |
-| Sol tık / çift tık | Seç / düzenle |
-| F | Ekrana sığdır |
-| Ctrl+1…7 | Ön, Arka, Sol, Sağ, Üst, Alt, İzometrik |
-| Ctrl+8 | Düzleme dik görünüm |
-| Ctrl+Z / Ctrl+Y | Geri al / Yinele |
-| Delete, F2, Esc, Enter | Sil, Yeniden adlandır, İptal, Tamam |
-| Taslakta: L, N, R, C, A, P, D, T, E, S, G | Çizgi, Merkez çizgisi, Dikdörtgen, Daire, Yay, Çokgen, Akıllı Boyut, Kırp, Uzat, Seç, Izgara |
+| Middle or right button drag | Rotate |
+| Ctrl + middle/right button drag | Pan |
+| Wheel | Zoom toward the cursor |
+| Left click / double click | Select / edit |
+| F | Zoom to fit |
+| Ctrl+1…7 | Front, Back, Left, Right, Top, Bottom, Isometric |
+| Ctrl+8 | Normal to plane |
+| Ctrl+Z / Ctrl+Y | Undo / Redo |
+| Delete, F2, Esc, Enter | Delete, Rename, Cancel, OK |
+| In a sketch: L, N, R, C, A, P, D, T, E, S, G | Line, Centerline, Rectangle, Circle, Arc, Polygon, Smart Dimension, Trim, Extend, Select, Grid |
 
-## Kod yapısı
+## Code structure
 
 ```
-src/core/     Belge, özellik, taslak, düzlem, birimler, malzemeler, kısıt çözücü, taslak işlemleri, denklemler, metin konturları, ayarlar (AppSettings), otomatik kayıt (Autosave), makro API (MacroApi)
-src/kernel/   Çekirdek seçici (GeoKernel), OpenCASCADE köprüsü (OccKernel), CSG yedeği, mesh araçları, kütle özellikleri, arka plan ağ işleme (MeshJob)
-occ/          OpenCASCADE sunucusu (Python, OCP) — occ_env içindeki Python ile çalışır
-src/view/     3B görünüm, CAD kamerası, taslak editörü (boyut/ilişki çizimi), eksen göstergesi
-src/ui/       Özellik ağacı, özellik paneli, sayı alanı, SVG ikonlar, kısayollar (Keymap), fare hareketleri (MouseGesture), tema (UiTheme), dil (I18n), Seçenekler penceresi
-src/io/       STL, OBJ, DXF, SVG dışa aktarma
-src/special/  Faz 8: sac metal (SheetMetal), kaynaklı konstrüksiyon (Weldment), konfigürasyonlar (Configs), yüzeyler (Surfaces), statik analiz + eğim analizi (Fea), CAM (Cam), arayüz + görselleştirme (SpecialUI)
-src/assembly/ Montaj: belge (CadAssembly), eşleştirme çözücüsü (MateSolver), referans geometrisi (MateGeom), görünüm (AssemblyView), mod denetleyicisi (AssemblyMode), bağlantı elemanları (Toolbox), LOD (AsmLod)
-src/drawing/  Teknik resim: veri modeli ve izdüşüm geometrisi (Drawing), sayfa çizimi (DrawingRender), PDF/SVG/DXF (DrawingExport), tuval (DrawingCanvas)
-plugins/      Örnek eklentiler (Hızlı Kutu, Parça Bilgisi); src/core/plugin_api.gd + plugins.gd
-macros/       Örnek makrolar; i18n/ İngilizce sözlük ve yardım; installer/ Inno Setup betiği; tools/ simge üretici
-tests/        selftest.gd (birim), solver_test.gd (kısıt çözücü), ops_test.gd (taslak işlemleri), drawing_test.gd (teknik resim), assembly_test.gd (montaj çözücüsü), special_test.gd (sac metal, kaynak, konfigürasyon, CAM, analiz), pro_test.gd (ayarlar, kısayollar, makro, dil), occ_test.gd (B-rep), ui_flow.gd (uçtan uca)
+src/core/     Document, feature, sketch, plane, units, materials, constraint solver, sketch operations, equations, text outlines, settings (AppSettings), auto-save (Autosave), macro API (MacroApi)
+src/kernel/   Kernel selector (GeoKernel), OpenCASCADE bridge (OccKernel), CSG fallback, mesh utilities, mass properties, background mesh processing (MeshJob)
+occ/          OpenCASCADE server (Python, OCP) — runs with the Python in occ_env
+src/view/     3D view, CAD camera, sketch editor (dimension/relation drawing), axis triad
+src/ui/       Feature tree, property panel, number field, SVG icons, shortcuts (Keymap), mouse gestures (MouseGesture), theme (UiTheme), language (I18n), Options window
+src/io/       STL, OBJ, DXF, SVG export; STL import
+src/special/  Phase 8: sheet metal (SheetMetal), weldments (Weldment), configurations (Configs), surfaces (Surfaces), static + draft analysis (Fea), CAM (Cam), UI + visualization (SpecialUI)
+src/assembly/ Assembly: document (CadAssembly), mate solver (MateSolver), reference geometry (MateGeom), view (AssemblyView), mode controller (AssemblyMode), fasteners (Toolbox), LOD (AsmLod)
+src/drawing/  Drawings: data model and projection geometry (Drawing), sheet rendering (DrawingRender), PDF/SVG/DXF (DrawingExport), canvas (DrawingCanvas)
+plugins/      Sample plugins (Quick Box, Part Info); src/core/plugin_api.gd + plugins.gd
+macros/       Sample macros; i18n/ English dictionary and help; installer/ Inno Setup script; tools/ icon generator
+tests/        selftest.gd (unit), solver_test.gd (constraint solver), ops_test.gd (sketch operations), drawing_test.gd (drawings), assembly_test.gd (mate solver), special_test.gd (sheet metal, weldments, configurations, CAM, analysis), pro_test.gd (settings, shortcuts, macros, language, STL import), occ_test.gd (B-rep), ui_flow.gd (end-to-end)
 ```
 
-Dosya formatı `.dcad` okunabilir JSON'dur.
+The `.dcad` file format is human-readable JSON. Source code comments are in Turkish.
 
-## Gereksinimler
+## Requirements
 
-- Windows 10/11, [Godot 4.7.1](https://godotengine.org/download) (standart sürüm; `Godot\` klasörü projenin bir üst klasöründe)
-- İsteğe bağlı OpenCASCADE çekirdeği için Python 3.11–3.13 (`OCC_Kur.bat` gerisini kurar). `occ_env` ve `build` klasörleri depoda yoktur, yerelde oluşturulur.
+- Windows 10/11, [Godot 4.7.1](https://godotengine.org/download) (standard build; the `Godot\` folder one level above the project)
+- Python 3.11–3.13 for the optional OpenCASCADE kernel (`OCC_Kur.bat` installs the rest). The `occ_env` and `build` folders are not in the repository; they are created locally.
 
-## Lisans
+## License
 
-[MIT](LICENSE). OpenCASCADE çekirdeği (OCP / OCCT) kendi lisansıyla (LGPL 2.1, istisnalı) ayrıca kurulur; depoya dahil değildir.
+[MIT](LICENSE). The OpenCASCADE kernel (OCP / OCCT) is installed separately under its own license (LGPL 2.1 with exception) and is not included in the repository.

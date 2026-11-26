@@ -1,230 +1,230 @@
-# DIY.CAD — Yol Haritası
+# DIY.CAD — Roadmap
 
-Godot 4.7 ile yazılan, **parametrik, özellik tabanlı (feature-based)** bir CAD programı.
+A **parametric, feature-based** CAD program written in Godot 4.7.
 
 
 ---
 
-## Mimari kararlar
+## Architecture decisions
 
-| Konu | Karar | Neden |
+| Topic | Decision | Why |
 |---|---|---|
-| Motor | Godot 4.7.1 | Hazır 3B görüntüleme, arayüz (UI) sistemi, çapraz platform |
-| Dil | Önce GDScript, ağır işler için sonra C++ (GDExtension) | Hızlı ilerleme; performans gereken yer C++'a taşınır |
-| Dahili birim | **Milimetre** ve **derece** | Tüm veriler mm saklanır, ekranda seçilen birime çevrilir |
-| Geometri çekirdeği | Faz 1–3: Godot CSG (Manifold kütüphanesi). Faz 4: **OpenCASCADE (OCCT)** | CSG hızlı başlangıç sağlar; fillet/shell/STEP için gerçek B-rep çekirdek şart |
-| Veri modeli | Özellik ağacı (Feature Tree) → her değişiklikte baştan "rebuild" | Parametrik geçmiş: her özellik öncekilerin sonucuna uygulanır |
-| Dosya formatı | `.dcad` (okunabilir JSON) | Hata ayıklaması kolay, sürüm kontrolüne uygun |
-| Geri al / Yinele | Belge anlık görüntüleri (snapshot) | Basit ve hatasız; sonra komut tabanlıya geçilebilir |
+| Engine | Godot 4.7.1 | Ready-made 3D rendering, UI system, cross-platform |
+| Language | GDScript first, C++ (GDExtension) later for heavy work | Fast progress; performance-critical parts can move to C++ |
+| Internal units | **Millimeters** and **degrees** | All data is stored in mm and converted to the selected unit on screen |
+| Geometry kernel | Phases 1–3: Godot CSG (Manifold library). Phase 4: **OpenCASCADE (OCCT)** | CSG gives a quick start; fillet/shell/STEP need a real B-rep kernel |
+| Data model | Feature tree → full "rebuild" on every change | Parametric history: each feature is applied to the result of the previous ones |
+| File format | `.dcad` (readable JSON) | Easy to debug, version-control friendly |
+| Undo / Redo | Document snapshots | Simple and robust; can move to a command-based approach later |
 
-### Klasör yapısı
+### Folder layout
 
 ```
 DIY.CAD/
   project.godot
-  scenes/main.tscn          Ana sahne
-  src/main.gd               Uygulama: menüler, komutlar, modlar
-  src/core/                 Belge, özellik, taslak, düzlem, birimler (motor bağımsız veri)
-  src/kernel/               Geometri çekirdeği (CSG) + mesh araçları
-  src/view/                 3B görünüm, kamera, taslak editörü, eksen göstergesi
-  src/ui/                   Özellik ağacı, özellik paneli, sayı alanı, ikonlar
-  src/io/                   Dışa aktarma: STL, OBJ, DXF, SVG
-  tests/selftest.gd         Otomatik testler (komut satırından)
+  scenes/main.tscn          Main scene
+  src/main.gd               Application: menus, commands, modes
+  src/core/                 Document, feature, sketch, plane, units (engine-independent data)
+  src/kernel/               Geometry kernel (CSG) + mesh utilities
+  src/view/                 3D view, camera, sketch editor, axis triad
+  src/ui/                   Feature tree, property panel, number field, icons
+  src/io/                   Export: STL, OBJ, DXF, SVG
+  tests/selftest.gd         Automated tests (from the command line)
 ```
 
 ---
 
-## Faz 0 — Temel iskelet ✅
-- [x] Godot projesi, ana sahne, klasör yapısı
-- [x] Arayüz yerleşimi: menü, komut çubuğu, özellik ağacı, özellik paneli, 3B görünüm, durum çubuğu
-- [x] CAD kamerası: döndür / kaydır / imlece doğru yakınlaştır, standart görünümler, sığdır, perspektif/ortografik
-- [x] Orijin ve üç ana düzlem (Ön, Üst, Sağ), XYZ eksen göstergesi
-- [x] Belge modeli, JSON kaydet/aç, geri al/yinele
+## Phase 0 — Basic skeleton ✅
+- [x] Godot project, main scene, folder layout
+- [x] UI layout: menu, command bar, feature tree, property panel, 3D view, status bar
+- [x] CAD camera: rotate / pan / zoom toward the cursor, standard views, fit, perspective/orthographic
+- [x] Origin and the three main planes (Front, Top, Right), XYZ axis triad
+- [x] Document model, JSON save/open, undo/redo
 
-**Bitti sayılır:** Program açılıyor, model alanında gezinilebiliyor, boş parça kaydedilip açılabiliyor.
+**Done when:** the program starts, you can navigate the model space, and an empty part can be saved and opened.
 
-## Faz 1 — Basit parça çizip çıktı alma (MVP) ✅
-- [x] Taslak (Sketch) modu: düzlem veya düzlemsel yüzey üzerine çizim, kamera düzleme dik döner
-- [x] Taslak araçları: çizgi (zincirleme), merkez çizgisi, köşe dikdörtgen, merkez dikdörtgen, daire, merkez noktalı yay
-- [x] Izgara (grid) ve uç nokta / orijin yakalama, yatay/dikey yakalama
-- [x] Ortak noktalar: birleşik çizgiler birlikte hareket eder, nokta sürükleme
-- [x] Seçili öğenin ölçülerini panelden sayısal girme (ifade destekli: `25.4*2`, `12,5`, `1in`)
-- [x] Kapalı kontur bulma, iç içe konturlar = delik
-- [x] Ekstrüzyon Patron/Taban: Kör, Orta Düzlem, Tümünden; yön çevirme
-- [x] Ekstrüzyon Kesme
-- [x] Döndürme / Döndürerek Kesme (taslak ekseni veya merkez çizgisi etrafında)
-- [x] Özellik ağacı: düzenle, taslağı düzenle, bastır (suppress), sil, yeniden adlandır
-- [x] Canlı önizleme (özellik paneli açıkken)
-- [x] Dışa aktarma: **STL** (3B baskı), **OBJ**, taslağı **DXF** / **SVG** (lazer kesim), ekran görüntüsü PNG
+## Phase 1 — Draw a simple part and export (MVP) ✅
+- [x] Sketch mode: draw on a plane or planar face, the camera turns normal to the plane
+- [x] Sketch tools: line (chained), centerline, corner rectangle, center rectangle, circle, center-point arc
+- [x] Grid and endpoint / origin snapping, horizontal/vertical snapping
+- [x] Shared points: connected lines move together, point dragging
+- [x] Numeric input for the selected entity in the panel (with expressions: `25.4*2`, `12,5`, `1in`)
+- [x] Closed contour detection, nested contours = holes
+- [x] Extruded Boss/Base: Blind, Mid Plane, Through All; flip direction
+- [x] Extruded Cut
+- [x] Revolve / Revolved Cut (about a sketch axis or centerline)
+- [x] Feature tree: edit, edit sketch, suppress, delete, rename
+- [x] Live preview (while the property panel is open)
+- [x] Export: **STL** (3D printing), **OBJ**, sketch as **DXF** / **SVG** (laser cutting), PNG screenshot
 
-**Bitti sayılır:** Bir plaka çizip delik açıp üstüne silindir ekleyip STL alınabiliyor ve dilimleyicide (Cura vb.) açılıyor.
+**Done when:** you can draw a plate, cut a hole, add a cylinder on top, export STL and open it in a slicer (Cura etc.).
 
-## Faz 2 — Ölçülendirme ve birimler ✅
-- [x] Birim sistemi seçimi: MMGS, CGS, MKS, IPS (inç-pound-saniye), özel; ondalık hassasiyet ayarı (durum çubuğundan tek tıkla)
-- [x] Belge özellikleri penceresi (birim sistemi, uzunluk/kütle birimi, ondalık basamak, malzeme) — birimler belgeyle kaydedilir
-- [x] **Kısıt çözücü (constraint solver)**: ağırlıklı Levenberg-Marquardt, serbestlik derecesi (DOF) analizi, çelişkili değişikliği otomatik geri alma
-- [x] **Akıllı Boyut (Smart Dimension)**: doğrusal (hizalı/yatay/dikey, imleç konumuna göre), yarıçap, çap, açı, nokta-çizgi mesafesi
-- [x] Boyutlar sürükleyici (driving) ve güdümlü (driven); ekranda oklu boyut gösterimi, çift tıkla değer kutusu
-- [x] Geometrik ilişkiler: çakışık, yatay, dikey, paralel, dik, teğet, eş merkezli, eşit, orta nokta, simetrik, sabit, doğrusal
-- [x] Çizerken otomatik ilişkiler: yatay/dikey çıkarımı, uç noktaya/çizgi ortasına/öğe üzerine yakalama, dikdörtgende yatay+dikey
-- [x] İlişkileri koruyarak sürükleme (nokta, çizgi taşıma, daire yarıçapı); gereksiz ilişki/boyut uyarısı
-- [x] Taslak tanım durumu renkleri: mavi (eksik tanımlı), siyah (tam tanımlı), kırmızı (aşırı tanımlı); ağaçta (-)/(+) öneki
-- [x] Ölçüm aracı: mesafe, normal mesafe, açı, alan, çevre, koordinat
-- [x] Malzeme kütüphanesi (21 malzeme: metal, 3B baskı plastikleri, ahşap) ve **kütle özellikleri** (hacim, alan, kütle, ağırlık merkezi, atalet tensörü, asal momentler)
+## Phase 2 — Dimensioning and units ✅
+- [x] Unit system selection: MMGS, CGS, MKS, IPS (inch-pound-second), custom; decimal precision (one click from the status bar)
+- [x] Document properties window (unit system, length/mass unit, decimal places, material) — units are saved with the document
+- [x] **Constraint solver**: weighted Levenberg-Marquardt, degree-of-freedom (DOF) analysis, automatic undo of conflicting changes
+- [x] **Smart Dimension**: linear (aligned/horizontal/vertical depending on cursor position), radius, diameter, angle, point-line distance
+- [x] Driving and driven dimensions; on-screen dimensions with arrows, double-click for the value box
+- [x] Geometric relations: coincident, horizontal, vertical, parallel, perpendicular, tangent, concentric, equal, midpoint, symmetric, fixed, collinear
+- [x] Automatic relations while drawing: horizontal/vertical inference, snapping to endpoint/line midpoint/entity, horizontal+vertical on rectangles
+- [x] Relation-preserving dragging (point, line move, circle radius); redundant relation/dimension warning
+- [x] Sketch definition colors: blue (under-defined), black (fully defined), red (over-defined); (-)/(+) prefix in the tree
+- [x] Measure tool: distance, normal distance, angle, area, perimeter, coordinates
+- [x] Material library (21 materials: metals, 3D-printing plastics, wood) and **mass properties** (volume, area, mass, center of gravity, inertia tensor, principal moments)
 
-**Bitti sayılır:** Dikdörtgen çizip "60 x 40" boyut verince taslak kendini düzeltiyor, birimi inç'e çevirince tüm değerler doğru görünüyor. ✔ (Otomatik testlerle doğrulandı.)
+**Done when:** drawing a rectangle and dimensioning it "60 x 40" fixes the sketch, and switching to inches shows all values correctly. ✔ (Verified by automated tests.)
 
-## Faz 3 — Gelişmiş taslak araçları ve parametreler ✅
-- [x] **Kırp** (güç kırpma: tıklanan parça en yakın kesişimler arasında silinir; uçlar çakışık ilişkisiyle bağlanır)
-- [x] **Uzat** (çizgiyi ilk kesiştiği öğeye kadar)
-- [x] **Ofset**: bağlı zincirleri köşeleriyle birlikte; tüm kenarlar tek bir ofset boyutuna bağlı, önizlemeli
-- [x] **Aynala**: merkez çizgisine göre, simetrik ilişkilerle (orijinal değişince kopya da değişir)
-- [x] **Taslak köşe yuvarlatma / pah**: teğet ilişkileri + yarıçap/mesafe boyutu; eski köşe "sanal köşe" olarak kalır, bağlı boyutlar korunur
-- [x] **Çokgen** (yapı çemberi + eşit kenarlar), **düz kanal** (teğet yaylar), **spline** (tüm noktalardan geçen, açık/kapalı), **taslak metni** (yazı tipi konturlarından; kabartma/gravür)
-- [x] Doğrusal / dairesel taslak çoğaltma, taşı / kopyala / döndür / ölçekle (iç ilişkiler kopyalanır)
-- [x] Yapı geometrisi (construction) değiştirme
-- [x] Global değişkenler ve **denklemler** (`"D1@Taslak1" = genislik / 2`): değer kutusuna `=ifade` yazılır, ekstrüzyon derinliği / döndürme açısı da denklemle sürülebilir, Türkçe değişken adları desteklenir
-- [x] **Elips** (merkez + büyük eksen ucu + küçük yarı eksen; yarı eksenler boyutlanır, açı/merkez panelden) ve **parabol** (tepe + odak + iki uç; odak uzaklığı boyutlanır, kapalı kontur olarak ekstrüde edilebilir)
-- [x] **Varlıkları dönüştür**: seçili model yüzünün sınır kenarları taslağa sabitlenmiş çizgi/yay olarak alınır (OpenCASCADE çekirdeğinde gerçek B-rep kenarlarından; CSG çekirdeğinde ağ tabanlı)
-- [x] **Taslak blokları**: seçili öğeler rijit bloğa dönüşür (sürüklenince bütün olarak taşınır/döner), patlatma ve kopyalama
-- [x] **Kesişen konturlardan bölge seçme** (Contour Select): kesişen eğrilerin oluşturduğu bölgeler tıklanarak ekstrüzyona/döndürmeye seçilir
-- [x] **3B taslak (temel)**: XY/XZ/YZ düzlemlerinde (Tab ile değişir) çizgi zinciri, eksen kilidi, nokta yakalama, koordinat düzenleme
+## Phase 3 — Advanced sketch tools and parameters ✅
+- [x] **Trim** (power trim: the clicked piece is deleted between the nearest intersections; ends are joined with coincident relations)
+- [x] **Extend** (a line up to the first entity it meets)
+- [x] **Offset**: connected chains with their corners; all edges driven by a single offset dimension, with preview
+- [x] **Mirror**: about a centerline, with symmetric relations (the copy changes when the original changes)
+- [x] **Sketch fillet / chamfer**: tangent relations + radius/distance dimension; the old corner remains as a "virtual sharp", attached dimensions are kept
+- [x] **Polygon** (construction circle + equal sides), **straight slot** (tangent arcs), **spline** (through all points, open/closed), **sketch text** (from font outlines; emboss/engrave)
+- [x] Linear / circular sketch patterns, move / copy / rotate / scale (internal relations are copied)
+- [x] Toggle construction geometry
+- [x] Global variables and **equations** (`"D1@Taslak1" = width / 2`): type `=expression` in the value box; extrude depth / revolve angle can also be driven by equations; Turkish variable names are supported
+- [x] **Ellipse** (center + major axis end + minor semi-axis; semi-axes are dimensioned, angle/center in the panel) and **parabola** (vertex + focus + two ends; focal distance is dimensioned, can be extruded as a closed contour)
+- [x] **Convert entities**: the boundary edges of the selected model face come into the sketch as fixed lines/arcs (from real B-rep edges in the OpenCASCADE kernel; mesh-based in the CSG kernel)
+- [x] **Sketch blocks**: selected entities become a rigid block (moves/rotates as a whole when dragged), explode and copy
+- [x] **Region selection from intersecting contours** (contour select): regions formed by intersecting curves are clicked to select them for extrude/revolve
+- [x] **3D sketch (basic)**: line chains on the XY/XZ/YZ planes (switched with Tab), axis lock, point snapping, coordinate editing
 
-## Faz 4 — B-rep çekirdeğine geçiş (OpenCASCADE) ✅
-CSG yalnızca üçgen ağ (mesh) üretir; köşe yuvarlatma, kabuk, STEP gibi işler için **gerçek yüzey/kenar topolojisi** gerekir.
-- [x] OpenCASCADE bağlantısı: C++ derleyici gerektirmeyen **Python yardımcı süreç** (`occ/occ_server.py`, OCP / OCCT 8.0, projeye özel `occ_env`, kurulum: `OCC_Kur.bat`). Godot ile stdin/stdout üzerinden JSON; büyük istekler geçici dosyayla. (GDExtension yerine bu yol seçildi; ileride aynı protokolle C++ modülüne geçilebilir.)
-- [x] Aynı çekirdek arayüzü (`GeoKernel`): Faz 1–3 özellikleri (ekstrüzyon, döndürme, kesme, bölge seçimi, elips/parabol/spline/metin profilleri) OCC'de **gerçek eğrilerle** çalışır; OCC yoksa/çökerse otomatik CSG yedeği. Araçlar → Geometri çekirdeği: Otomatik / OpenCASCADE / CSG
-- [x] Çift hassasiyet geometri, kesin hacim/alan/atalet (GProp)
-- [x] **Topolojik adlandırma**: her yüz, onu üreten özellik + taslak öğesinden kalıcı bir ad alır (ör. `F3:s:12`, `F3:b:10`); adlar her işlemde OCCT geçmişiyle (Modified/Generated/Deleted) taşınır. Kenarlar komşu yüz adlarıyla, yüzler/gövdeler adlarıyla başvurulur; ad bulunamazsa geometrik imzaya düşülür. Yüzeye çizilen taslak, destek yüzüne bağlıdır: model değişince taslak düzlemi yüzle birlikte kayar
-- [x] **Köşe yuvarlatma** (sabit yarıçap), **Pah** (eşit mesafe), **Kabuk** (seçili yüzler açık; yüz seçilmezse içi boş gövde; içe/dışa) — kenara/yüze tıklayarak seçim, seçim sırasında özellikten önceki gövde gösterilir
-- [x] **STEP / IGES dışa aktarma**, **STEP / IGES içe aktarma** (yüzey tabanlı IGES dikilerek katıya çevrilir, ölçek), yüksek kaliteli STL (sapma/açı ön ayarları, ikili/ASCII)
-- [x] Varlıkları dönüştür B-rep kenarlarından: çizgi, daire, yay, elips gerçek öğe olarak gelir
-- [x] **Değişken yarıçaplı yuvarlatma** (kenar boyunca doğrusal), **iki mesafeli** ve **açı-mesafe pah** (yön çevirme)
-- [x] **Eğim (Draft)**: yüzlere tarafsız yüze göre kalıp çıkma eğimi, çekme yönü çevrilebilir
-- [x] **Kaburga (Rib)**: açık taslak çizgisinden, iki yana eşit kalınlıkta; uçlar gövdeye değene kadar otomatik uzar, malzeme tarafı çevrilebilir
-- [x] **Çoklu gövde**: ekstrüzyon/döndürmede "Sonucu birleştir" kapatılınca ayrı gövde; **Gövdeleri Birleştir** (ekle / çıkar / kesiştir), **Gövde Taşı/Kopyala** (öteleme + eksen etrafında dönme), **Böl** (ana düzlem + ofset, korunacak taraf); yuvarlatma/pah/kabuk/eğim yalnızca ilgili gövdeye uygulanır
+## Phase 4 — Moving to a B-rep kernel (OpenCASCADE) ✅
+CSG only produces triangle meshes; fillets, shells, STEP etc. need **real face/edge topology**.
+- [x] OpenCASCADE connection: a **Python helper process** that needs no C++ compiler (`occ/occ_server.py`, OCP / OCCT 8.0, project-local `occ_env`, setup: `OCC_Kur.bat`). JSON over stdin/stdout with Godot; large requests go through a temporary file. (Chosen instead of GDExtension; a C++ module with the same protocol is possible later.)
+- [x] Same kernel interface (`GeoKernel`): Phase 1–3 features (extrude, revolve, cut, region selection, ellipse/parabola/spline/text profiles) work with **real curves** in OCC; automatic CSG fallback when OCC is missing/crashes. Tools → Geometry kernel: Auto / OpenCASCADE / CSG
+- [x] Double-precision geometry, exact volume/area/inertia (GProp)
+- [x] **Topological naming**: every face gets a persistent name from the feature + sketch entity that created it (e.g. `F3:s:12`, `F3:b:10`); names are carried through every operation with the OCCT history (Modified/Generated/Deleted). Edges are referenced by their neighboring face names, faces/bodies by name; if a name cannot be found it falls back to a geometric signature. A sketch drawn on a face is attached to its support face: when the model changes, the sketch plane moves with the face
+- [x] **Fillet** (constant radius), **Chamfer** (equal distance), **Shell** (selected faces open; hollow body when no face is selected; inward/outward) — select by clicking edges/faces, the body before the feature is shown while selecting
+- [x] **STEP / IGES export**, **STEP / IGES import** (surface-based IGES is sewn into a solid, scale), high-quality STL (deviation/angle presets, binary/ASCII)
+- [x] Convert entities from B-rep edges: lines, circles, arcs, ellipses come in as real entities
+- [x] **Variable-radius fillet** (linear along the edge), **two-distance** and **angle-distance chamfer** (flip direction)
+- [x] **Draft**: mold draft on faces relative to a neutral face, pull direction can be flipped
+- [x] **Rib**: from an open sketch line, equal thickness on both sides; ends extend automatically until they hit the body, material side can be flipped
+- [x] **Multi-body**: unchecking "Merge result" in extrude/revolve makes a separate body; **Combine Bodies** (add / subtract / common), **Move/Copy Body** (translation + rotation about an axis), **Split** (main plane + offset, side to keep); fillet/chamfer/shell/draft apply only to the relevant body
 
-## Faz 5 — Gelişmiş 3B özellikler ✅
-- [x] **Referans geometri**: düzlem (ofset, açılı, 3 nokta; taban ana düzlem / referans düzlem / model yüzü), eksen (ana eksen, iki nokta, kenar veya silindir ekseni, iki düzlem kesişimi), nokta. Taslaklar referans düzleme bağlanır, düzlem değişince taşınır; döndürme ve çoğaltma referans eksen kullanabilir
-- [x] **Ekstrüzyon bitiş koşulları**: Sonrakine Kadar, Köşeye Kadar, Yüzeye Kadar, Yüzeyden Ofset, İki Yönlü (Yön 2: kör / tümünden / sonrakine), eğim açısı (içe/dışa), **ince özellik** (açık veya kapalı taslak; orta / bir yön / diğer yön)
-- [x] **Süpürme** (patron / kesme; yol: taslak zinciri, 3B taslak veya helis) ve **Loft** (patron / kesme, düz veya yumuşak geçiş)
-- [x] **Doğrusal** (iki yön), **dairesel**, **tablo güdümlü** çoğaltma ve **aynalama** — özellikleri (ekstrüzyon, döndürme, süpürme, loft, delik) veya tüm gövdeleri
-- [x] **Delik Sihirbazı**: düz, havşa başlı (silindirik), konik havşa, kılavuz; ISO (M2–M24, ISO 273 geçme sınıfları) ve ANSI (#4–1/2 UNC); tümünden / kör (118° matkap ucu); kılavuz deliklerde kozmetik diş (kesikli daire)
-- [x] **Kubbe**, **helis** (adım/tur/yükseklik, saat yönü, başlangıç açısı)
-- [x] **Geri alma çubuğu** (sürüklenebilir; yeni özellikler çubuğun önüne eklenir), özellik sırasını **sürükleyerek** veya Yukarı/Aşağı taşı ile değiştirme (ebeveyn/çocuk sırası korunur), **Ebeveyn / Çocuk** penceresi
-- [x] **Yüzeye teğet referans düzlem** (silindir/koni/küre/düzlem üzerinde seçilen noktada) ve **koordinat sistemi** (başlangıç + X/Y eksenleri; kütle özellikleri bu sisteme göre raporlanır)
-- [x] Süpürmede **kılavuz eğrisi** (profil kılavuza değecek şekilde ölçeklenir) ve **bükme açısı**; loftta **kılavuz eğrisi**
-- [x] **Eğri güdümlü çoğaltma** (taslak zinciri, 3B taslak, helis veya projeksiyon eğrisi boyunca; eşit aralık veya sabit aralık; eğriyi izleyerek döndürme)
-- [x] **Spiral** (düzlemsel) ve **konik helis**, **projeksiyon eğrisi** (taslak eğrisini yüze izdüşürür; yol/kılavuz/çoğaltma eğrisi olur), **sarma** (silindire kabartma / oyma / çizgi, yay uzunluğu korunur), **kabartma / gravür** (yüzeyi izleyen sabit kalınlık)
+## Phase 5 — Advanced 3D features ✅
+- [x] **Reference geometry**: plane (offset, angled, 3 points; based on a main plane / reference plane / model face), axis (main axis, two points, edge or cylinder axis, intersection of two planes), point. Sketches attach to reference planes and move when the plane changes; revolve and patterns can use reference axes
+- [x] **Extrude end conditions**: Up To Next, Up To Vertex, Up To Surface, Offset From Surface, Two Directions (Direction 2: blind / through all / up to next), draft angle (in/out), **thin feature** (open or closed sketch; mid / one direction / other direction)
+- [x] **Sweep** (boss / cut; path: sketch chain, 3D sketch or helix) and **Loft** (boss / cut, ruled or smooth)
+- [x] **Linear** (two directions), **circular**, **table-driven** patterns and **mirror** — of features (extrude, revolve, sweep, loft, hole) or of all bodies
+- [x] **Hole Wizard**: simple, counterbore, countersink, tapped; ISO (M2–M24, ISO 273 fit classes) and ANSI (#4–1/2 UNC); through all / blind (118° drill point); cosmetic thread on tapped holes (dashed circle)
+- [x] **Dome**, **helix** (pitch/revolutions/height, clockwise, start angle)
+- [x] **Rollback bar** (draggable; new features are inserted before the bar), reorder features by **dragging** or Move up/down (parent/child order is kept), **Parent / Child** window
+- [x] **Reference plane tangent to a surface** (at a picked point on a cylinder/cone/sphere/plane) and **coordinate system** (origin + X/Y axes; mass properties are reported relative to it)
+- [x] **Guide curve** (the profile scales to touch the guide) and **twist angle** in sweeps; **guide curve** in lofts
+- [x] **Curve-driven pattern** (along a sketch chain, 3D sketch, helix or projected curve; equal spacing or fixed spacing; rotation following the curve)
+- [x] **Spiral** (planar) and **tapered helix**, **projected curve** (projects a sketch curve onto a face; usable as path/guide/pattern curve), **wrap** (emboss / deboss / scribe on a cylinder, arc length preserved), **emboss / engrave** (constant thickness following the surface)
 
-## Faz 6 — Teknik resim (Drawing) ✅
-- [x] **Teknik Resim** sekmesi: resim sayfaları parça dosyasında (`drawings`) saklanır, geri al/yinele ile çalışır; birden çok sayfa
-- [x] Sayfa boyutları **A4–A0** ve **ANSI A–E**, yatay/dikey, **ISO / ANSI** standardı; çerçeve, merkezleme işaretleri ve **antet** (firma, başlık, resim no, çizen, kontrol, tarih, malzeme, ölçek, ağırlık — malzeme ve kütle modelden otomatik)
-- [x] **Standart 3 görünüş + izometrik** (ölçek ve yerleşim otomatik), **1. açı (ISO) / 3. açı (ANSI)** izdüşüm sembolüyle; açı değişince izdüşüm görünüşleri yeniden yönlenir
-- [x] Model görünüşü (ön, arka, üst, alt, sağ, sol, izometrik, dimetrik), **izdüşüm görünüşü** (tıklanan tarafa), **kesit** (iki tıkla kesit çizgisi; tarama, A-A etiketi, oklar, bakış yönü çevrilebilir), **detay** (daire, büyütme oranı), **yardımcı** (kenara dik bakış), **kırık görünüş** (birden çok kırık, zikzak sınır)
-- [x] **Gizli çizgi kaldırma (HLR)**: OpenCASCADE HLRBRep ile görünür / gizli / teğet kenarlar; görünür çizgiyle çakışan gizli çizgiler bastırılır. Görünüş başına gizli çizgiler (kesikli / kaldırılmış) ve teğet kenarlar (göster / gizle); OCC yoksa ağ kenarlarından yaklaşık görünüş
-- [x] **Akıllı boyut** (köşe, daire merkezi, daire, kenar yakalama; yatay / dikey / hizalı, çap, açı), **model boyutlarını aktarma** (taslak boyutları paralel görünüşe; ilişkili — taslak değişince resim güncellenir), **referans boyut**, **toleranslar** (simetrik, sapma, sınır, geçme H7 vb.), metin geçersiz kılma
-- [x] **GD&T** kontrol çerçevesi (14 karakteristik, Ø bölgesi, MMC/LMC, datumlar), **datum** sembolü, **yüzey pürüzlülüğü** (Ra; talaşlı / talaşsız / herhangi), **kaynak sembolü** (köşe / V alın; ok tarafı / karşı taraf / iki taraf, çepeçevre, kuyruk notu)
-- [x] **Merkez işareti** (tek / görünüşteki tüm daireler), **merkez çizgisi**, **notlar** (çok satır, oklu), **balonlar**, **malzeme listesi (BOM)**, **revizyon tablosu**
-- [x] Görünüş ve açıklamaları sürükleyerek taşıma (izdüşüm çocukları hizalı kalır), otomatik yerleşimde boş yer arama, Delete / Esc
-- [x] Çıktı: **PDF** (vektörel, çok sayfa, TrueType alt kümesi gömülü — Türkçe karakterler tüm görüntüleyicilerde), **SVG**, **DXF** (R12, katmanlar GORUNUR / GIZLI / EKSEN / OLCU / TARAMA / METIN, çizgi tipleri, cp1254), **DWG** (DXF'i AutoCAD veya ücretsiz ODA File Converter ile), **yazdırma** (PDF varsayılan uygulamada açılır)
+## Phase 6 — Drawings ✅
+- [x] **Drawing** tab: drawing sheets are stored in the part file (`drawings`), work with undo/redo; multiple sheets
+- [x] Sheet sizes **A4–A0** and **ANSI A–E**, landscape/portrait, **ISO / ANSI** standard; border, centering marks and **title block** (company, title, drawing no., drawn by, checked by, date, material, scale, weight — material and mass from the model automatically)
+- [x] **Standard 3 views + isometric** (automatic scale and layout), **first angle (ISO) / third angle (ANSI)** with projection symbol; projected views re-orient when the angle changes
+- [x] Model view (front, back, top, bottom, right, left, isometric, dimetric), **projected view** (on the clicked side), **section** (section line with two clicks; hatch, A-A label, arrows, flippable direction), **detail** (circle, magnification), **auxiliary** (normal to an edge), **broken view** (multiple breaks, zigzag limits)
+- [x] **Hidden-line removal (HLR)**: visible / hidden / tangent edges with OpenCASCADE HLRBRep; hidden lines that coincide with visible ones are suppressed. Per-view hidden lines (dashed / removed) and tangent edges (show / hide); approximate view from mesh edges without OCC
+- [x] **Smart dimension** (vertex, circle center, circle, edge snapping; horizontal / vertical / aligned, diameter, angle), **model items** (sketch dimensions into parallel views; associative — the drawing updates when the sketch changes), **reference dimension**, **tolerances** (symmetric, deviation, limit, fit such as H7), text override
+- [x] **GD&T** feature control frame (14 characteristics, Ø zone, MMC/LMC, datums), **datum** symbol, **surface finish** (Ra; machined / no removal / any), **weld symbol** (fillet / V butt; arrow side / other side / both, all around, tail note)
+- [x] **Center mark** (single / all circles in a view), **centerline**, **notes** (multi-line, with leader), **balloons**, **bill of materials (BOM)**, **revision table**
+- [x] Move views and annotations by dragging (projected children stay aligned), free-space search for automatic placement, Delete / Esc
+- [x] Output: **PDF** (vector, multi-page, embedded TrueType subset — Turkish characters in all viewers), **SVG**, **DXF** (R12, layers GORUNUR / GIZLI / EKSEN / OLCU / TARAMA / METIN, line types, cp1254), **DWG** (convert the DXF with AutoCAD or the free ODA File Converter), **print** (the PDF opens in the default application)
 
-## Faz 7 — Montaj (Assembly) ✅
-- [x] **Montaj belgesi** `.dasm` (JSON; parça yolları montaja göre göreli), Dosya → Yeni Montaj / Aç, kendi geri al / yinele geçmişi; **Montaj** sekmesi ve araç çubuğu
-- [x] **Bileşen ekleme** (parça dosyası; aynı parça bir kez derlenir, örnekler `Ad<1>`, `Ad<2>`), ilk bileşen **sabit** (f), sabitle / serbest bırak, gizle, bastır, sayısal konum; eksik tanımlılar ağaçta (-)
-- [x] Parçalar ana parçadan bağımsız derlenir (OCC sunucusunda anahtarla saklanır; CSG'de ayrı çekirdek); **Parçayı Aç** ile düzenle, Montaj sekmesiyle dön (parça kaydedilir ve montajda yenilenir)
-- [x] **Standart eşleştirmeler**: çakışık, paralel, dik, teğet, eş merkezli, mesafe, açı, kilit — yüz / kenar / ana düzlem / orijin referansları, seçime göre önerilen türler (★), hizalamayı / yönü çevirme
-- [x] **Gelişmiş**: genişlik, simetrik, mesafe sınırı, açı sınırı, kanal; **mekanik**: menteşe, dişli (oran yarıçaplardan), kremayer-pinyon, vida (hatve)
-- [x] **Rijit cisim çözücü**: bileşen başına 6 serbestlik, Levenberg-Marquardt, bileşen başına **serbestlik analizi**, çelişkili / sağlanamayan eşleştirme uyarısı (⚠); mekanik eşleştirmelerde sürekli (çok turlu) açı
-- [x] Bileşeni **sürükleyerek taşıma / döndürme** (eşleştirmelere uyarak), sayısal öteleme ve döndürme
-- [x] **Girişim tespiti** (OpenCASCADE ortak hacim; kırmızı hacimler ve hacim listesi), **patlatılmış görünüm** (adımlar, eşleştirmelerden yön çıkaran otomatik patlatma, animasyon, patlatma çizgileri), **montaj malzeme listesi** (adet, malzeme, kütle; CSV), **kütle özellikleri**, montajı **STEP** olarak dışa aktarma
-- [x] **Bağlantı elemanı kütüphanesi** (Toolbox benzeri): altıgen başlı cıvata ISO 4017, somun ISO 4032, pul ISO 7089 (M3–M24), silindirik pim, sabit bilyalı rulman (60xx / 62xx) — ölçüsü panelden değiştirilebilir
-- [x] **Hareket etüdü** (motor): seçilen eksen etrafında dev/dk ile döndürme, eşleştirmeler (dişli, vida, kremayer...) hareketi aktarır, kilitlenmede durur
-- [x] **Alt montajlar**: `.dasm` bileşen olarak eklenir, rijit grup (alt parçalar tek modelde birleşir; yüzleri eşleştirilebilir), iç içe alt montaj, BOM'da "yalnızca parçalar" / "üst düzey", alt montajı açma
-- [x] **Kam eşleştirmesi**: izleyici (nokta, küre, makara/silindir) kam profiline değer; profil kamın yan yüzünün teğet bölgesinden otomatik çıkarılır, hareket etüdüyle çalışır
-- [x] **Bileşen çoğaltma**: doğrusal (X/Y/Z veya modelden kenar/eksen/yüz yönü, aralık) ve dairesel (eksen, toplam açı); örnekler çekirdeği izler, sayı değiştirilebilir, silinen örnek atlanır
-- [x] **Sürüklerken çarpışma algılama** (OpenCASCADE): bileşen çarpıştığı anda son çarpışmasız konumda durur; değen yüzler çarpışma sayılmaz
-- [x] **Montaj teknik resmi**: montajda Teknik Resim sekmesi; görünüşler montaj bileşiğinden (HLR, kesit, detay...), antette montaj adı/kütlesi, malzeme listesi tablosu montaj kalemleriyle, **otomatik balon** (kalem başına, hedefler dağıtılarak); resim `.dasm` içinde saklanır
-- [x] **Montaj içinde yeni parça**: parça dosyası oluşturulup montaj orijinine yerleşir; parça düzenlenirken diğer bileşenler parçanın koordinatlarında yarı saydam görünür ve düzlemsel yüzlerine taslak açılabilir (bağlamda tasarım)
+## Phase 7 — Assemblies ✅
+- [x] **Assembly document** `.dasm` (JSON; part paths relative to the assembly), File → New Assembly / Open, its own undo / redo history; **Assembly** tab and toolbar
+- [x] **Insert component** (part file; the same part is built once, instances `Name<1>`, `Name<2>`), the first component is **fixed** (f), fix / float, hide, suppress, numeric position; under-defined components marked (-) in the tree
+- [x] Parts are built independently of the main part (stored by key in the OCC server; separate kernel in CSG); edit with **Open Part**, return with the Assembly tab (the part is saved and refreshed in the assembly)
+- [x] **Standard mates**: coincident, parallel, perpendicular, tangent, concentric, distance, angle, lock — face / edge / main plane / origin references, suggested types based on the selection (★), flip alignment / direction
+- [x] **Advanced**: width, symmetric, distance limit, angle limit, slot; **mechanical**: hinge, gear (ratio from radii), rack and pinion, screw (pitch)
+- [x] **Rigid-body solver**: 6 DOF per component, Levenberg-Marquardt, per-component **DOF analysis**, conflicting / unsatisfied mate warning (⚠); continuous (multi-turn) angle for mechanical mates
+- [x] **Dragging to move / rotate** components (respecting mates), numeric translation and rotation
+- [x] **Interference detection** (OpenCASCADE common volume; red volumes and a volume list), **exploded view** (steps, automatic explode deriving directions from mates, animation, explode lines), **assembly bill of materials** (quantity, material, mass; CSV), **mass properties**, assembly **STEP** export
+- [x] **Fastener library**: hex bolt ISO 4017, nut ISO 4032, washer ISO 7089 (M3–M24), dowel pin, deep-groove ball bearing (60xx / 62xx) — size can be changed in the panel
+- [x] **Motion study** (motor): rotation about the selected axis in rpm, mates (gear, screw, rack...) transfer the motion, stops when locked
+- [x] **Sub-assemblies**: `.dasm` inserted as a component, rigid group (sub-parts merged into one model; their faces can be mated), nested sub-assemblies, "parts only" / "top level" in the BOM, open sub-assembly
+- [x] **Cam mate**: follower (point, sphere, roller/cylinder) touches the cam profile; the profile is extracted automatically from the tangent region of the cam's side face, works with the motion study
+- [x] **Component pattern**: linear (X/Y/Z or direction of an edge/axis/face on the model, spacing) and circular (axis, total angle); instances follow the seed, count can be changed, a deleted instance is skipped
+- [x] **Collision detection while dragging** (OpenCASCADE): the component stops at the last collision-free position the moment it collides; touching faces do not count as collisions
+- [x] **Assembly drawings**: Drawing tab in assembly mode; views from the assembly compound (HLR, section, detail...), assembly name/mass in the title block, bill of materials table with assembly items, **auto balloon** (one per item, targets distributed); the drawing is stored in the `.dasm`
+- [x] **New part in assembly**: a part file is created and placed at the assembly origin; while editing it the other components appear semi-transparent in the part's coordinates and sketches can be started on their planar faces (in-context design)
 
-## Faz 8 — Özel modüller ✅
-- [x] **Sac metal**: **Taban flanş** (kapalı profil → plaka; açık çizgi zinciri → büküm yarıçaplı bükümlü sac, malzeme tarafı, orta düzlem), **kenar flanş** (taban kenarlarına tıklayarak, çoklu kenar, açı, boy, büküm yarıçapı, yön, uç boşlukları; kenar topolojik addan taban taslağına bağlı), **K-faktörü** ve büküm payı BA = A·(R + K·T), **açınım** (düz sac gösterimi) ve **açınım DXF**'i (büküm çizgileri EKSEN katmanında, YUKARI/AŞAĞI açı notları)
-- [x] **Kıvırma (hem)**: 180° kenar flanşı hazır ayarı (R = T/2, boy 8 mm), kenara tıklayarak
-- [ ] Sac metal devamı (sonraya): gönye flanş, taslakla büküm, kenar flanşına flanş, köşe kabartma / boşaltma
-- [x] **Kaynaklı konstrüksiyon**: profil kütüphanesi (kare / dikdörtgen kutu, boru, köşebent, UPN, IPE, lama), taslak veya 3B taslak çizgilerinden **yapısal üye** (her üye ayrı gövde, profil dönüşü), köşede **gönye** veya **alın** birleşim, üçlü köşelerde dikey üye sürer, **T birleşiminde kırpma**, **kesim listesi** (profil, boy, kesim açıları, adet, kütle; CSV)
-- [x] **Yüzey modelleme**: ekstrüde / döndürülmüş / loft / düzlemsel yüzey, ofset yüzey, **dikme** (knit; kapalıysa katıya çevirir), **kalınlaştırma** (tek yön / orta, katıyla birleştirme), düzlemle **kırpma**; yüzeyler katılarla aynı parçada kalınlıksız gövde olarak tutulur, sonraki katı özellikleri onları korur
-- [ ] Yüzey devamı (sonraya): süpürülmüş yüzey, sınır yüzeyi, doldurma, yüzeyle kırpma, uzatma
-- [x] **Konfigürasyonlar** (boyut değerleri, özellik derinlik/açıları ve bastırma durumları; etkin konfigürasyon ağaç kökünde) ve **tasarım tablosu** (CSV içe / dışa aktarma; Excel CSV'yi açar)
-- [x] **Simülasyon (FEA)**: doğrusal statik analiz (sunucuda numpy + scipy; vokselli altı yüzlü, uyumsuz modlu elemanlar, seyrek doğrudan çözücü), yüze tıklayarak **sabit yüz** ve **kuvvet** (yüze dik / eksen yönlü), malzemeden E / ν / akma, **von Mises** ve **yer değiştirme** renk haritası, şekil değiştirme büyütmesi, güvenlik katsayısı, mesnet tepkisi (konsol kiriş FL³/3EI ile %0.2 içinde doğrulandı)
-- [ ] FEA devamı (sonraya): tetrahedral ağ, basınç / yerçekimi yükleri, montaj analizi, modal / termal analiz
-- [x] **Görselleştirme**: stüdyo / gün ışığı / gece ortamları ve **HDRI** panorama yükleme, gölgeli güneş + gölge yakalayıcı zemin, SSAO / SSR / glow, malzemeden **PBR** yüzey (metal / mat / parlak), pozlama, **çıkartmalar** (decal: görüntü seç, yüze tıkla), 2× çözünürlükte **render PNG**
-- [x] **Kalıp araçları**: eğim (çekme açısı) analizi — pozitif / negatif / eğim gerektiren yüzler renkli, alan oranları, olası **ayırma çizgisi**
-- [x] **CAM (2.5 eksen)**: taslak konturlarından dış kontur / iç kontur / cep takım yolları (takım yarıçapı ofseti, yan adım, adalar), kademeli pasolar, Z0 parça üstü ya da taslak düzlemi, **G-kod** (ISO, G21) ve süre tahmini
-- [ ] Kalıp / CAM devamı (sonraya): çekirdek-boşluk ayırma, büzülme payı, 3 eksen yüzey frezeleme, takım kütüphanesi
+## Phase 8 — Special modules ✅
+- [x] **Sheet metal**: **base flange** (closed profile → plate; open line chain → bent sheet with bend radius, material side, mid plane), **edge flange** (click base edges, multiple edges, angle, length, bend radius, direction, end gaps; the edge is tied to the base sketch through its topological name), **K-factor** and bend allowance BA = A·(R + K·T), **flat pattern** (flat sheet display) and **flat pattern DXF** (bend lines on the EKSEN layer, UP/DOWN angle notes)
+- [x] **Hem**: 180° edge flange preset (R = T/2, length 8 mm), by clicking an edge
+- [ ] Sheet metal, later: miter flange, sketched bend, flange on edge flange, corner relief
+- [x] **Weldments**: profile library (square / rectangular tube, pipe, angle, UPN, IPE, flat bar), **structural members** from sketch or 3D sketch lines (each member a separate body, profile rotation), **miter** or **butt** corners, the vertical member runs through at three-way corners, **trimming at T-joints**, **cut list** (profile, length, cut angles, quantity, mass; CSV)
+- [x] **Surface modeling**: extruded / revolved / loft / planar surface, offset surface, **knit** (converted to a solid if closed), **thicken** (one side / mid, merge with solid), **trim** with a plane; surfaces are kept as zero-thickness bodies in the same part as the solids, later solid features preserve them
+- [ ] Surfaces, later: swept surface, boundary surface, fill, trim with a surface, extend
+- [x] **Configurations** (dimension values, feature depths/angles and suppression states; the active configuration at the tree root) and **design table** (CSV import / export; Excel opens the CSV)
+- [x] **Simulation (FEA)**: linear static analysis (numpy + scipy in the server; voxel hexahedra with incompatible modes, sparse direct solver), **fixed faces** and **forces** (normal to the face / along an axis) by clicking faces, E / ν / yield from the material, **von Mises** and **displacement** color maps, deformation scale, factor of safety, support reactions (verified within 0.2% against the cantilever FL³/3EI)
+- [ ] FEA, later: tetrahedral mesh, pressure / gravity loads, assembly analysis, modal / thermal analysis
+- [x] **Visualization**: studio / daylight / night environments and **HDRI** panorama loading, shadowed sun + shadow-catcher floor, SSAO / SSR / glow, **PBR** surface from the material (metal / matte / glossy), exposure, **decals** (pick an image, click a face), **render PNG** at 2× resolution
+- [x] **Mold tools**: draft (pull angle) analysis — positive / negative / draft-required faces colored, area ratios, possible **parting line**
+- [x] **CAM (2.5-axis)**: outer contour / inner contour / pocket toolpaths from sketch contours (tool-radius offset, stepover, islands), step-downs, Z0 at part top or sketch plane, **G-code** (ISO, G21) and time estimate
+- [ ] Mold / CAM, later: core-cavity split, shrinkage allowance, 3-axis surface milling, tool library
 
-## Faz 9 — Profesyonelleşme ✅
-- [x] **Otomatik kaydetme** (aralık ayarlı, parça + montaj, süreç kimlikli kayıtlar), **çökme kurtarma** penceresi, **son dosyalar** (menü + boş parça paneli), kaydederken **.bak yedeği**
-- [x] **Klavye kısayolları** özelleştirme (170+ komut otomatik kaydedilir: menüler, araç çubukları, taslak araçları; bağlamlar Genel / Taslak; çakışma çözümü; menüler canlı kısayol gösterir), **fare hareketleri** (sağ tuş + yön → 8 yönlü halka; parça / taslak / montaj bağlamına göre atanabilir), **koyu / açık tema**, **arayüz ölçeği**, **Türkçe / İngilizce** arayüz (Godot otomatik çevirisi, `i18n/en.txt`, ~1050 metin)
-- [x] **Makro API'si** (GDScript: `func run(m: MacroApi)`; taslak / özellik / dışa aktarma yardımcıları, `await m.rebuild()`), **makro kaydı** (eklenen özellikler → `m.add_raw`, kimlik eşleme), **parçadan makro**, örnek makrolar (`macros/`), komut satırı `--macro=`
-- [x] Birim testleri: 10 test grubu (çözücü, taslak işlemleri, teknik resim, montaj, özel modüller, Faz 9, B-rep, uçtan uca arayüz × 2 çekirdek)
-- [x] **Performans**: çekirdek sonucunun işlenmesi (köşe birleştirme, komşuluk, kenarlar, yumuşatılmış normaller) **arka plan iş parçacığında** (WorkerThreadPool; en uzun donma 1072 → 234 ms), sıkıştırılmış komşuluk listesiyle hızlı normaller; **büyük montajlar için LOD** (ImporterMesh.generate_lods) ve büyük montaj modu
-- [x] **Sürüm notları** (CHANGELOG.md), **Windows paketleme**: dışa aktarma ayarı + simge, `Paketle.bat`, Inno Setup kurulum betiği (kullanıcı klasörüne, dosya ilişkilendirme, isteğe bağlı OpenCASCADE kurulumu); kurulu sürüm `occ_env` / `occ` / `macros` / `plugins` klasörlerini .exe yanında arar
-- [x] **Dil desteği devamı**: biçimli durum / panel mesajları ve Yardım metni İngilizce (~1170 metin, biçim belirteçleri testle doğrulanır); **eklenti arayüzü** (PluginApi: komut + düğme, özel panel, olaylar, makro API; Seçenekler'den aç / kapat; 2 örnek eklenti)
+## Phase 9 — Professional features ✅
+- [x] **Auto-save** (configurable interval, parts + assemblies, records keyed by process id), **crash recovery** window, **recent files** (menu + empty-part panel), **.bak backup** on save
+- [x] **Keyboard shortcut** customization (170+ commands registered automatically: menus, toolbars, sketch tools; contexts General / Sketch; conflict resolution; menus show live shortcuts), **mouse gestures** (right button + direction → 8-way ring; assignable per part / sketch / assembly context), **dark / light theme**, **UI scale**, **Turkish / English** UI (Godot auto-translation, `i18n/en.txt`, ~1050 strings)
+- [x] **Macro API** (GDScript: `func run(m: MacroApi)`; sketch / feature / export helpers, `await m.rebuild()`), **macro recording** (added features → `m.add_raw`, id remapping), **macro from part**, sample macros (`macros/`), command line `--macro=`
+- [x] Unit tests: 10 test groups (solver, sketch operations, drawings, assemblies, special modules, Phase 9, B-rep, end-to-end UI × 2 kernels)
+- [x] **Performance**: processing of the kernel result (vertex welding, adjacency, edges, smoothed normals) on a **background thread** (WorkerThreadPool; longest freeze 1072 → 234 ms), fast normals with a compressed adjacency list; **LOD for large assemblies** (ImporterMesh.generate_lods) and large assembly mode
+- [x] **Release notes** (CHANGELOG.md), **Windows packaging**: export preset + icon, `Paketle.bat`, Inno Setup installer script (per-user install, file association, optional OpenCASCADE setup); the installed version looks for the `occ_env` / `occ` / `macros` / `plugins` folders next to the .exe
+- [x] **More translation**: formatted status / panel messages and the Help text in English (~1170 strings, format specifiers verified by tests); **plugin interface** (PluginApi: command + button, custom panel, events, macro API; enable / disable in Options; 2 sample plugins)
 
 ---
 
-## Özellikler → Faz eşlemesi
+## Features → Phase mapping
 
-| Özellik | DIY.CAD Fazı |
+| Feature | DIY.CAD phase |
 |---|---|
 | Sketch, Line, Rectangle, Circle, Arc, Centerline | 1 ✅ |
 | Extruded Boss/Base, Extruded Cut, Revolved Boss/Cut | 1 ✅ |
-| STL/OBJ çıktı, DXF taslak çıktısı | 1 ✅ |
+| STL/OBJ export, DXF sketch export | 1 ✅ |
 | Smart Dimension, Relations, Units, Mass Properties, Measure | 2 ✅ |
 | Trim/Extend/Offset/Mirror, Sketch Fillet/Chamfer, Spline, Polygon, Slot, Text, Patterns, Equations | 3 ✅ |
-| Ellipse, Convert Entities, Blocks, Contour Select, 3D Sketch | 3 (kalan) |
-| Fillet, Chamfer, Shell, Draft, Rib, STEP/IGES, Multi-body | 4 |
-| Sweep, Loft, Patterns, Mirror, Delik sihirbazı, Reference Geometry | 5 |
+| Ellipse, Convert Entities, Blocks, Contour Select, 3D Sketch | 3 ✅ |
+| Fillet, Chamfer, Shell, Draft, Rib, STEP/IGES, Multi-body | 4 ✅ |
+| Sweep, Loft, Patterns, Mirror, Hole wizard, Reference Geometry | 5 ✅ |
 | Drawings, Section/Detail Views, BOM, GD&T | 6 ✅ |
-| Assemblies, Mates, Exploded View, Interference, standart parça kütüphanesi | 7 ✅ |
+| Assemblies, Mates, Exploded View, Interference, fastener library | 7 ✅ |
 | Sheet Metal, Weldments, Configurations | 8 ✅ |
-| Surfaces, statik analiz, görselleştirme, eğim analizi, CAM | 8 ✅ (temel) |
+| Surfaces, static analysis, visualization, draft analysis, CAM | 8 ✅ (basic) |
 | Options, Customize, Macros, Add-ins, Auto-recover, Large Assembly Mode | 9 ✅ |
 
-## Bilinen sınırlamalar
-- Faz 5 özelliklerinin hepsi OpenCASCADE çekirdeği gerektirir (referans geometri ve geri alma çubuğu CSG'de de çalışır). Çoğaltılan kılavuz deliklerde kozmetik diş yalnızca ilk delikte çizilir.
-- Sarma yalnızca silindirik yüzlere yapılır ve taslak düzlemi silindir eksenine paralel olmalıdır; kılavuzlu süpürmede tek kılavuz eğrisi desteklenir, profilin delikleri yok sayılır.
-- Bükmeli süpürme ara kesitlerden yumuşak loft olarak kurulur (yaklaşık yüzey); kabartma/gravür gövdenin tamamının ofsetini kullandığı için çok karmaşık gövdelerde başarısız olabilir.
-- Süpürmede profil yolun başında ve yola dik olmalıdır; köşeli 3B taslak yollarında süpürme başarısız olabilir.
-- CSG çekirdeğinde geometri üçgen ağ (mesh) tabanlıdır; daireler 128 parçaya bölünür. OpenCASCADE çekirdeğinde geometri kesindir, yalnızca ekran görüntüsü üçgenlenir.
-- OpenCASCADE çekirdeği Python 3.11–3.13 ve `occ_env` (~240 MB, statik analiz için numpy + scipy dahil) gerektirir; ilk açılışta ~1 sn içinde başlar, bu sürede model CSG ile gösterilir.
-- Topolojik adlar taslak öğe kimliklerine dayanır: taslaktaki bir öğe silinip yeniden çizilirse ondan türeyen yüzlerin adı değişir ve başvurular geometrik eşleşmeye düşer. Bir yüz ikiye bölünürse parçalar aynı adı taşır, aralarında en yakın olan seçilir.
-- Yüzey taslağı yalnızca destek yüzü kendi normali boyunca kayınca izler (yüz döner/eğilirse düzlem yerinde kalır).
-- Kaburga OCCT LinearForm ile yapılır: profil gövdenin dışında başlayıp gövdeye ulaşmalıdır; çok karmaşık profillerde başarısız olabilir.
-- CSG çekirdeğinde yüzeye çizilen taslak yüzün **düzlemini** kopyalar; alttaki parça değişirse taslak yerinde kalır (OpenCASCADE çekirdeğinde destek yüzüyle birlikte kayar).
-- Boyutlar 3B modelde yalnızca taslak düzenlenirken görünür (modele bağlı 3B boyutlar yok); teknik resimde model boyutları aktarılabilir.
-- Sac metal ve kaynaklı konstrüksiyon OpenCASCADE gerektirir. Kenar flanşı yalnızca düz (kapalı profilli) taban flanşın üst / alt kenarlarına eklenir; büküm "dışa doğru" yapılır (taban boyu değişmez). Açınım gösterilirken taban flanştan sonraki kesme/delik özellikleri açınıma taşınmaz. Açık profilli taban flanş yalnızca doğru çizgilerden oluşmalıdır.
-- Kaynaklı konstrüksiyonda üyeler düz çizgilerdir (yaylı yol yok); köşe yuvarlatmaları ve kaynak dikişleri modellenmez; kesim listesinde gönye üyelerin boyu merkez çizgisi boyudur.
-- Konfigürasyonlar boyut / derinlik / açı değerlerini ve bastırma durumlarını kapsar (malzeme, renk, özellik türü değişiklikleri kapsanmaz).
-- Yüzey özellikleri ve statik analiz OpenCASCADE gerektirir; FEA ayrıca `occ_env` içinde numpy + scipy ister (`OCC_Kur.bat` kurar). Ağ vokselli olduğu için eğri yüzeyler basamaklı yaklaşılır: gerilme yığılmaları (delik kenarı, iç köşe) ağ yoğunluğuna bağlıdır, sonuçlar ön boyutlandırma içindir. Yükler yüze eşit yayılmış kuvvettir (basınç / moment yok); yalnızca tek parça (montaj analizi yok).
-- Yüzey kırpma yalnızca standart düzlemlere (ofsetli) göredir; dikme yalnızca kenarları çakışan (tolerans içinde) yüzeyleri birleştirir.
-- CAM 2.5 eksendir: yalnız taslak konturları (düzlemsel) işlenir, takım yolu takım merkezidir, giriş/çıkış rampası ve takım telafisi (G41/G42) yoktur; G-kodu tezgâhta çalıştırmadan önce bir simülatörde kontrol edin.
-- Görselleştirme gerçek zamanlıdır (Godot Forward+): ışın izleme yoktur; HDRI panorama ortam ışığı ve yansıma olarak kullanılır, çıkartmalar kaydedilmez (oturumluk).
-- İngilizce arayüzde menüler, sekmeler, araç çubukları, ipuçları, panel etiketleri, durum mesajları ve Yardım çevrilir; özellik adları (Ekstrüzyon1...), malzeme adları ve bazı nadir hata iletileri Türkçe kalır. Tema değişikliği yeniden başlatınca uygulanır.
-- Makrolar uygulamanın tamamına erişen GDScript kodudur: yalnızca güvendiğiniz makroları çalıştırın. Makro kaydı yalnız **eklenen** özellikleri kaydeder (düzenleme / silme kaydedilmez).
-- Otomatik kayıt, kayıt aralığı içindeki son değişiklikleri kaybedebilir; teknik resim düzenlemeleri parça kaydının içindedir.
-- CSG çekirdeğinde Boolean işlemleri Godot'nun CSG düğümleriyle ana iş parçacığında hesaplanır (CSG sahne ağacı dışında çalışmıyor); çok delikli parçalarda kısa donma olabilir — OpenCASCADE çekirdeği ayrı süreçte çalıştığı için etkilenmez. LOD, perspektif ve ortografik görünümde Godot'nun ekran boyutu ölçütüyle seçilir.
-- Kurulum paketi için Godot dışa aktarma şablonları ve Inno Setup 6 gerekir (geliştirme makinesinde kurulu değilse `Paketle.bat` yol gösterir). OpenCASCADE kurulu sürümde de Python + `OCC_Kur.bat` ile kurulur; Python paketle gelmez.
-- Eklentiler ve makrolar tüm uygulamaya erişir; yalnız güvendiğiniz eklentileri `plugins/` klasörüne koyun.
-- Montaj: girişim tespiti ve montaj STEP çıktısı OpenCASCADE gerektirir. CSG çekirdeğinde eşleştirme referansları düzlemsel yüzler ve uydurulan silindirlerle sınırlıdır (kenar seçimi yok). Dişli / vida / kremayer açıları eşleştirme oluşturulduğu andaki konuma göre ölçülür; dişli geometrisi modellenmez (Toolbox rulmanı bilyesiz, cıvata dişsiz basitleştirilmiş katıdır). Alt montajlar rijittir (esnek alt montaj yok); alt montaj içindeki eşleştirmeler üst montajda çözülmez. Bağlamda düzenlemede diğer bileşenlerin yüzleri yalnızca taslak düzlemi olarak kullanılabilir (kenar dönüştürme / ilişkili referans yok). Çarpışma algılama asenkron çalışır: hızlı sürüklemede bileşen bir önceki çarpışmasız konuma geri döner.
-- Teknik resim: kesit görünüşü OpenCASCADE çekirdeği gerektirir; kesitte yalnızca tam (düz) kesit var (kademeli/yarım/kırık kesit yok). Model boyutu aktarımı taslak boyutlarıyla sınırlı (özellik derinlikleri aktarılmaz). Yazdırma doğrudan değil, PDF üzerinden yapılır. DWG doğrudan yazılmaz.
-- Teknik resimde metin genişliği yazı tipi ölçümüne değil tahmine dayanır (PDF'te gerçek glif genişlikleri kullanılır); çok uzun notlarda hizalama birkaç mm kayabilir.
-- Ölçüm aracı yüz ve köşe seçer; ölçüm aracına B-rep kenar seçimi ve silindir yarıçapı ölçümü henüz bağlanmadı (çekirdek bu bilgiyi veriyor).
-- Teğet yay aracı henüz yok (yay + teğet ilişkisiyle yapılabilir).
-- Uzat çizgi ve yaylarda; kırp çizgi/daire/yayda çalışır (spline, elips, parabol kesici olarak kullanılabilir ama kendileri kırpılmaz).
-- Ofset metni desteklemez; çoğaltılan kopyaların konumu serbesttir (eksik tanımlı).
-- 3B taslak şimdilik yalnızca düz çizgilerden oluşur ve henüz bir özellik (süpürme vb.) tarafından kullanılmaz — Faz 5'te süpürme yolu olarak bağlanacak; 3B ilişki/boyut yok.
-- Varlıkları dönüştür ile alınan öğeler sabittir; parça değişince taslak güncellenmez (CSG çekirdeğinde eğriler kısa çizgilere bölünür).
-- Metin, programın varsayılan yazı tipiyle çizilir; yazı tipi seçimi sonraki sürümlerde.
-- CSG çekirdeğinde tam çakışan iki eğri yüzey birleşince nadiren saç teli inceliğinde bir iz kalabilir (OpenCASCADE çekirdeğinde oluşmaz).
-- Çizgiler ekranda 1–2 piksel kalınlığındadır; kenar kalınlığı ayarı Faz 9'da.
+## Known limitations
+- All Phase 5 features require the OpenCASCADE kernel (reference geometry and the rollback bar also work in CSG). For patterned tapped holes the cosmetic thread is drawn only on the first hole.
+- Wrap works only on cylindrical faces and the sketch plane must be parallel to the cylinder axis; guided sweeps support a single guide curve, holes in the profile are ignored.
+- Twisted sweeps are built as smooth lofts through intermediate sections (approximate surface); emboss/engrave uses an offset of the whole body and may fail on very complex bodies.
+- In sweeps the profile must be at the start of the path and normal to it; sweeps along sharp-cornered 3D sketch paths may fail.
+- In the CSG kernel geometry is triangle-mesh based; circles are split into 128 segments. In the OpenCASCADE kernel geometry is exact, only the display is triangulated.
+- The OpenCASCADE kernel requires Python 3.11–3.13 and `occ_env` (~240 MB, including numpy + scipy for static analysis); it starts in ~1 s on first launch, during which the model is shown with CSG.
+- Topological names are based on sketch entity ids: if an entity is deleted and redrawn, the names of the faces derived from it change and references fall back to geometric matching. If a face is split in two, both pieces carry the same name and the closest one is chosen.
+- A sketch on a face follows the support face only when it moves along its own normal (if the face rotates/tilts, the plane stays in place).
+- Ribs use OCCT LinearForm: the profile must start outside the body and reach it; may fail with very complex profiles.
+- In the CSG kernel a sketch drawn on a face copies the face's **plane**; if the underlying part changes the sketch stays in place (in the OpenCASCADE kernel it moves with the support face).
+- Dimensions are shown on the 3D model only while editing a sketch (no 3D model-based dimensions); model items can be brought into drawings.
+- Sheet metal and weldments require OpenCASCADE. Edge flanges can only be added to the top / bottom edges of a flat (closed-profile) base flange; the bend is made "outward" (the base length does not change). While the flat pattern is shown, cut/hole features after the base flange are not carried into the flat pattern. An open-profile base flange must consist of straight lines only.
+- In weldments members are straight lines (no arc paths); corner fillets and weld beads are not modeled; in the cut list the length of mitered members is the centerline length.
+- Configurations cover dimension / depth / angle values and suppression states (material, color and feature type changes are not covered).
+- Surface features and static analysis require OpenCASCADE; FEA also needs numpy + scipy in `occ_env` (`OCC_Kur.bat` installs them). Because the mesh is voxel-based, curved faces are approximated with steps: stress concentrations (hole edges, inner corners) depend on the mesh density, results are for preliminary sizing. Loads are forces evenly distributed over faces (no pressure / moment); single parts only (no assembly analysis).
+- Surface trim is only against standard planes (with offset); knit only joins surfaces whose edges coincide (within tolerance).
+- CAM is 2.5-axis: only (planar) sketch contours are machined, the toolpath is the tool center, there is no lead-in/out ramp and no cutter compensation (G41/G42); check the G-code in a simulator before running it on a machine.
+- Visualization is real-time (Godot Forward+): no ray tracing; the HDRI panorama is used as ambient light and reflection, decals are not saved (per session).
+- In the English UI, menus, tabs, toolbars, tooltips, panel labels, status messages and Help are translated; feature names (Ekstrüzyon1...), material names and some rare error messages stay Turkish. Theme changes apply after a restart.
+- Macros are GDScript code with access to the whole application: only run macros you trust. Macro recording records only **added** features (edits / deletions are not recorded).
+- Auto-save may lose the latest changes within the save interval; drawing edits are part of the part's record.
+- In the CSG kernel Boolean operations are computed with Godot's CSG nodes on the main thread (CSG does not work outside the scene tree); parts with many holes may freeze briefly — the OpenCASCADE kernel is not affected because it runs in a separate process. LOD is chosen with Godot's screen-size criterion in perspective and orthographic views.
+- The installer needs the Godot export templates and Inno Setup 6 (`Paketle.bat` explains what to do if they are missing). In the installed version OpenCASCADE is also set up with Python + `OCC_Kur.bat`; Python is not bundled.
+- Plugins and macros have access to the whole application; only put plugins you trust in the `plugins/` folder.
+- Assemblies: interference detection and assembly STEP export require OpenCASCADE. In the CSG kernel mate references are limited to planar faces and fitted cylinders (no edge selection). Gear / screw / rack angles are measured from the position at the time the mate was created; gear geometry is not modeled (the library bearing has no balls, bolts have no threads — simplified solids). Sub-assemblies are rigid (no flexible sub-assemblies); mates inside a sub-assembly are not solved in the parent assembly. In in-context editing the faces of other components can only be used as sketch planes (no convert entities / associative references). Collision detection runs asynchronously: during fast dragging the component returns to the previous collision-free position.
+- Drawings: section views require the OpenCASCADE kernel; only full (straight) sections are available (no stepped/half/broken-out sections). Model items are limited to sketch dimensions (feature depths are not brought in). Printing goes through PDF, not directly. DWG is not written directly.
+- In drawings text width is estimated rather than measured from the font (real glyph widths are used in PDFs); alignment of very long notes may shift by a few mm.
+- The measure tool selects faces and vertices; B-rep edge selection and cylinder radius measurement are not yet wired into the measure tool (the kernel provides this information).
+- There is no tangent arc tool yet (use an arc + tangent relation).
+- Extend works on lines and arcs; trim works on lines/circles/arcs (splines, ellipses and parabolas can be used as cutters but cannot be trimmed themselves).
+- Offset does not support text; patterned copies are positioned freely (under-defined).
+- 3D sketches currently consist only of straight lines; there are no 3D relations/dimensions.
+- Entities brought in with convert entities are fixed; the sketch does not update when the part changes (in the CSG kernel curves are split into short lines).
+- Text is drawn with the program's default font; font selection in a later version.
+- In the CSG kernel, when two exactly coincident curved faces are merged, a hairline seam may rarely remain (does not happen in the OpenCASCADE kernel).
+- Lines are 1–2 pixels wide on screen; there is no edge thickness setting yet.

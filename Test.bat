@@ -1,5 +1,5 @@
 @echo off
-rem Otomatik testleri calistirir
+rem Runs the automated tests
 cd /d "%~dp0"
 set G=..\Godot\Godot_v4.7.1-stable_win64_console.exe
 "%G%" --headless --path . --script res://tests/selftest.gd
