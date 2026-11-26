@@ -1,0 +1,60 @@
+MOUSE
+  Middle button drag .......... rotate
+  Right button drag ........... rotate (or mouse gestures, see Options)
+  Ctrl + middle/right button .. pan
+  Shift + middle button ....... zoom
+  Wheel ....................... zoom toward the cursor
+  Left click .................. select   (double click: edit)
+
+KEYBOARD (customizable: Tools → Options → Keyboard shortcuts)
+  F ........................... zoom to fit
+  Ctrl+1..7 ................... Front, Back, Left, Right, Top, Bottom, Isometric
+  Ctrl+8 ...................... normal to view
+  Arrow keys .................. rotate the view by 15°
+  Ctrl+Z / Ctrl+Y ............. undo / redo
+  Ctrl+S / Ctrl+O / Ctrl+N .... save / open / new
+  Delete ...................... delete      F2: rename
+  Esc ......................... cancel / leave the tool
+  Enter ....................... OK in the feature panel
+
+SKETCH MODE
+  L line   N centerline   R rectangle   C circle   A arc
+  D Smart Dimension   S select   G grid snap
+  P polygon   T trim   E extend
+  Type =expression into a dimension box to link an equation (e.g. =width/2)
+  Double click / right click: finish a line chain
+  Double click a dimension label: change its value
+  Shift/Ctrl + click: multiple selection → add a relation from the panel
+  Blue = under defined, black = fully defined, red = over defined
+
+ASSEMBLY (File → New Assembly / .dasm)
+  Insert Component: part file; the first component is fixed (f), under defined (-)
+  Left drag: move a component while respecting its mates
+  Mate: click faces/edges → choose the type (★ suggested)
+  Double click a component (tree): edit the part; 'Assembly' tab: go back
+  New Part: part inside the assembly (other components ghosted, sketch on their faces)
+  Component Pattern, subassembly (insert .dasm), Drawing tab: assembly drawing
+  Large assemblies: automatic LOD; large assembly mode shows edges only on the selection
+
+SHEET METAL / WELDMENTS / SURFACES / ANALYSIS (tabs)
+  Base Flange: closed profile → plate, open line chain → bent sheet
+  Edge Flange / Hem: click base edges; Flat Pattern, Flat Pattern DXF with bend lines
+  Structural Member: profile on sketch / 3D sketch lines; Cut List (CSV)
+  Evaluate → Configuration: dimension / suppression sets, design table (CSV)
+  Surfaces: extruded / revolved / lofted / planar surface, knit, thicken, trim
+  Analysis: static FEA (click fixed + load faces), draft analysis, CAM G-code, visualization
+
+OPTIONS, MACROS AND PLUG-INS (Tools menu)
+  Options: language, theme, interface scale, autosave, backup
+  Keyboard shortcuts: double click a command, press a key (any command can be assigned)
+  Mouse gestures: hold the right button + pull in a direction → command ring
+  Run macro / start-stop macro recording / save part as macro
+  Plug-ins: plugins/ folder, 'Plug-ins' tab; enable / disable in Options
+  File → Recent Files; document recovery at start after a crash
+
+DRAWING (tab)
+  On first entry an A3 sheet with the standard 3 views and an isometric is created
+  Left click: select / place   Drag: move a view or annotation
+  Wheel: zoom   Right/middle button: pan   F: fit to sheet
+  Delete: delete the selected view/annotation   Esc: release the tool / clear selection
+  Output: PDF, SVG, DXF (convert DXF to DWG with AutoCAD / ODA)

@@ -1,0 +1,18 @@
+# Godot önbelleği ve dışa aktarma çıktıları
+.godot/
+export/
+build/
+
+# OpenCASCADE Python ortamı (OCC_Kur.bat ile yerelde kurulur)
+occ_env/
+__pycache__/
+*.pyc
+
+# Yedek / geçici dosyalar
+*.bak
+*.tmp
+*~
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
