@@ -7,7 +7,7 @@ extends Control
 ##   feature : özellik paneli açık (Ekstrüzyon / Döndürme / Yuvarlatma / Pah / Kabuk), canlı önizleme
 
 const APP_NAME := "DIY.CAD"
-const APP_VERSION := "0.9.4 — Faz 9"
+const APP_VERSION := "0.9.5 — Faz 9"
 const STL_PRESETS := [["Kaba", 0.1, 20.0], ["Normal", 0.02, 10.0], ["İnce", 0.005, 5.0], ["Çok ince", 0.001, 2.0]]
 
 var doc := CadDocument.new()

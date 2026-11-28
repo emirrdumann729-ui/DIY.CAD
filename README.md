@@ -7,7 +7,7 @@
 A **parametric, feature-based** CAD program written in Godot 4.7.
 Goals and phases: [ROADMAP.md](ROADMAP.md)
 
-**Current version: 0.9.4 — one Export dialog for 40+ formats, UI in Turkish / English / German / Russian / Chinese, STL import (per-axis scale, regional stretch, tapered growth, protected region) + Phase 9 (complete): background mesh processing, LOD for large assemblies, plugins, Windows packaging, auto-save, keyboard shortcuts, mouse gestures, macros** (previous: Phase 8). Release notes: [CHANGELOG.md](CHANGELOG.md)
+**Current version: 0.9.5 — new logo, complete Turkish / English / German / Russian / Chinese UI, one Export dialog for 40+ formats, STL import (per-axis scale, regional stretch, tapered growth, protected region) + Phase 9 (complete): background mesh processing, LOD for large assemblies, plugins, Windows packaging, auto-save, keyboard shortcuts, mouse gestures, macros** (previous: Phase 8). Release notes: [CHANGELOG.md](CHANGELOG.md)
 
 The user interface is Turkish by default; switch to English, German, Russian or Chinese under **Tools → Options → General → Language** (applies instantly) or start with `--lang=en` (`de`, `ru`, `zh`). Menu and tool names below are given as they appear in the English UI.
 

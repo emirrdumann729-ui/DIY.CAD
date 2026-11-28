@@ -7,7 +7,7 @@
 Godot 4.7 ile yazılmış, **parametrik ve özellik tabanlı** bir CAD programı.
 Hedef ve aşamalar için: [ROADMAP.md](ROADMAP.md)
 
-**Şu anki sürüm: 0.9.4 — tek Dışa Aktar penceresinde 40+ format, Türkçe / İngilizce / Almanca / Rusça / Çince arayüz, STL içe aktarma (eksen bazlı ölçek, bölgesel uzatma, kademeli büyütme, koruma bölgesi) + Faz 9 (tamamlandı): arka planda ağ işleme, büyük montajlar için LOD, eklentiler, Windows paketleme, otomatik kaydetme, kısayollar, fare hareketleri, makrolar** (önceki: Faz 8). Sürüm notları: [CHANGELOG.md](CHANGELOG.md)
+**Şu anki sürüm: 0.9.5 — yeni logo, eksiksiz Türkçe / İngilizce / Almanca / Rusça / Çince arayüz, tek Dışa Aktar penceresinde 40+ format, STL içe aktarma (eksen bazlı ölçek, bölgesel uzatma, kademeli büyütme, koruma bölgesi) + Faz 9 (tamamlandı): arka planda ağ işleme, büyük montajlar için LOD, eklentiler, Windows paketleme, otomatik kaydetme, kısayollar, fare hareketleri, makrolar** (önceki: Faz 8). Sürüm notları: [CHANGELOG.md](CHANGELOG.md)
 
 ![DIY.CAD — parça modelleme](docs/screenshots/part.png)
 

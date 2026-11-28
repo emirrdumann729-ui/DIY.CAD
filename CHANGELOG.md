@@ -2,7 +2,7 @@
 
 Detailed feature list: [ROADMAP.md](ROADMAP.md). Usage: [README.md](README.md).
 
-## Unreleased
+## 0.9.5
 - **New logo and banner**: application / installer icon (small sizes use the logo mark without text), window icon, a DIY.CAD startup splash instead of the engine logo, and the banner at the top of the README.
 - **Complete translation**: the remaining ~550 interface texts (status and error messages, sketch tool messages, selection hints, drawing tool help, feature summaries, import / STL options, material, mate, hole and GD&T names, file dialog titles and filters) are now translated into English, German, Russian and Chinese. Drawing sheets (title block, view labels, BOM / revision headers, default notes) follow the UI language; Russian and Chinese sheets use English because DXF is written in code page 1254 and PDFs embed Arial without Chinese glyphs. German characters are now encoded in DXF text.
 
