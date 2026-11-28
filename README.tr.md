@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/branding/banner.png" alt="DIY.CAD — Design · Model · Create" width="100%"></p>
+
 # DIY.CAD
 
 [English](README.md) | **Türkçe**
@@ -302,6 +304,7 @@ src/io/       Dışa aktarma formatları (ExportFormats: ağ, resim, XML / ZIP y
 src/special/  Faz 8: sac metal (SheetMetal), kaynaklı konstrüksiyon (Weldment), konfigürasyonlar (Configs), yüzeyler (Surfaces), statik analiz + eğim analizi (Fea), CAM (Cam), arayüz + görselleştirme (SpecialUI)
 src/assembly/ Montaj: belge (CadAssembly), eşleştirme çözücüsü (MateSolver), referans geometrisi (MateGeom), görünüm (AssemblyView), mod denetleyicisi (AssemblyMode), bağlantı elemanları (Toolbox), LOD (AsmLod)
 src/drawing/  Teknik resim: veri modeli ve izdüşüm geometrisi (Drawing), sayfa çizimi (DrawingRender), PDF/SVG/DXF (DrawingExport), tuval (DrawingCanvas)
+branding/     Logo, simge ve açılış ekranı görselleri (tools/make_icon.gd bunlardan icon.ico üretir)
 plugins/      Örnek eklentiler (Hızlı Kutu, Parça Bilgisi); src/core/plugin_api.gd + plugins.gd
 macros/       Örnek makrolar; i18n/ sözlükler ve yardım (en, de, ru, zh); installer/ Inno Setup betiği; tools/ simge üretici
 tests/        selftest.gd (birim), solver_test.gd (kısıt çözücü), ops_test.gd (taslak işlemleri), drawing_test.gd (teknik resim), assembly_test.gd (montaj çözücüsü), special_test.gd (sac metal, kaynak, konfigürasyon, CAM, analiz), pro_test.gd (ayarlar, kısayollar, makro, dil), occ_test.gd (B-rep), ui_flow.gd (uçtan uca)

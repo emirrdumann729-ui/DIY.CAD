@@ -2,6 +2,9 @@
 
 Detailed feature list: [ROADMAP.md](ROADMAP.md). Usage: [README.md](README.md).
 
+## Unreleased
+- **New logo and banner**: application / installer icon (small sizes use the logo mark without text), window icon, a DIY.CAD startup splash instead of the engine logo, and the banner at the top of the README.
+
 ## 0.9.4
 - **Export dialog**: every output format in one place — File → Export... (Ctrl+E) and the Export button on the Features, Sketch, Drawing and Assembly toolbars. 48 entries in groups (DIY.CAD, 3D solid, 3D mesh / printing / visualization, 2D drawing, image, data / package); formats that do not apply right now or cannot be written are greyed out with the reason and a recommended alternative.
 - **New DIY.CAD file types**: part / assembly / drawing templates (`.dcadt`, `.dasmt`, `.ddrwt` — they open as a new untitled document), drawing file (`.ddrw`, opens on the Drawing tab), library feature part (`.dclfp`) and forming tool (`.dcftp`).

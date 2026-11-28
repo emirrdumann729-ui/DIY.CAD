@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/branding/banner.png" alt="DIY.CAD — Design · Model · Create" width="100%"></p>
+
 # DIY.CAD
 
 **English** | [Türkçe](README.tr.md)
@@ -304,6 +306,7 @@ src/io/       Export formats (ExportFormats: mesh, image, XML / ZIP writers), ST
 src/special/  Phase 8: sheet metal (SheetMetal), weldments (Weldment), configurations (Configs), surfaces (Surfaces), static + draft analysis (Fea), CAM (Cam), UI + visualization (SpecialUI)
 src/assembly/ Assembly: document (CadAssembly), mate solver (MateSolver), reference geometry (MateGeom), view (AssemblyView), mode controller (AssemblyMode), fasteners (Toolbox), LOD (AsmLod)
 src/drawing/  Drawings: data model and projection geometry (Drawing), sheet rendering (DrawingRender), PDF/SVG/DXF (DrawingExport), canvas (DrawingCanvas)
+branding/     Logo, icon and splash images (tools/make_icon.gd builds icon.ico from them)
 plugins/      Sample plugins (Quick Box, Part Info); src/core/plugin_api.gd + plugins.gd
 macros/       Sample macros; i18n/ dictionaries and help (en, de, ru, zh); installer/ Inno Setup script; tools/ icon generator
 tests/        selftest.gd (unit), solver_test.gd (constraint solver), ops_test.gd (sketch operations), drawing_test.gd (drawings), assembly_test.gd (mate solver), special_test.gd (sheet metal, weldments, configurations, CAM, analysis), pro_test.gd (settings, shortcuts, macros, language, STL import), occ_test.gd (B-rep), ui_flow.gd (end-to-end)
