@@ -1304,3 +1304,37 @@ Eklenti: setup(api: PluginApi) içeren .gd dosyası (src/core/plugin_api.gd). A�
 Çift tıklayın veya sağ tıklayın: malzemeyi düzenle	双击或右键单击：编辑材料
 dk	分钟
 Otomatik kayıtlar: 	自动保存： 
+Model görünüşü	模型视图
+İzdüşüm görünüşü	投影视图
+Kesit görünüşü	剖面视图
+Detay görünüşü	局部视图
+Yardımcı görünüş	辅助视图
+Görünüş	视图
+Kesit çizgisinin ikinci ucuna tıklayın.	单击剖切线的第二个端点。
+Detay dairesinin kenarına tıklayın.	单击局部视图圆的边缘。
+İkinci kırık sınırına tıklayın.	单击第二条断裂线。
+Eşleştirmeler (%d)	配合 (%d)
+Büyük montaj modu	大型装配体模式
+Otomatik	自动
+Kapalı	关闭
+Her zaman	始终
+Patlatılmış görünüm	爆炸视图
+Toplanmış görünüm	解除爆炸视图
+%s eklendi.	已添加 %s。
+ — OCC kullanılamıyor: 	 — OCC 不可用： 
+ — OpenCASCADE başlatılıyor	 — 正在启动 OpenCASCADE
+ (başlatılıyor...)	 (正在启动...)
+Açınım gösteriliyor (düz sac).	显示展开状态（平板）。
+Bükülmüş hali gösteriliyor.	显示折弯状态。
+Kaba (~2 bin)	粗糙（约 2 千）
+Orta (~6 bin)	中等（约 6 千）
+İnce (~15 bin)	精细（约 1.5 万）
+Sabit yüz seç	选取固定面
+Yük yüzü seç	选取载荷面
+Sabit yüz %d	固定面 %d
+Yük %d: %.0f N	载荷 %d：%.0f N
+CAD (varsayılan)	CAD（默认）
+Stüdyo	工作室
+Gün ışığı	日光
+Gece	夜晚
+HDRI dosyası	HDRI 文件

@@ -7,6 +7,8 @@ Hedef ve aşamalar için: [ROADMAP.md](ROADMAP.md)
 
 **Şu anki sürüm: 0.9.4 — tek Dışa Aktar penceresinde 40+ format, Türkçe / İngilizce / Almanca / Rusça / Çince arayüz, STL içe aktarma (eksen bazlı ölçek, bölgesel uzatma, kademeli büyütme, koruma bölgesi) + Faz 9 (tamamlandı): arka planda ağ işleme, büyük montajlar için LOD, eklentiler, Windows paketleme, otomatik kaydetme, kısayollar, fare hareketleri, makrolar** (önceki: Faz 8). Sürüm notları: [CHANGELOG.md](CHANGELOG.md)
 
+![DIY.CAD — parça modelleme](docs/screenshots/part.png)
+
 ## İndir (Windows, Godot gerekmez)
 
 Son sürüm **[Releases](https://github.com/emirrdumann729-ui/DIY.CAD/releases/latest)** sayfasında:
@@ -19,6 +21,17 @@ Son sürüm **[Releases](https://github.com/emirrdumann729-ui/DIY.CAD/releases/l
 Program dahili CSG çekirdeğiyle hemen çalışır (taslak, ekstrüzyon / döndürme / kesme, STL çıktısı...). OpenCASCADE çekirdeği isteyen özellikler (köşe yuvarlatma, kabuk, STEP, teknik resim, sac metal...) için Python 3.11–3.13 gerekir: kurulumda "OpenCASCADE çekirdeğini kur" kutusunu işaretle ya da `OCC_Kur.bat`'ı bir kez çalıştır. Dosyalar kod imzalı olmadığı için Windows SmartScreen ilk açılışta uyarabilir ("Ek bilgi → Yine de çalıştır").
 
 Godot yalnızca kaynak koddan çalıştırmak veya kodu değiştirmek için gerekir (aşağıda).
+
+## Ekran görüntüleri
+
+| | |
+|---|---|
+| ![Dışa Aktar penceresi](docs/screenshots/export.png) | ![Teknik resim](docs/screenshots/drawing.png) |
+| **Dışa Aktar** — tüm formatlar tek pencerede (Ctrl+E); kullanılamayanlar nedenini gösterir | **Teknik resim** — standart görünüşler, kesit, detay, ölçüler, açıklamalar, antet |
+| ![Montaj](docs/screenshots/assembly.png) | ![Sac metal](docs/screenshots/sheet-metal.png) |
+| **Montaj** — eşleştirmeler, standart bağlantı elemanları, patlatılmış görünüm | **Sac metal** — taban / kenar flanşı, açınım |
+| ![Statik analiz](docs/screenshots/fea.png) | ![Diller](docs/screenshots/languages.png) |
+| **Statik analiz** — von Mises gerilme haritası | **Beş arayüz dili** — Türkçe, Almanca, Rusça, Çince ve İngilizce |
 
 ## Kaynak koddan çalıştırma
 

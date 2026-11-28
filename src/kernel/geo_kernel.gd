@@ -95,16 +95,16 @@ func backend() -> String:
 func backend_label() -> String:
 	match backend():
 		"occ":
-			return "OpenCASCADE" + ("" if occ.is_ready() else " (başlatılıyor...)")
+			return "OpenCASCADE" + ("" if occ.is_ready() else I18n.t(" (başlatılıyor...)"))
 	return "CSG"
 
 
 func status_text() -> String:
-	var t := "Çekirdek: " + backend_label()
+	var t := I18n.t("Çekirdek: ") + backend_label()
 	if mode != "csg" and occ.state == "failed":
-		t += " — OCC kullanılamıyor: " + occ.fail_reason
+		t += I18n.t(" — OCC kullanılamıyor: ") + occ.fail_reason
 	elif mode == "auto" and occ.state == "starting":
-		t += " — OpenCASCADE başlatılıyor"
+		t += I18n.t(" — OpenCASCADE başlatılıyor")
 	return t
 
 

@@ -872,7 +872,7 @@ func _panel_fea(panel: PropertyPanel) -> void:
 		_highlight_fea()
 		app._refresh_panel()
 	for i in (fea_st["fix"] as Array).size():
-		panel.item_row("Sabit yüz %d" % (i + 1), Icons.get_icon("asm_fix", 14), rm_fix.bind(i))
+		panel.item_row(I18n.t("Sabit yüz %d") % (i + 1), Icons.get_icon("asm_fix", 14), rm_fix.bind(i))
 	var rm_ld := func(i: int) -> void:
 		(fea_st["loads"] as Array).remove_at(i)
 		fea_res = {}
@@ -885,7 +885,7 @@ func _panel_fea(panel: PropertyPanel) -> void:
 		dnames.append(Fea.DIRS[k])
 	for i in (fea_st["loads"] as Array).size():
 		var ld: Dictionary = fea_st["loads"][i]
-		panel.item_row("Yük %d: %.0f N" % [i + 1, float(ld["mag"])], Icons.get_icon("arrow_down", 14), rm_ld.bind(i))
+		panel.item_row(I18n.t("Yük %d: %.0f N") % [i + 1, float(ld["mag"])], Icons.get_icon("arrow_down", 14), rm_ld.bind(i))
 		var on_mag := func(v: float) -> void:
 			ld["mag"] = v
 			fea_res = {}

@@ -1304,3 +1304,37 @@ Eklenti: setup(api: PluginApi) içeren .gd dosyası (src/core/plugin_api.gd). A�
 Çift tıklayın veya sağ tıklayın: malzemeyi düzenle	Двойной или правый щелчок: изменить материал
 dk	мин
 Otomatik kayıtlar: 	Автосохранения: 
+Model görünüşü	Вид модели
+İzdüşüm görünüşü	Проекционный вид
+Kesit görünüşü	Вид в разрезе
+Detay görünüşü	Выносной вид
+Yardımcı görünüş	Вспомогательный вид
+Görünüş	Вид
+Kesit çizgisinin ikinci ucuna tıklayın.	Щелкните второй конец линии разреза.
+Detay dairesinin kenarına tıklayın.	Щелкните край окружности выносного вида.
+İkinci kırık sınırına tıklayın.	Щелкните вторую линию разрыва.
+Eşleştirmeler (%d)	Сопряжения (%d)
+Büyük montaj modu	Режим большой сборки
+Otomatik	Автоматически
+Kapalı	Выкл.
+Her zaman	Всегда
+Patlatılmış görünüm	Разнесенный вид
+Toplanmış görünüm	Собранный вид
+%s eklendi.	%s добавлено.
+ — OCC kullanılamıyor: 	 — OCC недоступен: 
+ — OpenCASCADE başlatılıyor	 — запуск OpenCASCADE
+ (başlatılıyor...)	 (запуск...)
+Açınım gösteriliyor (düz sac).	Показана развертка (плоский лист).
+Bükülmüş hali gösteriliyor.	Показано согнутое состояние.
+Kaba (~2 bin)	Грубая (~2 тыс.)
+Orta (~6 bin)	Средняя (~6 тыс.)
+İnce (~15 bin)	Мелкая (~15 тыс.)
+Sabit yüz seç	Выбор закрепленной грани
+Yük yüzü seç	Выбор грани нагрузки
+Sabit yüz %d	Закрепленная грань %d
+Yük %d: %.0f N	Нагрузка %d: %.0f Н
+CAD (varsayılan)	CAD (по умолчанию)
+Stüdyo	Студия
+Gün ışığı	Дневной свет
+Gece	Ночь
+HDRI dosyası	Файл HDRI

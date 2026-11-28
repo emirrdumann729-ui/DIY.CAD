@@ -1304,3 +1304,37 @@ Eklenti: setup(api: PluginApi) içeren .gd dosyası (src/core/plugin_api.gd). A�
 Çift tıklayın veya sağ tıklayın: malzemeyi düzenle	Doppelklick oder Rechtsklick: Material bearbeiten
 dk	min
 Otomatik kayıtlar: 	Automatische Sicherungen: 
+Model görünüşü	Modellansicht
+İzdüşüm görünüşü	Projizierte Ansicht
+Kesit görünüşü	Schnittansicht
+Detay görünüşü	Detailansicht
+Yardımcı görünüş	Hilfsansicht
+Görünüş	Ansicht
+Kesit çizgisinin ikinci ucuna tıklayın.	Klicken Sie auf das zweite Ende der Schnittlinie.
+Detay dairesinin kenarına tıklayın.	Klicken Sie auf den Rand des Detailkreises.
+İkinci kırık sınırına tıklayın.	Klicken Sie auf die zweite Unterbrechungslinie.
+Eşleştirmeler (%d)	Verknüpfungen (%d)
+Büyük montaj modu	Modus für große Baugruppen
+Otomatik	Automatisch
+Kapalı	Aus
+Her zaman	Immer
+Patlatılmış görünüm	Explosionsansicht
+Toplanmış görünüm	Zusammengefügte Ansicht
+%s eklendi.	%s hinzugefügt.
+ — OCC kullanılamıyor: 	 — OCC nicht verfügbar: 
+ — OpenCASCADE başlatılıyor	 — OpenCASCADE wird gestartet
+ (başlatılıyor...)	 (wird gestartet...)
+Açınım gösteriliyor (düz sac).	Abwicklung wird angezeigt (ebenes Blech).
+Bükülmüş hali gösteriliyor.	Gebogener Zustand wird angezeigt.
+Kaba (~2 bin)	Grob (~2 Tsd.)
+Orta (~6 bin)	Mittel (~6 Tsd.)
+İnce (~15 bin)	Fein (~15 Tsd.)
+Sabit yüz seç	Fixierte Fläche wählen
+Yük yüzü seç	Lastfläche wählen
+Sabit yüz %d	Fixierte Fläche %d
+Yük %d: %.0f N	Last %d: %.0f N
+CAD (varsayılan)	CAD (Standard)
+Stüdyo	Studio
+Gün ışığı	Tageslicht
+Gece	Nacht
+HDRI dosyası	HDRI-Datei

@@ -9,6 +9,8 @@ Goals and phases: [ROADMAP.md](ROADMAP.md)
 
 The user interface is Turkish by default; switch to English, German, Russian or Chinese under **Tools → Options → General → Language** (applies instantly) or start with `--lang=en` (`de`, `ru`, `zh`). Menu and tool names below are given as they appear in the English UI.
 
+![DIY.CAD — part modeling](docs/screenshots/part.png)
+
 ## Download (Windows, no Godot needed)
 
 Get the latest version from the **[Releases](https://github.com/emirrdumann729-ui/DIY.CAD/releases/latest)** page:
@@ -21,6 +23,17 @@ Get the latest version from the **[Releases](https://github.com/emirrdumann729-u
 The program runs right away with the built-in CSG kernel (sketches, extrude / revolve / cut, STL export...). Features that need the OpenCASCADE kernel (fillet, shell, STEP, drawings, sheet metal...) require Python 3.11–3.13: tick "Install the OpenCASCADE kernel" in the installer, or run `OCC_Kur.bat` once. The executables are not code-signed, so Windows SmartScreen may warn on first launch ("More info → Run anyway").
 
 Godot is only needed to run from source or to change the code (see below).
+
+## Screenshots
+
+| | |
+|---|---|
+| ![Export dialog](docs/screenshots/export.png) | ![Drawing](docs/screenshots/drawing.png) |
+| **Export** — every format in one dialog (Ctrl+E); unavailable ones show the reason | **Drawing** — standard views, section, detail, dimensions, annotations, title block |
+| ![Assembly](docs/screenshots/assembly.png) | ![Sheet metal](docs/screenshots/sheet-metal.png) |
+| **Assembly** — mates, standard fasteners, exploded view | **Sheet metal** — base / edge flanges, flat pattern |
+| ![Static analysis](docs/screenshots/fea.png) | ![Languages](docs/screenshots/languages.png) |
+| **Static analysis** — von Mises stress map | **Five UI languages** — Turkish, German, Russian, Chinese and English |
 
 ## Running from source
 

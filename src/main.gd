@@ -3658,7 +3658,7 @@ func _process(_delta: float) -> void:
 		return
 	if viewport.kernel.is_busy() or viewport.camera.is_animating() or _dw_pending > 0 or asm_mode._pending > 0:
 		return
-	if (_shot_mode.begins_with("asm_demo") or _shot_mode in ["asm_drawing", "sm_demo", "sm_flat", "weld_demo", "surf_demo", "fea_demo"]) and viewport.kernel.mode != "csg" and viewport.kernel.occ.state == "starting":
+	if (_shot_mode.begins_with("asm_demo") or _shot_mode in ["asm_drawing", "sm_demo", "sm_flat", "weld_demo", "surf_demo", "fea_demo", "export"]) and viewport.kernel.mode != "csg" and viewport.kernel.occ.state == "starting":
 		return
 	if special.fea_busy:
 		return
@@ -3733,6 +3733,8 @@ func _setup_shot_mode() -> void:
 	match _shot_mode:
 		"options_keys", "options_mouse", "options_general":
 			show_options({"options_general": 0, "options_keys": 1, "options_mouse": 2}[_shot_mode])
+		"export":
+			export_dlg.open(_export_reason, "step214")
 		"plugin_info":
 			_show_toolbar(9)
 			run_command("plg_parca_bilgisi")

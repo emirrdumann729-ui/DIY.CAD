@@ -1393,7 +1393,7 @@ func apply_mate(type: String) -> Dictionary:
 		asm.get_mate(int(m["id"]))["error"] = keep_err
 		app._set_status(I18n.t("%s eşleştirmesi sağlanamadı: hizalamayı çevirin veya silin.") % m["name"])
 	else:
-		app._set_status("%s eklendi." % m["name"])
+		app._set_status(I18n.t("%s eklendi.") % m["name"])
 	asm.commit()
 	mate_refs.clear()
 	sel = {"kind": "mate", "id": int(m["id"])}
@@ -1716,7 +1716,7 @@ func rebuild_tree() -> void:
 	root.set_icon(0, Icons.get_icon("assembly", 18))
 	root.set_metadata(0, {"kind": "asm"})
 	var mf := t.create_item(root)
-	mf.set_text(0, "Eşleştirmeler (%d)" % asm.mates.size())
+	mf.set_text(0, I18n.t("Eşleştirmeler (%d)") % asm.mates.size())
 	mf.set_icon(0, Icons.get_icon("asm_mate", 18))
 	mf.set_metadata(0, {"kind": "mates"})
 	for m in asm.mates:
@@ -1896,7 +1896,7 @@ func _panel_asm(panel: PropertyPanel) -> void:
 		large_auto = i == 0
 		large_mode = i == 2
 		refresh()
-	panel.option("Büyük montaj modu", ["Otomatik", "Kapalı", "Açık"], 0 if large_auto else (2 if large_mode else 1), on_big)
+	panel.option("Büyük montaj modu", ["Otomatik", "Kapalı", "Her zaman"], 0 if large_auto else (2 if large_mode else 1), on_big)
 	panel.button("Bileşen Ekle", func(): cmd("asm_insert"), Icons.get_icon("asm_insert", 16))
 	panel.button("Bağlantı Elemanı Ekle", func(): cmd("asm_toolbox"), Icons.get_icon("asm_toolbox", 16))
 	panel.button("Eşleştir", func(): cmd("asm_mate"), Icons.get_icon("asm_mate", 16))
