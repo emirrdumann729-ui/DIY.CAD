@@ -261,7 +261,7 @@ func export(path: String) -> void:
 	var ext := path.get_extension().to_lower()
 	var action: String = {"stl": "stl", "obj": "obj", "step": "step", "stp": "step", "iges": "iges", "igs": "iges", "png": "png"}.get(ext, "")
 	if action == "":
-		message("Bilinmeyen dışa aktarma uzantısı: " + ext)
+		message(I18n.t("Bilinmeyen dışa aktarma uzantısı: ") + ext)
 		return
 	var k: GeoKernel = app.viewport.kernel
 	var asyncx: bool = action in ["stl", "step", "iges"] and k.is_brep() and k.occ.is_ready()
@@ -338,14 +338,14 @@ func add_raw(d: Dictionary, ids := {}) -> CadFeature:
 ## Makro kaynağını çalıştır. Dönüş: {ok, error, messages}
 func run_source(src: String, label := "makro") -> Dictionary:
 	if running:
-		return {"ok": false, "error": "Bir makro zaten çalışıyor"}
+		return {"ok": false, "error": I18n.t("Bir makro zaten çalışıyor")}
 	var s := GDScript.new()
 	s.source_code = src
 	if s.reload() != OK:
-		return {"ok": false, "error": "Makro derlenemedi (sözdizimi hatası, konsol çıktısına bakın): " + label}
+		return {"ok": false, "error": I18n.t("Makro derlenemedi (sözdizimi hatası, konsol çıktısına bakın): ") + label}
 	var obj: Object = s.new()
 	if obj == null or not obj.has_method("run"):
-		return {"ok": false, "error": "Makroda 'func run(m: MacroApi)' yok: " + label}
+		return {"ok": false, "error": I18n.t("Makroda 'func run(m: MacroApi)' yok: ") + label}
 	messages = []
 	running = true
 	doc = app.doc
@@ -359,7 +359,7 @@ func run_source(src: String, label := "makro") -> Dictionary:
 
 func run_file(path: String) -> Dictionary:
 	if not FileAccess.file_exists(path):
-		return {"ok": false, "error": "Makro dosyası bulunamadı: " + path}
+		return {"ok": false, "error": I18n.t("Makro dosyası bulunamadı: ") + path}
 	return await run_source(FileAccess.get_file_as_string(path), path.get_file())
 
 

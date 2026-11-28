@@ -59,7 +59,7 @@ static func toolpaths(sk: Sketch, p: Dictionary) -> Dictionary:
 	var prof := sk.extract_profiles()
 	var loops: Array = prof["loops"]
 	if loops.is_empty():
-		return {"error": "Taslakta kapalı kontur yok"}
+		return {"error": I18n.t("Taslakta kapalı kontur yok")}
 	var r := float(p.get("tool", 6.0)) * 0.5
 	var paths: Array = []
 	var op := str(p.get("op", "outside"))
@@ -111,7 +111,7 @@ static func toolpaths(sk: Sketch, p: Dictionary) -> Dictionary:
 						break
 					off -= step
 	if paths.is_empty():
-		return {"error": "Takım yolu oluşmadı (takım çapı / işlem türü uygun değil)"}
+		return {"error": I18n.t("Takım yolu oluşmadı (takım çapı / işlem türü uygun değil)")}
 	return {"paths": paths}
 
 

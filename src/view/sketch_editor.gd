@@ -60,7 +60,7 @@ var _spline_pts: Array = []        # spline aracında tıklanan noktalar (yakala
 
 const RELATION_NAMES := {
 	"horizontal": "Yatay", "vertical": "Dikey", "parallel": "Paralel", "perpendicular": "Dik",
-	"collinear": "Doğrusal", "equal": "Eşit", "concentric": "Eş Merkezli", "tangent": "Teğet",
+	"collinear": "Eşdoğrusal", "equal": "Eşit", "concentric": "Eş Merkezli", "tangent": "Teğet",
 	"coincident": "Çakışık", "merge": "Çakışık", "midpoint": "Orta Nokta", "symmetric": "Simetrik", "fix": "Sabit", "offset": "Ofset",
 }
 
@@ -305,73 +305,73 @@ func _emit_hint() -> void:
 	var h := ""
 	match tool:
 		"select":
-			h = "Öğe seçin, sürükleyin. Birden fazla öğe seçince (Shift/Ctrl) panelden ilişki ekleyebilirsiniz."
+			h = I18n.t("Öğe seçin, sürükleyin. Birden fazla öğe seçince (Shift/Ctrl) panelden ilişki ekleyebilirsiniz.")
 		"line", "centerline":
-			h = "Başlangıç noktasını tıklayın." if _stage == 0 else "Sonraki noktayı tıklayın. Çift tık / sağ tık / Esc: zinciri bitir."
+			h = I18n.t("Başlangıç noktasını tıklayın.") if _stage == 0 else I18n.t("Sonraki noktayı tıklayın. Çift tık / sağ tık / Esc: zinciri bitir.")
 		"rect":
-			h = "İlk köşeyi tıklayın." if _stage == 0 else "Karşı köşeyi tıklayın."
+			h = I18n.t("İlk köşeyi tıklayın.") if _stage == 0 else I18n.t("Karşı köşeyi tıklayın.")
 		"crect":
-			h = "Dikdörtgenin merkezini tıklayın." if _stage == 0 else "Köşeyi tıklayın."
+			h = I18n.t("Dikdörtgenin merkezini tıklayın.") if _stage == 0 else I18n.t("Köşeyi tıklayın.")
 		"circle":
-			h = "Dairenin merkezini tıklayın." if _stage == 0 else "Yarıçapı belirlemek için tıklayın."
+			h = I18n.t("Dairenin merkezini tıklayın.") if _stage == 0 else I18n.t("Yarıçapı belirlemek için tıklayın.")
 		"arc":
 			match _stage:
 				0:
-					h = "Yayın merkezini tıklayın."
+					h = I18n.t("Yayın merkezini tıklayın.")
 				1:
-					h = "Yayın başlangıç noktasını tıklayın."
+					h = I18n.t("Yayın başlangıç noktasını tıklayın.")
 				_:
-					h = "Yayın bitiş noktasını tıklayın (fareyi istediğiniz yönde döndürün)."
+					h = I18n.t("Yayın bitiş noktasını tıklayın (fareyi istediğiniz yönde döndürün).")
 		"dimension":
 			if _dim_sel.is_empty():
-				h = "Ölçülecek öğeyi seçin (çizgi, daire, yay, nokta). Var olan boyutu düzenlemek için etikete tıklayın."
+				h = I18n.t("Ölçülecek öğeyi seçin (çizgi, daire, yay, nokta). Var olan boyutu düzenlemek için etikete tıklayın.")
 			elif _dim_sel.size() == 1:
-				h = "Boyutu yerleştirmek için boş bir yere tıklayın veya ikinci öğeyi seçin."
+				h = I18n.t("Boyutu yerleştirmek için boş bir yere tıklayın veya ikinci öğeyi seçin.")
 			else:
-				h = "Boyutu yerleştirmek için boş bir yere tıklayın."
+				h = I18n.t("Boyutu yerleştirmek için boş bir yere tıklayın.")
 		"polygon":
-			h = ("Çokgenin merkezini tıklayın (%d kenar; panelden değiştirin)." % polygon_sides) if _stage == 0 else "Bir köşeyi tıklayın."
+			h = (I18n.t("Çokgenin merkezini tıklayın (%d kenar; panelden değiştirin).") % polygon_sides) if _stage == 0 else I18n.t("Bir köşeyi tıklayın.")
 		"slot":
 			match _stage:
 				0:
-					h = "Kanalın ilk yay merkezini tıklayın."
+					h = I18n.t("Kanalın ilk yay merkezini tıklayın.")
 				1:
-					h = "İkinci yay merkezini tıklayın."
+					h = I18n.t("İkinci yay merkezini tıklayın.")
 				_:
-					h = "Kanal genişliğini belirlemek için tıklayın."
+					h = I18n.t("Kanal genişliğini belirlemek için tıklayın.")
 		"spline":
-			h = "Spline noktalarını tıklayın. İlk noktaya tıklamak kapatır; çift tık / sağ tık / Enter bitirir."
+			h = I18n.t("Spline noktalarını tıklayın. İlk noktaya tıklamak kapatır; çift tık / sağ tık / Enter bitirir.")
 		"text":
-			h = "Metnin yerleşeceği noktayı tıklayın (metin ve boyut panelden değişir)."
+			h = I18n.t("Metnin yerleşeceği noktayı tıklayın (metin ve boyut panelden değişir).")
 		"trim":
-			h = "Silinecek parçaya tıklayın (en yakın kesişimler arasında kırpılır)."
+			h = I18n.t("Silinecek parçaya tıklayın (en yakın kesişimler arasında kırpılır).")
 		"extend":
-			h = "Uzatılacak çizginin ucuna yakın tıklayın."
+			h = I18n.t("Uzatılacak çizginin ucuna yakın tıklayın.")
 		"fillet":
-			h = "Yuvarlatılacak köşeye tıklayın (R %s; panelden değiştirin)." % Units.format_length(fillet_radius)
+			h = I18n.t("Yuvarlatılacak köşeye tıklayın (R %s; panelden değiştirin).") % Units.format_length(fillet_radius)
 		"chamfer":
-			h = "Pah kırılacak köşeye tıklayın (%s; panelden değiştirin)." % Units.format_length(chamfer_dist)
+			h = I18n.t("Pah kırılacak köşeye tıklayın (%s; panelden değiştirin).") % Units.format_length(chamfer_dist)
 		"ellipse":
 			match _stage:
 				0:
-					h = "Elipsin merkezini tıklayın."
+					h = I18n.t("Elipsin merkezini tıklayın.")
 				1:
-					h = "Büyük eksenin ucunu tıklayın."
+					h = I18n.t("Büyük eksenin ucunu tıklayın.")
 				_:
-					h = "Küçük eksen genişliği için tıklayın."
+					h = I18n.t("Küçük eksen genişliği için tıklayın.")
 		"parabola":
 			match _stage:
 				0:
-					h = "Parabolün tepe noktasını tıklayın."
+					h = I18n.t("Parabolün tepe noktasını tıklayın.")
 				1:
-					h = "Odak noktasını tıklayın (eksen yönü ve açıklık)."
+					h = I18n.t("Odak noktasını tıklayın (eksen yönü ve açıklık).")
 				2:
-					h = "Başlangıç ucunu tıklayın."
+					h = I18n.t("Başlangıç ucunu tıklayın.")
 				_:
-					h = "Bitiş ucunu tıklayın."
+					h = I18n.t("Bitiş ucunu tıklayın.")
 		"convert":
-			h = "Taslağa alınacak model yüzüne tıklayın; yüzün kenarları çizgi/yay olarak eklenir."
-	status.emit(TOOL_NAMES.get(tool, tool) + ": " + h)
+			h = I18n.t("Taslağa alınacak model yüzüne tıklayın; yüzün kenarları çizgi/yay olarak eklenir.")
+	status.emit(I18n.t(str(TOOL_NAMES.get(tool, tool))) + ": " + h)
 
 
 ## Bir işlem (SketchOps) uygular; başarısızsa geri alır. Dönüş: işlem sonucu.
@@ -383,7 +383,7 @@ func apply_op(op: Callable, weights := {}) -> Dictionary:
 		doc.drop_checkpoint()
 		_prune_selection()
 		redraw()
-		status.emit(str(r.get("msg", "İşlem uygulanamadı.")))
+		status.emit(str(r.get("msg", I18n.t("İşlem uygulanamadı."))))
 		return r
 	if _finish(before, weights):
 		status.emit(str(r.get("msg", "")))
@@ -452,7 +452,7 @@ func mirror_axis() -> int:
 func mirror_selection() -> Dictionary:
 	var axis := mirror_axis()
 	if axis < 0:
-		var r0 := {"ok": false, "msg": "Aynalamak için öğelerle birlikte tek bir merkez çizgisi (eksen) seçin."}
+		var r0 := {"ok": false, "msg": I18n.t("Aynalamak için öğelerle birlikte tek bir merkez çizgisi (eksen) seçin.")}
 		status.emit(r0["msg"])
 		return r0
 	var ids := _sel_entity_ids()
@@ -463,7 +463,7 @@ func mirror_selection() -> Dictionary:
 func transform_selection(kind: String, a: Vector2, b: float, count: int, copy: bool) -> Dictionary:
 	var ids := _sel_entity_ids()
 	if ids.is_empty():
-		var r0 := {"ok": false, "msg": "Önce öğeleri seçin."}
+		var r0 := {"ok": false, "msg": I18n.t("Önce öğeleri seçin.")}
 		status.emit(r0["msg"])
 		return r0
 	var sk := sketch()
@@ -479,16 +479,16 @@ func transform_selection(kind: String, a: Vector2, b: float, count: int, copy: b
 			scale = maxf(b, 1e-4)
 			xf = func(p: Vector2) -> Vector2: return a + (p - a) * scale
 		"linear":
-			return apply_op(func(): return {"ok": true, "msg": "Doğrusal çoğaltma: %d kopya." % count, "ids": SketchOps.linear_pattern(sk, ids, a, count)})
+			return apply_op(func(): return {"ok": true, "msg": I18n.t("Doğrusal çoğaltma: %d kopya.") % count, "ids": SketchOps.linear_pattern(sk, ids, a, count)})
 		"circular":
-			return apply_op(func(): return {"ok": true, "msg": "Dairesel çoğaltma: %d kopya." % count, "ids": SketchOps.circular_pattern(sk, ids, a, count, b)})
+			return apply_op(func(): return {"ok": true, "msg": I18n.t("Dairesel çoğaltma: %d kopya.") % count, "ids": SketchOps.circular_pattern(sk, ids, a, count, b)})
 	if copy:
-		return apply_op(func(): return {"ok": true, "msg": "Kopyalandı.", "ids": SketchOps.copy_entities(sk, ids, xf, scale)})
+		return apply_op(func(): return {"ok": true, "msg": I18n.t("Kopyalandı."), "ids": SketchOps.copy_entities(sk, ids, xf, scale)})
 	var before := _begin()
 	var moved := SketchOps.transform_points(sk, ids, xf, scale)
 	var ok := _finish(before, _weights_for(moved))
 	if ok:
-		status.emit("Dönüştürüldü.")
+		status.emit(I18n.t("Dönüştürüldü."))
 	return {"ok": ok}
 
 
@@ -506,12 +506,12 @@ func _finish(before: Dictionary, weights := {}, fail_msg := "", check_cids: Arra
 	var r := s.solve()
 	var msg := ""
 	if not r["ok"]:
-		msg = fail_msg if fail_msg != "" else "Bu değişiklik mevcut ilişki ve boyutlarla çelişiyor; geri alındı."
+		msg = fail_msg if fail_msg != "" else I18n.t("Bu değişiklik mevcut ilişki ve boyutlarla çelişiyor; geri alındı.")
 	else:
 		s.apply()
 		for cid in check_cids:
 			if not sk.get_constraint(cid).is_empty() and not SketchSolver.is_independent(sk, cid):
-				msg = "Bu ilişki/boyut taslağı aşırı tanımlar (gereksiz veya zaten mevcut); eklenmedi."
+				msg = I18n.t("Bu ilişki/boyut taslağı aşırı tanımlar (gereksiz veya zaten mevcut); eklenmedi.")
 				break
 	if msg != "":
 		feature.sketch = Sketch.from_dict(before)
@@ -836,7 +836,7 @@ func _modify_click(l: Vector2) -> void:
 			var r := viewport.ray(_press_screen)
 			var hit := viewport.model.raycast(r[0], r[1])
 			if hit.is_empty():
-				status.emit("Model yüzüne tıklayın (taslak düzleminden görünen bir yüz).")
+				status.emit(I18n.t("Model yüzüne tıklayın (taslak düzleminden görünen bir yüz)."))
 				return
 			var fd := viewport.model.planar_face(int(hit["tri"]))
 			if viewport.model.has_brep() and int(fd.get("face", -1)) >= 0:
@@ -857,7 +857,7 @@ func _modify_click(l: Vector2) -> void:
 		"trim", "extend":
 			var eid := sk.hit_entity(l, PICK_PX * w)
 			if eid < 0:
-				status.emit("Bir öğeye tıklayın.")
+				status.emit(I18n.t("Bir öğeye tıklayın."))
 				return
 			if tool == "trim":
 				apply_op(func(): return SketchOps.trim(sketch(), eid, l))
@@ -872,7 +872,7 @@ func _modify_click(l: Vector2) -> void:
 				if not e.is_empty() and e["type"] == "line":
 					pid = e["a"] if l.distance_to(sk.points[e["a"]]) < l.distance_to(sk.points[e["b"]]) else e["b"]
 			if pid < 0:
-				status.emit("Bir köşe noktasına tıklayın.")
+				status.emit(I18n.t("Bir köşe noktasına tıklayın."))
 				return
 			var r: Dictionary
 			if tool == "fillet":
@@ -906,19 +906,19 @@ func _parabola_project(p: Vector2) -> Vector2:
 func make_block_selection() -> Dictionary:
 	var ids := _sel_entity_ids()
 	if ids.is_empty():
-		var r0 := {"ok": false, "msg": "Blok için önce öğeleri seçin."}
+		var r0 := {"ok": false, "msg": I18n.t("Blok için önce öğeleri seçin.")}
 		status.emit(r0["msg"])
 		return r0
 	var op := func() -> Dictionary:
 		var bid := sketch().make_block(ids)
-		return {"ok": bid >= 0, "msg": "Blok oluşturuldu: öğeler artık tek parça (rijit) hareket eder." if bid >= 0 else "Seçili öğeler zaten bir blokta."}
+		return {"ok": bid >= 0, "msg": I18n.t("Blok oluşturuldu: öğeler artık tek parça (rijit) hareket eder.") if bid >= 0 else I18n.t("Seçili öğeler zaten bir blokta.")}
 	return apply_op(op)
 
 
 func explode_block(bid: int) -> void:
 	var op := func() -> Dictionary:
 		sketch().explode_block(bid)
-		return {"ok": true, "msg": "Blok dağıtıldı."}
+		return {"ok": true, "msg": I18n.t("Blok dağıtıldı.")}
 	apply_op(op)
 
 
@@ -933,7 +933,7 @@ func copy_block(bid: int, offset: Vector2) -> void:
 		var xf := func(p: Vector2) -> Vector2: return p + offset
 		var ids := SketchOps.copy_entities(sk, ents, xf)
 		var nb := sk.make_block(ids, bname)
-		return {"ok": nb >= 0, "msg": "Blok kopyalandı."}
+		return {"ok": nb >= 0, "msg": I18n.t("Blok kopyalandı.")}
 	apply_op(op)
 
 
@@ -970,7 +970,7 @@ func _finish_spline() -> void:
 		sk.add_constraint(c)
 	if _finish(before):
 		select_entity(eid)
-		status.emit("Spline oluşturuldu (%d nokta). Noktaları sürükleyerek şeklini değiştirebilirsiniz." % ids.size())
+		status.emit(I18n.t("Spline oluşturuldu (%d nokta). Noktaları sürükleyerek şeklini değiştirebilirsiniz.") % ids.size())
 	_emit_hint()
 
 
@@ -1116,7 +1116,7 @@ func _tool_click() -> void:
 			var tid := sk.add_text(tp, text_default, text_height)
 			if _finish(before_t):
 				select_entity(tid)
-				status.emit("Metin eklendi. Yazıyı ve boyutunu soldaki panelden değiştirin.")
+				status.emit(I18n.t("Metin eklendi. Yazıyı ve boyutunu soldaki panelden değiştirin."))
 		"line", "centerline":
 			if _stage == 0:
 				_start_snap = _snap_info()
@@ -1270,11 +1270,11 @@ func _readout() -> String:
 	var snap_txt := ""
 	match _snap_kind:
 		"midpoint":
-			snap_txt = "   [Orta nokta]"
+			snap_txt = I18n.t("   [Orta nokta]")
 		"entity":
-			snap_txt = "   [Üzerinde]"
+			snap_txt = I18n.t("   [Üzerinde]")
 		"point":
-			snap_txt = "   [Çakışık]"
+			snap_txt = I18n.t("   [Çakışık]")
 	if _stage == 0:
 		return snap_txt.strip_edges()
 	match tool:
@@ -1297,13 +1297,13 @@ func _readout() -> String:
 				return "R " + Units.format_length(_cursor.distance_to(_start_pos))
 			return "R " + Units.format_length(_p2.distance_to(_start_pos)) + "   " + Units.format_angle(absf(rad_to_deg(_arc_sweep)))
 		"polygon":
-			return "%d kenar   R %s" % [polygon_sides, Units.format_length(_cursor.distance_to(_start_pos))]
+			return I18n.t("%d kenar   R %s") % [polygon_sides, Units.format_length(_cursor.distance_to(_start_pos))]
 		"slot":
 			if _stage == 1:
 				return "L " + Units.format_length(_cursor.distance_to(_start_pos))
-			return "L %s   genişlik %s" % [Units.format_length(_p2.distance_to(_start_pos), false), Units.format_length(_slot_half_width() * 2.0)]
+			return I18n.t("L %s   genişlik %s") % [Units.format_length(_p2.distance_to(_start_pos), false), Units.format_length(_slot_half_width() * 2.0)]
 		"spline":
-			return "%d nokta%s" % [_spline_pts.size(), snap_txt]
+			return I18n.t("%d nokta%s") % [_spline_pts.size(), snap_txt]
 		"ellipse":
 			if _stage == 1:
 				return "a " + Units.format_length(_cursor.distance_to(_start_pos))
@@ -1346,7 +1346,7 @@ func _dimension_click(l: Vector2, mb: InputEventMouseButton) -> void:
 	var spec := dimension_spec(_dim_sel, l)
 	_dim_sel.clear()
 	if spec.is_empty():
-		status.emit("Bu seçimden boyut oluşturulamadı.")
+		status.emit(I18n.t("Bu seçimden boyut oluşturulamadı."))
 		return
 	add_dimension(spec, l)
 
@@ -1431,7 +1431,7 @@ func add_dimension(spec: Dictionary, label: Vector2, open_editor := true) -> int
 	doc.commit()
 	select_constraint(cid)
 	if driven:
-		status.emit("Bu boyut taslağı aşırı tanımlardı; güdümlü (referans) boyut olarak eklendi.")
+		status.emit(I18n.t("Bu boyut taslağı aşırı tanımlardı; güdümlü (referans) boyut olarak eklendi."))
 	elif open_editor:
 		open_dimension_editor(cid)
 	return cid
@@ -1448,7 +1448,7 @@ func set_dimension_value(cid: int, v: float) -> bool:
 	var before := _begin()
 	sketch().get_constraint(cid)["value"] = v
 	sketch().get_constraint(cid).erase("expr")
-	return _finish(before, {}, "Bu değer geometrik olarak mümkün değil (diğer ilişki/boyutlarla çelişiyor); geri alındı.")
+	return _finish(before, {}, I18n.t("Bu değer geometrik olarak mümkün değil (diğer ilişki/boyutlarla çelişiyor); geri alındı."))
 
 
 ## Boyuta denklem bağlar (ör. "genislik / 2"). Boş ifade denklemi kaldırır.
@@ -1464,16 +1464,16 @@ func set_dimension_expr(cid: int, expr: String) -> bool:
 	var ctx: Dictionary = Equations.variable_values(doc)["ctx"]
 	var r = Equations.evaluate(expr, ctx)
 	if r == null:
-		status.emit("Denklem hesaplanamadı: '%s' (tanımsız değişken veya hatalı ifade)." % expr)
+		status.emit(I18n.t("Denklem hesaplanamadı: '%s' (tanımsız değişken veya hatalı ifade).") % expr)
 		return false
 	var v: float = r if c["type"] == "angle" else Units.from_display(r)
 	var before := _begin()
 	var cc := sketch().get_constraint(cid)
 	cc["expr"] = expr
 	cc["value"] = clampf(v, 0.001, 179.999) if c["type"] == "angle" else maxf(v, 1e-4)
-	var ok := _finish(before, {}, "Denklemin sonucu geometriyle çelişiyor; geri alındı.")
+	var ok := _finish(before, {}, I18n.t("Denklemin sonucu geometriyle çelişiyor; geri alındı."))
 	if ok:
-		status.emit("Denklem bağlandı: %s = %s" % [Equations.full_name(cc, feature.name), expr])
+		status.emit(I18n.t("Denklem bağlandı: %s = %s") % [Equations.full_name(cc, feature.name), expr])
 	return ok
 
 
@@ -1663,7 +1663,7 @@ func _relation_specs(t: String) -> Array:
 func add_relation(t: String) -> bool:
 	var specs := _relation_specs(t)
 	if specs.is_empty():
-		status.emit("Bu ilişki seçili öğelere uygulanamaz.")
+		status.emit(I18n.t("Bu ilişki seçili öğelere uygulanamaz."))
 		return false
 	var sk := sketch()
 	var before := _begin()
@@ -1678,8 +1678,8 @@ func add_relation(t: String) -> bool:
 				if c["type"] == "coincident" and c.get("p1", -1) == sp["p1"] and c.get("e1", -1) == sp["e1"]:
 					sk.remove_constraint(c["id"])
 		new_ids.append(sk.add_constraint(sp))
-	if _finish(before, {}, "Bu ilişki mevcut geometriyle çelişiyor; eklenmedi.", new_ids):
-		status.emit("İlişki eklendi: " + str(RELATION_NAMES.get(t, t)))
+	if _finish(before, {}, I18n.t("Bu ilişki mevcut geometriyle çelişiyor; eklenmedi."), new_ids):
+		status.emit(I18n.t("İlişki eklendi: ") + I18n.t(str(RELATION_NAMES.get(t, t))))
 		return true
 	return false
 
@@ -1695,11 +1695,11 @@ func delete_constraint(cid: int) -> void:
 static func constraint_label(sk: Sketch, c: Dictionary) -> String:
 	var t: String = c["type"]
 	if Sketch.is_dimension(c):
-		var txt := str(DIM_NAMES.get(t, t)) + ": " + dimension_text(c)
+		var txt := I18n.t(str(DIM_NAMES.get(t, t))) + ": " + dimension_text(c)
 		if bool(c.get("driven", false)):
-			txt += " (güdümlü)"
+			txt += I18n.t(" (güdümlü)")
 		return txt
-	return str(RELATION_NAMES.get(t, t))
+	return I18n.t(str(RELATION_NAMES.get(t, t)))
 
 
 static func dimension_text(c: Dictionary) -> String:
@@ -1755,7 +1755,7 @@ func _weights_for(pids: Array, eids_r: Array = []) -> Dictionary:
 
 func _check_reached(ok: bool, reached: bool) -> void:
 	if ok and not reached:
-		status.emit("Değer, mevcut ilişki/boyutlar nedeniyle tam uygulanamadı. Değiştirmek için ilgili boyutu düzenleyin.")
+		status.emit(I18n.t("Değer, mevcut ilişki/boyutlar nedeniyle tam uygulanamadı. Değiştirmek için ilgili boyutu düzenleyin."))
 
 
 func edit_point(pid: int, p: Vector2) -> void:

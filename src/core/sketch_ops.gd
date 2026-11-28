@@ -147,9 +147,9 @@ static func _dissolve_group(sk: Sketch, e: Dictionary) -> void:
 static func trim(sk: Sketch, eid: int, click: Vector2) -> Dictionary:
 	var e := sk.get_entity(eid)
 	if e.is_empty():
-		return _fail("Öğe bulunamadı.")
+		return _fail(I18n.t("Öğe bulunamadı."))
 	if not (e["type"] in ["line", "circle", "arc"]):
-		return _fail("Bu öğe türü kırpılamaz (yalnızca çizgi, daire, yay).")
+		return _fail(I18n.t("Bu öğe türü kırpılamaz (yalnızca çizgi, daire, yay)."))
 	var cuts: Array = []
 	for o in sk.entities:
 		if o["id"] == eid or o["type"] == "text":
@@ -174,7 +174,7 @@ static func trim(sk: Sketch, eid: int, click: Vector2) -> Dictionary:
 					hi = c
 			if lo == null and hi == null:
 				sk.remove_entity(eid)
-				return {"ok": true, "msg": "Kesişim yok: öğe tamamen silindi."}
+				return {"ok": true, "msg": I18n.t("Kesişim yok: öğe tamamen silindi.")}
 			if lo == null:
 				e["a"] = _end_point(sk, hi[1], hi[2])
 			elif hi == null:
@@ -194,7 +194,7 @@ static func trim(sk: Sketch, eid: int, click: Vector2) -> Dictionary:
 		"circle":
 			if cuts.size() < 2:
 				sk.remove_entity(eid)
-				return {"ok": true, "msg": "Dairede iki kesişim yok: tamamen silindi."}
+				return {"ok": true, "msg": I18n.t("Dairede iki kesişim yok: tamamen silindi.")}
 			var tq2 := param_of(sk, e, click)
 			var lo2 = null
 			var hi2 = null
@@ -218,7 +218,7 @@ static func trim(sk: Sketch, eid: int, click: Vector2) -> Dictionary:
 					sk.entities.remove_at(i)
 					break
 	sk._cleanup()
-	return {"ok": true, "msg": "Kırpıldı."}
+	return {"ok": true, "msg": I18n.t("Kırpıldı.")}
 
 
 ## Çizginin tıklanan ucunu ilk kesiştiği öğeye kadar uzatır.
@@ -227,7 +227,7 @@ static func extend(sk: Sketch, eid: int, click: Vector2) -> Dictionary:
 	if not e.is_empty() and e["type"] == "arc":
 		return _extend_arc(sk, e, click)
 	if e.is_empty() or e["type"] != "line":
-		return _fail("Uzatma çizgi ve yaylar için çalışır.")
+		return _fail(I18n.t("Uzatma çizgi ve yaylar için çalışır."))
 	var A: Vector2 = sk.points[e["a"]]
 	var B: Vector2 = sk.points[e["b"]]
 	var key := "a" if click.distance_to(A) < click.distance_to(B) else "b"
@@ -258,7 +258,7 @@ static func extend(sk: Sketch, eid: int, click: Vector2) -> Dictionary:
 					best_p = h3
 					best_o = o["id"]
 	if best_o < 0:
-		return _fail("Uzatılacak bir sınır bulunamadı.")
+		return _fail(I18n.t("Uzatılacak bir sınır bulunamadı."))
 	_dissolve_group(sk, e)
 	var pid: int = e[key]
 	if sk.point_users(pid).size() > 1 or pid == Sketch.ORIGIN:
@@ -276,7 +276,7 @@ static func extend(sk: Sketch, eid: int, click: Vector2) -> Dictionary:
 			if oe["type"] in ["line", "circle", "arc"]:
 				sk.add_constraint({"type": "coincident", "p1": pid, "e1": best_o})
 	sk._cleanup()
-	return {"ok": true, "msg": "Uzatıldı."}
+	return {"ok": true, "msg": I18n.t("Uzatıldı.")}
 
 
 ## Yayı tıklanan ucundan, çemberi boyunca ilk kesiştiği öğeye kadar uzatır.
@@ -304,7 +304,7 @@ static func _extend_arc(sk: Sketch, e: Dictionary, click: Vector2) -> Dictionary
 				best_p = p
 				best_o = o["id"]
 	if best_o < 0:
-		return _fail("Yayın uzatılacağı bir sınır bulunamadı.")
+		return _fail(I18n.t("Yayın uzatılacağı bir sınır bulunamadı."))
 	var pid: int = e[key]
 	if sk.point_users(pid).size() > 1:
 		e[key] = _end_point(sk, best_p, best_o)
@@ -314,7 +314,7 @@ static func _extend_arc(sk: Sketch, e: Dictionary, click: Vector2) -> Dictionary
 		if oe["type"] in ["line", "circle", "arc"]:
 			sk.add_constraint({"type": "coincident", "p1": pid, "e1": best_o})
 	sk._cleanup()
-	return {"ok": true, "msg": "Yay uzatıldı."}
+	return {"ok": true, "msg": I18n.t("Yay uzatıldı.")}
 
 
 # ================================================================ varlıkları dönüştür
@@ -423,11 +423,11 @@ static func convert_loops(sk: Sketch, loops: Array, fix := true) -> Dictionary:
 					continue
 			new_ids.append(sk.add_line(get_pid.call(k0), get_pid.call(k1)))
 	if new_ids.is_empty():
-		return _fail("Dönüştürülecek kenar bulunamadı.")
+		return _fail(I18n.t("Dönüştürülecek kenar bulunamadı."))
 	if fix:
 		for eid in new_ids:
 			sk.add_constraint({"type": "fix", "e1": eid})
-	return {"ok": true, "msg": "%d öğe dönüştürüldü (kenarlara sabitlendi)." % new_ids.size(), "ids": new_ids}
+	return {"ok": true, "msg": I18n.t("%d öğe dönüştürüldü (kenarlara sabitlendi).") % new_ids.size(), "ids": new_ids}
 
 
 ## B-rep kenarlarını (OpenCASCADE) taslağa gerçek eğriler olarak alır: çizgi, daire/yay, elips;
@@ -489,11 +489,11 @@ static func convert_brep_edges(sk: Sketch, plane: SketchPlane, edges: Array, fix
 		pids.append(pids[0] if closed else get_pid.call(proj[proj.size() - 1]))
 		new_ids.append(sk.add_spline(pids))
 	if new_ids.is_empty():
-		return _fail("Dönüştürülecek kenar bulunamadı.")
+		return _fail(I18n.t("Dönüştürülecek kenar bulunamadı."))
 	if fix:
 		for eid in new_ids:
 			sk.add_constraint({"type": "fix", "e1": eid})
-	return {"ok": true, "msg": "%d kenar dönüştürüldü (B-rep, kenarlara sabitlendi)." % new_ids.size(), "ids": new_ids}
+	return {"ok": true, "msg": I18n.t("%d kenar dönüştürüldü (B-rep, kenarlara sabitlendi).") % new_ids.size(), "ids": new_ids}
 
 
 # ================================================================ ofset
@@ -660,7 +660,7 @@ static func offset(sk: Sketch, eids: Array, dist: float) -> Dictionary:
 			new_ids.append(nid)
 	var geo := offset_geometry(sk, rest, dist) if not rest.is_empty() else []
 	if geo.is_empty() and new_ids.is_empty():
-		return _fail("Ofset uygulanamadı (seçim boş veya mesafe yayları tersine çeviriyor).")
+		return _fail(I18n.t("Ofset uygulanamadı (seçim boş veya mesafe yayları tersine çeviriyor)."))
 	var master := -1
 	for ch in geo:
 		var pieces: Array = ch["pieces"]
@@ -696,7 +696,7 @@ static func offset(sk: Sketch, eids: Array, dist: float) -> Dictionary:
 			else:
 				nid = sk.add_arc(pc2["c"], a, b) if pc2["fwd"] else sk.add_arc(pc2["c"], b, a)
 			new_ids.append(nid)
-	return {"ok": true, "msg": "Ofset oluşturuldu.", "ids": new_ids, "master": master}
+	return {"ok": true, "msg": I18n.t("Ofset oluşturuldu."), "ids": new_ids, "master": master}
 
 
 ## Spline ofseti: kontrol noktaları eğrinin o noktadaki normali boyunca kaydırılır (yaklaşık ofset).
@@ -742,7 +742,7 @@ static func reflect(p: Vector2, a: Vector2, b: Vector2) -> Vector2:
 static func mirror(sk: Sketch, eids: Array, axis_eid: int) -> Dictionary:
 	var ax := sk.get_entity(axis_eid)
 	if ax.is_empty() or ax["type"] != "line":
-		return _fail("Ayna ekseni bir çizgi olmalı.")
+		return _fail(I18n.t("Ayna ekseni bir çizgi olmalı."))
 	var A: Vector2 = sk.points[ax["a"]]
 	var B: Vector2 = sk.points[ax["b"]]
 	var pmap := {}
@@ -785,8 +785,8 @@ static func mirror(sk: Sketch, eids: Array, axis_eid: int) -> Dictionary:
 			"parabola":
 				new_ids.append(sk.add_parabola(pmap[e["v"]], pmap[e["f"]], pmap[e["a"]], pmap[e["b"]], cons))
 	if new_ids.is_empty():
-		return _fail("Aynalanacak öğe yok.")
-	return {"ok": true, "msg": "Aynalandı.", "ids": new_ids}
+		return _fail(I18n.t("Aynalanacak öğe yok."))
+	return {"ok": true, "msg": I18n.t("Aynalandı."), "ids": new_ids}
 
 
 # ================================================================ köşe yuvarlatma / pah
@@ -812,7 +812,7 @@ static func corner_info(sk: Sketch, pid: int) -> Dictionary:
 static func fillet(sk: Sketch, pid: int, r: float) -> Dictionary:
 	var ci := corner_info(sk, pid)
 	if ci.is_empty():
-		return _fail("Köşe yuvarlatma için iki çizginin birleştiği bir köşe seçin.")
+		return _fail(I18n.t("Köşe yuvarlatma için iki çizginin birleştiği bir köşe seçin."))
 	var P: Vector2 = sk.points[pid]
 	var u1: Vector2 = ((sk.points[ci["A"]] as Vector2) - P)
 	var u2: Vector2 = ((sk.points[ci["B"]] as Vector2) - P)
@@ -822,10 +822,10 @@ static func fillet(sk: Sketch, pid: int, r: float) -> Dictionary:
 	u2 = u2.normalized()
 	var th := acos(clampf(u1.dot(u2), -1.0, 1.0))
 	if th < 1e-3 or th > PI - 1e-3:
-		return _fail("Çizgiler doğrusal; köşe yok.")
+		return _fail(I18n.t("Çizgiler doğrusal; köşe yok."))
 	var d := r / tan(th * 0.5)
 	if d >= l1 - 1e-6 or d >= l2 - 1e-6:
-		return _fail("Yarıçap bu köşe için çok büyük.")
+		return _fail(I18n.t("Yarıçap bu köşe için çok büyük."))
 	var T1 := P + u1 * d
 	var T2 := P + u2 * d
 	var C := P + (u1 + u2).normalized() * (r / sin(th * 0.5))
@@ -852,21 +852,21 @@ static func fillet(sk: Sketch, pid: int, r: float) -> Dictionary:
 	dim["value"] = r
 	var dim_id := sk.add_constraint(dim)
 	sk._cleanup()
-	return {"ok": true, "msg": "Köşe yuvarlatıldı (R %s)." % Units.format_length(r), "arc": arc, "dim": dim_id}
+	return {"ok": true, "msg": I18n.t("Köşe yuvarlatıldı (R %s).") % Units.format_length(r), "arc": arc, "dim": dim_id}
 
 
 ## Köşeyi d mesafeli eşit pah ile keser.
 static func chamfer(sk: Sketch, pid: int, d: float) -> Dictionary:
 	var ci := corner_info(sk, pid)
 	if ci.is_empty():
-		return _fail("Pah için iki çizginin birleştiği bir köşe seçin.")
+		return _fail(I18n.t("Pah için iki çizginin birleştiği bir köşe seçin."))
 	var P: Vector2 = sk.points[pid]
 	var v1: Vector2 = (sk.points[ci["A"]] as Vector2) - P
 	var v2: Vector2 = (sk.points[ci["B"]] as Vector2) - P
 	if d >= v1.length() - 1e-6 or d >= v2.length() - 1e-6:
-		return _fail("Pah mesafesi bu köşe için çok büyük.")
+		return _fail(I18n.t("Pah mesafesi bu köşe için çok büyük."))
 	if absf(v1.normalized().cross(v2.normalized())) < 1e-3:
-		return _fail("Çizgiler doğrusal; köşe yok.")
+		return _fail(I18n.t("Çizgiler doğrusal; köşe yok."))
 	var L1 := sk.get_entity(ci["L1"])
 	var L2 := sk.get_entity(ci["L2"])
 	_dissolve_group(sk, L1)
@@ -887,7 +887,7 @@ static func chamfer(sk: Sketch, pid: int, d: float) -> Dictionary:
 	d2["value"] = d
 	sk.add_constraint(d2)
 	sk._cleanup()
-	return {"ok": true, "msg": "Pah kırıldı (%s)." % Units.format_length(d), "line": ln, "dim": id1}
+	return {"ok": true, "msg": I18n.t("Pah kırıldı (%s).") % Units.format_length(d), "line": ln, "dim": id1}
 
 
 # ================================================================ çokgen / kanal
@@ -898,7 +898,7 @@ static func add_polygon(sk: Sketch, center_pid: int, vertex: Vector2, n: int) ->
 	var C: Vector2 = sk.points[center_pid]
 	var r := C.distance_to(vertex)
 	if r < 1e-6:
-		return _fail("Çokgen yarıçapı sıfır.")
+		return _fail(I18n.t("Çokgen yarıçapı sıfır."))
 	var a0 := (vertex - C).angle()
 	var circ := sk.add_circle(center_pid, r, true)
 	var pids: Array = []
@@ -910,7 +910,7 @@ static func add_polygon(sk: Sketch, center_pid: int, vertex: Vector2, n: int) ->
 		sk.add_constraint({"type": "coincident", "p1": pids[k], "e1": circ})
 	for k in range(1, n):
 		sk.add_constraint({"type": "equal", "e1": lines[0], "e2": lines[k]})
-	return {"ok": true, "msg": "%d kenarlı çokgen." % n, "ids": lines, "circle": circ}
+	return {"ok": true, "msg": I18n.t("%d kenarlı çokgen.") % n, "ids": lines, "circle": circ}
 
 
 ## Düz kanal: iki uç merkezi + genişlik. Merkez çizgisi, iki yay, iki teğet çizgi.
@@ -918,7 +918,7 @@ static func add_slot(sk: Sketch, c1_pid: int, c2_pid: int, half_w: float) -> Dic
 	var C1: Vector2 = sk.points[c1_pid]
 	var C2: Vector2 = sk.points[c2_pid]
 	if C1.distance_to(C2) < 1e-6 or half_w < 1e-6:
-		return _fail("Kanal boyutları geçersiz.")
+		return _fail(I18n.t("Kanal boyutları geçersiz."))
 	var u := (C2 - C1).normalized()
 	var n := Vector2(-u.y, u.x)
 	var p1 := sk.add_point(C1 + n * half_w)
@@ -935,7 +935,7 @@ static func add_slot(sk: Sketch, c1_pid: int, c2_pid: int, half_w: float) -> Dic
 	sk.add_constraint({"type": "tangent", "e1": bottom, "e2": right})
 	sk.add_constraint({"type": "tangent", "e1": bottom, "e2": left})
 	sk.add_constraint({"type": "equal", "e1": left, "e2": right})
-	return {"ok": true, "msg": "Kanal oluşturuldu.", "ids": [top, right, bottom, left]}
+	return {"ok": true, "msg": I18n.t("Kanal oluşturuldu."), "ids": [top, right, bottom, left]}
 
 
 # ================================================================ kopyala / taşı / döndür / ölçekle / çoğalt

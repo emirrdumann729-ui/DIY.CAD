@@ -100,11 +100,11 @@ func set_tool(t: String) -> void:
 
 
 func _emit_hint() -> void:
-	var t := "3B Taslak — düzlem %s (Tab: değiştir). " % plane_name
+	var t := I18n.t("3B Taslak — düzlem %s (Tab: değiştir). ") % plane_name
 	if tool == "line":
-		t += "Noktaları tıklayın; sağ tık / Esc zinciri bitirir. Eksene yakın çizim X/Y/Z'ye kilitlenir."
+		t += I18n.t("Noktaları tıklayın; sağ tık / Esc zinciri bitirir. Eksene yakın çizim X/Y/Z'ye kilitlenir.")
 	else:
-		t += "Nokta veya çizgi seçin; Delete siler, nokta koordinatları panelden girilir."
+		t += I18n.t("Nokta veya çizgi seçin; Delete siler, nokta koordinatları panelden girilir.")
 	status.emit(t)
 
 

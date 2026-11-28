@@ -40,12 +40,12 @@ static func _line(a: Vector2, b: Vector2, k: String) -> Dictionary:
 static func bent_profile(pts: Array, T: float, R: float, K: float, side: float) -> Dictionary:
 	var n := pts.size()
 	if n < 2:
-		return {"error": "Açık profil en az bir çizgi içermeli"}
+		return {"error": I18n.t("Açık profil en az bir çizgi içermeli")}
 	var dirs: Array = []
 	for i in n - 1:
 		var d: Vector2 = (pts[i + 1] as Vector2) - (pts[i] as Vector2)
 		if d.length() < 1e-9:
-			return {"error": "Sıfır uzunluklu çizgi"}
+			return {"error": I18n.t("Sıfır uzunluklu çizgi")}
 		dirs.append(d.normalized())
 	var corners: Array = []   # her iç köşe: {q_in, q_out, c, r_line, r_other, a0, a1, theta, left}
 	var setback := []
@@ -78,7 +78,7 @@ static func bent_profile(pts: Array, T: float, R: float, K: float, side: float) 
 	for i in n - 1:
 		var L: float = ((pts[i + 1] as Vector2) - (pts[i] as Vector2)).length() - float(setback[i]) - float(setback[i + 1])
 		if L < -1e-6:
-			return {"error": "Çizgi büküm yarıçapı için çok kısa (%d. çizgi)" % (i + 1)}
+			return {"error": I18n.t("Çizgi büküm yarıçapı için çok kısa (%d. çizgi)") % (i + 1)}
 		straights.append(maxf(L, 0.0))
 	var off := func(d: Vector2) -> Vector2: return Vector2(-d.y, d.x) * side * T
 	# Taslak yüzü (ileri) + uç + ofset yüzü (geri) + uç
@@ -145,7 +145,7 @@ static func payload(doc: CadDocument, f: CadFeature, d: Dictionary) -> bool:
 	if f.type == "sm_base":
 		return _base_payload(doc, f, d)
 	if base == null:
-		f.error = "Önce taban flanş oluşturun"
+		f.error = I18n.t("Önce taban flanş oluşturun")
 		return false
 	if bool(base.params.get("flat", false)):
 		return false   # açınım gösterilirken flanşlar açınıma dahildir
@@ -161,7 +161,7 @@ static func payload(doc: CadDocument, f: CadFeature, d: Dictionary) -> bool:
 static func _base_payload(doc: CadDocument, f: CadFeature, d: Dictionary) -> bool:
 	var sk_f := doc.get_feature(f.sketch_ref())
 	if sk_f == null or sk_f.sketch == null:
-		f.error = "Taslak bulunamadı"
+		f.error = I18n.t("Taslak bulunamadı")
 		return false
 	var T := maxf(0.01, float(f.params.get("T", 2.0)))
 	var pl := sk_f.plane
@@ -199,7 +199,7 @@ static func _base_payload(doc: CadDocument, f: CadFeature, d: Dictionary) -> boo
 		return true
 	var chain := open_chain(sk_f.sketch)
 	if chain.is_empty():
-		f.error = "Taslakta kapalı kontur veya açık çizgi zinciri yok"
+		f.error = I18n.t("Taslakta kapalı kontur veya açık çizgi zinciri yok")
 		return false
 	var side := -1.0 if bool(f.params.get("flip", false)) else 1.0
 	var bp := bent_profile(chain, T, maxf(0.01, float(f.params.get("R", 2.0))), float(f.params.get("K", 0.44)), side)
@@ -280,11 +280,11 @@ static func _in_material(q: Vector2, polys: Array) -> bool:
 static func edge_frame(doc: CadDocument, base: CadFeature, ref: Dictionary) -> Dictionary:
 	var pe := parse_edge(ref.get("fn", []))
 	if pe.is_empty() or int(pe["fid"]) != base.id:
-		return {"error": "Kenar flanşı yalnızca taban flanşın üst / alt kenarlarına eklenebilir"}
+		return {"error": I18n.t("Kenar flanşı yalnızca taban flanşın üst / alt kenarlarına eklenebilir")}
 	var sk_f := doc.get_feature(base.sketch_ref())
 	var e := sk_f.sketch.get_entity(int(pe["eid"]))
 	if e.is_empty() or str(e["type"]) != "line":
-		return {"error": "Seçilen kenar doğrusal bir taslak çizgisine ait değil"}
+		return {"error": I18n.t("Seçilen kenar doğrusal bir taslak çizgisine ait değil")}
 	var a2: Vector2 = sk_f.sketch.points[int(e["a"])]
 	var b2: Vector2 = sk_f.sketch.points[int(e["b"])]
 	var e2 := (b2 - a2).normalized()
@@ -329,12 +329,12 @@ static func edge_items(doc: CadDocument, f: CadFeature) -> Dictionary:
 	var base := base_of(doc)
 	var sk_f := doc.get_feature(base.sketch_ref())
 	if sk_f == null:
-		return {"error": "Taban taslağı bulunamadı"}
+		return {"error": I18n.t("Taban taslağı bulunamadı")}
 	if (sk_f.sketch.extract_profiles()["loops"] as Array).is_empty():
-		return {"error": "Kenar flanşı şimdilik yalnızca düz (kapalı profilli) taban flanşa eklenebilir"}
+		return {"error": I18n.t("Kenar flanşı şimdilik yalnızca düz (kapalı profilli) taban flanşa eklenebilir")}
 	var edges: Array = f.params.get("edges", [])
 	if edges.is_empty():
-		return {"error": "Kenar seçilmedi"}
+		return {"error": I18n.t("Kenar seçilmedi")}
 	var sh := sheet(base)
 	var T: float = sh["T"]
 	var R := float(f.params.get("R", -1.0))
@@ -354,7 +354,7 @@ static func edge_items(doc: CadDocument, f: CadFeature) -> Dictionary:
 		var off2 := float(f.params.get("off2", 0.0))
 		var length: float = float(fr["len"]) - off1 - off2
 		if length <= 1e-6:
-			return {"error": "Kenar boşlukları kenar boyundan büyük"}
+			return {"error": I18n.t("Kenar boşlukları kenar boyundan büyük")}
 		var up := (str(fr["cap"]) == "b") != bool(f.params.get("flip", false))
 		var o3 := pl.x_dir * (fr["o2"] as Vector2).x + pl.y_dir * (fr["o2"] as Vector2).y
 		var a3 := pl.to_world(fr["a2"])
@@ -382,10 +382,10 @@ static func base_normal_doc(doc: CadDocument, base: CadFeature) -> Vector3:
 static func flat_pattern(doc: CadDocument) -> Dictionary:
 	var base := base_of(doc)
 	if base == null:
-		return {"error": "Taban flanş yok"}
+		return {"error": I18n.t("Taban flanş yok")}
 	var sk_f := doc.get_feature(base.sketch_ref())
 	if sk_f == null:
-		return {"error": "Taban taslağı bulunamadı"}
+		return {"error": I18n.t("Taban taslağı bulunamadı")}
 	var sh := sheet(base)
 	var T: float = sh["T"]
 	var K: float = sh["K"]
@@ -397,7 +397,7 @@ static func flat_pattern(doc: CadDocument) -> Dictionary:
 		# Açık profil: dikdörtgen açınım
 		var chain := open_chain(sk_f.sketch)
 		if chain.is_empty():
-			return {"error": "Taslakta profil yok"}
+			return {"error": I18n.t("Taslakta profil yok")}
 		var side := -1.0 if bool(base.params.get("flip", false)) else 1.0
 		var bp := bent_profile(chain, T, sh["R"], K, side)
 		if bp.has("error"):

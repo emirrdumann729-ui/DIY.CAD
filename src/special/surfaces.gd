@@ -51,14 +51,14 @@ static func payload(doc: CadDocument, f: CadFeature, d: Dictionary) -> bool:
 		"srf_extrude", "srf_revolve", "srf_planar":
 			var sk_f := doc.get_feature(f.sketch_ref())
 			if sk_f == null or sk_f.sketch == null:
-				f.error = "Taslak bulunamadı"
+				f.error = I18n.t("Taslak bulunamadı")
 				return false
 			d["plane"] = OccKernel._plane_dict(sk_f.plane)
 			d["sketch_fid"] = sk_f.id
 			if f.type == "srf_planar":
 				var prof := sk_f.sketch.extract_profiles()
 				if (prof["loops"] as Array).is_empty():
-					f.error = "Düzlemsel yüzey için kapalı kontur gerekli"
+					f.error = I18n.t("Düzlemsel yüzey için kapalı kontur gerekli")
 					return false
 				var loops: Array = []
 				for L in prof["loops"]:
@@ -67,7 +67,7 @@ static func payload(doc: CadDocument, f: CadFeature, d: Dictionary) -> bool:
 				return true
 			d["chains"] = sk_f.sketch.curve_chains()
 			if (d["chains"] as Array).is_empty():
-				f.error = "Taslakta eğri yok"
+				f.error = I18n.t("Taslakta eğri yok")
 				return false
 			if f.type == "srf_extrude":
 				var n := sk_f.plane.normal() * (-1.0 if bool(f.params.get("reverse", false)) else 1.0)
@@ -94,7 +94,7 @@ static func payload(doc: CadDocument, f: CadFeature, d: Dictionary) -> bool:
 					continue
 				secs.append({"plane": OccKernel._plane_dict(ls.plane), "curves": ch[0]})
 			if secs.size() < 2:
-				f.error = "En az iki taslak seçin"
+				f.error = I18n.t("En az iki taslak seçin")
 				return false
 			d["sections"] = secs
 			d["ruled"] = bool(f.params.get("ruled", false))

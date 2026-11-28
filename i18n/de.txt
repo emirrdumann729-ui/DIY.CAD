@@ -1338,3 +1338,680 @@ Stüdyo	Studio
 Gün ışığı	Tageslicht
 Gece	Nacht
 HDRI dosyası	HDRI-Datei
+Bileşene tıklayın: seç. Sol tuşla sürükleyin: eşleştirmelere uyarak taşı.	Komponente anklicken: auswählen. Mit der linken Taste ziehen: unter Beachtung der Verknüpfungen bewegen.
+Eşleştirilecek yüz / kenarlara tıklayın (ağaçtan ana düzlemler de seçilebilir); sonra paneldeki türü seçin.	Klicken Sie die zu verknüpfenden Flächen / Kanten an (Hauptebenen auch im Baum wählbar); wählen Sie dann den Typ im Panel.
+Bileşeni sürükleyerek taşıyın veya panelden sayısal öteleme girin.	Ziehen Sie die Komponente zum Verschieben oder geben Sie im Panel eine numerische Verschiebung ein.
+Bileşeni sürükleyerek döndürün (eşleştirmeler korunur) veya panelden açı girin.	Ziehen Sie die Komponente zum Drehen (Verknüpfungen bleiben erhalten) oder geben Sie im Panel einen Winkel ein.
+Patlatılacak bileşenlere tıklayın, yön ve mesafe seçip 'Adım ekle'.	Klicken Sie die aufzulösenden Komponenten an, wählen Sie Richtung und Abstand, dann „Schritt hinzufügen“.
+Motor: döndürülecek bileşenin silindirik yüzüne tıklayın, hız ve süreyi girip Oynat.	Motor: klicken Sie die Zylinderfläche der zu drehenden Komponente an, geben Sie Drehzahl und Dauer ein, dann Abspielen.
+Çoğaltılacak bileşenlere tıklayın; yön, sayı ve aralığı panelden seçip Uygula.	Klicken Sie die zu musternden Komponenten an; Richtung, Anzahl und Abstand im Panel wählen, dann Anwenden.
+Parça dosyası bulunamadı	Teildatei nicht gefunden
+Alt montaj iç içe çok derin (döngü?)	Unterbaugruppen zu tief verschachtelt (Schleife?)
+Alt montaj dosyası açılamadı	Unterbaugruppendatei konnte nicht geöffnet werden
+Alt parça yüklenemedi: 	Unterteil konnte nicht geladen werden: 
+Parça geometrisi boş	Teilgeometrie ist leer
+Montajı Farklı Kaydet	Baugruppe speichern unter
+Geri alınacak işlem yok.	Nichts rückgängig zu machen.
+Yinelenecek işlem yok.	Nichts zu wiederholen.
+*.dcad, *.dasm ; Parça veya alt montaj	*.dcad, *.dasm ; Teil oder Unterbaugruppe
+*.dcad ; DIY.CAD Parça	*.dcad ; DIY.CAD-Teil
+Yeni parça (montaj içinde)	Neues Teil (in der Baugruppe)
+Montajı Kaydet	Baugruppe speichern
+CSV yazılamadı	CSV konnte nicht geschrieben werden
+ — eşleştirmelerle konumlandırın	 — mit Verknüpfungen positionieren
+Alt montaj açılamadı.	Unterbaugruppe konnte nicht geöffnet werden.
+Girişim yok.	Keine Interferenz.
+No;Parça;Adet;Malzeme;Birim kütle (g);Toplam kütle (g)	Nr.;Teil;Menge;Material;Masse je Stück (g);Gesamtmasse (g)
+\nBüyük montaj modu: kenarlar yalnız seçili bileşende	\nModus für große Baugruppen: Kanten nur an der gewählten Komponente
+  (tam tanımlı)	  (vollständig definiert)
+1-2: genişlik yüzleri (yerleşen bileşen), 3-4: kanal yüzleri	1-2: Breitenflächen (platzierte Komponente), 3-4: Kanalflächen
+1-2: simetrik yüz/eksenler, 3: simetri düzlemi	1-2: symmetrische Flächen/Achsen, 3: Symmetrieebene
+1-2: eksenler (silindirik yüzler), 3-4: çakışacak düzlemler	1-2: Achsen (Zylinderflächen), 3-4: deckungsgleiche Ebenen
+1: dişli 1 silindirik yüzü, 2: dişli 2 silindirik yüzü (oran yarıçaplardan)	1: Zylinderfläche von Zahnrad 1, 2: Zylinderfläche von Zahnrad 2 (Verhältnis aus den Radien)
+1: kremayerin doğrusal kenarı, 2: pinyonun silindirik yüzü	1: lineare Kante der Zahnstange, 2: Zylinderfläche des Ritzels
+1: pim (silindir veya nokta), 2: kanal orta çizgisi (doğrusal kenar)	1: Stift (Zylinder oder Punkt), 2: Nutmittellinie (lineare Kante)
+Gelişmiş	Erweitert
+aynı yön	gleiche Richtung
+ters yön	entgegengesetzte Richtung
+Bileşeni Döndür	Komponente drehen
+<seçilmedi>	<nicht gewählt>
+Doğrusal	Linear
+Modelden seç (kenar, eksen, yüz)	Aus dem Modell wählen (Kante, Achse, Fläche)
+Modelde kenar / silindirik yüz / düzlemsel yüze tıklayın.	Klicken Sie eine Kante / Zylinderfläche / ebene Fläche am Modell an.
+Çakışık	Deckungsgleich
+Teğet	Tangential
+Eş merkezli	Konzentrisch
+Mesafe sınırı	Abstandsgrenze
+Açı sınırı	Winkelgrenze
+Menteşe	Scharnier
+Dişli	Zahnrad
+Düzlemsel yüz	Ebene Fläche
+Konik yüz	Kegelfläche
+Küresel yüz	Kugelfläche
+Doğrusal kenar	Lineare Kante
+Eşleştirme sağlanamıyor (çelişkili veya geometri uygun değil)	Verknüpfung nicht erfüllbar (widersprüchlich oder ungeeignete Geometrie)
+Düz Karbon Çelik (AISI 1020)	Unlegierter Kohlenstoffstahl (AISI 1020)
+Paslanmaz Çelik (AISI 304)	Edelstahl (AISI 304)
+Altıgen başlı cıvata (ISO 4017)	Sechskantschraube (ISO 4017)
+Altıgen somun (ISO 4032)	Sechskantmutter (ISO 4032)
+Düz pul (ISO 7089)	Unterlegscheibe (ISO 7089)
+Sabit bilyalı rulman (60xx / 62xx)	Rillenkugellager (60xx / 62xx)
+Alüminyum 6061	Aluminium 6061
+Değişken '%s' hesaplanamadı.	Variable '%s' konnte nicht ausgewertet werden.
+%s: '%s' hesaplanamadı.	%s: '%s' konnte nicht ausgewertet werden.
+%s: denklem değerleri taslağın geometrisiyle çelişiyor.	%s: Gleichungswerte widersprechen der Skizzengeometrie.
+D1@%s: '%s' hesaplanamadı.	D1@%s: '%s' konnte nicht ausgewertet werden.
+Döndürme Patron/Taban	Rotierter Aufsatz/Basis
+Süpürme Patron/Taban	Ausgetragener Aufsatz/Basis
+Düz delik	Einfache Bohrung
+Havşa başlı (silindirik havşa)	Senkbohrung (zylindrisch)
+Havşa (konik)	Kegelsenkung
+Kılavuz (diş)	Gewindebohrung
+Sıkı	Eng
+Gevşek	Lose
+Bilinmeyen dışa aktarma uzantısı: 	Unbekannte Exporterweiterung: 
+Bir makro zaten çalışıyor	Ein Makro läuft bereits
+Makro derlenemedi (sözdizimi hatası, konsol çıktısına bakın): 	Makro konnte nicht kompiliert werden (Syntaxfehler, siehe Konsolenausgabe): 
+Makro dosyası bulunamadı: 	Makrodatei nicht gefunden: 
+Dökme Demir (Gri)	Grauguss
+Alüminyum 7075	Aluminium 7075
+Pirinç	Messing
+Bakır	Kupfer
+Plastik (3B baskı)	Kunststoff (3D-Druck)
+Meşe	Eiche
+Ahşap	Holz
+Çam	Kiefer
+Kontrplak (Huş)	Sperrholz (Birke)
+derlenemedi (sözdizimi hatası)	konnte nicht kompiliert werden (Syntaxfehler)
+Düzlem tanımı geçersiz	Ungültige Ebenendefinition
+Helis için daire içeren bir taslak seçin	Wählen Sie für die Helix eine Skizze mit einem Kreis
+Taslakta daire yok (helis çapı daireden alınır)	Die Skizze hat keinen Kreis (der Helixdurchmesser kommt vom Kreis)
+Helis ölçüleri geçersiz	Ungültige Helixmaße
+Koniklik açısı ±89°'den küçük olmalı	Der Konuswinkel muss kleiner als ±89° sein
+Konik helisin yarıçapı sıfırın altına iniyor	Der Radius der konischen Helix wird kleiner als null
+Öğe bulunamadı.	Element nicht gefunden.
+Bu öğe türü kırpılamaz (yalnızca çizgi, daire, yay).	Dieser Elementtyp kann nicht getrimmt werden (nur Linien, Kreise, Bögen).
+Kesişim yok: öğe tamamen silindi.	Kein Schnittpunkt: das Element wurde vollständig gelöscht.
+Dairede iki kesişim yok: tamamen silindi.	Der Kreis hat keine zwei Schnittpunkte: vollständig gelöscht.
+Kırpıldı.	Getrimmt.
+Uzatma çizgi ve yaylar için çalışır.	Verlängern funktioniert für Linien und Bögen.
+Uzatılacak bir sınır bulunamadı.	Keine Begrenzung zum Verlängern gefunden.
+Uzatıldı.	Verlängert.
+Yayın uzatılacağı bir sınır bulunamadı.	Keine Begrenzung zum Verlängern des Bogens gefunden.
+Yay uzatıldı.	Bogen verlängert.
+Dönüştürülecek kenar bulunamadı.	Keine umzuwandelnde Kante gefunden.
+%d öğe dönüştürüldü (kenarlara sabitlendi).	%d Elemente umgewandelt (an den Kanten fixiert).
+%d kenar dönüştürüldü (B-rep, kenarlara sabitlendi).	%d Kanten umgewandelt (B-Rep, an den Kanten fixiert).
+Ofset uygulanamadı (seçim boş veya mesafe yayları tersine çeviriyor).	Versatz nicht möglich (leere Auswahl oder der Abstand kehrt Bögen um).
+Ofset oluşturuldu.	Versatz erstellt.
+Ayna ekseni bir çizgi olmalı.	Die Spiegelachse muss eine Linie sein.
+Aynalanacak öğe yok.	Nichts zu spiegeln.
+Aynalandı.	Gespiegelt.
+Köşe yuvarlatma için iki çizginin birleştiği bir köşe seçin.	Wählen Sie für eine Verrundung eine Ecke, an der sich zwei Linien treffen.
+Çizgiler doğrusal; köşe yok.	Die Linien sind kollinear; es gibt keine Ecke.
+Yarıçap bu köşe için çok büyük.	Der Radius ist für diese Ecke zu groß.
+Köşe yuvarlatıldı (R %s).	Ecke verrundet (R %s).
+Pah için iki çizginin birleştiği bir köşe seçin.	Wählen Sie für eine Fase eine Ecke, an der sich zwei Linien treffen.
+Pah mesafesi bu köşe için çok büyük.	Der Fasenabstand ist für diese Ecke zu groß.
+Pah kırıldı (%s).	Ecke gefast (%s).
+Çokgen yarıçapı sıfır.	Polygonradius ist null.
+%d kenarlı çokgen.	Polygon mit %d Seiten.
+Kanal boyutları geçersiz.	Ungültige Nutmaße.
+Kanal oluşturuldu.	Nut erstellt.
+IPS (inç, pound, saniye)	IPS (Zoll, Pfund, Sekunde)
+Özel (%s, %s)	Benutzerdefiniert (%s, %s)
+Düzlemsellik	Ebenheit
+Doğrusallık	Geradheit
+Açısallık	Neigung
+Eş merkezlilik	Konzentrizität
+Çizgi profili	Linienform
+Yüzey profili	Flächenform
+Dairesel salgı	Rundlauf
+Toplam salgı	Gesamtrundlauf
+FİRMA	FIRMA
+BAŞLIK	BENENNUNG
+ÇİZEN	GEZEICHNET
+TARİH	DATUM
+ÖLÇEK	MASSSTAB
+AĞIRLIK	GEWICHT
+RESİM NO	ZEICHNUNGSNR.
+1. AÇI	METHODE 1
+3. AÇI	METHODE 3
+Görünüş hesaplanamadı	Ansicht konnte nicht berechnet werden
+Görünüş hesaplanıyor...	Ansicht wird berechnet...
+KESİT %s-%s	SCHNITT %s-%s
+GÖRÜNÜŞ %s	ANSICHT %s
+ÖLÇEK 	MASSSTAB 
+PARÇA ADI	BEZEICHNUNG
+AÇIKLAMA	BESCHREIBUNG
+Uzatma bölgesi geçersiz (bitiş > başlangıç olmalı)	Ungültiger Streckbereich (Ende muss > Anfang sein)
+Kademeli büyütme bölgesi geçersiz (bitiş > başlangıç olmalı)	Ungültiger Bereich für stufenweises Vergrößern (Ende muss > Anfang sein)
+Koruma bölgesi geçersiz (bitiş > başlangıç olmalı)	Ungültiger Schutzbereich (Ende muss > Anfang sein)
+Koruma bandı geçersiz (üst sınır alttan küçük)	Ungültiges Schutzband (Obergrenze kleiner als Untergrenze)
+Bu ekstrüzyon seçenekleri OpenCASCADE (B-rep) çekirdeği gerektirir	Diese Extrusionsoptionen erfordern den OpenCASCADE-Kern (B-Rep)
+Bu özellik OpenCASCADE (B-rep) çekirdeği gerektirir	Dieses Feature erfordert den OpenCASCADE-Kern (B-Rep)
+Taslak bulunamadı	Skizze nicht gefunden
+Seçili bölgeler bulunamadı (taslak değişmiş olabilir)	Gewählte Bereiche nicht gefunden (die Skizze wurde evtl. geändert)
+Taslakta kapalı kontur yok	Die Skizze hat keine geschlossene Kontur
+STL okunamadı (üçgen yok)	STL konnte nicht gelesen werden (keine Dreiecke)
+Döndürme ekseni bulunamadı	Rotationsachse nicht gefunden
+Döndürme ekseni geçersiz	Ungültige Rotationsachse
+Profil döndürme ekseninin iki tarafında olamaz	Das Profil darf nicht auf beiden Seiten der Rotationsachse liegen
+Köşe seçilmedi	Kein Eckpunkt gewählt
+Seçilen köşe ekstrüzyon yönünde değil (yönü ters çevirin)	Der gewählte Eckpunkt liegt nicht in Extrusionsrichtung (Richtung umkehren)
+OpenCASCADE ortamı bulunamadı (occ_env). Kurulum: README → Faz 4	OpenCASCADE-Umgebung nicht gefunden (occ_env). Einrichtung: README → Phase 4
+Python süreci başlatılamadı	Python-Prozess konnte nicht gestartet werden
+Eğri (yol) seçilmedi	Keine Kurve (Pfad) gewählt
+Seçili eğri bulunamadı	Gewählte Kurve nicht gefunden
+Yol taslağında çizgi yok	Die Pfadskizze enthält keine Linien
+Yol 3B taslağı boş	Die Pfad-3D-Skizze ist leer
+Yol olarak taslak, 3B taslak veya helis seçin	Wählen Sie eine Skizze, 3D-Skizze oder Helix als Pfad
+Yön 1 geçersiz	Richtung 1 ist ungültig
+Yön 2 geçersiz	Richtung 2 ist ungültig
+Dönme ekseni geçersiz	Ungültige Drehachse
+Aynalama düzlemi geçersiz	Ungültige Spiegelebene
+Taslakta çizgi yok	Die Skizze enthält keine Linien
+Kılavuz: 	Leitkurve: 
+En az iki kapalı profilli taslak seçin	Wählen Sie mindestens zwei Skizzen mit geschlossenen Profilen
+Bilinmeyen delik ölçüsü	Unbekannte Bohrungsgröße
+Bölme düzlemi geçersiz	Ungültige Trennebene
+Desteklenmeyen özellik	Nicht unterstütztes Feature
+OpenCASCADE sunucusu zamanında başlamadı	Der OpenCASCADE-Server ist nicht rechtzeitig gestartet
+OpenCASCADE sunucusu beklenmedik şekilde kapandı	Der OpenCASCADE-Server wurde unerwartet beendet
+OCP yüklenemedi	OCP konnte nicht geladen werden
+Çekirdek hatası	Kernfehler
+İnce	Fein
+Çok ince	Sehr fein
+Izgaraya yakala (aç / kapat)	Rasterfang (ein / aus)
+Taslak ızgara yakalamasını aç/kapat	Skizzen-Rasterfang umschalten
+Dışa Aktar...\tCtrl+E	Exportieren...\tCtrl+E
+STEP / IGES / STL dosyasını gövde olarak içe aktar (STL: eksen bazlı ölçek ve uzatma)	STEP-/IGES-/STL-Datei als Körper importieren (STL: Skalierung je Achse und Streckung)
+Aç	Öffnen
+Farklı Kaydet	Speichern unter
+*.stl ; STL (3B baskı)	*.stl ; STL (3D-Druck)
+STL olarak dışa aktar	Als STL exportieren
+OBJ olarak dışa aktar	Als OBJ exportieren
+STEP olarak dışa aktar	Als STEP exportieren
+IGES olarak dışa aktar	Als IGES exportieren
+*.stl ; STL (CSG çekirdeği: yalnız STL)	*.stl ; STL (CSG-Kern: nur STL)
+STL içe aktar	STL importieren
+STEP / IGES / STL içe aktar	STEP / IGES / STL importieren
+Makro çalıştır	Makro ausführen
+Parçayı makro olarak kaydet	Teil als Makro speichern
+Taslağı DXF olarak dışa aktar	Skizze als DXF exportieren
+Taslağı SVG olarak dışa aktar	Skizze als SVG exportieren
+Ekran görüntüsü	Bildschirmfoto
+%s %s\nGodot %s ile yazılmış parametrik CAD.\n\nGeometri çekirdeği: %s\nYedek çekirdek: Godot CSG (Manifold).	%s %s\nParametrisches CAD, geschrieben in Godot %s.\n\nGeometriekern: %s\nErsatzkern: Godot CSG (Manifold).
+Bastır (suppress)	Unterdrücken
+ (ve onu kullanan özellikler)	 (und die Features, die es verwenden)
+ silindi. Geri almak için Ctrl+Z.	 gelöscht. Rückgängig mit Strg+Z.
+Eksik Tanımlı (%d)	Unterbestimmt (%d)
+ oluşturuldu.	 erstellt.
+Orta Düzlem	Mittelebene
+Köşeye Kadar	Bis Eckpunkt
+Yüzeye Kadar	Bis Fläche
+Yüzeyden Ofset	Versatz von Fläche
+Merkez çizgisi 	Mittellinie 
+Çizgi 	Linie 
+Bölge seç (taslakta tıkla)	Bereich wählen (in die Skizze klicken)
+Bitiş: 	Ende: 
+kapalı	geschlossen
+açık	offen
+Tam tanımlı	Vollständig definiert
+Eksik tanımlı	Unterbestimmt
+Aşırı tanımlı	Überbestimmt
+  (denklemlerde bu adla kullanılır)	  (in Gleichungen unter diesem Namen verwendet)
+ör. genislik / 2	z. B. width / 2
+Taşı	Verschieben
+Ölçekle	Skalieren
+Doğrusal çoğalt	Lineares Muster
+Dairesel çoğalt	Kreismuster
+Aralık X	Abstand X
+Aralık Y	Abstand Y
+ör. 80 veya genislik*2	z. B. 80 oder width*2
+Çevre: 	Umfang: 
+Düzlemsel yüz, normal: (%.3f, %.3f, %.3f)	Ebene Fläche, Normale: (%.3f, %.3f, %.3f)
+Eğri yüz	Gekrümmte Fläche
+Yüz alanı: 	Flächeninhalt: 
+Mesafe (paralel yüzler): 	Abstand (parallele Flächen): 
+Yoğunluk = 	Dichte = 
+Kütle = 	Masse = 
+Yüzey alanı = 	Oberfläche = 
+Ağırlık merkezi (%s): X = %s  Y = %s  Z = %s	Schwerpunkt (%s): X = %s  Y = %s  Z = %s
+Atalet tensörü (ağırlık merkezinde, global eksenler):	Trägheitstensor (im Schwerpunkt, globale Achsen):
+İptal	Abbrechen
+Kütle birimi	Masseeinheit
+Uzunluk ondalık basamak	Dezimalstellen Länge
+Açı ondalık basamak	Dezimalstellen Winkel
+Kaydedilmemiş değişiklikler kaybolacak. Devam edilsin mi?	Nicht gespeicherte Änderungen gehen verloren. Fortfahren?
+Montaj açılamadı (hata %d): %s	Baugruppe konnte nicht geöffnet werden (Fehler %d): %s
+parça	Teil
+Önceki oturum beklenmedik şekilde kapandı.\n\nOtomatik kaydedilmiş %s bulundu: %s\nKayıt zamanı: %s\n%s\n\nKurtarılsın mı?	Die vorherige Sitzung wurde unerwartet beendet.\n\nAutomatisch gespeichert (%s) gefunden: %s\nGespeichert um: %s\n%s\n\nWiederherstellen?
+(hiç kaydedilmemiş belge)	(nie gespeichertes Dokument)
+seçili	gewählt
+SEÇİLMEDİ	NICHT GEWÄHLT
+%d yüz, tarafsız yüz %s	%d Flächen, neutrale Fläche %s
+%d gövde seçili (ilki ana gövde)	%d Körper gewählt (der erste ist der Hauptkörper)
+Gövde seçilmedi — gövdelere tıklayın	Kein Körper gewählt — klicken Sie die Körper an
+Gövde seçilmedi — gövdeye tıklayın	Kein Körper gewählt — klicken Sie den Körper an
+Konum yok — düzlemsel yüze tıklayın	Keine Position — klicken Sie eine ebene Fläche an
+Yüz seçilmedi — düzlemsel yüze tıklayın	Keine Fläche gewählt — klicken Sie eine ebene Fläche an
+%d yüz açık bırakılacak	%d Flächen bleiben offen
+Yüz seçilmedi: kapalı (içi boş) gövde	Keine Fläche gewählt: geschlossener (hohler) Körper
+%d kenar seçili	%d Kanten gewählt
+Kenar seçilmedi — modelde kenarlara tıklayın	Keine Kante gewählt — klicken Sie Kanten am Modell an
+Başlangıç yarıçapı	Anfangsradius
+Tarafsız yüzü seç (sonraki tıklama)	Neutrale Fläche wählen (nächster Klick)
+\nHavşa Ø%s x %s	\nSenkung Ø%s x %s
+\nHavşa Ø%s x %s°	\nKegelsenkung Ø%s x %s°
+ (kılavuz matkabı)\nKozmetik diş: %s	 (Kernlochbohrer)\nGewindedarstellung: %s
+Yarıçap: %s\nKenar: %d	Radius: %s\nKanten: %d
+Kalınlık: %s%s\nAçık yüz: %d	Dicke: %s%s\nOffene Flächen: %d
+ (dışa)	 (nach außen)
+Dosya: %s\nÖlçek: %s   X/Y/Z: %s / %s / %s%s	Datei: %s\nMaßstab: %s   X/Y/Z: %s / %s / %s%s
+Açı: %s\nYüz: %d	Winkel: %s\nFlächen: %d
+Kalınlık: %s	Dicke: %s
+Çıkar	Subtrahieren
+Kesiştir	Schneiden
+İşlem: %s\nGövde: %d	Operation: %s\nKörper: %d
+Öteleme: (%s, %s, %s)\nDönme: %s%s	Verschiebung: (%s, %s, %s)\nDrehung: %s%s
+Düzlem: %s, ofset %s	Ebene: %s, Versatz %s
+\nKozmetik diş: 	\nGewindedarstellung: 
+Yükseklik: %s	Höhe: %s
+seçilmedi	nicht gewählt
+  (düz)	  (Regelfläche)
+Özellik: %d%s	Features: %d%s
+  (tüm gövdeler)	  (alle Körper)
+Tür: %s	Typ: %s
+Tür: %s, derinlik %s	Typ: %s, Tiefe %s
+Gravür	Gravur
+Özellik: %d, örnek: %d	Features: %d, Exemplare: %d
+Ölçek X	Skalierung X
+Ölçek Y	Skalierung Y
+Ölçek Z	Skalierung Z
+Ölçek merkezi / öteleme	Skalierungszentrum / Verschiebung
+Öteleme 	Verschiebung 
+Bölgesel uzatma (STL)	Bereichsweise Streckung (STL)
+Çok bölgeli uzatma: %d bölge (makro / dosyadan). Tek bölgeye dönmek için listeyi silin.	Mehrbereichs-Streckung: %d Bereiche (aus Makro / Datei). Liste löschen, um zu einem Bereich zurückzukehren.
+Uzatmayı kaldır	Streckung entfernen
+Bölge başı (özgün)	Bereichsanfang (Original)
+Bölge sonu (özgün)	Bereichsende (Original)
+Bölgedeki köşeler orantılı uzar, sonrası kaydırılır; bölge dışındaki ayrıntılar bozulmaz.	Eckpunkte im Bereich werden proportional gestreckt, alles danach wird verschoben; Details außerhalb des Bereichs bleiben unverzerrt.
+Koruma bölgesi (STL)	Schutzbereich (STL)
+Bölgeyi ölçekleme (yalnızca taşı)	Bereich nicht skalieren (nur verschieben)
+Geçiş boyu	Übergangslänge
+Kesit bantları: %d (makro / dosyadan); bant yoksa kesitin tamamı korunur.	Querschnittsbänder: %d (aus Makro / Datei); ohne Bänder ist der ganze Querschnitt geschützt.
+\nÖteleme: %s	\nVersatz: %s
+\nÖteleme: normal dönüşümle bölge merkezine göre	\nVersatz: durch die normale Transformation um die Bereichsmitte
+\nUzatma: %d bölge, toplam %+.2f mm	\nStreckung: %d Bereiche, gesamt %+.2f mm
+\nKademeli kesit büyütme	\nStufenweise Querschnittsvergrößerung
+\nKoruma bölgesi: %s %s → %s	\nSchutzbereich: %s %s → %s
+CSG (Godot, yalnızca üçgen ağ)	CSG (Godot, nur Dreiecksnetz)
+Tarafsız yüz için modelde düzlemsel bir yüze tıklayın.	Klicken Sie für die neutrale Fläche eine ebene Fläche am Modell an.
+Eğim verilecek yüzlere tıklayın.	Klicken Sie die Flächen für die Formschräge an.
+Modelde bir köşeye tıklayın.	Klicken Sie einen Eckpunkt am Modell an.
+Hedef yüze tıklayın.	Klicken Sie die Zielfläche an.
+Yön için doğrusal bir kenara (veya düzlemsel yüze) tıklayın.	Klicken Sie für die Richtung eine lineare Kante (oder ebene Fläche) an.
+Yön 2 için doğrusal bir kenara tıklayın.	Klicken Sie für Richtung 2 eine lineare Kante an.
+Eksen için dairesel/doğrusal kenara veya silindirik yüze tıklayın.	Klicken Sie für die Achse eine kreisförmige/lineare Kante oder eine Zylinderfläche an.
+Aynalama düzlemi olarak düzlemsel bir yüze tıklayın.	Klicken Sie eine ebene Fläche als Spiegelebene an.
+Taban olarak düzlemsel bir yüze tıklayın.	Klicken Sie eine ebene Fläche als Basis an.
+Üç köşeye sırayla tıklayın.	Klicken Sie nacheinander drei Eckpunkte an.
+İki köşeye sırayla tıklayın.	Klicken Sie nacheinander zwei Eckpunkte an.
+Bir köşeye tıklayın.	Klicken Sie einen Eckpunkt an.
+Doğrusal/dairesel kenara veya silindirik yüze tıklayın.	Klicken Sie eine lineare/kreisförmige Kante oder eine Zylinderfläche an.
+Teğet düzlemin değeceği noktaya (silindir, koni, küre veya düzlem yüzünde) tıklayın.	Klicken Sie den Berührpunkt der Tangentialebene an (auf einer Zylinder-, Kegel-, Kugel- oder ebenen Fläche).
+Koordinat sisteminin başlangıcı için bir köşeye tıklayın.	Klicken Sie einen Eckpunkt für den Ursprung des Koordinatensystems an.
+X ekseni için doğrusal bir kenara tıklayın.	Klicken Sie eine lineare Kante für die X-Achse an.
+Y ekseni için doğrusal bir kenara tıklayın.	Klicken Sie eine lineare Kante für die Y-Achse an.
+Seçim iptal edildi.	Auswahl abgebrochen.
+Seçimi iptal et	Auswahl abbrechen
+Köşe seç (modele tıkla)	Eckpunkt wählen (Modell anklicken)
+Hedef yüzü seç (modele tıkla)	Zielfläche wählen (Modell anklicken)
+Kılavuz eğrisi	Leitkurve
+Seçilen kenar / eksen	Gewählte Kante / Achse
+Modelden seç	Aus dem Modell wählen
+Seçilen yüz	Gewählte Fläche
+Düzlemsel yüz seç	Ebene Fläche wählen
+Yüzeyde nokta seç (silindir, koni, düzlem...)	Punkt auf einer Fläche wählen (Zylinder, Kegel, Ebene...)
+Taban için yüz seç	Fläche für die Basis wählen
+Üç köşe seç	Drei Eckpunkte wählen
+İki köşe seç	Zwei Eckpunkte wählen
+Kenar / silindir seç	Kante / Zylinder wählen
+Köşe seç	Eckpunkt wählen
+Geri alma çubuğu kaldırıldı: tüm özellikler hesaplanıyor.	Rückführungsleiste entfernt: alle Features werden berechnet.
+Geri alma çubuğu: ilk %d özellik etkin, sonrakiler hesaplanmıyor.	Rückführungsleiste: die ersten %d Features sind aktiv, die übrigen werden nicht berechnet.
+Çocuklar:	Untergeordnet:
+Hedef yüzü seç	Zielfläche wählen
+Silindirik yüzü seç	Zylinderfläche wählen
+Seç: görünüş veya açıklamaya tıklayın, sürükleyerek taşıyın; Delete siler.	Auswählen: Ansicht oder Beschriftung anklicken, zum Verschieben ziehen; Entf löscht.
+Model görünüşü: yerleştirmek için sayfaya tıklayın (yönelim panelden).	Modellansicht: zum Platzieren auf das Blatt klicken (Ausrichtung im Panel).
+İzdüşüm görünüşü: seçili görünüşün sağına/soluna/üstüne/altına tıklayın.	Projizierte Ansicht: rechts/links/oberhalb/unterhalb der gewählten Ansicht klicken.
+Kesit: seçili görünüşte kesit çizgisinin iki ucuna tıklayın.	Schnitt: klicken Sie in der gewählten Ansicht beide Enden der Schnittlinie an.
+Detay: seçili görünüşte önce merkeze, sonra daire kenarına tıklayın.	Detail: in der gewählten Ansicht zuerst den Mittelpunkt, dann den Kreisrand anklicken.
+Yardımcı görünüş: seçili görünüşte bir kenara tıklayın (görünüş kenara dik bakar).	Hilfsansicht: klicken Sie in der gewählten Ansicht eine Kante an (die Ansicht blickt senkrecht auf die Kante).
+Kırık görünüş: seçili görünüşte kaldırılacak bölgenin iki sınırına tıklayın.	Unterbrochene Ansicht: klicken Sie in der gewählten Ansicht die beiden Grenzen des zu entfernenden Bereichs an.
+Akıllı boyut: köşe/daire/kenara tıklayın; ikinci öğe ve ardından boyutun yerine tıklayın.	Intelligente Bemaßung: Eckpunkt/Kreis/Kante anklicken; dann das zweite Element und die Position der Bemaßung.
+Merkez işareti: bir daireye tıklayın.	Mittelpunktmarkierung: klicken Sie einen Kreis an.
+Merkez çizgisi: iki noktaya tıklayın.	Mittellinie: klicken Sie zwei Punkte an.
+Not: yerleştirmek için tıklayın (metni panelden düzenleyin).	Notiz: zum Platzieren klicken (Text im Panel bearbeiten).
+Balon: önce gösterilecek noktaya, sonra balonun yerine tıklayın.	Positionsnummer: zuerst den zu zeigenden Punkt, dann die Position anklicken.
+Yüzey pürüzlülüğü: sembolün yerine tıklayın.	Oberflächengüte: klicken Sie die Position des Symbols an.
+Geometrik tolerans: önce gösterilecek noktaya, sonra çerçevenin yerine tıklayın.	Form- und Lagetoleranz: zuerst den zu zeigenden Punkt, dann die Position des Rahmens anklicken.
+Datum: önce yüzey/kenara, sonra etiketin yerine tıklayın.	Bezug: zuerst Fläche/Kante, dann die Position der Beschriftung anklicken.
+Kaynak sembolü: önce kaynak yerine, sonra referans çizgisinin yerine tıklayın.	Schweißsymbol: zuerst die Schweißstelle, dann die Position der Bezugslinie anklicken.
+Kesit görünüşü OpenCASCADE çekirdeği gerektirir	Eine Schnittansicht erfordert den OpenCASCADE-Kern
+Açıklama	Beschreibung
+çerçevenin	der Rahmen
+referans çizgisinin	die Bezugslinie
+İkinci köşeye tıklayın.	Klicken Sie den zweiten Eckpunkt an.
+Boyutun yerine tıklayın (çap).	Klicken Sie die Position der Bemaßung an (Durchmesser).
+Başka bir kenara (açı) veya boyutun yerine tıklayın.	Klicken Sie eine weitere Kante (Winkel) oder die Position der Bemaßung an.
+Başlık (boş: parça adı)	Benennung (leer: Teilename)
+Çizen	Gezeichnet
+Malzeme (boş: parça)	Material (leer: Teil)
+Yüzey pürüzlülüğü	Oberflächengüte
+Kaynak sembolü	Schweißsymbol
+Merkez işareti	Mittelpunktmarkierung
+   (model boyutu — ilişkili)	   (Modellbemaßung — assoziativ)
+(boş: ölçülen değer)	(leer: gemessener Wert)
+ör. 111 (elektrik ark)	z. B. 111 (Lichtbogenhandschweißen)
+NOTLAR:\n1. KESKİN KÖŞELERİ KIRIN.\n2. GENEL TOLERANS ISO 2768-m.	HINWEISE:\n1. SCHARFE KANTEN BRECHEN.\n2. ALLGEMEINTOLERANZ ISO 2768-m.
+İlk yayın	Erstausgabe
+Parça açılamadı: 	Teil konnte nicht geöffnet werden: 
+Parça kaydedilemedi!	Teil konnte nicht gespeichert werden!
+*.dcad, *.dasm, *.ddrw, *.dcadt, *.dasmt, *.ddrwt, *.dclfp, *.dcftp ; DIY.CAD dosyaları	*.dcad, *.dasm, *.ddrw, *.dcadt, *.dasmt, *.ddrwt, *.dclfp, *.dcftp ; DIY.CAD-Dateien
+*.dcadt, *.dasmt, *.ddrwt ; DIY.CAD şablonları	*.dcadt, *.dasmt, *.ddrwt ; DIY.CAD-Vorlagen
+*.dclfp ; DIY.CAD Kütüphane Unsuru Parçası	*.dclfp ; DIY.CAD-Bibliotheksfeature-Teil
+*.dcftp ; DIY.CAD Form Verme Aracı	*.dcftp ; DIY.CAD-Umformwerkzeug
+Takım yolu oluşmadı (takım çapı / işlem türü uygun değil)	Keine Werkzeugbahn erzeugt (Werkzeugdurchmesser / Bearbeitungsart ungeeignet)
+Dosya bulunamadı	Datei nicht gefunden
+Tabloda satır yok	Die Tabelle hat keine Zeilen
+Açık profil en az bir çizgi içermeli	Ein offenes Profil muss mindestens eine Linie enthalten
+Sıfır uzunluklu çizgi	Linie mit Länge null
+Çizgi büküm yarıçapı için çok kısa (%d. çizgi)	Linie zu kurz für den Biegeradius (Linie %d)
+Önce taban flanş oluşturun	Erzeugen Sie zuerst eine Basislasche
+Taslakta kapalı kontur veya açık çizgi zinciri yok	Die Skizze hat keine geschlossene Kontur und keinen offenen Linienzug
+Kenar flanşı yalnızca taban flanşın üst / alt kenarlarına eklenebilir	Eine Kantenlasche kann nur an den oberen / unteren Kanten der Basislasche hinzugefügt werden
+Seçilen kenar doğrusal bir taslak çizgisine ait değil	Die gewählte Kante gehört zu keiner linearen Skizzenlinie
+Taban taslağı bulunamadı	Basisskizze nicht gefunden
+Kenar flanşı şimdilik yalnızca düz (kapalı profilli) taban flanşa eklenebilir	Eine Kantenlasche kann vorerst nur an einer ebenen Basislasche (geschlossenes Profil) hinzugefügt werden
+Kenar seçilmedi	Keine Kante gewählt
+Kenar boşlukları kenar boyundan büyük	Kantenabstände sind größer als die Kantenlänge
+Taban flanş yok	Keine Basislasche
+Açınımı DXF olarak kaydet	Abwicklung als DXF speichern
+ (boyut ve bastırma değişiklikleri bu konfigürasyona kaydedilir)	 (Bemaßungs- und Unterdrückungsänderungen werden in dieser Konfiguration gespeichert)
+Tasarım tablosunu kaydet	Konstruktionstabelle speichern
+Tasarım tablosunu içe aktar	Konstruktionstabelle importieren
+DXF yazılamadı	DXF konnte nicht geschrieben werden
+<belirtilmemiş: çelik>	<nicht angegeben: Stahl>
+yük uygulanacak	Last
+Çözülüyor...	Wird gelöst...
+Yer değiştirme	Verschiebung
+Yan adım (% çap)	Seitliche Zustellung (% Durchmesser)
+parçanın üstü, taslaktan %s yukarıda	Teileoberseite, %s über der Skizze
+taslak düzlemi	Skizzenebene
+*.hdr, *.exr, *.png, *.jpg ; Panorama görüntüsü	*.hdr, *.exr, *.png, *.jpg ; Panoramabild
+HDRI / panorama seç	HDRI / Panorama wählen
+*.png, *.jpg, *.webp ; Görüntü	*.png, *.jpg, *.webp ; Bild
+Çıkartma görüntüsü seç	Abziehbild wählen
+Render kaydet (2× çözünürlük)	Rendering speichern (2× Auflösung)
+Düzlemsel yüzey için kapalı kontur gerekli	Eine ebene Fläche benötigt eine geschlossene Kontur
+Taslakta eğri yok	Die Skizze enthält keine Kurven
+En az iki taslak seçin	Wählen Sie mindestens zwei Skizzen
+Dikdörtgen kutu profil	Rechteckrohr
+Köşebent (L)	Winkelprofil (L)
+Dikdörtgen profil %s	Rechteckprofil %s
+Köşebent L%s	Winkel L%s
+Taslakta çizgi yok (2B taslak veya 3B taslak seçin)	Die Skizze enthält keine Linien (2D- oder 3D-Skizze wählen)
+No;Profil;Boy (mm);Kesim açıları;Adet;Birim kütle (g);Toplam kütle (g)	Nr.;Profil;Länge (mm);Schnittwinkel;Menge;Masse je Stück (g);Gesamtmasse (g)
+\nEksik tanımlı taslak (boyut/ilişki ekleyerek tam tanımlayın)	\nUnterbestimmte Skizze (durch Bemaßungen/Beziehungen vollständig definieren)
+\nAşırı tanımlı taslak	\nÜberbestimmte Skizze
+\n(Bastırılmış)	\n(Unterdrückt)
+\n(Geri alma çubuğunun altında: hesaplanmıyor)	\n(Unter der Rückführungsleiste: nicht berechnet)
+━━━ Geri alma çubuğu ━━━	━━━ Rückführungsleiste ━━━
+Altındaki özellikler hesaplanmaz. Sürükleyerek taşıyın; sağ tık: kaldır.	Features darunter werden nicht berechnet. Zum Verschieben ziehen; Rechtsklick: entfernen.
+Kısayol kaldırıldı: 	Tastenkürzel entfernt: 
+Varsayılan kısayollar geri yüklendi.	Standard-Tastenkürzel wiederhergestellt.
+… tuşa basın	… Taste drücken
+'%s' için bir tuş kombinasyonuna basın (Esc: vazgeç).	Drücken Sie eine Tastenkombination für '%s' (Esc: abbrechen).
+%s sabit bir tuştur, atanamaz.	%s ist eine feste Taste und kann nicht zugewiesen werden.
+  (önceki atama kaldırıldı: %s)	  (vorherige Zuweisung entfernt: %s)
+yüklendi	geladen
+Klasörü aç: 	Ordner öffnen: 
+3B Taslak — düzlem %s (Tab: değiştir). 	3D-Skizze — Ebene %s (Tab: wechseln). 
+Noktaları tıklayın; sağ tık / Esc zinciri bitirir. Eksene yakın çizim X/Y/Z'ye kilitlenir.	Punkte anklicken; Rechtsklick / Esc beendet die Kette. Zeichnen nahe einer Achse rastet auf X/Y/Z ein.
+Nokta veya çizgi seçin; Delete siler, nokta koordinatları panelden girilir.	Punkt oder Linie wählen; Entf löscht, Punktkoordinaten werden im Panel eingegeben.
+Merkez Çizgisi	Mittellinie
+Köşe Dikdörtgen	Eckrechteck
+Merkez Dikdörtgen	Mittelpunktrechteck
+Merkez Noktalı Yay	Mittelpunktbogen
+Akıllı Boyut	Intelligente Bemaßung
+Düz Kanal	Gerade Nut
+Taslak Köşe Yuvarlatma	Skizzenverrundung
+Taslak Pahı	Skizzenfase
+Varlıkları Dönüştür	Elemente umwandeln
+Eşit	Gleich
+Eş Merkezli	Konzentrisch
+Nokta-çizgi mesafesi	Abstand Punkt–Linie
+Öğe seçin, sürükleyin. Birden fazla öğe seçince (Shift/Ctrl) panelden ilişki ekleyebilirsiniz.	Elemente wählen, ziehen. Bei mehreren gewählten Elementen (Umschalt/Strg) können Sie im Panel Beziehungen hinzufügen.
+Başlangıç noktasını tıklayın.	Klicken Sie den Startpunkt an.
+Sonraki noktayı tıklayın. Çift tık / sağ tık / Esc: zinciri bitir.	Klicken Sie den nächsten Punkt an. Doppelklick / Rechtsklick / Esc: Kette beenden.
+İlk köşeyi tıklayın.	Klicken Sie die erste Ecke an.
+Karşı köşeyi tıklayın.	Klicken Sie die gegenüberliegende Ecke an.
+Dikdörtgenin merkezini tıklayın.	Klicken Sie den Mittelpunkt des Rechtecks an.
+Köşeyi tıklayın.	Klicken Sie die Ecke an.
+Dairenin merkezini tıklayın.	Klicken Sie den Kreismittelpunkt an.
+Yarıçapı belirlemek için tıklayın.	Klicken Sie, um den Radius festzulegen.
+Yayın merkezini tıklayın.	Klicken Sie den Bogenmittelpunkt an.
+Yayın başlangıç noktasını tıklayın.	Klicken Sie den Bogenanfang an.
+Yayın bitiş noktasını tıklayın (fareyi istediğiniz yönde döndürün).	Klicken Sie das Bogenende an (Maus in die gewünschte Richtung drehen).
+Ölçülecek öğeyi seçin (çizgi, daire, yay, nokta). Var olan boyutu düzenlemek için etikete tıklayın.	Wählen Sie das zu bemaßende Element (Linie, Kreis, Bogen, Punkt). Klicken Sie auf eine Beschriftung, um eine vorhandene Bemaßung zu bearbeiten.
+Boyutu yerleştirmek için boş bir yere tıklayın veya ikinci öğeyi seçin.	Klicken Sie auf eine freie Stelle, um die Bemaßung zu platzieren, oder wählen Sie ein zweites Element.
+Boyutu yerleştirmek için boş bir yere tıklayın.	Klicken Sie auf eine freie Stelle, um die Bemaßung zu platzieren.
+Çokgenin merkezini tıklayın (%d kenar; panelden değiştirin).	Klicken Sie den Polygonmittelpunkt an (%d Seiten; im Panel ändern).
+Bir köşeyi tıklayın.	Klicken Sie einen Eckpunkt an.
+Kanalın ilk yay merkezini tıklayın.	Klicken Sie den ersten Bogenmittelpunkt der Nut an.
+İkinci yay merkezini tıklayın.	Klicken Sie den zweiten Bogenmittelpunkt an.
+Kanal genişliğini belirlemek için tıklayın.	Klicken Sie, um die Nutbreite festzulegen.
+Spline noktalarını tıklayın. İlk noktaya tıklamak kapatır; çift tık / sağ tık / Enter bitirir.	Klicken Sie die Splinepunkte an. Ein Klick auf den ersten Punkt schließt ihn; Doppelklick / Rechtsklick / Enter beendet.
+Metnin yerleşeceği noktayı tıklayın (metin ve boyut panelden değişir).	Klicken Sie dorthin, wo der Text hinkommt (Text und Größe im Panel ändern).
+Silinecek parçaya tıklayın (en yakın kesişimler arasında kırpılır).	Klicken Sie auf das zu löschende Segment (zwischen den nächsten Schnittpunkten getrimmt).
+Uzatılacak çizginin ucuna yakın tıklayın.	Klicken Sie nahe dem Ende der zu verlängernden Linie.
+Yuvarlatılacak köşeye tıklayın (R %s; panelden değiştirin).	Klicken Sie die zu verrundende Ecke an (R %s; im Panel ändern).
+Pah kırılacak köşeye tıklayın (%s; panelden değiştirin).	Klicken Sie die zu fasende Ecke an (%s; im Panel ändern).
+Elipsin merkezini tıklayın.	Klicken Sie den Mittelpunkt der Ellipse an.
+Büyük eksenin ucunu tıklayın.	Klicken Sie das Ende der Hauptachse an.
+Küçük eksen genişliği için tıklayın.	Klicken Sie für die Breite der Nebenachse.
+Parabolün tepe noktasını tıklayın.	Klicken Sie den Scheitel der Parabel an.
+Odak noktasını tıklayın (eksen yönü ve açıklık).	Klicken Sie den Brennpunkt an (Achsrichtung und Öffnung).
+Başlangıç ucunu tıklayın.	Klicken Sie das Anfangsende an.
+Bitiş ucunu tıklayın.	Klicken Sie das Ende an.
+Taslağa alınacak model yüzüne tıklayın; yüzün kenarları çizgi/yay olarak eklenir.	Klicken Sie die in die Skizze zu übernehmende Modellfläche an; ihre Kanten werden als Linien/Bögen hinzugefügt.
+İşlem uygulanamadı.	Der Vorgang konnte nicht angewendet werden.
+Aynalamak için öğelerle birlikte tek bir merkez çizgisi (eksen) seçin.	Wählen Sie zum Spiegeln zusammen mit den Elementen eine einzelne Mittellinie (Achse).
+Önce öğeleri seçin.	Wählen Sie zuerst Elemente.
+Doğrusal çoğaltma: %d kopya.	Lineares Muster: %d Kopien.
+Dairesel çoğaltma: %d kopya.	Kreismuster: %d Kopien.
+Kopyalandı.	Kopiert.
+Dönüştürüldü.	Umgewandelt.
+Bu değişiklik mevcut ilişki ve boyutlarla çelişiyor; geri alındı.	Diese Änderung widerspricht den vorhandenen Beziehungen und Bemaßungen; rückgängig gemacht.
+Bu ilişki/boyut taslağı aşırı tanımlar (gereksiz veya zaten mevcut); eklenmedi.	Diese Beziehung/Bemaßung überbestimmt die Skizze (überflüssig oder bereits vorhanden); nicht hinzugefügt.
+Model yüzüne tıklayın (taslak düzleminden görünen bir yüz).	Klicken Sie eine Modellfläche an (eine von der Skizzenebene sichtbare Fläche).
+Bir öğeye tıklayın.	Klicken Sie ein Element an.
+Bir köşe noktasına tıklayın.	Klicken Sie einen Eckpunkt an.
+Blok için önce öğeleri seçin.	Wählen Sie zuerst Elemente für den Block.
+Blok oluşturuldu: öğeler artık tek parça (rijit) hareket eder.	Block erstellt: die Elemente bewegen sich jetzt als starres Teil.
+Seçili öğeler zaten bir blokta.	Die gewählten Elemente sind bereits in einem Block.
+Blok dağıtıldı.	Block aufgelöst.
+Blok kopyalandı.	Block kopiert.
+Spline oluşturuldu (%d nokta). Noktaları sürükleyerek şeklini değiştirebilirsiniz.	Spline erstellt (%d Punkte). Ziehen Sie die Punkte, um die Form zu ändern.
+Metin eklendi. Yazıyı ve boyutunu soldaki panelden değiştirin.	Text hinzugefügt. Text und Größe im linken Panel ändern.
+   [Üzerinde]	   [Auf]
+   [Çakışık]	   [Deckungsgleich]
+L %s   genişlik %s	L %s   Breite %s
+Bu seçimden boyut oluşturulamadı.	Aus dieser Auswahl konnte keine Bemaßung erstellt werden.
+Bu boyut taslağı aşırı tanımlardı; güdümlü (referans) boyut olarak eklendi.	Diese Bemaßung würde die Skizze überbestimmen; sie wurde als getriebene (Referenz-)Bemaßung hinzugefügt.
+Bu değer geometrik olarak mümkün değil (diğer ilişki/boyutlarla çelişiyor); geri alındı.	Dieser Wert ist geometrisch nicht möglich (widerspricht anderen Beziehungen/Bemaßungen); rückgängig gemacht.
+Denklem hesaplanamadı: '%s' (tanımsız değişken veya hatalı ifade).	Gleichung konnte nicht ausgewertet werden: '%s' (undefinierte Variable oder fehlerhafter Ausdruck).
+Denklemin sonucu geometriyle çelişiyor; geri alındı.	Das Ergebnis der Gleichung widerspricht der Geometrie; rückgängig gemacht.
+Denklem bağlandı: %s = %s	Gleichung verknüpft: %s = %s
+Bu ilişki seçili öğelere uygulanamaz.	Diese Beziehung kann nicht auf die gewählten Elemente angewendet werden.
+Bu ilişki mevcut geometriyle çelişiyor; eklenmedi.	Diese Beziehung widerspricht der vorhandenen Geometrie; nicht hinzugefügt.
+İlişki eklendi: 	Beziehung hinzugefügt: 
+ (güdümlü)	 (getrieben)
+Değer, mevcut ilişki/boyutlar nedeniyle tam uygulanamadı. Değiştirmek için ilgili boyutu düzenleyin.	Der Wert konnte wegen vorhandener Beziehungen/Bemaßungen nicht vollständig angewendet werden. Bearbeiten Sie die betreffende Bemaßung.
+ — DIY.CAD (Montaj)	 — DIY.CAD (Baugruppe)
+*.dasm ; DIY.CAD Montaj	*.dasm ; DIY.CAD-Baugruppe
+*.dasm ; DIY.CAD Montaj (alt montaj)	*.dasm ; DIY.CAD-Baugruppe (Unterbaugruppe)
+Malzeme listesini kaydet	Stückliste speichern
+Montaj kaydedilemedi (hata %d)	Baugruppe konnte nicht gespeichert werden (Fehler %d)
+ (sabit)	 (fixiert)
+ (alt montaj)	 (Unterbaugruppe)
+Serbestlik derecesi: %d	Freiheitsgrade: %d
+Serbestlik derecesi: %d%s	Freiheitsgrade: %d%s
+1-2: vida ve somun eksenleri	1-2: Schrauben- und Mutterachsen
+Mekanik	Mechanisch
+CSV olarak kaydet	Als CSV speichern
+Dairesel	Kreisförmig
+ ekseni	 -Achse
+Paralel	Parallel
+Dik	Senkrecht
+Kilit	Sperren
+Simetrik	Symmetrisch
+Kremayer-pinyon	Zahnstange und Ritzel
+Vida	Schraube
+Kam	Nocke
+X Ekseni	X-Achse
+Y Ekseni	Y-Achse
+Z Ekseni	Z-Achse
+Dairesel kenar	Kreisförmige Kante
+Kenar	Kante
+Silindirik pim (ISO 2338)	Zylinderstift (ISO 2338)
+Loft Patron/Taban	Ausgeformter Aufsatz/Basis
+Makroda 'func run(m: MacroApi)' yok: 	Das Makro hat kein 'func run(m: MacroApi)': 
+Metal	Metall
+Bronz	Bronze
+Titanyum (Ti-6Al-4V)	Titan (Ti-6Al-4V)
+TPU (esnek)	TPU (flexibel)
+Naylon (PA12)	Nylon (PA12)
+Plastik	Kunststoff
+Akrilik (PMMA)	Acryl (PMMA)
+Polikarbonat (PC)	Polycarbonat (PC)
+setup(api) yok	kein setup(api)
+X ekseni	X-Achse
+Y ekseni	Y-Achse
+Z ekseni	Z-Achse
+MMGS (milimetre, gram, saniye)	MMGS (Millimeter, Gramm, Sekunde)
+CGS (santimetre, gram, saniye)	CGS (Zentimeter, Gramm, Sekunde)
+MKS (metre, kilogram, saniye)	MKS (Meter, Kilogramm, Sekunde)
+Dimetrik	Dimetrisch
+Dairesellik	Rundheit
+Silindiriklik	Zylinderform
+Diklik	Rechtwinkligkeit
+Paralellik	Parallelität
+Simetri	Symmetrie
+KONTROL	GEPRÜFT
+MALZEME	WERKSTOFF
+BOYUT	FORMAT
+SAYFA 1/1   	BLATT 1/1   
+DETAY %s (%s)	DETAIL %s (%s)
+ADET	MENGE
+ONAY	FREIGABE
+Sayfa: %.1f, %.1f mm	Blatt: %.1f, %.1f mm
+*.gd ; DIY.CAD makrosu (GDScript)	*.gd ; DIY.CAD-Makro (GDScript)
+Kaydedilen makroyu sakla	Aufgezeichnetes Makro speichern
+*.png ; PNG resmi	*.png ; PNG-Bild
+Σ Derinlik denklemi: =	Σ Tiefengleichung: =
+Taslak yatay ekseni (x)	Horizontale Skizzenachse (x)
+Taslak dikey ekseni (y)	Vertikale Skizzenachse (y)
+Referans: 	Referenz: 
+\nDerinlik: 	\nTiefe: 
+ (Taslak)	 (Skizze)
+%s — serbestlik derecesi: %d	%s — Freiheitsgrade: %d
+Nokta: X %s  Y %s  Z %s	Punkt: X %s  Y %s  Z %s
+Alan: 	Fläche: 
+Mesafe: 	Abstand: 
+Normal mesafe: 	Normalabstand: 
+Toplam alan: 	Gesamtfläche: 
+Hacim = 	Volumen = 
+Asal atalet momentleri: Px = %s   Py = %s   Pz = %s	Hauptträgheitsmomente: Px = %s   Py = %s   Pz = %s
+Global (orijin)	Global (Ursprung)
+Birim sistemi	Einheitensystem
+Uzunluk birimi	Längeneinheit
+Kaydedilemedi! Hata kodu: %d	Speichern fehlgeschlagen! Fehlercode: %d
+ — Belge kurtarma	 — Dokumentwiederherstellung
+Dosya: 	Datei: 
+%d delik konumu	%d Bohrungspositionen
+Mesafe 1	Abstand 1
+ISO (metrik)	ISO (metrisch)
+Delik Ø%s	Bohrung Ø%s
+Mesafe: %s\nKenar: %d	Abstand: %s\nKanten: %d
+Ekle	Hinzufügen
+  (kopya)	  (Kopie)
+%s %s — Ø%s\n%s, %d konum%s	%s %s — Ø%s\n%s, %d Positionen%s
+Yol: %s	Pfad: %s
+Profil: %d%s	Profile: %d%s
+Taslak: %s	Skizze: %s
+Oyma	Vertiefen
+Merkez 	Mittelpunkt 
+Eklenecek boy	Hinzuzufügende Länge
+\nUzatma: %s +%s mm	\nStreckung: %s +%s mm
+bilinmeyen hata	unbekannter Fehler
+Otomatik (OpenCASCADE varsa)	Automatisch (OpenCASCADE, falls vorhanden)
+%s (sapma %s mm, %s°)	%s (Abweichung %s mm, %s°)
+HAYIR	NEIN
+X ve Y eksenleri paralel olamaz	X- und Y-Achse dürfen nicht parallel sein
+Ebeveynler:	Übergeordnet:
+  (yok)	  (keine)
+Teknik resmi PDF olarak kaydet	Zeichnung als PDF speichern
+Teknik resmi SVG olarak kaydet	Zeichnung als SVG speichern
+Teknik resmi DXF olarak kaydet	Zeichnung als DXF speichern
+Firma	Firma
+Resim no	Zeichnungsnr.
+Kontrol	Geprüft
+Tarih	Datum
+PDF olarak kaydet	Als PDF speichern
+SVG olarak kaydet	Als SVG speichern
+DXF olarak kaydet	Als DXF speichern
+Geometrik tolerans	Form- und Lagetoleranz
+Ⓜ Maksimum (MMC)	Ⓜ Maximum (MMC)
+Ⓛ Minimum (LMC)	Ⓛ Minimum (LMC)
+*.ddrw ; DIY.CAD Teknik Resim	*.ddrw ; DIY.CAD-Zeichnung
+Taslakta profil yok	Die Skizze enthält kein Profil
+Kesim listesini kaydet	Zuschnittsliste speichern
+  (etkin)	  (aktiv)
+    sil: 	    löschen: 
+G-kod kaydedildi: 	G-Code gespeichert: 
+    Kuvvet (N)	    Kraft (N)
+von Mises gerilme	Von-Mises-Spannung
+*.nc ; G-kod	*.nc ; G-Code
+*.gcode ; G-kod	*.gcode ; G-Code
+Malzemeden (PBR)	Aus Material (PBR)
+Mat	Matt
+Parlak	Glänzend
+Render kaydedilemedi	Rendering konnte nicht gespeichert werden
+Kare kutu profil	Quadratrohr
+Boru	Rohr
+U profil (UPN)	U-Profil (UPN)
+I profil (IPE)	I-Profil (IPE)
+Lama	Flachstahl
+Kare profil %s	Quadratprofil %s
+Boru Ø%s	Rohr Ø%s
+Lama %s	Flachstahl %s
+\nHata: 	\nFehler: 
+hata: 	Fehler: 
+Orta Nokta	Mittelpunkt
+Yatay mesafe	Horizontaler Abstand
+Dikey mesafe	Vertikaler Abstand
+   [Orta nokta]	   [Mittelpunkt]
+%d kenar   R %s	%d Seiten   R %s
+%d nokta%s	%d Punkte%s
+balonun	die Positionsnummer
+etiketin	die Beschriftung
+sabitlenecek	Fix
+montaj	Baugruppe
+devre dışı	deaktiviert
+Eşdoğrusal	Kollinear
+%s seçildi. 'Taslak' ile çizime başlayın.	%s gewählt. Beginnen Sie mit „Skizze“ zu zeichnen.
+%s seçildi (%s). Çift tık: düzenle.	%s gewählt (%s). Doppelklick: bearbeiten.

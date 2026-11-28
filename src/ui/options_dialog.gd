@@ -189,13 +189,13 @@ func _keys() -> Control:
 		var id := _selected_cmd()
 		if id != "":
 			app.keymap.clear_cmd(id)
-			_keys_changed("Kısayol kaldırıldı: " + app.command_label(id)))
+			_keys_changed(I18n.t("Kısayol kaldırıldı: ") + app.command_label(id)))
 	h.add_child(b2)
 	var b3 := Button.new()
 	b3.text = "Varsayılanlara dön"
 	b3.pressed.connect(func() -> void:
 		app.keymap.reset()
-		_keys_changed("Varsayılan kısayollar geri yüklendi."))
+		_keys_changed(I18n.t("Varsayılan kısayollar geri yüklendi.")))
 	h.add_child(b3)
 	v.add_child(h)
 	key_info = _note(v, "Satıra çift tıklayın veya 'Kısayol ata' deyip tuş kombinasyonuna basın. Esc, Enter, ok tuşları ve Tab sabittir.")
@@ -233,7 +233,7 @@ func _fill_keys() -> void:
 		it.set_text(3, sc)
 		it.set_metadata(0, id)
 		if id == capturing:
-			it.set_text(3, "… tuşa basın")
+			it.set_text(3, I18n.t("… tuşa basın"))
 			it.select(0)
 
 
@@ -248,7 +248,7 @@ func _start_capture() -> void:
 		key_info.text = "Önce listeden bir komut seçin."
 		return
 	capturing = id
-	key_info.text = "'%s' için bir tuş kombinasyonuna basın (Esc: vazgeç)." % app.command_label(id)
+	key_info.text = I18n.t("'%s' için bir tuş kombinasyonuna basın (Esc: vazgeç).") % app.command_label(id)
 	_fill_keys()
 
 
@@ -276,14 +276,14 @@ func assign_capture(sc: String) -> void:
 	if id == "":
 		return
 	if Keymap.is_fixed(sc):
-		key_info.text = "%s sabit bir tuştur, atanamaz." % sc
+		key_info.text = I18n.t("%s sabit bir tuştur, atanamaz.") % sc
 		_fill_keys()
 		return
 	var ctx := str(app._commands[id]["ctx"]) if app._commands.has(id) else "global"
 	var lost: String = app.keymap.assign(ctx, id, sc)
 	var msg := "%s → %s" % [sc, app.command_label(id)]
 	if lost != "" and lost != id:
-		msg += "  (önceki atama kaldırıldı: %s)" % app.command_label(lost)
+		msg += I18n.t("  (önceki atama kaldırıldı: %s)") % app.command_label(lost)
 	_keys_changed(msg)
 
 
@@ -397,13 +397,13 @@ func _plugins() -> Control:
 				Plugins.set_enabled(pid, b)
 				app._set_status("Eklenti değişikliği yeniden başlatınca uygulanır."))
 			v.add_child(cb)
-			var st := "yüklendi" if bool(it["ok"]) else ("kapalı" if not bool(it["enabled"]) else "hata: " + str(it["error"]))
+			var st := I18n.t("yüklendi") if bool(it["ok"]) else (I18n.t("devre dışı") if not bool(it["enabled"]) else I18n.t("hata: ") + str(it["error"]))
 			_note(v, "    %s\n    %s  —  %s" % [str(it["desc"]), it["path"], st])
 	v.add_child(HSeparator.new())
 	var h := HBoxContainer.new()
 	for d in Plugins.dirs():
 		var b := Button.new()
-		b.text = "Klasörü aç: " + str(d).get_file()
+		b.text = I18n.t("Klasörü aç: ") + str(d).get_file()
 		b.tooltip_text = str(d)
 		var dd := str(d)
 		b.pressed.connect(func() -> void:

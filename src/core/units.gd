@@ -68,7 +68,7 @@ static func set_custom(p_length: String, p_mass: String) -> void:
 
 static func system_short() -> String:
 	if system == "custom":
-		return "Özel (%s, %s)" % [length_unit, mass_unit]
+		return I18n.t("Özel (%s, %s)") % [length_unit, mass_unit]
 	return system
 
 

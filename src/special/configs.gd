@@ -161,11 +161,11 @@ static func write_csv(doc: CadDocument, path: String) -> Error:
 ## Tasarım tablosunu okur: konfigürasyonları oluşturur / günceller. Dönüş: {configs, params} veya {error}
 static func read_csv(doc: CadDocument, path: String) -> Dictionary:
 	if not FileAccess.file_exists(path):
-		return {"error": "Dosya bulunamadı"}
+		return {"error": I18n.t("Dosya bulunamadı")}
 	var text := FileAccess.get_file_as_string(path).trim_prefix("﻿")
 	var lines := text.replace("\r", "").split("\n", false)
 	if lines.size() < 2:
-		return {"error": "Tabloda satır yok"}
+		return {"error": I18n.t("Tabloda satır yok")}
 	var sep := ";" if lines[0].contains(";") else ","
 	var head := lines[0].split(sep)
 	ensure_default(doc)

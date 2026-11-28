@@ -199,7 +199,7 @@ static func resolve(ref: Dictionary, model: ModelMesh) -> Dictionary:
 
 ## Referansın ekranda gösterilecek kısa açıklaması
 static func describe(ref: Dictionary, comp_name: String) -> String:
-	return "%s @ %s" % [str(ref.get("label", "?")), comp_name]
+	return "%s @ %s" % [I18n.t(str(ref.get("label", "?"))), comp_name]
 
 
 ## Eşleştirme için uygun türleri öner (seçilen iki referansa göre)

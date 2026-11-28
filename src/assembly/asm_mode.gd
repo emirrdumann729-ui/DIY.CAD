@@ -138,7 +138,7 @@ func close() -> void:
 
 func update_title() -> void:
 	if asm != null:
-		app.get_window().title = asm.name + (" *" if asm.dirty else "") + " — DIY.CAD (Montaj)"
+		app.get_window().title = asm.name + (" *" if asm.dirty else "") + I18n.t(" — DIY.CAD (Montaj)")
 
 
 func _on_asm_changed() -> void:
@@ -170,7 +170,7 @@ func _request(src: Dictionary, base_dir: String, depth: int, force_keys: Array) 
 	p["kind"] = "part"
 	p["doc"] = doc
 	p["ok"] = false
-	p["error"] = "" if doc != null else "Parça dosyası bulunamadı"
+	p["error"] = "" if doc != null else I18n.t("Parça dosyası bulunamadı")
 	if doc != null:
 		p["name"] = doc.part_name
 		p["material"] = doc.material
@@ -194,11 +194,11 @@ func _request_sub(key: String, path: String, depth: int, force_keys: Array) -> v
 	p["error"] = ""
 	parts[key] = p
 	if depth > 6:
-		p["error"] = "Alt montaj iç içe çok derin (döngü?)"
+		p["error"] = I18n.t("Alt montaj iç içe çok derin (döngü?)")
 		return
 	var sub := CadAssembly.new()
 	if sub.load_from(path) != OK:
-		p["error"] = "Alt montaj dosyası açılamadı"
+		p["error"] = I18n.t("Alt montaj dosyası açılamadı")
 		return
 	p["name"] = sub.name
 	p["sub_path"] = path
@@ -226,7 +226,7 @@ func _compose_subs() -> void:
 				if not bool(cp.get("ok", false)):
 					ready = false
 					if str(cp.get("error", "")) != "":
-						p["error"] = "Alt parça yüklenemedi: " + str(ch["name"])
+						p["error"] = I18n.t("Alt parça yüklenemedi: ") + str(ch["name"])
 			if not ready:
 				continue
 			_merge_sub(key, p)
@@ -342,7 +342,7 @@ func _on_part_built(key: String, mesh: ArrayMesh, brep: Dictionary) -> void:
 	p["brep"] = not brep.is_empty()
 	p["ver"] = int(p.get("ver", 0)) + 1
 	if mesh == null and str(p.get("error", "")) == "":
-		p["error"] = "Parça geometrisi boş"
+		p["error"] = I18n.t("Parça geometrisi boş")
 	if view != null:
 		view.invalidate_part(key)
 	_pending = maxi(0, _pending - 1)
@@ -776,12 +776,12 @@ func handle_cmd(c: String) -> bool:
 		"save":
 			save()
 		"save_as":
-			app._file_dialog(true, ["*.dasm ; DIY.CAD Montaj"], "Montajı Farklı Kaydet", "asm_save", asm.name + ".dasm")
+			app._file_dialog(true, ["*.dasm ; DIY.CAD Montaj"], I18n.t("Montajı Farklı Kaydet"), "asm_save", asm.name + ".dasm")
 		"undo", "redo":
 			_stop_motion()
 			var ok := asm.undo() if c == "undo" else asm.redo()
 			if not ok:
-				app._set_status("Geri alınacak işlem yok." if c == "undo" else "Yinelenecek işlem yok.")
+				app._set_status(I18n.t("Geri alınacak işlem yok.") if c == "undo" else I18n.t("Yinelenecek işlem yok."))
 			else:
 				_validate_sel()
 				load_parts()
@@ -808,14 +808,14 @@ func cmd(c: String) -> void:
 		"asm_export_all":
 			app._cmd("export_all")
 		"asm_insert":
-			app._file_dialog(false, ["*.dcad, *.dasm ; Parça veya alt montaj", "*.dcad ; DIY.CAD Parça", "*.dasm ; DIY.CAD Montaj (alt montaj)"], "Bileşen Ekle", "asm_insert")
+			app._file_dialog(false, [I18n.t("*.dcad, *.dasm ; Parça veya alt montaj"), I18n.t("*.dcad ; DIY.CAD Parça"), "*.dasm ; DIY.CAD Montaj (alt montaj)"], "Bileşen Ekle", "asm_insert")
 		"asm_toolbox":
 			set_tool("toolbox")
 		"asm_newpart":
 			if asm.file_path == "":
 				app._set_status("Yeni parça için önce montajı kaydedin (parça montajın yanına kaydedilir).")
 				return
-			app._file_dialog(true, ["*.dcad ; DIY.CAD Parça"], "Yeni parça (montaj içinde)", "asm_newpart", "YeniParca.dcad")
+			app._file_dialog(true, [I18n.t("*.dcad ; DIY.CAD Parça")], I18n.t("Yeni parça (montaj içinde)"), "asm_newpart", "YeniParca.dcad")
 		"asm_mate":
 			mate_type = ""
 			set_tool("mate")
@@ -877,10 +877,10 @@ func change(fn: Callable) -> void:
 
 func save() -> void:
 	if asm.file_path == "":
-		app._file_dialog(true, ["*.dasm ; DIY.CAD Montaj"], "Montajı Kaydet", "asm_save", asm.name + ".dasm")
+		app._file_dialog(true, ["*.dasm ; DIY.CAD Montaj"], I18n.t("Montajı Kaydet"), "asm_save", asm.name + ".dasm")
 		return
 	var err := asm.save_to(asm.file_path)
-	app._set_status((I18n.t("Montaj kaydedildi: ") + asm.file_path) if err == OK else ("Montaj kaydedilemedi (hata %d)" % err))
+	app._set_status((I18n.t("Montaj kaydedildi: ") + asm.file_path) if err == OK else (I18n.t("Montaj kaydedilemedi (hata %d)") % err))
 	if err == OK:
 		app._note_file(asm.file_path, "asm")
 	refresh()
@@ -902,7 +902,7 @@ func on_file(action: String, path: String) -> void:
 			if path.get_extension().to_lower() != "dasm":
 				path += ".dasm"
 			var err := asm.save_to(path)
-			app._set_status((I18n.t("Montaj kaydedildi: ") + path) if err == OK else ("Montaj kaydedilemedi (hata %d)" % err))
+			app._set_status((I18n.t("Montaj kaydedildi: ") + path) if err == OK else (I18n.t("Montaj kaydedilemedi (hata %d)") % err))
 			if err == OK:
 				app._note_file(path, "asm")
 			refresh()
@@ -914,7 +914,7 @@ func on_file(action: String, path: String) -> void:
 			if path.get_extension().to_lower() != "csv":
 				path += ".csv"
 			var err2 := write_bom_csv(path)
-			app._set_status((I18n.t("Malzeme listesi kaydedildi: ") + path) if err2 == OK else "CSV yazılamadı")
+			app._set_status((I18n.t("Malzeme listesi kaydedildi: ") + path) if err2 == OK else I18n.t("CSV yazılamadı"))
 
 
 func insert_file(path: String) -> Dictionary:
@@ -929,7 +929,7 @@ func insert_file(path: String) -> Dictionary:
 	sel = {"kind": "comp", "id": int(c["id"])}
 	load_parts()
 	refresh()
-	app._set_status(I18n.t("Bileşen eklendi: %s%s") % [c["name"], " (sabit)" if bool(c["fixed"]) else " — eşleştirmelerle konumlandırın"])
+	app._set_status(I18n.t("Bileşen eklendi: %s%s") % [c["name"], I18n.t(" (sabit)") if bool(c["fixed"]) else I18n.t(" — eşleştirmelerle konumlandırın")])
 	return c
 
 
@@ -962,7 +962,7 @@ func open_selected_part() -> void:
 				return
 			asm.save_to(asm.file_path)
 		var err := open_file(path)
-		app._set_status((I18n.t("Alt montaj açıldı: ") + path.get_file()) if err == OK else "Alt montaj açılamadı.")
+		app._set_status((I18n.t("Alt montaj açıldı: ") + path.get_file()) if err == OK else I18n.t("Alt montaj açılamadı."))
 		return
 	app.open_part_from_assembly(path, int(c["id"]))
 
@@ -1312,7 +1312,7 @@ func apply_mate(type: String) -> Dictionary:
 	var need := int(CadAssembly.MATE_TYPES[type][1])
 	if mate_refs.size() < need:
 		mate_type = type
-		app._set_status(I18n.t("%s için %d referans gerekli (%d seçili).") % [CadAssembly.MATE_TYPES[type][0], need, mate_refs.size()])
+		app._set_status(I18n.t("%s için %d referans gerekli (%d seçili).") % [I18n.t(str(CadAssembly.MATE_TYPES[type][0])), need, mate_refs.size()])
 		refresh()
 		return {}
 	var refs: Array = mate_refs.slice(0, need)
@@ -1481,7 +1481,7 @@ func _on_asm_done(res: Dictionary) -> void:
 						tris.append(Vector3(fl[i + 3], fl[i + 4], fl[i + 5]))
 					interf.append({"a": int(interf_ids[int(p["a"])]), "b": int(interf_ids[int(p["b"])]), "volume": float(p["volume"]),
 						"center": MateSolver.v3(p["center"]), "tris": tris})
-				app._set_status(I18n.t("Girişim: %d çakışma") % interf.size() if not interf.is_empty() else "Girişim yok.")
+				app._set_status(I18n.t("Girişim: %d çakışma") % interf.size() if not interf.is_empty() else I18n.t("Girişim yok."))
 			refresh()
 		"asm_export":
 			if bool(res.get("ok", false)):
@@ -1649,7 +1649,7 @@ func bom_rows() -> Array:
 			var acc := {"mass": 0.0, "volume": 0.0, "mc": Vector3.ZERO}
 			_mass_add(key, Transform3D.IDENTITY, acc, 0)
 			mass = float(acc["mass"])
-		rows.append({"no": no, "name": str(p.get("name", key.get_file())) + (" (alt montaj)" if p.get("kind", "") == "asm" else ""),
+		rows.append({"no": no, "name": str(p.get("name", key.get_file())) + (I18n.t(" (alt montaj)") if p.get("kind", "") == "asm" else ""),
 			"qty": int(counts[key]), "material": str(p.get("material", "")), "mass": mass, "key": key, "comps": comps_of.get(key, [])})
 		no += 1
 	return rows
@@ -1672,7 +1672,7 @@ func write_bom_csv(path: String) -> Error:
 	if fa == null:
 		return FileAccess.get_open_error()
 	fa.store_buffer(PackedByteArray([0xEF, 0xBB, 0xBF]))
-	fa.store_line("No;Parça;Adet;Malzeme;Birim kütle (g);Toplam kütle (g)")
+	fa.store_line(I18n.t("No;Parça;Adet;Malzeme;Birim kütle (g);Toplam kütle (g)"))
 	for r in bom_rows():
 		fa.store_line("%d;%s;%d;%s;%.3f;%.3f" % [r["no"], str(r["name"]).replace(";", ","), r["qty"], r["material"], r["mass"], float(r["mass"]) * int(r["qty"])])
 	fa.close()
@@ -1758,7 +1758,7 @@ func rebuild_tree() -> void:
 		var is_sub: bool = p.get("kind", "") == "asm"
 		it2.set_icon(0, Icons.get_icon("asm_toolbox" if c["src"].has("toolbox") else ("assembly" if is_sub else "part"), 16))
 		it2.set_metadata(0, {"kind": "comp", "id": id})
-		var tip := "Sabit" if bool(c.get("fixed", false)) else ("Serbestlik derecesi: %d" % dof_of(id))
+		var tip := "Sabit" if bool(c.get("fixed", false)) else (I18n.t("Serbestlik derecesi: %d") % dof_of(id))
 		if str(p.get("error", "")) != "":
 			tip += "\n" + str(p["error"])
 		it2.set_tooltip_text(0, tip)
@@ -1891,7 +1891,7 @@ func _panel_asm(panel: PropertyPanel) -> void:
 		if pm2 != null:
 			tris += int(pm2.get_meta("tris", 0))
 	var big := view != null and view.large
-	panel.info(I18n.t("Üçgen: %d   LOD'lu parça: %d%s") % [tris, lods, "\nBüyük montaj modu: kenarlar yalnız seçili bileşende" if big else ""], Color(0.6, 0.66, 0.74))
+	panel.info(I18n.t("Üçgen: %d   LOD'lu parça: %d%s") % [tris, lods, I18n.t("\nBüyük montaj modu: kenarlar yalnız seçili bileşende") if big else ""], Color(0.6, 0.66, 0.74))
 	var on_big := func(i: int) -> void:
 		large_auto = i == 0
 		large_mode = i == 2
@@ -1916,10 +1916,10 @@ func _panel_comp(panel: PropertyPanel, c: Dictionary) -> void:
 	else:
 		panel.info(I18n.t("Parça: ") + str(c["src"].get("path", "")).get_file())
 	if str(p.get("material", "")) != "":
-		panel.info(I18n.t("Malzeme: ") + str(p["material"]))
+		panel.info(I18n.t("Malzeme: ") + I18n.t(str(p["material"])))
 	if str(p.get("error", "")) != "":
 		panel.info(I18n.t("Hata: ") + str(p["error"]), Color(1.0, 0.45, 0.4))
-	panel.info("Sabit" if bool(c.get("fixed", false)) else ("Serbestlik derecesi: %d%s" % [dof_of(id), "  (tam tanımlı)" if dof_of(id) == 0 else ""]),
+	panel.info("Sabit" if bool(c.get("fixed", false)) else (I18n.t("Serbestlik derecesi: %d%s") % [dof_of(id), I18n.t("  (tam tanımlı)") if dof_of(id) == 0 else ""]),
 		Color(0.55, 0.85, 1.0))
 	var set_flag := func(b: bool, key: String) -> void:
 		asm.checkpoint()
@@ -1985,11 +1985,11 @@ func _panel_mate(panel: PropertyPanel) -> void:
 	panel.title("Eşleştir", Icons.get_icon("asm_mate", 22))
 	if mate_type != "":
 		var mt: Array = CadAssembly.MATE_TYPES[mate_type]
-		panel.info(I18n.t("Tür: %s — %d referans") % [mt[0], mt[1]], Color(0.55, 0.85, 1.0))
-		var order := {"width": "1-2: genişlik yüzleri (yerleşen bileşen), 3-4: kanal yüzleri",
-			"symmetric": "1-2: simetrik yüz/eksenler, 3: simetri düzlemi", "hinge": "1-2: eksenler (silindirik yüzler), 3-4: çakışacak düzlemler",
-			"gear": "1: dişli 1 silindirik yüzü, 2: dişli 2 silindirik yüzü (oran yarıçaplardan)", "rack": "1: kremayerin doğrusal kenarı, 2: pinyonun silindirik yüzü",
-			"screw": "1-2: vida ve somun eksenleri", "slot": "1: pim (silindir veya nokta), 2: kanal orta çizgisi (doğrusal kenar)"}
+		panel.info(I18n.t("Tür: %s — %d referans") % [I18n.t(str(mt[0])), mt[1]], Color(0.55, 0.85, 1.0))
+		var order := {"width": I18n.t("1-2: genişlik yüzleri (yerleşen bileşen), 3-4: kanal yüzleri"),
+			"symmetric": I18n.t("1-2: simetrik yüz/eksenler, 3: simetri düzlemi"), "hinge": I18n.t("1-2: eksenler (silindirik yüzler), 3-4: çakışacak düzlemler"),
+			"gear": I18n.t("1: dişli 1 silindirik yüzü, 2: dişli 2 silindirik yüzü (oran yarıçaplardan)"), "rack": I18n.t("1: kremayerin doğrusal kenarı, 2: pinyonun silindirik yüzü"),
+			"screw": I18n.t("1-2: vida ve somun eksenleri"), "slot": I18n.t("1: pim (silindir veya nokta), 2: kanal orta çizgisi (doğrusal kenar)")}
 		if order.has(mate_type):
 			panel.info(order[mate_type], Color(0.6, 0.66, 0.72))
 	panel.section(I18n.t("Seçimler (%d)") % mate_refs.size())
@@ -2011,10 +2011,10 @@ func _panel_mate(panel: PropertyPanel) -> void:
 	var choose := func(tt: String) -> void:
 		mate_type = tt
 		apply_mate(tt)
-	for grp in [["Standart", CadAssembly.STANDARD_MATES], ["Gelişmiş", CadAssembly.ADVANCED_MATES], ["Mekanik", CadAssembly.MECHANICAL_MATES]]:
+	for grp in [["Standart", CadAssembly.STANDARD_MATES], [I18n.t("Gelişmiş"), CadAssembly.ADVANCED_MATES], [I18n.t("Mekanik"), CadAssembly.MECHANICAL_MATES]]:
 		panel.section(grp[0])
 		for t in grp[1]:
-			var label: String = CadAssembly.MATE_TYPES[t][0] + ("  ★" if t in sugg else "")
+			var label: String = I18n.t(str(CadAssembly.MATE_TYPES[t][0])) + ("  ★" if t in sugg else "")
 			panel.button(label, choose.bind(t), Icons.get_icon("asm_mate", 14))
 
 
@@ -2054,7 +2054,7 @@ func _panel_mate_edit(panel: PropertyPanel, m: Dictionary) -> void:
 			panel.number("Hatve (tur başına)", float(m.get("value", 1.0)), func(v: float) -> void: upd.call("value", v), "length", 0.001)
 	if type in ["coincident", "distance", "limit_distance", "hinge"] and str(m.get("align", "")) != "":
 		var flip_align := func() -> void: upd.call("align", "anti" if m["align"] == "aligned" else "aligned")
-		panel.button(I18n.t("Hizalamayı çevir (%s)") % ("aynı yön" if m["align"] == "aligned" else "ters yön"), flip_align, Icons.get_icon("refresh", 16))
+		panel.button(I18n.t("Hizalamayı çevir (%s)") % (I18n.t("aynı yön") if m["align"] == "aligned" else I18n.t("ters yön")), flip_align, Icons.get_icon("refresh", 16))
 	if type in ["distance", "tangent", "angle", "gear", "rack", "screw", "limit_angle"]:
 		panel.check("Yönü çevir", bool(m.get("flip", false)), func(b: bool) -> void: upd.call("flip", b))
 	panel.check("Bastırılmış", bool(m.get("suppressed", false)), func(b: bool) -> void: upd.call("suppressed", b))
@@ -2062,7 +2062,7 @@ func _panel_mate_edit(panel: PropertyPanel, m: Dictionary) -> void:
 
 
 func _panel_move(panel: PropertyPanel) -> void:
-	panel.title("Bileşeni Taşı" if tool == "move" else "Bileşeni Döndür", Icons.get_icon("asm_" + tool, 22))
+	panel.title("Bileşeni Taşı" if tool == "move" else I18n.t("Bileşeni Döndür"), Icons.get_icon("asm_" + tool, 22))
 	panel.info(str(TOOL_HINTS.get(tool, "")), Color(0.6, 0.66, 0.72))
 	var on_coll := func(b: bool) -> void:
 		collide_on = b
@@ -2161,7 +2161,7 @@ func _panel_bom(panel: PropertyPanel) -> void:
 			Units.format_mass(float(r["mass"]))], Color(0.8, 0.83, 0.88))
 		total += int(r["qty"])
 	panel.info(I18n.t("Toplam parça adedi: %d") % total, Color(0.55, 0.85, 1.0))
-	panel.button("CSV olarak kaydet", func(): cmd("asm_bom_csv"), Icons.get_icon("export", 16))
+	panel.button(I18n.t("CSV olarak kaydet"), func(): cmd("asm_bom_csv"), Icons.get_icon("export", 16))
 
 
 func _panel_toolbox(panel: PropertyPanel) -> void:
@@ -2201,7 +2201,7 @@ func _panel_motion(panel: PropertyPanel) -> void:
 	panel.title("Hareket Etüdü", Icons.get_icon("asm_motion", 22))
 	panel.info(str(TOOL_HINTS["motion"]), Color(0.6, 0.66, 0.72))
 	var r: Dictionary = motion["ref"]
-	panel.info(I18n.t("Motor ekseni: ") + (_ref_desc(r) if not r.is_empty() else "<seçilmedi>"))
+	panel.info(I18n.t("Motor ekseni: ") + (_ref_desc(r) if not r.is_empty() else I18n.t("<seçilmedi>")))
 	panel.number("Hız (dev/dk)", float(motion["rpm"]), func(v: float) -> void: motion["rpm"] = v, "plain", -1000.0, 1000.0)
 	panel.number("Süre (sn)", float(motion["dur"]), func(v: float) -> void: motion["dur"] = v, "plain", 0.1, 600.0)
 	var do_stop := func() -> void:
@@ -2223,20 +2223,20 @@ func _panel_pattern(panel: PropertyPanel) -> void:
 	var names: Array = []
 	for id in sel_comps:
 		names.append(str(asm.get_comp(int(id)).get("name", "?")))
-	panel.info(I18n.t("Çoğaltılacak: ") + (", ".join(names) if not names.is_empty() else "<seçilmedi>"))
+	panel.info(I18n.t("Çoğaltılacak: ") + (", ".join(names) if not names.is_empty() else I18n.t("<seçilmedi>")))
 	var types := ["linear", "circular"]
 	var on_t := func(i: int) -> void:
 		pat_opts["type"] = types[i]
 		app._refresh_panel()
-	panel.option("Tür", ["Doğrusal", "Dairesel"], types.find(str(pat_opts["type"])), on_t)
+	panel.option("Tür", [I18n.t("Doğrusal"), I18n.t("Dairesel")], types.find(str(pat_opts["type"])), on_t)
 	var on_ax := func(i: int) -> void:
 		pat_opts["axis"] = i
 		pat_opts["pick_dir"] = i == 3
 		refresh()
-	panel.option("Yön / eksen", ["X", "Y", "Z", "Modelden seç (kenar, eksen, yüz)"], int(pat_opts["axis"]), on_ax)
+	panel.option("Yön / eksen", ["X", "Y", "Z", I18n.t("Modelden seç (kenar, eksen, yüz)")], int(pat_opts["axis"]), on_ax)
 	if int(pat_opts["axis"]) == 3:
 		var rr: Dictionary = pat_opts["ref"]
-		panel.info((I18n.t("Yön: ") + _ref_desc(rr)) if not rr.is_empty() else "Modelde kenar / silindirik yüz / düzlemsel yüze tıklayın.", Color(0.55, 0.85, 1.0))
+		panel.info((I18n.t("Yön: ") + _ref_desc(rr)) if not rr.is_empty() else I18n.t("Modelde kenar / silindirik yüz / düzlemsel yüze tıklayın."), Color(0.55, 0.85, 1.0))
 		var again := func() -> void: pat_opts["pick_dir"] = true
 		panel.button("Yönü yeniden seç", again, Icons.get_icon("select", 16))
 	var on_c := func(v: float) -> void: pat_opts["count"] = int(v)
@@ -2261,7 +2261,7 @@ func _panel_pattern_edit(panel: PropertyPanel, p: Dictionary) -> void:
 		names.append(str(asm.get_comp(int(id)).get("name", "?")))
 	panel.info(I18n.t("Çekirdek: ") + ", ".join(names))
 	var dirv: Dictionary = p.get("dir", {})
-	panel.info(I18n.t("Yön: ") + (str(dirv["axis"]).to_upper() + " ekseni" if dirv.has("axis") else _ref_desc(dirv.get("ref", {}))))
+	panel.info(I18n.t("Yön: ") + (str(dirv["axis"]).to_upper() + I18n.t(" ekseni") if dirv.has("axis") else _ref_desc(dirv.get("ref", {}))))
 	if not (p.get("skip", []) as Array).is_empty():
 		panel.info(I18n.t("Atlanan örnek: %d") % (p["skip"] as Array).size(), Color(0.6, 0.66, 0.72))
 	var upd := func(v: Variant, key: String) -> void:

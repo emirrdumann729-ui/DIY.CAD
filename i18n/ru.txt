@@ -1338,3 +1338,680 @@ Stüdyo	Студия
 Gün ışığı	Дневной свет
 Gece	Ночь
 HDRI dosyası	Файл HDRI
+Bileşene tıklayın: seç. Sol tuşla sürükleyin: eşleştirmelere uyarak taşı.	Щелчок по компоненту: выбор. Перетаскивание левой кнопкой: перемещение с учетом сопряжений.
+Eşleştirilecek yüz / kenarlara tıklayın (ağaçtan ana düzlemler de seçilebilir); sonra paneldeki türü seçin.	Щелкните сопрягаемые грани / ребра (основные плоскости можно выбрать и в дереве); затем выберите тип на панели.
+Bileşeni sürükleyerek taşıyın veya panelden sayısal öteleme girin.	Перетащите компонент или введите числовое смещение на панели.
+Bileşeni sürükleyerek döndürün (eşleştirmeler korunur) veya panelden açı girin.	Перетащите компонент для поворота (сопряжения сохраняются) или введите угол на панели.
+Patlatılacak bileşenlere tıklayın, yön ve mesafe seçip 'Adım ekle'.	Щелкните разносимые компоненты, выберите направление и расстояние, затем «Добавить шаг».
+Motor: döndürülecek bileşenin silindirik yüzüne tıklayın, hız ve süreyi girip Oynat.	Двигатель: щелкните цилиндрическую грань вращаемого компонента, введите скорость и длительность, затем «Воспроизвести».
+Çoğaltılacak bileşenlere tıklayın; yön, sayı ve aralığı panelden seçip Uygula.	Щелкните компоненты для массива; выберите направление, количество и шаг на панели, затем «Применить».
+Parça dosyası bulunamadı	Файл детали не найден
+Alt montaj iç içe çok derin (döngü?)	Слишком глубокая вложенность подсборок (цикл?)
+Alt montaj dosyası açılamadı	Не удалось открыть файл подсборки
+Alt parça yüklenemedi: 	Не удалось загрузить вложенную деталь: 
+Parça geometrisi boş	Геометрия детали пуста
+Montajı Farklı Kaydet	Сохранить сборку как
+Geri alınacak işlem yok.	Нечего отменять.
+Yinelenecek işlem yok.	Нечего повторять.
+*.dcad, *.dasm ; Parça veya alt montaj	*.dcad, *.dasm ; Деталь или подсборка
+*.dcad ; DIY.CAD Parça	*.dcad ; Деталь DIY.CAD
+Yeni parça (montaj içinde)	Новая деталь (в сборке)
+Montajı Kaydet	Сохранить сборку
+CSV yazılamadı	Не удалось записать CSV
+ — eşleştirmelerle konumlandırın	 — расположите с помощью сопряжений
+Alt montaj açılamadı.	Не удалось открыть подсборку.
+Girişim yok.	Интерференции нет.
+No;Parça;Adet;Malzeme;Birim kütle (g);Toplam kütle (g)	№;Деталь;Кол-во;Материал;Масса ед. (г);Общая масса (г)
+\nBüyük montaj modu: kenarlar yalnız seçili bileşende	\nРежим большой сборки: ребра только у выбранного компонента
+  (tam tanımlı)	  (полностью определен)
+1-2: genişlik yüzleri (yerleşen bileşen), 3-4: kanal yüzleri	1-2: грани ширины (размещаемый компонент), 3-4: грани паза
+1-2: simetrik yüz/eksenler, 3: simetri düzlemi	1-2: симметричные грани/оси, 3: плоскость симметрии
+1-2: eksenler (silindirik yüzler), 3-4: çakışacak düzlemler	1-2: оси (цилиндрические грани), 3-4: совпадающие плоскости
+1: dişli 1 silindirik yüzü, 2: dişli 2 silindirik yüzü (oran yarıçaplardan)	1: цилиндрическая грань шестерни 1, 2: цилиндрическая грань шестерни 2 (отношение по радиусам)
+1: kremayerin doğrusal kenarı, 2: pinyonun silindirik yüzü	1: линейное ребро рейки, 2: цилиндрическая грань шестерни
+1: pim (silindir veya nokta), 2: kanal orta çizgisi (doğrusal kenar)	1: штифт (цилиндр или точка), 2: осевая линия паза (линейное ребро)
+Gelişmiş	Расширенные
+aynı yön	то же направление
+ters yön	противоположное направление
+Bileşeni Döndür	Повернуть компонент
+<seçilmedi>	<не выбрано>
+Doğrusal	Линейный
+Modelden seç (kenar, eksen, yüz)	Выбрать на модели (ребро, ось, грань)
+Modelde kenar / silindirik yüz / düzlemsel yüze tıklayın.	Щелкните ребро / цилиндрическую грань / плоскую грань модели.
+Çakışık	Совпадение
+Teğet	Касание
+Eş merkezli	Концентричность
+Mesafe sınırı	Предел расстояния
+Açı sınırı	Предел угла
+Menteşe	Шарнир
+Dişli	Зубчатая передача
+Düzlemsel yüz	Плоская грань
+Konik yüz	Коническая грань
+Küresel yüz	Сферическая грань
+Doğrusal kenar	Линейное ребро
+Eşleştirme sağlanamıyor (çelişkili veya geometri uygun değil)	Сопряжение невыполнимо (противоречие или неподходящая геометрия)
+Düz Karbon Çelik (AISI 1020)	Углеродистая сталь (AISI 1020)
+Paslanmaz Çelik (AISI 304)	Нержавеющая сталь (AISI 304)
+Altıgen başlı cıvata (ISO 4017)	Болт с шестигранной головкой (ISO 4017)
+Altıgen somun (ISO 4032)	Шестигранная гайка (ISO 4032)
+Düz pul (ISO 7089)	Плоская шайба (ISO 7089)
+Sabit bilyalı rulman (60xx / 62xx)	Радиальный шарикоподшипник (60xx / 62xx)
+Alüminyum 6061	Алюминий 6061
+Değişken '%s' hesaplanamadı.	Переменную '%s' не удалось вычислить.
+%s: '%s' hesaplanamadı.	%s: '%s' не удалось вычислить.
+%s: denklem değerleri taslağın geometrisiyle çelişiyor.	%s: значения уравнений противоречат геометрии эскиза.
+D1@%s: '%s' hesaplanamadı.	D1@%s: '%s' не удалось вычислить.
+Döndürme Patron/Taban	Повернутая бобышка/основание
+Süpürme Patron/Taban	Бобышка/основание по траектории
+Düz delik	Простое отверстие
+Havşa başlı (silindirik havşa)	Цековка (цилиндрическая)
+Havşa (konik)	Зенковка (коническая)
+Kılavuz (diş)	Резьбовое (резьба)
+Sıkı	Плотная
+Gevşek	Свободная
+Bilinmeyen dışa aktarma uzantısı: 	Неизвестное расширение экспорта: 
+Bir makro zaten çalışıyor	Макрос уже выполняется
+Makro derlenemedi (sözdizimi hatası, konsol çıktısına bakın): 	Не удалось скомпилировать макрос (синтаксическая ошибка, см. вывод консоли): 
+Makro dosyası bulunamadı: 	Файл макроса не найден: 
+Dökme Demir (Gri)	Серый чугун
+Alüminyum 7075	Алюминий 7075
+Pirinç	Латунь
+Bakır	Медь
+Plastik (3B baskı)	Пластик (3D-печать)
+Meşe	Дуб
+Ahşap	Дерево
+Çam	Сосна
+Kontrplak (Huş)	Фанера (береза)
+derlenemedi (sözdizimi hatası)	не удалось скомпилировать (синтаксическая ошибка)
+Düzlem tanımı geçersiz	Недопустимое определение плоскости
+Helis için daire içeren bir taslak seçin	Выберите эскиз с окружностью для винтовой линии
+Taslakta daire yok (helis çapı daireden alınır)	В эскизе нет окружности (диаметр винтовой линии берется из окружности)
+Helis ölçüleri geçersiz	Недопустимые размеры винтовой линии
+Koniklik açısı ±89°'den küçük olmalı	Угол конусности должен быть меньше ±89°
+Konik helisin yarıçapı sıfırın altına iniyor	Радиус конической винтовой линии становится меньше нуля
+Öğe bulunamadı.	Объект не найден.
+Bu öğe türü kırpılamaz (yalnızca çizgi, daire, yay).	Этот тип объекта нельзя обрезать (только линии, окружности, дуги).
+Kesişim yok: öğe tamamen silindi.	Нет пересечений: объект удален полностью.
+Dairede iki kesişim yok: tamamen silindi.	У окружности нет двух пересечений: удалена полностью.
+Kırpıldı.	Обрезано.
+Uzatma çizgi ve yaylar için çalışır.	Удлинение работает для линий и дуг.
+Uzatılacak bir sınır bulunamadı.	Не найдена граница для удлинения.
+Uzatıldı.	Удлинено.
+Yayın uzatılacağı bir sınır bulunamadı.	Не найдена граница для удлинения дуги.
+Yay uzatıldı.	Дуга удлинена.
+Dönüştürülecek kenar bulunamadı.	Не найдено ребро для преобразования.
+%d öğe dönüştürüldü (kenarlara sabitlendi).	Преобразовано объектов: %d (зафиксированы на ребрах).
+%d kenar dönüştürüldü (B-rep, kenarlara sabitlendi).	Преобразовано ребер: %d (B-rep, зафиксированы на ребрах).
+Ofset uygulanamadı (seçim boş veya mesafe yayları tersine çeviriyor).	Не удалось сместить (выбор пуст или расстояние выворачивает дуги).
+Ofset oluşturuldu.	Смещение создано.
+Ayna ekseni bir çizgi olmalı.	Ось отражения должна быть линией.
+Aynalanacak öğe yok.	Нечего отражать.
+Aynalandı.	Отражено.
+Köşe yuvarlatma için iki çizginin birleştiği bir köşe seçin.	Для скругления выберите угол, где сходятся две линии.
+Çizgiler doğrusal; köşe yok.	Линии коллинеарны; угла нет.
+Yarıçap bu köşe için çok büyük.	Радиус слишком велик для этого угла.
+Köşe yuvarlatıldı (R %s).	Угол скруглен (R %s).
+Pah için iki çizginin birleştiği bir köşe seçin.	Для фаски выберите угол, где сходятся две линии.
+Pah mesafesi bu köşe için çok büyük.	Расстояние фаски слишком велико для этого угла.
+Pah kırıldı (%s).	Фаска на угле (%s).
+Çokgen yarıçapı sıfır.	Радиус многоугольника равен нулю.
+%d kenarlı çokgen.	Многоугольник с %d сторонами.
+Kanal boyutları geçersiz.	Недопустимые размеры паза.
+Kanal oluşturuldu.	Паз создан.
+IPS (inç, pound, saniye)	IPS (дюйм, фунт, секунда)
+Özel (%s, %s)	Пользовательская (%s, %s)
+Düzlemsellik	Плоскостность
+Doğrusallık	Прямолинейность
+Açısallık	Наклон
+Eş merkezlilik	Соосность
+Çizgi profili	Форма заданного профиля
+Yüzey profili	Форма заданной поверхности
+Dairesel salgı	Радиальное биение
+Toplam salgı	Полное биение
+FİRMA	ОРГАНИЗАЦИЯ
+BAŞLIK	НАИМЕНОВАНИЕ
+ÇİZEN	РАЗРАБ.
+TARİH	ДАТА
+ÖLÇEK	МАСШТАБ
+AĞIRLIK	МАССА
+RESİM NO	ОБОЗНАЧЕНИЕ
+1. AÇI	МЕТОД 1
+3. AÇI	МЕТОД 3
+Görünüş hesaplanamadı	Не удалось вычислить вид
+Görünüş hesaplanıyor...	Вычисление вида...
+KESİT %s-%s	РАЗРЕЗ %s-%s
+GÖRÜNÜŞ %s	ВИД %s
+ÖLÇEK 	МАСШТАБ 
+PARÇA ADI	НАИМЕНОВАНИЕ
+AÇIKLAMA	ОПИСАНИЕ
+Uzatma bölgesi geçersiz (bitiş > başlangıç olmalı)	Недопустимая область растяжения (конец должен быть > начала)
+Kademeli büyütme bölgesi geçersiz (bitiş > başlangıç olmalı)	Недопустимая область постепенного увеличения (конец должен быть > начала)
+Koruma bölgesi geçersiz (bitiş > başlangıç olmalı)	Недопустимая защищенная область (конец должен быть > начала)
+Koruma bandı geçersiz (üst sınır alttan küçük)	Недопустимая защищенная полоса (верхняя граница меньше нижней)
+Bu ekstrüzyon seçenekleri OpenCASCADE (B-rep) çekirdeği gerektirir	Эти параметры вытягивания требуют ядра OpenCASCADE (B-rep)
+Bu özellik OpenCASCADE (B-rep) çekirdeği gerektirir	Этот элемент требует ядра OpenCASCADE (B-rep)
+Taslak bulunamadı	Эскиз не найден
+Seçili bölgeler bulunamadı (taslak değişmiş olabilir)	Выбранные области не найдены (эскиз мог измениться)
+Taslakta kapalı kontur yok	В эскизе нет замкнутого контура
+STL okunamadı (üçgen yok)	Не удалось прочитать STL (нет треугольников)
+Döndürme ekseni bulunamadı	Ось вращения не найдена
+Döndürme ekseni geçersiz	Недопустимая ось вращения
+Profil döndürme ekseninin iki tarafında olamaz	Профиль не может лежать по обе стороны от оси вращения
+Köşe seçilmedi	Вершина не выбрана
+Seçilen köşe ekstrüzyon yönünde değil (yönü ters çevirin)	Выбранная вершина не в направлении вытягивания (измените направление)
+OpenCASCADE ortamı bulunamadı (occ_env). Kurulum: README → Faz 4	Среда OpenCASCADE не найдена (occ_env). Установка: README → Phase 4
+Python süreci başlatılamadı	Не удалось запустить процесс Python
+Eğri (yol) seçilmedi	Кривая (траектория) не выбрана
+Seçili eğri bulunamadı	Выбранная кривая не найдена
+Yol taslağında çizgi yok	В эскизе траектории нет линий
+Yol 3B taslağı boş	3D-эскиз траектории пуст
+Yol olarak taslak, 3B taslak veya helis seçin	Выберите эскиз, 3D-эскиз или винтовую линию в качестве траектории
+Yön 1 geçersiz	Направление 1 недопустимо
+Yön 2 geçersiz	Направление 2 недопустимо
+Dönme ekseni geçersiz	Недопустимая ось поворота
+Aynalama düzlemi geçersiz	Недопустимая плоскость отражения
+Taslakta çizgi yok	В эскизе нет линий
+Kılavuz: 	Направляющая: 
+En az iki kapalı profilli taslak seçin	Выберите не менее двух эскизов с замкнутыми профилями
+Bilinmeyen delik ölçüsü	Неизвестный размер отверстия
+Bölme düzlemi geçersiz	Недопустимая плоскость разделения
+Desteklenmeyen özellik	Неподдерживаемый элемент
+OpenCASCADE sunucusu zamanında başlamadı	Сервер OpenCASCADE не запустился вовремя
+OpenCASCADE sunucusu beklenmedik şekilde kapandı	Сервер OpenCASCADE неожиданно закрылся
+OCP yüklenemedi	Не удалось загрузить OCP
+Çekirdek hatası	Ошибка ядра
+İnce	Мелкое
+Çok ince	Очень мелкое
+Izgaraya yakala (aç / kapat)	Привязка к сетке (вкл / выкл)
+Taslak ızgara yakalamasını aç/kapat	Привязка к сетке эскиза вкл/выкл
+Dışa Aktar...\tCtrl+E	Экспорт...\tCtrl+E
+STEP / IGES / STL dosyasını gövde olarak içe aktar (STL: eksen bazlı ölçek ve uzatma)	Импортировать файл STEP / IGES / STL как тело (STL: масштаб по осям и растяжение)
+Aç	Открыть
+Farklı Kaydet	Сохранить как
+*.stl ; STL (3B baskı)	*.stl ; STL (3D-печать)
+STL olarak dışa aktar	Экспорт в STL
+OBJ olarak dışa aktar	Экспорт в OBJ
+STEP olarak dışa aktar	Экспорт в STEP
+IGES olarak dışa aktar	Экспорт в IGES
+*.stl ; STL (CSG çekirdeği: yalnız STL)	*.stl ; STL (ядро CSG: только STL)
+STL içe aktar	Импорт STL
+STEP / IGES / STL içe aktar	Импорт STEP / IGES / STL
+Makro çalıştır	Выполнить макрос
+Parçayı makro olarak kaydet	Сохранить деталь как макрос
+Taslağı DXF olarak dışa aktar	Экспорт эскиза в DXF
+Taslağı SVG olarak dışa aktar	Экспорт эскиза в SVG
+Ekran görüntüsü	Снимок экрана
+%s %s\nGodot %s ile yazılmış parametrik CAD.\n\nGeometri çekirdeği: %s\nYedek çekirdek: Godot CSG (Manifold).	%s %s\nПараметрическая САПР, написанная на Godot %s.\n\nГеометрическое ядро: %s\nРезервное ядро: Godot CSG (Manifold).
+Bastır (suppress)	Подавить
+ (ve onu kullanan özellikler)	 (и использующие его элементы)
+ silindi. Geri almak için Ctrl+Z.	 удалено. Отменить: Ctrl+Z.
+Eksik Tanımlı (%d)	Недоопределен (%d)
+ oluşturuldu.	 создан.
+Orta Düzlem	Средняя плоскость
+Köşeye Kadar	До вершины
+Yüzeye Kadar	До поверхности
+Yüzeyden Ofset	На расстоянии от поверхности
+Merkez çizgisi 	Осевая линия 
+Çizgi 	Линия 
+Bölge seç (taslakta tıkla)	Выбрать область (щелкните в эскизе)
+Bitiş: 	Конец: 
+kapalı	замкнутая
+açık	открытая
+Tam tanımlı	Полностью определен
+Eksik tanımlı	Недоопределен
+Aşırı tanımlı	Переопределен
+  (denklemlerde bu adla kullanılır)	  (используется под этим именем в уравнениях)
+ör. genislik / 2	напр. width / 2
+Taşı	Переместить
+Ölçekle	Масштаб
+Doğrusal çoğalt	Линейный массив
+Dairesel çoğalt	Круговой массив
+Aralık X	Шаг X
+Aralık Y	Шаг Y
+ör. 80 veya genislik*2	напр. 80 или width*2
+Çevre: 	Периметр: 
+Düzlemsel yüz, normal: (%.3f, %.3f, %.3f)	Плоская грань, нормаль: (%.3f, %.3f, %.3f)
+Eğri yüz	Криволинейная грань
+Yüz alanı: 	Площадь грани: 
+Mesafe (paralel yüzler): 	Расстояние (параллельные грани): 
+Yoğunluk = 	Плотность = 
+Kütle = 	Масса = 
+Yüzey alanı = 	Площадь поверхности = 
+Ağırlık merkezi (%s): X = %s  Y = %s  Z = %s	Центр масс (%s): X = %s  Y = %s  Z = %s
+Atalet tensörü (ağırlık merkezinde, global eksenler):	Тензор инерции (в центре масс, глобальные оси):
+İptal	Отмена
+Kütle birimi	Единица массы
+Uzunluk ondalık basamak	Знаков после запятой (длина)
+Açı ondalık basamak	Знаков после запятой (угол)
+Kaydedilmemiş değişiklikler kaybolacak. Devam edilsin mi?	Несохраненные изменения будут потеряны. Продолжить?
+Montaj açılamadı (hata %d): %s	Не удалось открыть сборку (ошибка %d): %s
+parça	деталь
+Önceki oturum beklenmedik şekilde kapandı.\n\nOtomatik kaydedilmiş %s bulundu: %s\nKayıt zamanı: %s\n%s\n\nKurtarılsın mı?	Предыдущий сеанс неожиданно завершился.\n\nНайдено автосохранение (%s): %s\nВремя сохранения: %s\n%s\n\nВосстановить?
+(hiç kaydedilmemiş belge)	(документ ни разу не сохранялся)
+seçili	выбрана
+SEÇİLMEDİ	НЕ ВЫБРАНА
+%d yüz, tarafsız yüz %s	Граней: %d, нейтральная грань %s
+%d gövde seçili (ilki ana gövde)	Выбрано тел: %d (первое — основное)
+Gövde seçilmedi — gövdelere tıklayın	Тело не выбрано — щелкните тела
+Gövde seçilmedi — gövdeye tıklayın	Тело не выбрано — щелкните тело
+Konum yok — düzlemsel yüze tıklayın	Нет положения — щелкните плоскую грань
+Yüz seçilmedi — düzlemsel yüze tıklayın	Грань не выбрана — щелкните плоскую грань
+%d yüz açık bırakılacak	Открытых граней будет: %d
+Yüz seçilmedi: kapalı (içi boş) gövde	Грань не выбрана: замкнутое (полое) тело
+%d kenar seçili	Выбрано ребер: %d
+Kenar seçilmedi — modelde kenarlara tıklayın	Ребро не выбрано — щелкните ребра модели
+Başlangıç yarıçapı	Начальный радиус
+Tarafsız yüzü seç (sonraki tıklama)	Выбрать нейтральную грань (следующий щелчок)
+\nHavşa Ø%s x %s	\nЦековка Ø%s x %s
+\nHavşa Ø%s x %s°	\nЗенковка Ø%s x %s°
+ (kılavuz matkabı)\nKozmetik diş: %s	 (сверло под резьбу)\nУсловная резьба: %s
+Yarıçap: %s\nKenar: %d	Радиус: %s\nРебра: %d
+Kalınlık: %s%s\nAçık yüz: %d	Толщина: %s%s\nОткрытые грани: %d
+ (dışa)	 (наружу)
+Dosya: %s\nÖlçek: %s   X/Y/Z: %s / %s / %s%s	Файл: %s\nМасштаб: %s   X/Y/Z: %s / %s / %s%s
+Açı: %s\nYüz: %d	Угол: %s\nГрани: %d
+Kalınlık: %s	Толщина: %s
+Çıkar	Вычесть
+Kesiştir	Пересечь
+İşlem: %s\nGövde: %d	Операция: %s\nТела: %d
+Öteleme: (%s, %s, %s)\nDönme: %s%s	Перенос: (%s, %s, %s)\nПоворот: %s%s
+Düzlem: %s, ofset %s	Плоскость: %s, смещение %s
+\nKozmetik diş: 	\nУсловная резьба: 
+Yükseklik: %s	Высота: %s
+seçilmedi	не выбрано
+  (düz)	  (линейчатая)
+Özellik: %d%s	Элементы: %d%s
+  (tüm gövdeler)	  (все тела)
+Tür: %s	Тип: %s
+Tür: %s, derinlik %s	Тип: %s, глубина %s
+Gravür	Гравировка
+Özellik: %d, örnek: %d	Элементы: %d, экземпляры: %d
+Ölçek X	Масштаб X
+Ölçek Y	Масштаб Y
+Ölçek Z	Масштаб Z
+Ölçek merkezi / öteleme	Центр масштаба / перенос
+Öteleme 	Перенос 
+Bölgesel uzatma (STL)	Растяжение области (STL)
+Çok bölgeli uzatma: %d bölge (makro / dosyadan). Tek bölgeye dönmek için listeyi silin.	Растяжение нескольких областей: %d (из макроса / файла). Удалите список, чтобы вернуться к одной области.
+Uzatmayı kaldır	Удалить растяжение
+Bölge başı (özgün)	Начало области (исходное)
+Bölge sonu (özgün)	Конец области (исходный)
+Bölgedeki köşeler orantılı uzar, sonrası kaydırılır; bölge dışındaki ayrıntılar bozulmaz.	Вершины в области растягиваются пропорционально, все после нее смещается; детали вне области не искажаются.
+Koruma bölgesi (STL)	Защищенная область (STL)
+Bölgeyi ölçekleme (yalnızca taşı)	Не масштабировать область (только перенос)
+Geçiş boyu	Длина перехода
+Kesit bantları: %d (makro / dosyadan); bant yoksa kesitin tamamı korunur.	Полосы сечения: %d (из макроса / файла); без полос защищено все сечение.
+\nÖteleme: %s	\nСмещение: %s
+\nÖteleme: normal dönüşümle bölge merkezine göre	\nСмещение: обычным преобразованием относительно центра области
+\nUzatma: %d bölge, toplam %+.2f mm	\nРастяжение: областей %d, всего %+.2f мм
+\nKademeli kesit büyütme	\nПостепенное увеличение сечения
+\nKoruma bölgesi: %s %s → %s	\nЗащищенная область: %s %s → %s
+CSG (Godot, yalnızca üçgen ağ)	CSG (Godot, только треугольная сетка)
+Tarafsız yüz için modelde düzlemsel bir yüze tıklayın.	Щелкните плоскую грань модели для нейтральной грани.
+Eğim verilecek yüzlere tıklayın.	Щелкните грани для уклона.
+Modelde bir köşeye tıklayın.	Щелкните вершину модели.
+Hedef yüze tıklayın.	Щелкните целевую грань.
+Yön için doğrusal bir kenara (veya düzlemsel yüze) tıklayın.	Щелкните линейное ребро (или плоскую грань) для направления.
+Yön 2 için doğrusal bir kenara tıklayın.	Щелкните линейное ребро для направления 2.
+Eksen için dairesel/doğrusal kenara veya silindirik yüze tıklayın.	Щелкните круговое/линейное ребро или цилиндрическую грань для оси.
+Aynalama düzlemi olarak düzlemsel bir yüze tıklayın.	Щелкните плоскую грань как плоскость отражения.
+Taban olarak düzlemsel bir yüze tıklayın.	Щелкните плоскую грань как основание.
+Üç köşeye sırayla tıklayın.	Щелкните три вершины по порядку.
+İki köşeye sırayla tıklayın.	Щелкните две вершины по порядку.
+Bir köşeye tıklayın.	Щелкните вершину.
+Doğrusal/dairesel kenara veya silindirik yüze tıklayın.	Щелкните линейное/круговое ребро или цилиндрическую грань.
+Teğet düzlemin değeceği noktaya (silindir, koni, küre veya düzlem yüzünde) tıklayın.	Щелкните точку касания касательной плоскости (на цилиндрической, конической, сферической или плоской грани).
+Koordinat sisteminin başlangıcı için bir köşeye tıklayın.	Щелкните вершину для начала системы координат.
+X ekseni için doğrusal bir kenara tıklayın.	Щелкните линейное ребро для оси X.
+Y ekseni için doğrusal bir kenara tıklayın.	Щелкните линейное ребро для оси Y.
+Seçim iptal edildi.	Выбор отменен.
+Seçimi iptal et	Отменить выбор
+Köşe seç (modele tıkla)	Выбрать вершину (щелкните модель)
+Hedef yüzü seç (modele tıkla)	Выбрать целевую грань (щелкните модель)
+Kılavuz eğrisi	Направляющая кривая
+Seçilen kenar / eksen	Выбранное ребро / ось
+Modelden seç	Выбрать на модели
+Seçilen yüz	Выбранная грань
+Düzlemsel yüz seç	Выбрать плоскую грань
+Yüzeyde nokta seç (silindir, koni, düzlem...)	Выбрать точку на поверхности (цилиндр, конус, плоскость...)
+Taban için yüz seç	Выбрать грань для основания
+Üç köşe seç	Выбрать три вершины
+İki köşe seç	Выбрать две вершины
+Kenar / silindir seç	Выбрать ребро / цилиндр
+Köşe seç	Выбрать вершину
+Geri alma çubuğu kaldırıldı: tüm özellikler hesaplanıyor.	Панель отката удалена: все элементы вычисляются.
+Geri alma çubuğu: ilk %d özellik etkin, sonrakiler hesaplanmıyor.	Панель отката: первые %d элементов активны, остальные не вычисляются.
+Çocuklar:	Дочерние:
+Hedef yüzü seç	Выбрать целевую грань
+Silindirik yüzü seç	Выбрать цилиндрическую грань
+Seç: görünüş veya açıklamaya tıklayın, sürükleyerek taşıyın; Delete siler.	Выбор: щелкните вид или примечание, перетащите для перемещения; Delete удаляет.
+Model görünüşü: yerleştirmek için sayfaya tıklayın (yönelim panelden).	Вид модели: щелкните на листе для размещения (ориентация на панели).
+İzdüşüm görünüşü: seçili görünüşün sağına/soluna/üstüne/altına tıklayın.	Проекционный вид: щелкните справа/слева/сверху/снизу от выбранного вида.
+Kesit: seçili görünüşte kesit çizgisinin iki ucuna tıklayın.	Разрез: щелкните оба конца линии разреза на выбранном виде.
+Detay: seçili görünüşte önce merkeze, sonra daire kenarına tıklayın.	Выносной вид: на выбранном виде щелкните сначала центр, затем край окружности.
+Yardımcı görünüş: seçili görünüşte bir kenara tıklayın (görünüş kenara dik bakar).	Вспомогательный вид: щелкните ребро на выбранном виде (вид направлен перпендикулярно ребру).
+Kırık görünüş: seçili görünüşte kaldırılacak bölgenin iki sınırına tıklayın.	Вид с разрывом: щелкните две границы удаляемой области на выбранном виде.
+Akıllı boyut: köşe/daire/kenara tıklayın; ikinci öğe ve ardından boyutun yerine tıklayın.	Автоматический размер: щелкните вершину/окружность/ребро; затем второй объект и место размера.
+Merkez işareti: bir daireye tıklayın.	Метка центра: щелкните окружность.
+Merkez çizgisi: iki noktaya tıklayın.	Осевая линия: щелкните две точки.
+Not: yerleştirmek için tıklayın (metni panelden düzenleyin).	Примечание: щелкните для размещения (текст редактируется на панели).
+Balon: önce gösterilecek noktaya, sonra balonun yerine tıklayın.	Позиционная выноска: щелкните сначала указываемую точку, затем место выноски.
+Yüzey pürüzlülüğü: sembolün yerine tıklayın.	Шероховатость: щелкните место знака.
+Geometrik tolerans: önce gösterilecek noktaya, sonra çerçevenin yerine tıklayın.	Допуск формы и расположения: щелкните сначала указываемую точку, затем место рамки.
+Datum: önce yüzey/kenara, sonra etiketin yerine tıklayın.	База: щелкните сначала поверхность/ребро, затем место обозначения.
+Kaynak sembolü: önce kaynak yerine, sonra referans çizgisinin yerine tıklayın.	Обозначение шва: щелкните сначала место шва, затем место линии-выноски.
+Kesit görünüşü OpenCASCADE çekirdeği gerektirir	Вид в разрезе требует ядра OpenCASCADE
+Açıklama	Описание
+çerçevenin	рамка
+referans çizgisinin	линия-выноска
+İkinci köşeye tıklayın.	Щелкните вторую вершину.
+Boyutun yerine tıklayın (çap).	Щелкните место размера (диаметр).
+Başka bir kenara (açı) veya boyutun yerine tıklayın.	Щелкните другое ребро (угол) или место размера.
+Başlık (boş: parça adı)	Наименование (пусто: имя детали)
+Çizen	Разработал
+Malzeme (boş: parça)	Материал (пусто: деталь)
+Yüzey pürüzlülüğü	Шероховатость поверхности
+Kaynak sembolü	Обозначение сварного шва
+Merkez işareti	Метка центра
+   (model boyutu — ilişkili)	   (размер модели — ассоциативный)
+(boş: ölçülen değer)	(пусто: измеренное значение)
+ör. 111 (elektrik ark)	напр. 111 (дуговая сварка)
+NOTLAR:\n1. KESKİN KÖŞELERİ KIRIN.\n2. GENEL TOLERANS ISO 2768-m.	ПРИМЕЧАНИЯ:\n1. ОСТРЫЕ КРОМКИ ПРИТУПИТЬ.\n2. ОБЩИЕ ДОПУСКИ ISO 2768-m.
+İlk yayın	Первый выпуск
+Parça açılamadı: 	Не удалось открыть деталь: 
+Parça kaydedilemedi!	Не удалось сохранить деталь!
+*.dcad, *.dasm, *.ddrw, *.dcadt, *.dasmt, *.ddrwt, *.dclfp, *.dcftp ; DIY.CAD dosyaları	*.dcad, *.dasm, *.ddrw, *.dcadt, *.dasmt, *.ddrwt, *.dclfp, *.dcftp ; Файлы DIY.CAD
+*.dcadt, *.dasmt, *.ddrwt ; DIY.CAD şablonları	*.dcadt, *.dasmt, *.ddrwt ; Шаблоны DIY.CAD
+*.dclfp ; DIY.CAD Kütüphane Unsuru Parçası	*.dclfp ; Деталь библиотечного элемента DIY.CAD
+*.dcftp ; DIY.CAD Form Verme Aracı	*.dcftp ; Формовочный инструмент DIY.CAD
+Takım yolu oluşmadı (takım çapı / işlem türü uygun değil)	Траектория инструмента не построена (диаметр инструмента / тип операции не подходит)
+Dosya bulunamadı	Файл не найден
+Tabloda satır yok	В таблице нет строк
+Açık profil en az bir çizgi içermeli	Открытый профиль должен содержать хотя бы одну линию
+Sıfır uzunluklu çizgi	Линия нулевой длины
+Çizgi büküm yarıçapı için çok kısa (%d. çizgi)	Линия слишком коротка для радиуса сгиба (линия %d)
+Önce taban flanş oluşturun	Сначала создайте базовую кромку
+Taslakta kapalı kontur veya açık çizgi zinciri yok	В эскизе нет замкнутого контура или открытой цепочки линий
+Kenar flanşı yalnızca taban flanşın üst / alt kenarlarına eklenebilir	Ребро-кромку можно добавить только к верхним / нижним ребрам базовой кромки
+Seçilen kenar doğrusal bir taslak çizgisine ait değil	Выбранное ребро не принадлежит линейной линии эскиза
+Taban taslağı bulunamadı	Базовый эскиз не найден
+Kenar flanşı şimdilik yalnızca düz (kapalı profilli) taban flanşa eklenebilir	Пока ребро-кромку можно добавить только к плоской базовой кромке (замкнутый профиль)
+Kenar seçilmedi	Ребро не выбрано
+Kenar boşlukları kenar boyundan büyük	Зазоры по краям больше длины ребра
+Taban flanş yok	Нет базовой кромки
+Açınımı DXF olarak kaydet	Сохранить развертку в DXF
+ (boyut ve bastırma değişiklikleri bu konfigürasyona kaydedilir)	 (изменения размеров и подавления сохраняются в этой конфигурации)
+Tasarım tablosunu kaydet	Сохранить таблицу параметров
+Tasarım tablosunu içe aktar	Импортировать таблицу параметров
+DXF yazılamadı	Не удалось записать DXF
+<belirtilmemiş: çelik>	<не указан: сталь>
+yük uygulanacak	нагрузки
+Çözülüyor...	Решение...
+Yer değiştirme	Перемещение
+Yan adım (% çap)	Боковой шаг (% диаметра)
+parçanın üstü, taslaktan %s yukarıda	верх детали, на %s выше эскиза
+taslak düzlemi	плоскость эскиза
+*.hdr, *.exr, *.png, *.jpg ; Panorama görüntüsü	*.hdr, *.exr, *.png, *.jpg ; Панорамное изображение
+HDRI / panorama seç	Выбрать HDRI / панораму
+*.png, *.jpg, *.webp ; Görüntü	*.png, *.jpg, *.webp ; Изображение
+Çıkartma görüntüsü seç	Выбрать изображение наклейки
+Render kaydet (2× çözünürlük)	Сохранить рендер (2× разрешение)
+Düzlemsel yüzey için kapalı kontur gerekli	Для плоской поверхности нужен замкнутый контур
+Taslakta eğri yok	В эскизе нет кривых
+En az iki taslak seçin	Выберите не менее двух эскизов
+Dikdörtgen kutu profil	Прямоугольная труба
+Köşebent (L)	Уголок (L)
+Dikdörtgen profil %s	Прямоугольный профиль %s
+Köşebent L%s	Уголок L%s
+Taslakta çizgi yok (2B taslak veya 3B taslak seçin)	В эскизе нет линий (выберите 2D- или 3D-эскиз)
+No;Profil;Boy (mm);Kesim açıları;Adet;Birim kütle (g);Toplam kütle (g)	№;Профиль;Длина (мм);Углы реза;Кол-во;Масса ед. (г);Общая масса (г)
+\nEksik tanımlı taslak (boyut/ilişki ekleyerek tam tanımlayın)	\nНедоопределенный эскиз (полностью определите его размерами/взаимосвязями)
+\nAşırı tanımlı taslak	\nПереопределенный эскиз
+\n(Bastırılmış)	\n(Подавлен)
+\n(Geri alma çubuğunun altında: hesaplanmıyor)	\n(Ниже панели отката: не вычисляется)
+━━━ Geri alma çubuğu ━━━	━━━ Панель отката ━━━
+Altındaki özellikler hesaplanmaz. Sürükleyerek taşıyın; sağ tık: kaldır.	Элементы ниже не вычисляются. Перетащите для перемещения; правый щелчок: удалить.
+Kısayol kaldırıldı: 	Сочетание удалено: 
+Varsayılan kısayollar geri yüklendi.	Сочетания клавиш по умолчанию восстановлены.
+… tuşa basın	… нажмите клавишу
+'%s' için bir tuş kombinasyonuna basın (Esc: vazgeç).	Нажмите сочетание клавиш для '%s' (Esc: отмена).
+%s sabit bir tuştur, atanamaz.	%s — фиксированная клавиша, ее нельзя назначить.
+  (önceki atama kaldırıldı: %s)	  (предыдущее назначение удалено: %s)
+yüklendi	загружен
+Klasörü aç: 	Открыть папку: 
+3B Taslak — düzlem %s (Tab: değiştir). 	3D-эскиз — плоскость %s (Tab: сменить). 
+Noktaları tıklayın; sağ tık / Esc zinciri bitirir. Eksene yakın çizim X/Y/Z'ye kilitlenir.	Щелкайте точки; правый щелчок / Esc завершает цепочку. Рисование рядом с осью фиксируется по X/Y/Z.
+Nokta veya çizgi seçin; Delete siler, nokta koordinatları panelden girilir.	Выберите точку или линию; Delete удаляет, координаты точек вводятся на панели.
+Merkez Çizgisi	Осевая линия
+Köşe Dikdörtgen	Прямоугольник по углам
+Merkez Dikdörtgen	Прямоугольник от центра
+Merkez Noktalı Yay	Дуга по центру
+Akıllı Boyut	Автоматический размер
+Düz Kanal	Прямой паз
+Taslak Köşe Yuvarlatma	Скругление эскиза
+Taslak Pahı	Фаска эскиза
+Varlıkları Dönüştür	Преобразовать объекты
+Eşit	Равенство
+Eş Merkezli	Концентричность
+Nokta-çizgi mesafesi	Расстояние точка–линия
+Öğe seçin, sürükleyin. Birden fazla öğe seçince (Shift/Ctrl) panelden ilişki ekleyebilirsiniz.	Выбирайте объекты, перетаскивайте. При выборе нескольких объектов (Shift/Ctrl) на панели можно добавить взаимосвязь.
+Başlangıç noktasını tıklayın.	Щелкните начальную точку.
+Sonraki noktayı tıklayın. Çift tık / sağ tık / Esc: zinciri bitir.	Щелкните следующую точку. Двойной щелчок / правый щелчок / Esc: завершить цепочку.
+İlk köşeyi tıklayın.	Щелкните первый угол.
+Karşı köşeyi tıklayın.	Щелкните противоположный угол.
+Dikdörtgenin merkezini tıklayın.	Щелкните центр прямоугольника.
+Köşeyi tıklayın.	Щелкните угол.
+Dairenin merkezini tıklayın.	Щелкните центр окружности.
+Yarıçapı belirlemek için tıklayın.	Щелкните, чтобы задать радиус.
+Yayın merkezini tıklayın.	Щелкните центр дуги.
+Yayın başlangıç noktasını tıklayın.	Щелкните начальную точку дуги.
+Yayın bitiş noktasını tıklayın (fareyi istediğiniz yönde döndürün).	Щелкните конечную точку дуги (ведите мышь в нужном направлении).
+Ölçülecek öğeyi seçin (çizgi, daire, yay, nokta). Var olan boyutu düzenlemek için etikete tıklayın.	Выберите объект для размера (линия, окружность, дуга, точка). Щелкните надпись, чтобы изменить существующий размер.
+Boyutu yerleştirmek için boş bir yere tıklayın veya ikinci öğeyi seçin.	Щелкните пустое место, чтобы разместить размер, или выберите второй объект.
+Boyutu yerleştirmek için boş bir yere tıklayın.	Щелкните пустое место, чтобы разместить размер.
+Çokgenin merkezini tıklayın (%d kenar; panelden değiştirin).	Щелкните центр многоугольника (сторон: %d; измените на панели).
+Bir köşeyi tıklayın.	Щелкните вершину.
+Kanalın ilk yay merkezini tıklayın.	Щелкните центр первой дуги паза.
+İkinci yay merkezini tıklayın.	Щелкните центр второй дуги.
+Kanal genişliğini belirlemek için tıklayın.	Щелкните, чтобы задать ширину паза.
+Spline noktalarını tıklayın. İlk noktaya tıklamak kapatır; çift tık / sağ tık / Enter bitirir.	Щелкайте точки сплайна. Щелчок по первой точке замыкает его; двойной щелчок / правый щелчок / Enter завершает.
+Metnin yerleşeceği noktayı tıklayın (metin ve boyut panelden değişir).	Щелкните место текста (текст и размер меняются на панели).
+Silinecek parçaya tıklayın (en yakın kesişimler arasında kırpılır).	Щелкните удаляемый сегмент (обрезается между ближайшими пересечениями).
+Uzatılacak çizginin ucuna yakın tıklayın.	Щелкните рядом с концом удлиняемой линии.
+Yuvarlatılacak köşeye tıklayın (R %s; panelden değiştirin).	Щелкните угол для скругления (R %s; измените на панели).
+Pah kırılacak köşeye tıklayın (%s; panelden değiştirin).	Щелкните угол для фаски (%s; измените на панели).
+Elipsin merkezini tıklayın.	Щелкните центр эллипса.
+Büyük eksenin ucunu tıklayın.	Щелкните конец большой оси.
+Küçük eksen genişliği için tıklayın.	Щелкните, чтобы задать ширину малой оси.
+Parabolün tepe noktasını tıklayın.	Щелкните вершину параболы.
+Odak noktasını tıklayın (eksen yönü ve açıklık).	Щелкните фокус (направление оси и раскрытие).
+Başlangıç ucunu tıklayın.	Щелкните начальный конец.
+Bitiş ucunu tıklayın.	Щелкните второй конец.
+Taslağa alınacak model yüzüne tıklayın; yüzün kenarları çizgi/yay olarak eklenir.	Щелкните грань модели для переноса в эскиз; ее ребра добавляются как линии/дуги.
+İşlem uygulanamadı.	Не удалось применить операцию.
+Aynalamak için öğelerle birlikte tek bir merkez çizgisi (eksen) seçin.	Для отражения выберите вместе с объектами одну осевую линию (ось).
+Önce öğeleri seçin.	Сначала выберите объекты.
+Doğrusal çoğaltma: %d kopya.	Линейный массив: копий %d.
+Dairesel çoğaltma: %d kopya.	Круговой массив: копий %d.
+Kopyalandı.	Скопировано.
+Dönüştürüldü.	Преобразовано.
+Bu değişiklik mevcut ilişki ve boyutlarla çelişiyor; geri alındı.	Это изменение противоречит существующим взаимосвязям и размерам; отменено.
+Bu ilişki/boyut taslağı aşırı tanımlar (gereksiz veya zaten mevcut); eklenmedi.	Эта взаимосвязь/размер переопределяет эскиз (лишняя или уже есть); не добавлено.
+Model yüzüne tıklayın (taslak düzleminden görünen bir yüz).	Щелкните грань модели (видимую с плоскости эскиза).
+Bir öğeye tıklayın.	Щелкните объект.
+Bir köşe noktasına tıklayın.	Щелкните угловую точку.
+Blok için önce öğeleri seçin.	Сначала выберите объекты для блока.
+Blok oluşturuldu: öğeler artık tek parça (rijit) hareket eder.	Блок создан: объекты теперь перемещаются как единое жесткое целое.
+Seçili öğeler zaten bir blokta.	Выбранные объекты уже входят в блок.
+Blok dağıtıldı.	Блок разбит.
+Blok kopyalandı.	Блок скопирован.
+Spline oluşturuldu (%d nokta). Noktaları sürükleyerek şeklini değiştirebilirsiniz.	Сплайн создан (точек: %d). Перетаскивайте точки, чтобы изменить форму.
+Metin eklendi. Yazıyı ve boyutunu soldaki panelden değiştirin.	Текст добавлен. Измените текст и его размер на левой панели.
+   [Üzerinde]	   [На объекте]
+   [Çakışık]	   [Совпадение]
+L %s   genişlik %s	L %s   ширина %s
+Bu seçimden boyut oluşturulamadı.	Не удалось создать размер из этого выбора.
+Bu boyut taslağı aşırı tanımlardı; güdümlü (referans) boyut olarak eklendi.	Этот размер переопределил бы эскиз; он добавлен как управляемый (справочный).
+Bu değer geometrik olarak mümkün değil (diğer ilişki/boyutlarla çelişiyor); geri alındı.	Это значение геометрически невозможно (противоречит другим взаимосвязям/размерам); отменено.
+Denklem hesaplanamadı: '%s' (tanımsız değişken veya hatalı ifade).	Не удалось вычислить уравнение: '%s' (неопределенная переменная или ошибочное выражение).
+Denklemin sonucu geometriyle çelişiyor; geri alındı.	Результат уравнения противоречит геометрии; отменено.
+Denklem bağlandı: %s = %s	Уравнение связано: %s = %s
+Bu ilişki seçili öğelere uygulanamaz.	Эту взаимосвязь нельзя применить к выбранным объектам.
+Bu ilişki mevcut geometriyle çelişiyor; eklenmedi.	Эта взаимосвязь противоречит существующей геометрии; не добавлено.
+İlişki eklendi: 	Взаимосвязь добавлена: 
+ (güdümlü)	 (управляемый)
+Değer, mevcut ilişki/boyutlar nedeniyle tam uygulanamadı. Değiştirmek için ilgili boyutu düzenleyin.	Значение не удалось применить полностью из-за существующих взаимосвязей/размеров. Измените соответствующий размер.
+ — DIY.CAD (Montaj)	 — DIY.CAD (Сборка)
+*.dasm ; DIY.CAD Montaj	*.dasm ; Сборка DIY.CAD
+*.dasm ; DIY.CAD Montaj (alt montaj)	*.dasm ; Сборка DIY.CAD (подсборка)
+Malzeme listesini kaydet	Сохранить спецификацию
+Montaj kaydedilemedi (hata %d)	Не удалось сохранить сборку (ошибка %d)
+ (sabit)	 (зафиксирован)
+ (alt montaj)	 (подсборка)
+Serbestlik derecesi: %d	Степени свободы: %d
+Serbestlik derecesi: %d%s	Степени свободы: %d%s
+1-2: vida ve somun eksenleri	1-2: оси винта и гайки
+Mekanik	Механические
+CSV olarak kaydet	Сохранить в CSV
+Dairesel	Круговой
+ ekseni	 (ось)
+Paralel	Параллельность
+Dik	Перпендикулярность
+Kilit	Блокировка
+Simetrik	Симметрия
+Kremayer-pinyon	Реечная передача
+Vida	Винт
+Kam	Кулачок
+X Ekseni	Ось X
+Y Ekseni	Ось Y
+Z Ekseni	Ось Z
+Dairesel kenar	Круговое ребро
+Kenar	Ребро
+Silindirik pim (ISO 2338)	Цилиндрический штифт (ISO 2338)
+Loft Patron/Taban	Бобышка/основание по сечениям
+Makroda 'func run(m: MacroApi)' yok: 	В макросе нет 'func run(m: MacroApi)': 
+Metal	Металл
+Bronz	Бронза
+Titanyum (Ti-6Al-4V)	Титан (Ti-6Al-4V)
+TPU (esnek)	TPU (гибкий)
+Naylon (PA12)	Нейлон (PA12)
+Plastik	Пластик
+Akrilik (PMMA)	Акрил (PMMA)
+Polikarbonat (PC)	Поликарбонат (PC)
+setup(api) yok	нет setup(api)
+X ekseni	Ось X
+Y ekseni	Ось Y
+Z ekseni	Ось Z
+MMGS (milimetre, gram, saniye)	MMGS (миллиметр, грамм, секунда)
+CGS (santimetre, gram, saniye)	CGS (сантиметр, грамм, секунда)
+MKS (metre, kilogram, saniye)	MKS (метр, килограмм, секунда)
+Dimetrik	Диметрия
+Dairesellik	Круглость
+Silindiriklik	Цилиндричность
+Diklik	Перпендикулярность
+Paralellik	Параллельность
+Simetri	Симметричность
+KONTROL	ПРОВ.
+MALZEME	МАТЕРИАЛ
+BOYUT	ФОРМАТ
+SAYFA 1/1   	ЛИСТ 1/1   
+DETAY %s (%s)	ВЫНОСНОЙ ВИД %s (%s)
+ADET	КОЛ.
+ONAY	УТВ.
+Sayfa: %.1f, %.1f mm	Лист: %.1f, %.1f мм
+*.gd ; DIY.CAD makrosu (GDScript)	*.gd ; Макрос DIY.CAD (GDScript)
+Kaydedilen makroyu sakla	Сохранить записанный макрос
+*.png ; PNG resmi	*.png ; Изображение PNG
+Σ Derinlik denklemi: =	Σ Уравнение глубины: =
+Taslak yatay ekseni (x)	Горизонтальная ось эскиза (x)
+Taslak dikey ekseni (y)	Вертикальная ось эскиза (y)
+Referans: 	Справочная: 
+\nDerinlik: 	\nГлубина: 
+ (Taslak)	 (Эскиз)
+%s — serbestlik derecesi: %d	%s — степени свободы: %d
+Nokta: X %s  Y %s  Z %s	Точка: X %s  Y %s  Z %s
+Alan: 	Площадь: 
+Mesafe: 	Расстояние: 
+Normal mesafe: 	Расстояние по нормали: 
+Toplam alan: 	Общая площадь: 
+Hacim = 	Объем = 
+Asal atalet momentleri: Px = %s   Py = %s   Pz = %s	Главные моменты инерции: Px = %s   Py = %s   Pz = %s
+Global (orijin)	Глобальная (начало координат)
+Birim sistemi	Система единиц
+Uzunluk birimi	Единица длины
+Kaydedilemedi! Hata kodu: %d	Не удалось сохранить! Код ошибки: %d
+ — Belge kurtarma	 — Восстановление документа
+Dosya: 	Файл: 
+%d delik konumu	Положений отверстий: %d
+Mesafe 1	Расстояние 1
+ISO (metrik)	ISO (метрическая)
+Delik Ø%s	Отверстие Ø%s
+Mesafe: %s\nKenar: %d	Расстояние: %s\nРебра: %d
+Ekle	Сложить
+  (kopya)	  (копия)
+%s %s — Ø%s\n%s, %d konum%s	%s %s — Ø%s\n%s, положений: %d%s
+Yol: %s	Траектория: %s
+Profil: %d%s	Профили: %d%s
+Taslak: %s	Эскиз: %s
+Oyma	Вдавливание
+Merkez 	Центр 
+Eklenecek boy	Добавляемая длина
+\nUzatma: %s +%s mm	\nРастяжение: %s +%s мм
+bilinmeyen hata	неизвестная ошибка
+Otomatik (OpenCASCADE varsa)	Автоматически (OpenCASCADE, если есть)
+%s (sapma %s mm, %s°)	%s (отклонение %s мм, %s°)
+HAYIR	НЕТ
+X ve Y eksenleri paralel olamaz	Оси X и Y не могут быть параллельны
+Ebeveynler:	Родительские:
+  (yok)	  (нет)
+Teknik resmi PDF olarak kaydet	Сохранить чертеж в PDF
+Teknik resmi SVG olarak kaydet	Сохранить чертеж в SVG
+Teknik resmi DXF olarak kaydet	Сохранить чертеж в DXF
+Firma	Организация
+Resim no	Обозначение
+Kontrol	Проверил
+Tarih	Дата
+PDF olarak kaydet	Сохранить в PDF
+SVG olarak kaydet	Сохранить в SVG
+DXF olarak kaydet	Сохранить в DXF
+Geometrik tolerans	Допуск формы и расположения
+Ⓜ Maksimum (MMC)	Ⓜ Максимум (MMC)
+Ⓛ Minimum (LMC)	Ⓛ Минимум (LMC)
+*.ddrw ; DIY.CAD Teknik Resim	*.ddrw ; Чертеж DIY.CAD
+Taslakta profil yok	В эскизе нет профиля
+Kesim listesini kaydet	Сохранить список вырезов
+  (etkin)	  (активна)
+    sil: 	    удалить: 
+G-kod kaydedildi: 	G-код сохранен: 
+    Kuvvet (N)	    Сила (Н)
+von Mises gerilme	Напряжение по Мизесу
+*.nc ; G-kod	*.nc ; G-код
+*.gcode ; G-kod	*.gcode ; G-код
+Malzemeden (PBR)	Из материала (PBR)
+Mat	Матовая
+Parlak	Глянцевая
+Render kaydedilemedi	Не удалось сохранить рендер
+Kare kutu profil	Квадратная труба
+Boru	Труба
+U profil (UPN)	Швеллер (UPN)
+I profil (IPE)	Двутавр (IPE)
+Lama	Полоса
+Kare profil %s	Квадратный профиль %s
+Boru Ø%s	Труба Ø%s
+Lama %s	Полоса %s
+\nHata: 	\nОшибка: 
+hata: 	ошибка: 
+Orta Nokta	Середина
+Yatay mesafe	Горизонтальное расстояние
+Dikey mesafe	Вертикальное расстояние
+   [Orta nokta]	   [Середина]
+%d kenar   R %s	сторон: %d   R %s
+%d nokta%s	точек: %d%s
+balonun	выноска
+etiketin	обозначение
+sabitlenecek	закрепления
+montaj	сборка
+devre dışı	отключен
+Eşdoğrusal	Коллинеарность
+%s seçildi. 'Taslak' ile çizime başlayın.	Выбрано: %s. Начните рисовать командой «Эскиз».
+%s seçildi (%s). Çift tık: düzenle.	Выбрано: %s (%s). Двойной щелчок: редактировать.

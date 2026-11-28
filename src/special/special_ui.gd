@@ -134,7 +134,7 @@ func cmd(c: String) -> void:
 			if SheetMetal.base_of(_doc()) == null:
 				app._set_status("Önce taban flanş oluşturun.")
 				return
-			app._file_dialog(true, ["*.dxf ; DXF"], "Açınımı DXF olarak kaydet", "sm_dxf", _doc().part_name + "_acinim.dxf")
+			app._file_dialog(true, ["*.dxf ; DXF"], I18n.t("Açınımı DXF olarak kaydet"), "sm_dxf", _doc().part_name + "_acinim.dxf")
 		"weld_cutlist":
 			_enter_aux("cutlist")
 		"configs":
@@ -435,7 +435,7 @@ func show_aux(m: String) -> void:
 			if not rows.is_empty():
 				panel.info(I18n.t("Toplam profil boyu: %s") % Units.format_length(total), Color(0.55, 0.85, 1.0))
 				var save := func() -> void: app._file_dialog(true, ["*.csv ; CSV"], "Kesim listesini kaydet", "weld_csv", _doc().part_name + "_kesim.csv")
-				panel.button("CSV olarak kaydet", save, Icons.get_icon("export", 16))
+				panel.button(I18n.t("CSV olarak kaydet"), save, Icons.get_icon("export", 16))
 		"configs":
 			panel.title("Konfigürasyonlar", Icons.get_icon("configs", 22))
 			Configs.ensure_default(_doc())
@@ -452,24 +452,24 @@ func show_aux(m: String) -> void:
 			for c in _doc().configs:
 				var nm := str(c["name"])
 				if nm == _doc().active_config:
-					panel.info("● " + nm + "  (etkin)", Color(0.9, 0.92, 0.95))
+					panel.info("● " + nm + I18n.t("  (etkin)"), Color(0.9, 0.92, 0.95))
 				else:
 					panel.button(I18n.t("Etkinleştir: ") + nm, act.bind(nm), Icons.get_icon("configs", 14))
-					panel.item_row("    sil: " + nm, Icons.get_icon("delete", 14), rm.bind(nm))
+					panel.item_row(I18n.t("    sil: ") + nm, Icons.get_icon("delete", 14), rm.bind(nm))
 			panel.section("Yeni konfigürasyon")
 			var on_name := func(t: String) -> void: cfg_name = t
 			panel.text_field("Ad", cfg_name, on_name)
 			var add := func() -> void:
 				if Configs.add(_doc(), cfg_name.strip_edges()):
 					_doc().commit()
-					app._set_status(I18n.t("Konfigürasyon eklendi: ") + cfg_name + " (boyut ve bastırma değişiklikleri bu konfigürasyona kaydedilir)")
+					app._set_status(I18n.t("Konfigürasyon eklendi: ") + cfg_name + I18n.t(" (boyut ve bastırma değişiklikleri bu konfigürasyona kaydedilir)"))
 					cfg_name = "Konfigürasyon%d" % (_doc().configs.size() + 1)
 				else:
 					app._set_status("Ad boş veya zaten var.")
 			panel.button("Ekle (etkin değerlerden kopyala)", add, Icons.get_icon("new", 16))
 			panel.section("Tasarım tablosu")
-			var out := func() -> void: app._file_dialog(true, ["*.csv ; CSV"], "Tasarım tablosunu kaydet", "cfg_csv_out", _doc().part_name + "_tasarim_tablosu.csv")
-			var inp := func() -> void: app._file_dialog(false, ["*.csv ; CSV"], "Tasarım tablosunu içe aktar", "cfg_csv_in")
+			var out := func() -> void: app._file_dialog(true, ["*.csv ; CSV"], I18n.t("Tasarım tablosunu kaydet"), "cfg_csv_out", _doc().part_name + "_tasarim_tablosu.csv")
+			var inp := func() -> void: app._file_dialog(false, ["*.csv ; CSV"], I18n.t("Tasarım tablosunu içe aktar"), "cfg_csv_in")
 			panel.button("Dışa aktar (CSV)", out, Icons.get_icon("export", 16))
 			panel.button("İçe aktar (CSV)", inp, Icons.get_icon("import", 16))
 			panel.info("Sütunlar: D1@Taslak1 (boyut), D1@Ekstrüzyon1 (derinlik), $BASTIR@Özellik (1/0). Değerler ekran biriminde.", Color(0.55, 0.6, 0.66))
@@ -486,7 +486,7 @@ func on_file(action: String, path: String) -> Error:
 				return ERR_CANT_CREATE
 			fa.store_string(str(cam_res["gcode"]))
 			fa.close()
-			app._set_status("G-kod kaydedildi: " + path)
+			app._set_status(I18n.t("G-kod kaydedildi: ") + path)
 			return OK
 		"render_png":
 			if path.get_extension().to_lower() != "png":
@@ -519,19 +519,19 @@ func on_file(action: String, path: String) -> Error:
 				app._set_status(I18n.t("Açınım hesaplanamadı: ") + str(fp["error"]))
 				return ERR_INVALID_DATA
 			var err := DrawingExport.write_dxf(path, SheetMetal.flat_prims(fp))
-			app._set_status((I18n.t("Açınım kaydedildi: %s (%s × %s)") % [path, Units.format_length((fp["size"] as Vector2).x), Units.format_length((fp["size"] as Vector2).y)]) if err == OK else "DXF yazılamadı")
+			app._set_status((I18n.t("Açınım kaydedildi: %s (%s × %s)") % [path, Units.format_length((fp["size"] as Vector2).x), Units.format_length((fp["size"] as Vector2).y)]) if err == OK else I18n.t("DXF yazılamadı"))
 			return err
 		"weld_csv":
 			if path.get_extension().to_lower() != "csv":
 				path += ".csv"
 			var err2 := Weldment.write_cutlist_csv(path, Weldment.doc_cutlist(_doc()))
-			app._set_status((I18n.t("Kesim listesi kaydedildi: ") + path) if err2 == OK else "CSV yazılamadı")
+			app._set_status((I18n.t("Kesim listesi kaydedildi: ") + path) if err2 == OK else I18n.t("CSV yazılamadı"))
 			return err2
 		"cfg_csv_out":
 			if path.get_extension().to_lower() != "csv":
 				path += ".csv"
 			var err3 := Configs.write_csv(_doc(), path)
-			app._set_status((I18n.t("Tasarım tablosu kaydedildi: ") + path) if err3 == OK else "CSV yazılamadı")
+			app._set_status((I18n.t("Tasarım tablosu kaydedildi: ") + path) if err3 == OK else I18n.t("CSV yazılamadı"))
 			return err3
 		"cfg_csv_in":
 			_doc().checkpoint()
@@ -846,7 +846,7 @@ func _legend(panel: PropertyPanel, lo: String, hi: String) -> void:
 
 func _panel_fea(panel: PropertyPanel) -> void:
 	panel.title("Statik Analiz", Icons.get_icon("fea", 22))
-	panel.section(I18n.t("Malzeme: ") + (_doc().material if _doc().material != "" else "<belirtilmemiş: çelik>"))
+	panel.section(I18n.t("Malzeme: ") + (I18n.t(_doc().material) if _doc().material != "" else I18n.t("<belirtilmemiş: çelik>")))
 	var setv := func(v: float, k: String) -> void:
 		fea_st[k] = v
 		fea_res = {}
@@ -863,7 +863,7 @@ func _panel_fea(panel: PropertyPanel) -> void:
 	var picks := ["fix", "load"]
 	var on_p := func(i: int) -> void:
 		fea_st["pick"] = picks[i]
-		app._set_status(I18n.t("Modelde %s yüze tıklayın (tekrar tıklamak kaldırır).") % ("sabitlenecek" if i == 0 else "yük uygulanacak"))
+		app._set_status(I18n.t("Modelde %s yüze tıklayın (tekrar tıklamak kaldırır).") % (I18n.t("sabitlenecek") if i == 0 else I18n.t("yük uygulanacak")))
 	panel.option("Tıklama", ["Sabit yüz seç", "Yük yüzü seç"], picks.find(str(fea_st["pick"])), on_p)
 	var rm_fix := func(i: int) -> void:
 		(fea_st["fix"] as Array).remove_at(i)
@@ -889,12 +889,12 @@ func _panel_fea(panel: PropertyPanel) -> void:
 		var on_mag := func(v: float) -> void:
 			ld["mag"] = v
 			fea_res = {}
-		panel.number("    Kuvvet (N)", float(ld["mag"]), on_mag, "plain")
+		panel.number(I18n.t("    Kuvvet (N)"), float(ld["mag"]), on_mag, "plain")
 		var on_dir := func(j: int) -> void:
 			ld["dir"] = dkeys[j]
 			fea_res = {}
 		panel.option("    Yön", dnames, maxi(dkeys.find(str(ld["dir"])), 0), on_dir)
-	panel.button("Çalıştır" if not fea_busy else "Çözülüyor...", run_fea, Icons.get_icon("fea", 16))
+	panel.button("Çalıştır" if not fea_busy else I18n.t("Çözülüyor..."), run_fea, Icons.get_icon("fea", 16))
 	if fea_res.is_empty():
 		panel.info("Sabit yüz(ler) ve yük yüz(ler)i seçip Çalıştır'a basın. Ağ: vokselli altı yüzlü elemanlar.", Color(0.55, 0.6, 0.66))
 		return
@@ -910,7 +910,7 @@ func _panel_fea(panel: PropertyPanel) -> void:
 		fea_st["show"] = shows[i]
 		update_fea_view()
 		app._refresh_panel()
-	panel.option("Gösterim", ["von Mises gerilme", "Yer değiştirme"], shows.find(str(fea_st["show"])), on_sh)
+	panel.option("Gösterim", [I18n.t("von Mises gerilme"), I18n.t("Yer değiştirme")], shows.find(str(fea_st["show"])), on_sh)
 	var on_def := func(b: bool) -> void:
 		fea_st["deform"] = 1.0 if b else 0.0
 		update_fea_view()
@@ -1079,7 +1079,7 @@ func _panel_cam(panel: PropertyPanel) -> void:
 	panel.number("Derinlik", float(cam_st["depth"]), setc.bind("depth"), "length", 0.01)
 	panel.number("Paso derinliği", float(cam_st["step"]), setc.bind("step"), "length", 0.01)
 	if cam_st["op"] == "pocket":
-		panel.number("Yan adım (% çap)", float(cam_st["stepover"]), setc.bind("stepover"), "plain", 5.0, 95.0)
+		panel.number(I18n.t("Yan adım (% çap)"), float(cam_st["stepover"]), setc.bind("stepover"), "plain", 5.0, 95.0)
 	panel.number("İlerleme (mm/dk)", float(cam_st["feed"]), setc.bind("feed"), "plain", 1.0)
 	panel.number("Dalma (mm/dk)", float(cam_st["plunge"]), setc.bind("plunge"), "plain", 1.0)
 	panel.number("Devir (dev/dk)", float(cam_st["rpm"]), setc.bind("rpm"), "plain", 1.0)
@@ -1093,7 +1093,7 @@ func _panel_cam(panel: PropertyPanel) -> void:
 		Units.format_length(float(cam_res["length"])), float(cam_res["time_min"])], Color(0.55, 0.85, 1.0))
 	var save := func() -> void: app._file_dialog(true, ["*.nc ; G-kod", "*.gcode ; G-kod"], "G-kodu kaydet", "cam_nc", _doc().part_name + ".nc")
 	panel.button("G-kodu kaydet", save, Icons.get_icon("export", 16))
-	panel.info(I18n.t("Turuncu: takım merkezi yolları (her paso derinliğinde). Z0 = %s; X/Y taslak eksenleri.") % ("parçanın üstü, taslaktan %s yukarıda" % Units.format_length(float(cam_res.get("z0", 0.0))) if str(cam_st.get("z0", "top")) == "top" else "taslak düzlemi"), Color(0.55, 0.6, 0.66))
+	panel.info(I18n.t("Turuncu: takım merkezi yolları (her paso derinliğinde). Z0 = %s; X/Y taslak eksenleri.") % (I18n.t("parçanın üstü, taslaktan %s yukarıda") % Units.format_length(float(cam_res.get("z0", 0.0))) if str(cam_st.get("z0", "top")) == "top" else I18n.t("taslak düzlemi")), Color(0.55, 0.6, 0.66))
 
 
 # ---------------------------------------------------------------- görselleştirme
@@ -1245,13 +1245,13 @@ func _panel_render(panel: PropertyPanel) -> void:
 	var envs := ["default", "studio", "day", "night", "hdri"]
 	var on_e := func(i: int) -> void:
 		if envs[i] == "hdri" and not render_st.has("hdri_tex"):
-			app._file_dialog(false, ["*.hdr, *.exr, *.png, *.jpg ; Panorama görüntüsü"], "HDRI / panorama seç", "render_hdri")
+			app._file_dialog(false, [I18n.t("*.hdr, *.exr, *.png, *.jpg ; Panorama görüntüsü")], I18n.t("HDRI / panorama seç"), "render_hdri")
 			return
 		render_st["env"] = envs[i]
 		apply_render()
 		app._refresh_panel()
 	panel.option("Ortam", ["CAD (varsayılan)", "Stüdyo", "Gün ışığı", "Gece", "HDRI dosyası"], maxi(envs.find(str(render_st["env"])), 0), on_e)
-	var hd := func() -> void: app._file_dialog(false, ["*.hdr, *.exr, *.png, *.jpg ; Panorama görüntüsü"], "HDRI / panorama seç", "render_hdri")
+	var hd := func() -> void: app._file_dialog(false, [I18n.t("*.hdr, *.exr, *.png, *.jpg ; Panorama görüntüsü")], I18n.t("HDRI / panorama seç"), "render_hdri")
 	panel.button("HDRI / panorama yükle", hd, Icons.get_icon("import", 16))
 	var setb := func(b: bool, k: String) -> void:
 		render_st[k] = b
@@ -1265,7 +1265,7 @@ func _panel_render(panel: PropertyPanel) -> void:
 	var on_f := func(i: int) -> void:
 		render_st["finish"] = fins[i]
 		apply_render()
-	panel.option("Yüzey", ["Malzemeden (PBR)", "Mat", "Parlak", "Metal"], maxi(fins.find(str(render_st["finish"])), 0), on_f)
+	panel.option("Yüzey", [I18n.t("Malzemeden (PBR)"), I18n.t("Mat"), I18n.t("Parlak"), "Metal"], maxi(fins.find(str(render_st["finish"])), 0), on_f)
 	var on_x := func(v: float) -> void:
 		render_st["exposure"] = v
 		apply_render()
@@ -1273,7 +1273,7 @@ func _panel_render(panel: PropertyPanel) -> void:
 	panel.section("Çıkartmalar (decal)")
 	var on_ds := func(v: float) -> void: render_st["decal_size"] = v
 	panel.number("Çıkartma boyu", float(render_st["decal_size"]), on_ds, "length", 0.1)
-	var add := func() -> void: app._file_dialog(false, ["*.png, *.jpg, *.webp ; Görüntü"], "Çıkartma görüntüsü seç", "decal_img")
+	var add := func() -> void: app._file_dialog(false, [I18n.t("*.png, *.jpg, *.webp ; Görüntü")], I18n.t("Çıkartma görüntüsü seç"), "decal_img")
 	panel.button("Çıkartma ekle (görüntü seç, sonra yüze tıkla)", add, Icons.get_icon("new", 16))
 	if not _decals.is_empty():
 		var clr := func() -> void:
@@ -1283,7 +1283,7 @@ func _panel_render(panel: PropertyPanel) -> void:
 			app._refresh_panel()
 		panel.button(I18n.t("Çıkartmaları temizle (%d)") % _decals.size(), clr, Icons.get_icon("delete", 16))
 	panel.section("Çıktı")
-	var shot := func() -> void: app._file_dialog(true, ["*.png ; PNG"], "Render kaydet (2× çözünürlük)", "render_png", _doc().part_name + "_render.png")
+	var shot := func() -> void: app._file_dialog(true, ["*.png ; PNG"], I18n.t("Render kaydet (2× çözünürlük)"), "render_png", _doc().part_name + "_render.png")
 	panel.button("Render kaydet (2×)", shot, Icons.get_icon("export", 16))
 
 
@@ -1309,4 +1309,4 @@ func render_to(path: String, scale: int) -> void:
 		out.blend_rect(img, Rect2i(Vector2i.ZERO, img.get_size()), Vector2i.ZERO)
 		img = out
 	var err := img.save_png(path)
-	app._set_status((I18n.t("Render kaydedildi: %s (%d × %d)") % [path, img.get_width(), img.get_height()]) if err == OK else "Render kaydedilemedi")
+	app._set_status((I18n.t("Render kaydedildi: %s (%d × %d)") % [path, img.get_width(), img.get_height()]) if err == OK else I18n.t("Render kaydedilemedi"))

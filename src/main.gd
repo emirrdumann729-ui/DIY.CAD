@@ -374,7 +374,7 @@ func _build_ui() -> void:
 	center.add_child(drawing_canvas)
 	drawing_canvas.clicked.connect(_dw_on_click)
 	drawing_canvas.dragged.connect(_dw_on_drag)
-	drawing_canvas.hovered.connect(func(p: Vector2) -> void: coord_label.text = "Sayfa: %.1f, %.1f mm" % [p.x, p.y])
+	drawing_canvas.hovered.connect(func(p: Vector2) -> void: coord_label.text = I18n.t("Sayfa: %.1f, %.1f mm") % [p.x, p.y])
 	_build_view_overlay()
 
 	# --- Durum çubuğu
@@ -688,7 +688,7 @@ func _cmd(c: String) -> void:
 		"new":
 			_ask_discard(func(): _new_document())
 		"open":
-			_ask_discard(func(): _file_dialog(false, OPEN_FILTERS, "Aç", "open"))
+			_ask_discard(func(): _file_dialog(false, OPEN_FILTERS, I18n.t("Aç"), "open"))
 		"new_asm":
 			_ask_discard(_new_assembly)
 		"sm_base", "sm_edge", "sm_flat", "sm_dxf", "weld", "weld_cutlist", "configs", "sm_hem", "fea", "draft_an", "cam", "render", \
@@ -699,33 +699,33 @@ func _cmd(c: String) -> void:
 		"save":
 			_save()
 		"save_as":
-			_file_dialog(true, ["*.dcad ; DIY.CAD Parça"], "Farklı Kaydet", "save", doc.part_name + ".dcad")
+			_file_dialog(true, [I18n.t("*.dcad ; DIY.CAD Parça")], I18n.t("Farklı Kaydet"), "save", doc.part_name + ".dcad")
 		"export_all":
 			_open_export_dialog()
 		"export_stl":
 			if viewport.model.is_empty():
 				_set_status("Dışa aktarılacak katı model yok. Önce bir ekstrüzyon oluşturun.")
 			else:
-				_file_dialog(true, ["*.stl ; STL (3B baskı)"], "STL olarak dışa aktar", "stl", doc.part_name + ".stl")
+				_file_dialog(true, [I18n.t("*.stl ; STL (3B baskı)")], I18n.t("STL olarak dışa aktar"), "stl", doc.part_name + ".stl")
 		"export_obj":
 			if viewport.model.is_empty():
 				_set_status("Dışa aktarılacak katı model yok.")
 			else:
-				_file_dialog(true, ["*.obj ; Wavefront OBJ"], "OBJ olarak dışa aktar", "obj", doc.part_name + ".obj")
+				_file_dialog(true, ["*.obj ; Wavefront OBJ"], I18n.t("OBJ olarak dışa aktar"), "obj", doc.part_name + ".obj")
 		"export_step", "export_iges":
 			if not viewport.kernel.is_brep() or not viewport.kernel.occ.is_ready():
 				_set_status("STEP/IGES için OpenCASCADE çekirdeği gerekli (Araçlar → Geometri çekirdeği).")
 			elif viewport.model.is_empty():
 				_set_status("Dışa aktarılacak katı model yok.")
 			elif c == "export_step":
-				_file_dialog(true, ["*.step, *.stp ; STEP AP214"], "STEP olarak dışa aktar", "step", doc.part_name + ".step")
+				_file_dialog(true, ["*.step, *.stp ; STEP AP214"], I18n.t("STEP olarak dışa aktar"), "step", doc.part_name + ".step")
 			else:
-				_file_dialog(true, ["*.iges, *.igs ; IGES"], "IGES olarak dışa aktar", "iges", doc.part_name + ".igs")
+				_file_dialog(true, ["*.iges, *.igs ; IGES"], I18n.t("IGES olarak dışa aktar"), "iges", doc.part_name + ".igs")
 		"import_step":
 			if not viewport.kernel.is_brep():
-				_file_dialog(false, ["*.stl ; STL (CSG çekirdeği: yalnız STL)"], "STL içe aktar", "import")
+				_file_dialog(false, [I18n.t("*.stl ; STL (CSG çekirdeği: yalnız STL)")], I18n.t("STL içe aktar"), "import")
 			else:
-				_file_dialog(false, ["*.step, *.stp, *.iges, *.igs, *.stl ; STEP / IGES / STL", "*.stl ; STL"], "STEP / IGES / STL içe aktar", "import")
+				_file_dialog(false, ["*.step, *.stp, *.iges, *.igs, *.stl ; STEP / IGES / STL", "*.stl ; STL"], I18n.t("STEP / IGES / STL içe aktar"), "import")
 		"fillet3d":
 			_cmd_brep_feature("fillet")
 		"chamfer3d":
@@ -752,7 +752,7 @@ func _cmd(c: String) -> void:
 			show_options()
 		"macro_run":
 			file_dialog.current_dir = AppSettings.app_dir("macros")
-			_file_dialog(false, ["*.gd ; DIY.CAD makrosu (GDScript)"], "Makro çalıştır", "macro_run")
+			_file_dialog(false, ["*.gd ; DIY.CAD makrosu (GDScript)"], I18n.t("Makro çalıştır"), "macro_run")
 		"macro_record":
 			if macro.recording:
 				_macro_src = macro.stop_recording()
@@ -768,17 +768,17 @@ func _cmd(c: String) -> void:
 				_set_status("Parça boş.")
 			else:
 				_macro_src = macro.part_macro()
-				_file_dialog(true, ["*.gd ; DIY.CAD makrosu (GDScript)"], "Parçayı makro olarak kaydet", "macro_save", doc.part_name + ".gd")
+				_file_dialog(true, ["*.gd ; DIY.CAD makrosu (GDScript)"], I18n.t("Parçayı makro olarak kaydet"), "macro_save", doc.part_name + ".gd")
 		"export_dxf", "export_svg":
 			var sk := _sketch_for_export()
 			if sk == null:
 				_set_status("Önce dışa aktarılacak taslağı seçin (ağaçtan veya taslak modunda).")
 			elif c == "export_dxf":
-				_file_dialog(true, ["*.dxf ; DXF (R12)"], "Taslağı DXF olarak dışa aktar", "dxf", sk.name + ".dxf")
+				_file_dialog(true, ["*.dxf ; DXF (R12)"], I18n.t("Taslağı DXF olarak dışa aktar"), "dxf", sk.name + ".dxf")
 			else:
-				_file_dialog(true, ["*.svg ; SVG"], "Taslağı SVG olarak dışa aktar", "svg", sk.name + ".svg")
+				_file_dialog(true, ["*.svg ; SVG"], I18n.t("Taslağı SVG olarak dışa aktar"), "svg", sk.name + ".svg")
 		"export_png":
-			_file_dialog(true, ["*.png ; PNG resmi"], "Ekran görüntüsü", "png", doc.part_name + ".png")
+			_file_dialog(true, ["*.png ; PNG resmi"], I18n.t("Ekran görüntüsü"), "png", doc.part_name + ".png")
 		"demo":
 			_ask_discard(func(): _load_demo())
 		"demo2":
@@ -881,7 +881,7 @@ func _cmd(c: String) -> void:
 			var kinfo := viewport.kernel.backend_label()
 			if viewport.kernel.occ.is_ready():
 				kinfo += " (OCP %s)" % viewport.kernel.occ.version
-			info_dialog.dialog_text = "%s %s\nGodot %s ile yazılmış parametrik CAD.\n\nGeometri çekirdeği: %s\nYedek çekirdek: Godot CSG (Manifold)." % [APP_NAME, APP_VERSION, Engine.get_version_info()["string"], kinfo]
+			info_dialog.dialog_text = I18n.t("%s %s\nGodot %s ile yazılmış parametrik CAD.\n\nGeometri çekirdeği: %s\nYedek çekirdek: Godot CSG (Manifold).") % [APP_NAME, APP_VERSION, Engine.get_version_info()["string"], kinfo]
 			info_dialog.popup_centered()
 		_:
 			if c.begins_with("view_"):
@@ -1253,11 +1253,11 @@ func _select(sel: Dictionary) -> void:
 			else:
 				_set_status("Eğri yüzey seçildi (üzerine taslak çizilemez).")
 		"plane":
-			_set_status(SketchPlane.standard(sel["id"]).name + " seçildi. 'Taslak' ile çizime başlayın.")
+			_set_status(I18n.t("%s seçildi. 'Taslak' ile çizime başlayın.") % I18n.t(SketchPlane.standard(sel["id"]).name))
 		"feature":
 			var f := doc.get_feature(int(sel["id"]))
 			if f:
-				_set_status(f.name + " seçildi (" + f.type_label() + "). Çift tık: düzenle.")
+				_set_status(I18n.t("%s seçildi (%s). Çift tık: düzenle.") % [f.name, I18n.t(f.type_label())])
 		_:
 			_set_status("")
 
@@ -1363,7 +1363,7 @@ func _show_context(meta: Dictionary, at: Vector2) -> void:
 		else:
 			context_menu.add_item("Özelliği düzenle", 1)
 			context_menu.add_item("Taslağı düzenle", 2)
-			context_menu.add_item("Bastırmayı kaldır" if f.suppressed else "Bastır (suppress)", 3)
+			context_menu.add_item("Bastırmayı kaldır" if f.suppressed else I18n.t("Bastır (suppress)"), 3)
 		context_menu.add_separator()
 		context_menu.add_item("Yukarı taşı", 20)
 		context_menu.add_item("Aşağı taşı", 21)
@@ -1461,12 +1461,12 @@ func _delete() -> void:
 			return
 		var extra := ""
 		if f.is_sketch() and not doc.consumers_of(f.id).is_empty():
-			extra = " (ve onu kullanan özellikler)"
+			extra = I18n.t(" (ve onu kullanan özellikler)")
 		doc.checkpoint()
 		doc.remove_feature(f.id)
 		selection = {}
 		doc.commit()
-		_set_status(f.name + extra + " silindi. Geri almak için Ctrl+Z.")
+		_set_status(f.name + extra + I18n.t(" silindi. Geri almak için Ctrl+Z."))
 
 
 func _undo_redo(undo: bool) -> void:
@@ -1474,7 +1474,7 @@ func _undo_redo(undo: bool) -> void:
 		_cancel_feature()
 	var ok := doc.undo() if undo else doc.redo()
 	if not ok:
-		_set_status("Geri alınacak işlem yok." if undo else "Yinelenecek işlem yok.")
+		_set_status(I18n.t("Geri alınacak işlem yok.") if undo else I18n.t("Yinelenecek işlem yok."))
 
 
 # ================================================================ 3B TASLAK
@@ -1716,9 +1716,9 @@ func _on_definition_changed(info: Dictionary) -> void:
 			def_label.text = "Aşırı Tanımlı"
 			def_label.add_theme_color_override("font_color", Color(1.0, 0.4, 0.35))
 		_:
-			def_label.text = "Eksik Tanımlı (%d)" % int(info.get("dof", 0))
+			def_label.text = I18n.t("Eksik Tanımlı (%d)") % int(info.get("dof", 0))
 			def_label.add_theme_color_override("font_color", Color(0.45, 0.65, 1.0))
-	def_label.tooltip_text = "Serbestlik derecesi: %d" % int(info.get("dof", 0))
+	def_label.tooltip_text = I18n.t("Serbestlik derecesi: %d") % int(info.get("dof", 0))
 
 
 func _on_tool_button(t: String) -> void:
@@ -1920,7 +1920,7 @@ func _ok_feature() -> void:
 		nf.params = f.params.duplicate(true)
 		doc.add_feature(nf)
 		selection = {"kind": "feature", "id": nf.id}
-		_set_status(nf.name + " oluşturuldu.")
+		_set_status(nf.name + I18n.t(" oluşturuldu."))
 	else:
 		var orig := doc.get_feature(f.id)
 		if orig:
@@ -1999,7 +1999,7 @@ func _show_feature_panel() -> void:
 	if f.type == "extrude":
 		panel.section("Yön 1")
 		var ends := ["blind", "midplane", "through", "next", "vertex", "face", "face_offset"]
-		var end_names := ["Kör", "Orta Düzlem", "Tümünden", "Sonrakine Kadar", "Köşeye Kadar", "Yüzeye Kadar", "Yüzeyden Ofset"]
+		var end_names := ["Kör", I18n.t("Orta Düzlem"), "Tümünden", "Sonrakine Kadar", I18n.t("Köşeye Kadar"), I18n.t("Yüzeye Kadar"), I18n.t("Yüzeyden Ofset")]
 		var cur: String = f.params.get("end", "blind")
 		var on_end := func(i: int) -> void:
 			f.params["end"] = ends[i]
@@ -2015,7 +2015,7 @@ func _show_feature_panel() -> void:
 			df.allow_expr = true
 			df.expr_committed.connect(func(ex): _set_feature_expr(f, "depth", ex))
 			if str(f.params.get("depth_expr", "")) != "":
-				panel.info("Σ Derinlik denklemi: =" + str(f.params["depth_expr"]), Color(0.95, 0.8, 0.4))
+				panel.info(I18n.t("Σ Derinlik denklemi: =") + str(f.params["depth_expr"]), Color(0.95, 0.8, 0.4))
 		if cur != "midplane":
 			panel.check("Yönü ters çevir", bool(f.params.get("reverse", false)), on_reverse)
 		_extrude_extra_controls(f, cur)
@@ -2023,18 +2023,18 @@ func _show_feature_panel() -> void:
 		var sk_f := doc.get_feature(f.sketch_ref())
 		panel.section("Döndürme ekseni")
 		var axis_vals: Array = ["x", "y"]
-		var axis_names: Array = ["Taslak yatay ekseni (x)", "Taslak dikey ekseni (y)"]
+		var axis_names: Array = [I18n.t("Taslak yatay ekseni (x)"), I18n.t("Taslak dikey ekseni (y)")]
 		if sk_f:
 			var n := 1
 			for e in sk_f.sketch.entities:
 				if e["type"] == "line":
 					axis_vals.append(e["id"])
-					axis_names.append(("Merkez çizgisi " if e.get("construction", false) else "Çizgi ") + str(n))
+					axis_names.append((I18n.t("Merkez çizgisi ") if e.get("construction", false) else I18n.t("Çizgi ")) + str(n))
 					n += 1
 		for ra in doc.features:
 			if ra.type == "refaxis" and not ra.suppressed:
 				axis_vals.append("ax:%d" % ra.id)
-				axis_names.append("Referans: " + ra.name)
+				axis_names.append(I18n.t("Referans: ") + ra.name)
 		var cur_axis = f.params.get("axis", "y")
 		var ai := 1
 		for i in axis_vals.size():
@@ -2069,7 +2069,7 @@ func _show_feature_panel() -> void:
 			panel.info("Otomatik: taslaktaki tüm kapalı konturlar kullanılıyor.")
 		else:
 			panel.info(I18n.t("%d bölge seçili (vurgulu alanlar).") % regs.size(), Color(0.55, 0.85, 1.0))
-		var pick_btn := panel.button("Bölge seçmeyi bitir" if _region_pick else "Bölge seç (taslakta tıkla)", _toggle_region_pick, Icons.get_icon("region", 18))
+		var pick_btn := panel.button("Bölge seçmeyi bitir" if _region_pick else I18n.t("Bölge seç (taslakta tıkla)"), _toggle_region_pick, Icons.get_icon("region", 18))
 		pick_btn.toggle_mode = true
 		pick_btn.button_pressed = _region_pick
 		if not regs.is_empty():
@@ -2144,10 +2144,10 @@ func _show_idle_panel() -> void:
 			else:
 				var p := f.params
 				if f.type == "extrude":
-					var end_names := {"blind": "Kör", "midplane": "Orta Düzlem", "through": "Tümünden"}
-					var txt := "Bitiş: " + str(end_names.get(p.get("end", "blind"), ""))
+					var end_names := {"blind": "Kör", "midplane": I18n.t("Orta Düzlem"), "through": "Tümünden"}
+					var txt := I18n.t("Bitiş: ") + str(end_names.get(p.get("end", "blind"), ""))
 					if p.get("end", "blind") != "through":
-						txt += "\nDerinlik: " + Units.format_length(float(p.get("depth", 0.0)))
+						txt += I18n.t("\nDerinlik: ") + Units.format_length(float(p.get("depth", 0.0)))
 					panel.info(txt)
 				else:
 					panel.info(I18n.t("Açı: ") + Units.format_angle(float(p.get("angle", 360.0))))
@@ -2193,7 +2193,7 @@ func _show_sketch_panel() -> void:
 	if f == null:
 		return
 	var sk := f.sketch
-	panel.title(f.name + " (Taslak)", Icons.get_icon("sketch", 22))
+	panel.title(f.name + I18n.t(" (Taslak)"), Icons.get_icon("sketch", 22))
 	panel.button("Taslaktan çık", func(): _exit_sketch(), Icons.get_icon("exit_sketch", 18))
 	if _sketch_op != "":
 		if editor.selected_entities.is_empty():
@@ -2294,7 +2294,7 @@ func _show_sketch_panel() -> void:
 			"spline":
 				panel.section("Spline")
 				var closed: bool = e["pts"][0] == e["pts"][e["pts"].size() - 1]
-				panel.info(I18n.t("%d nokta, %s. Şekli değiştirmek için noktaları sürükleyin.") % [Sketch.entity_point_ids(e).size(), "kapalı" if closed else "açık"])
+				panel.info(I18n.t("%d nokta, %s. Şekli değiştirmek için noktaları sürükleyin.") % [Sketch.entity_point_ids(e).size(), I18n.t("kapalı") if closed else I18n.t("açık")])
 			"ellipse":
 				var ax := sk.ellipse_axes(e)
 				var ec: Vector2 = ax["c"]
@@ -2353,13 +2353,13 @@ func _show_sketch_panel() -> void:
 	# Hiçbir şey seçili değil: taslak bilgisi
 	var an := editor.analysis
 	var st: String = an.get("status", "under")
-	var st_names := {"full": "Tam tanımlı", "under": "Eksik tanımlı", "over": "Aşırı tanımlı"}
+	var st_names := {"full": I18n.t("Tam tanımlı"), "under": I18n.t("Eksik tanımlı"), "over": I18n.t("Aşırı tanımlı")}
 	var st_cols := {"full": Color(0.85, 0.9, 0.95), "under": Color(0.45, 0.65, 1.0), "over": Color(1.0, 0.4, 0.35)}
 	panel.section("Tanım durumu")
 	if sk.is_empty():
 		panel.info("Taslak boş.")
 	else:
-		panel.info("%s — serbestlik derecesi: %d" % [st_names.get(st, st), int(an.get("dof", 0))], st_cols.get(st, Color.WHITE))
+		panel.info(I18n.t("%s — serbestlik derecesi: %d") % [st_names.get(st, st), int(an.get("dof", 0))], st_cols.get(st, Color.WHITE))
 	var prof := sk.extract_profiles()
 	var n_dim := 0
 	for c in sk.constraints:
@@ -2402,7 +2402,7 @@ func _constraint_panel(sk: Sketch, c: Dictionary) -> void:
 	if Sketch.is_dimension(c):
 		var driven := bool(c.get("driven", false))
 		panel.section(I18n.t("Boyut: ") + str(SketchEditor.DIM_NAMES.get(t, t)))
-		panel.info(I18n.t("Ad: ") + Equations.full_name(c, editor.feature.name) + "  (denklemlerde bu adla kullanılır)", Color(0.6, 0.75, 0.9))
+		panel.info(I18n.t("Ad: ") + Equations.full_name(c, editor.feature.name) + I18n.t("  (denklemlerde bu adla kullanılır)"), Color(0.6, 0.75, 0.9))
 		if driven:
 			panel.info(I18n.t("Değer: ") + SketchEditor.dimension_text(c))
 		else:
@@ -2410,13 +2410,13 @@ func _constraint_panel(sk: Sketch, c: Dictionary) -> void:
 			var nf := panel.number("Değer", float(c["value"]), func(v): editor.set_dimension_value(cid, v), kind, 0.0001)
 			nf.allow_expr = true
 			nf.expr_committed.connect(func(ex): editor.set_dimension_expr(cid, ex))
-			panel.text_field("Denklem", str(c.get("expr", "")), func(tx): editor.set_dimension_expr(cid, tx), "ör. genislik / 2")
+			panel.text_field("Denklem", str(c.get("expr", "")), func(tx): editor.set_dimension_expr(cid, tx), I18n.t("ör. genislik / 2"))
 			if str(c.get("expr", "")) != "":
 				panel.info("Σ Bu boyut denklemle sürülüyor; değeri değişkenler değişince güncellenir.", Color(0.95, 0.8, 0.4))
 		panel.check("Güdümlü (referans) boyut", driven, func(b): editor.set_dimension_driven(cid, b))
 		panel.info("Sürükleyici boyut geometriyi belirler; güdümlü boyut yalnızca ölçer.", Color(0.6, 0.65, 0.7))
 	else:
-		panel.section(I18n.t("İlişki: ") + str(SketchEditor.RELATION_NAMES.get(t, t)))
+		panel.section(I18n.t("İlişki: ") + I18n.t(str(SketchEditor.RELATION_NAMES.get(t, t))))
 		var parts: Array = []
 		for eid in Sketch.constraint_entities(c):
 			var e := sk.get_entity(eid)
@@ -2491,7 +2491,7 @@ func _show_sketch_op_panel() -> void:
 			panel.ok_cancel(_apply_offset, _cancel_sketch_op)
 		"transform":
 			var kinds := ["move", "rotate", "scale", "linear", "circular"]
-			var names := ["Taşı", "Döndür", "Ölçekle", "Doğrusal çoğalt", "Dairesel çoğalt"]
+			var names := [I18n.t("Taşı"), "Döndür", I18n.t("Ölçekle"), I18n.t("Doğrusal çoğalt"), I18n.t("Dairesel çoğalt")]
 			var k: String = _op_params["kind"]
 			panel.section(I18n.t("Dönüştür / çoğalt (%d öğe)") % editor.selected_entities.size())
 			var on_kind := func(i: int) -> void:
@@ -2502,8 +2502,8 @@ func _show_sketch_op_panel() -> void:
 				return func(v: float) -> void: _op_params[key] = v
 			match k:
 				"move", "linear":
-					panel.number("dX" if k == "move" else "Aralık X", float(_op_params["dx"]), setp.call("dx"))
-					panel.number("dY" if k == "move" else "Aralık Y", float(_op_params["dy"]), setp.call("dy"))
+					panel.number("dX" if k == "move" else I18n.t("Aralık X"), float(_op_params["dx"]), setp.call("dx"))
+					panel.number("dY" if k == "move" else I18n.t("Aralık Y"), float(_op_params["dy"]), setp.call("dy"))
 				"rotate", "scale", "circular":
 					panel.number("Merkez X", float(_op_params["cx"]), setp.call("cx"))
 					panel.number("Merkez Y", float(_op_params["cy"]), setp.call("cy"))
@@ -2593,7 +2593,7 @@ func _show_equations_panel() -> void:
 		var vname := str(v["name"])
 		var shown := ("= " + Units.fmt_sig(float(vals[vname]), 6)) if vals.has(vname) else "= ?"
 		panel.text_field("Ad", vname, func(t): _set_variable(idx, t, ""))
-		panel.text_field("İfade", str(v["expr"]), func(t): _set_variable(idx, "", t), "ör. 80 veya genislik*2")
+		panel.text_field("İfade", str(v["expr"]), func(t): _set_variable(idx, "", t), I18n.t("ör. 80 veya genislik*2"))
 		panel.item_row(vname + " " + shown, Icons.get_icon("equations", 14), func(): _remove_variable(idx))
 	panel.button("Değişken ekle", _add_variable, Icons.get_icon("new", 18))
 	panel.section("Denklemle sürülen boyutlar")
@@ -2787,38 +2787,38 @@ func _measure_results() -> Array:
 		var a: Dictionary = P[0]
 		if a["kind"] == "vertex":
 			var q: Vector3 = a["p"]
-			out.append("Nokta: X %s  Y %s  Z %s" % [Units.format_length(q.x, false), Units.format_length(q.y, false), Units.format_length(q.z, false)])
+			out.append(I18n.t("Nokta: X %s  Y %s  Z %s") % [Units.format_length(q.x, false), Units.format_length(q.y, false), Units.format_length(q.z, false)])
 		else:
-			out.append("Alan: " + Units.format_area(a["area"]))
-			out.append("Çevre: " + Units.format_length(a["perimeter"]))
+			out.append(I18n.t("Alan: ") + Units.format_area(a["area"]))
+			out.append(I18n.t("Çevre: ") + Units.format_length(a["perimeter"]))
 			if a["planar"]:
 				var n: Vector3 = a["normal"]
-				out.append("Düzlemsel yüz, normal: (%.3f, %.3f, %.3f)" % [n.x, n.y, n.z])
+				out.append(I18n.t("Düzlemsel yüz, normal: (%.3f, %.3f, %.3f)") % [n.x, n.y, n.z])
 			else:
-				out.append("Eğri yüz")
+				out.append(I18n.t("Eğri yüz"))
 	elif P.size() == 2:
 		var a2: Dictionary = P[0]
 		var b2: Dictionary = P[1]
 		if a2["kind"] == "vertex" and b2["kind"] == "vertex":
 			var d: Vector3 = (b2["p"] as Vector3) - (a2["p"] as Vector3)
-			out.append("Mesafe: " + Units.format_length(d.length()))
+			out.append(I18n.t("Mesafe: ") + Units.format_length(d.length()))
 			out.append("dX: %s   dY: %s   dZ: %s" % [Units.format_length(absf(d.x)), Units.format_length(absf(d.y)), Units.format_length(absf(d.z))])
 		elif a2["kind"] != b2["kind"]:
 			var vtx: Dictionary = a2 if a2["kind"] == "vertex" else b2
 			var fc: Dictionary = b2 if a2["kind"] == "vertex" else a2
 			if fc["planar"]:
 				var n2: Vector3 = fc["normal"]
-				out.append("Normal mesafe: " + Units.format_length(absf(n2.dot((vtx["p"] as Vector3) - (fc["point"] as Vector3)))))
-			out.append("Yüz alanı: " + Units.format_area(fc["area"]))
+				out.append(I18n.t("Normal mesafe: ") + Units.format_length(absf(n2.dot((vtx["p"] as Vector3) - (fc["point"] as Vector3)))))
+			out.append(I18n.t("Yüz alanı: ") + Units.format_area(fc["area"]))
 		else:
 			if a2["planar"] and b2["planar"]:
 				var n3: Vector3 = a2["normal"]
 				var n4: Vector3 = b2["normal"]
 				if absf(n3.dot(n4)) > 0.99999:
-					out.append("Mesafe (paralel yüzler): " + Units.format_length(absf(n3.dot((b2["point"] as Vector3) - (a2["point"] as Vector3)))))
+					out.append(I18n.t("Mesafe (paralel yüzler): ") + Units.format_length(absf(n3.dot((b2["point"] as Vector3) - (a2["point"] as Vector3)))))
 				else:
 					out.append("Açı: " + Units.format_angle(rad_to_deg(acos(clampf(n3.dot(n4), -1.0, 1.0)))))
-			out.append("Toplam alan: " + Units.format_area(float(a2["area"]) + float(b2["area"])))
+			out.append(I18n.t("Toplam alan: ") + Units.format_area(float(a2["area"]) + float(b2["area"])))
 	return out
 
 
@@ -2877,17 +2877,17 @@ func _mass_text() -> String:
 	var pm: Array = m["principal"]
 	var L := Units.length_unit
 	var lines := PackedStringArray()
-	lines.append("Malzeme: " + (doc.material if doc.material != "" else "<belirtilmemiş>"))
-	lines.append("Yoğunluk = " + Units.format_density(Materials.density_of(doc.material)))
-	lines.append("Kütle = " + Units.format_mass(m["mass"]))
-	lines.append("Hacim = " + Units.format_volume(m["volume"]))
-	lines.append("Yüzey alanı = " + Units.format_area(m["area"]))
-	lines.append("Ağırlık merkezi (%s): X = %s  Y = %s  Z = %s" % [L, Units.format_length(m["cx"], false), Units.format_length(m["cy"], false), Units.format_length(m["cz"], false)])
-	lines.append("Atalet tensörü (ağırlık merkezinde, global eksenler):")
+	lines.append(I18n.t("Malzeme: ") + (I18n.t(doc.material) if doc.material != "" else I18n.t("<belirtilmemiş>")))
+	lines.append(I18n.t("Yoğunluk = ") + Units.format_density(Materials.density_of(doc.material)))
+	lines.append(I18n.t("Kütle = ") + Units.format_mass(m["mass"]))
+	lines.append(I18n.t("Hacim = ") + Units.format_volume(m["volume"]))
+	lines.append(I18n.t("Yüzey alanı = ") + Units.format_area(m["area"]))
+	lines.append(I18n.t("Ağırlık merkezi (%s): X = %s  Y = %s  Z = %s") % [L, Units.format_length(m["cx"], false), Units.format_length(m["cy"], false), Units.format_length(m["cz"], false)])
+	lines.append(I18n.t("Atalet tensörü (ağırlık merkezinde, global eksenler):"))
 	var names := ["x", "y", "z"]
 	for i in 3:
 		lines.append("  L%sx = %s   L%sy = %s   L%sz = %s" % [names[i], Units.format_inertia(t[i][0]), names[i], Units.format_inertia(t[i][1]), names[i], Units.format_inertia(t[i][2])])
-	lines.append("Asal atalet momentleri: Px = %s   Py = %s   Pz = %s" % [Units.format_inertia(pm[0]), Units.format_inertia(pm[1]), Units.format_inertia(pm[2])])
+	lines.append(I18n.t("Asal atalet momentleri: Px = %s   Py = %s   Pz = %s") % [Units.format_inertia(pm[0]), Units.format_inertia(pm[1]), Units.format_inertia(pm[2])])
 	return "\n".join(lines)
 
 
@@ -2899,12 +2899,12 @@ func _show_mass_panel() -> void:
 	if m.is_empty():
 		panel.info("Katı model yok.")
 		return
-	panel.info(I18n.t("Malzeme: ") + (doc.material if doc.material != "" else "<belirtilmemiş>"))
+	panel.info(I18n.t("Malzeme: ") + (I18n.t(doc.material) if doc.material != "" else I18n.t("<belirtilmemiş>")))
 	panel.info(I18n.t("Yoğunluk: ") + Units.format_density(Materials.density_of(doc.material)))
 	if doc.material == "":
 		panel.info("Malzeme seçilmediği için yoğunluk 1 g/cm³ (su) varsayıldı.", Color(1.0, 0.75, 0.3))
 	var css: Array = [-1]
-	var csn: Array = ["Global (orijin)"]
+	var csn: Array = [I18n.t("Global (orijin)")]
 	for g in doc.features:
 		if g.type == "refcsys" and not g.suppressed:
 			css.append(g.id)
@@ -2940,7 +2940,7 @@ func _set_material(material_name: String) -> void:
 	doc.checkpoint()
 	doc.material = material_name
 	doc.commit()
-	_set_status(I18n.t("Malzeme: ") + (material_name if material_name != "" else "<belirtilmemiş>"))
+	_set_status(I18n.t("Malzeme: ") + (I18n.t(material_name) if material_name != "" else I18n.t("<belirtilmemiş>")))
 
 
 func _material_ok() -> void:
@@ -2956,7 +2956,7 @@ func _show_material_panel() -> void:
 	var names: Array = ["<belirtilmemiş>"]
 	var keys: Array = [""]
 	for mt in Materials.LIST:
-		names.append(str(mt["group"]) + " — " + str(mt["name"]))
+		names.append(I18n.t(str(mt["group"])) + " — " + I18n.t(str(mt["name"])))
 		keys.append(mt["name"])
 	var sel := maxi(keys.find(_material_choice), 0)
 	var on_pick := func(i: int) -> void:
@@ -2996,7 +2996,7 @@ func _show_doc_props() -> void:
 		props_dialog = AcceptDialog.new()
 		props_dialog.title = "Belge Özellikleri"
 		props_dialog.ok_button_text = "Tamam"
-		props_dialog.add_cancel_button("İptal")
+		props_dialog.add_cancel_button(I18n.t("İptal"))
 		var grid := GridContainer.new()
 		grid.columns = 2
 		grid.add_theme_constant_override("h_separation", 12)
@@ -3012,23 +3012,23 @@ func _show_doc_props() -> void:
 		for k in Units.SYSTEM_ORDER:
 			sys.add_item(Units.SYSTEMS[k]["label"])
 		sys.add_item("Özel")
-		add_row.call("Birim sistemi", sys)
+		add_row.call(I18n.t("Birim sistemi"), sys)
 		var len_ob := OptionButton.new()
 		for u in Units.LENGTH_ORDER:
 			len_ob.add_item(u)
-		add_row.call("Uzunluk birimi", len_ob)
+		add_row.call(I18n.t("Uzunluk birimi"), len_ob)
 		var mass_ob := OptionButton.new()
 		for u in Units.MASS_ORDER:
 			mass_ob.add_item(u)
-		add_row.call("Kütle birimi", mass_ob)
+		add_row.call(I18n.t("Kütle birimi"), mass_ob)
 		var dec := SpinBox.new()
 		dec.min_value = 0
 		dec.max_value = 8
-		add_row.call("Uzunluk ondalık basamak", dec)
+		add_row.call(I18n.t("Uzunluk ondalık basamak"), dec)
 		var adec := SpinBox.new()
 		adec.min_value = 0
 		adec.max_value = 6
-		add_row.call("Açı ondalık basamak", adec)
+		add_row.call(I18n.t("Açı ondalık basamak"), adec)
 		var mat := OptionButton.new()
 		mat.add_item("<belirtilmemiş>")
 		for nm in Materials.names():
@@ -3129,7 +3129,7 @@ func _ask_discard(action: Callable) -> void:
 		action.call()
 		return
 	_confirm_action = action
-	confirm_dialog.dialog_text = "Kaydedilmemiş değişiklikler kaybolacak. Devam edilsin mi?"
+	confirm_dialog.dialog_text = I18n.t("Kaydedilmemiş değişiklikler kaybolacak. Devam edilsin mi?")
 	confirm_dialog.popup_centered()
 
 
@@ -3180,15 +3180,18 @@ func _save() -> void:
 		return
 	_backup_before_save(doc.file_path)
 	var err := doc.save_to(doc.file_path)
-	_set_status((I18n.t("Kaydedildi: ") + doc.file_path) if err == OK else ("Kaydedilemedi! Hata kodu: %d" % err))
+	_set_status((I18n.t("Kaydedildi: ") + doc.file_path) if err == OK else (I18n.t("Kaydedilemedi! Hata kodu: %d") % err))
 	if err == OK:
 		_note_file(doc.file_path, "part")
 
 
 func _file_dialog(save: bool, filters: Array, title: String, action: String, default_name := "") -> void:
 	file_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE if save else FileDialog.FILE_MODE_OPEN_FILE
-	file_dialog.filters = PackedStringArray(filters)
-	file_dialog.title = title
+	var tf := PackedStringArray()
+	for fl in filters:
+		tf.append(I18n.t(str(fl)))
+	file_dialog.filters = tf
+	file_dialog.title = I18n.t(title)
 	file_dialog.current_file = default_name
 	_pending_file_action = action
 	file_dialog.popup_centered_ratio(0.6)
@@ -3232,7 +3235,7 @@ func _on_file_selected(path: String) -> void:
 					editor3d.end()
 				_leave_aux_mode()
 				var aerr := asm_mode.open_file(path)
-				_set_status((I18n.t("Montaj açıldı: ") + path) if aerr == OK else ("Montaj açılamadı (hata %d): %s" % [aerr, path]))
+				_set_status((I18n.t("Montaj açıldı: ") + path) if aerr == OK else (I18n.t("Montaj açılamadı (hata %d): %s") % [aerr, path]))
 				if aerr == OK and oext == "dasmt":
 					# şablon: yeni (adsız) montaj olarak başlar
 					asm_mode.asm.file_path = ""
@@ -3388,17 +3391,17 @@ func _check_recovery() -> void:
 	_recovery_rec = recs[0]
 	if recovery_dialog == null:
 		recovery_dialog = ConfirmationDialog.new()
-		recovery_dialog.title = APP_NAME + " — Belge kurtarma"
+		recovery_dialog.title = APP_NAME + I18n.t(" — Belge kurtarma")
 		recovery_dialog.ok_button_text = "Kurtar"
 		recovery_dialog.cancel_button_text = "Kaydı sil"
 		recovery_dialog.confirmed.connect(func(): recover(_recovery_rec))
 		recovery_dialog.canceled.connect(_on_recovery_canceled)
 		add_child(recovery_dialog)
 	var t := Time.get_datetime_string_from_unix_time(int(float(_recovery_rec.get("time", 0))) + int(Time.get_time_zone_from_system().get("bias", 0)) * 60, true)
-	var kind_s := "montaj" if str(_recovery_rec.get("kind", "")) == "asm" else "parça"
+	var kind_s := I18n.t("montaj") if str(_recovery_rec.get("kind", "")) == "asm" else I18n.t("parça")
 	var src := str(_recovery_rec.get("source", ""))
-	recovery_dialog.dialog_text = "Önceki oturum beklenmedik şekilde kapandı.\n\nOtomatik kaydedilmiş %s bulundu: %s\nKayıt zamanı: %s\n%s\n\nKurtarılsın mı?" % [
-		kind_s, str(_recovery_rec.get("name", "?")), t, ("Dosya: " + src) if src != "" else "(hiç kaydedilmemiş belge)"]
+	recovery_dialog.dialog_text = I18n.t("Önceki oturum beklenmedik şekilde kapandı.\n\nOtomatik kaydedilmiş %s bulundu: %s\nKayıt zamanı: %s\n%s\n\nKurtarılsın mı?") % [
+		kind_s, str(_recovery_rec.get("name", "?")), t, (I18n.t("Dosya: ") + src) if src != "" else I18n.t("(hiç kaydedilmemiş belge)")]
 	recovery_dialog.popup_centered()
 
 
@@ -4102,25 +4105,25 @@ func _brep_count_text() -> String:
 	match editing.type:
 		"draft":
 			var nd: int = (editing.params.get("faces", []) as Array).size()
-			var neu := "seçili" if not (editing.params.get("neutral", {}) as Dictionary).is_empty() else "SEÇİLMEDİ"
-			return "%d yüz, tarafsız yüz %s" % [nd, neu]
+			var neu := I18n.t("seçili") if not (editing.params.get("neutral", {}) as Dictionary).is_empty() else I18n.t("SEÇİLMEDİ")
+			return I18n.t("%d yüz, tarafsız yüz %s") % [nd, neu]
 		"combine":
 			var nb: int = (editing.params.get("bodies", []) as Array).size()
-			return ("%d gövde seçili (ilki ana gövde)" % nb) if nb > 0 else "Gövde seçilmedi — gövdelere tıklayın"
+			return (I18n.t("%d gövde seçili (ilki ana gövde)") % nb) if nb > 0 else I18n.t("Gövde seçilmedi — gövdelere tıklayın")
 		"move_body":
-			return "Gövde seçili" if not (editing.params.get("body", {}) as Dictionary).is_empty() else "Gövde seçilmedi — gövdeye tıklayın"
+			return "Gövde seçili" if not (editing.params.get("body", {}) as Dictionary).is_empty() else I18n.t("Gövde seçilmedi — gövdeye tıklayın")
 		"split":
 			return ""
 		"hole":
 			var npt: int = (editing.params.get("points", []) as Array).size()
-			return ("%d delik konumu" % npt) if npt > 0 else "Konum yok — düzlemsel yüze tıklayın"
+			return (I18n.t("%d delik konumu") % npt) if npt > 0 else I18n.t("Konum yok — düzlemsel yüze tıklayın")
 		"dome":
-			return "Yüz seçili" if not (editing.params.get("face", {}) as Dictionary).is_empty() else "Yüz seçilmedi — düzlemsel yüze tıklayın"
+			return "Yüz seçili" if not (editing.params.get("face", {}) as Dictionary).is_empty() else I18n.t("Yüz seçilmedi — düzlemsel yüze tıklayın")
 	if editing.type == "shell":
 		var nf: int = (editing.params.get("faces", []) as Array).size()
-		return ("%d yüz açık bırakılacak" % nf) if nf > 0 else "Yüz seçilmedi: kapalı (içi boş) gövde"
+		return (I18n.t("%d yüz açık bırakılacak") % nf) if nf > 0 else I18n.t("Yüz seçilmedi: kapalı (içi boş) gövde")
 	var ne: int = (editing.params.get("edges", []) as Array).size()
-	return ("%d kenar seçili" % ne) if ne > 0 else "Kenar seçilmedi — modelde kenarlara tıklayın"
+	return (I18n.t("%d kenar seçili") % ne) if ne > 0 else I18n.t("Kenar seçilmedi — modelde kenarlara tıklayın")
 
 
 func _update_brep_counts() -> void:
@@ -4178,7 +4181,7 @@ func _show_brep_feature_panel() -> void:
 			var on_r := func(v: float) -> void:
 				f.params["r"] = v
 				_preview()
-			panel.number("Yarıçap" if not bool(f.params.get("variable", false)) else "Başlangıç yarıçapı", float(f.params.get("r", 2.0)), on_r, "length", 0.001)
+			panel.number("Yarıçap" if not bool(f.params.get("variable", false)) else I18n.t("Başlangıç yarıçapı"), float(f.params.get("r", 2.0)), on_r, "length", 0.001)
 			var on_var := func(b: bool) -> void:
 				f.params["variable"] = b
 				if b and not f.params.has("r2"):
@@ -4204,7 +4207,7 @@ func _show_brep_feature_panel() -> void:
 				_preview()
 				_show_brep_feature_panel()
 			panel.option("Pah türü", ["Eşit mesafe", "İki mesafe", "Açı - mesafe"], maxi(modes.find(cur_mode), 0), on_mode)
-			panel.number("Mesafe" if cur_mode == "equal" else "Mesafe 1", float(f.params.get("d", 1.0)), on_d, "length", 0.001)
+			panel.number("Mesafe" if cur_mode == "equal" else I18n.t("Mesafe 1"), float(f.params.get("d", 1.0)), on_d, "length", 0.001)
 			if cur_mode == "dist2":
 				var on_d2 := func(v: float) -> void:
 					f.params["d2"] = v
@@ -4242,7 +4245,7 @@ func _show_brep_feature_panel() -> void:
 				f.params["reverse"] = b
 				_preview()
 			panel.check("Çekme yönünü ters çevir", bool(f.params.get("reverse", false)), on_rev)
-			var nb := panel.button("Tarafsız yüzü seçmeyi iptal et" if _draft_neutral_pick else "Tarafsız yüzü seç (sonraki tıklama)", _toggle_draft_neutral, Icons.get_icon("plane", 16))
+			var nb := panel.button("Tarafsız yüzü seçmeyi iptal et" if _draft_neutral_pick else I18n.t("Tarafsız yüzü seç (sonraki tıklama)"), _toggle_draft_neutral, Icons.get_icon("plane", 16))
 			nb.toggle_mode = true
 			nb.button_pressed = _draft_neutral_pick
 			panel.section("Eğim verilecek yüzler")
@@ -4270,7 +4273,7 @@ func _show_brep_feature_panel() -> void:
 			var on_ax := func(i: int) -> void:
 				f.params["axis"] = axes[i]
 				_preview()
-			panel.option("Eksen", ["X ekseni", "Y ekseni", "Z ekseni"], maxi(axes.find(str(f.params.get("axis", "y"))), 0), on_ax)
+			panel.option("Eksen", [I18n.t("X ekseni"), I18n.t("Y ekseni"), I18n.t("Z ekseni")], maxi(axes.find(str(f.params.get("axis", "y"))), 0), on_ax)
 			var on_ma := func(v: float) -> void:
 				f.params["angle"] = v
 				_preview()
@@ -4306,7 +4309,7 @@ func _show_brep_feature_panel() -> void:
 					f.params["size"] = szs[mini(5, szs.size() - 1)] if stds[i] == "ISO" else szs[4]
 				_preview()
 				_show_brep_feature_panel()
-			panel.option("Standart", ["ISO (metrik)", "ANSI (inç)"], maxi(stds.find(str(f.params.get("std", "ISO"))), 0), on_std)
+			panel.option("Standart", [I18n.t("ISO (metrik)"), "ANSI (inç)"], maxi(stds.find(str(f.params.get("std", "ISO"))), 0), on_std)
 			var on_ht := func(i: int) -> void:
 				f.params["htype"] = HoleTable.TYPES[i]
 				_preview()
@@ -4337,14 +4340,14 @@ func _show_brep_feature_panel() -> void:
 				panel.number("Derinlik", float(f.params.get("depth", 10.0)), on_dp, "length", 0.001)
 			var hd := HoleTable.dims(str(f.params.get("std", "ISO")), str(f.params.get("htype", "simple")), str(f.params.get("size", "M6")), str(f.params.get("fit", "normal")))
 			if not hd.is_empty():
-				var txt := "Delik Ø%s" % Units.format_length(float(hd["d"]))
+				var txt := I18n.t("Delik Ø%s") % Units.format_length(float(hd["d"]))
 				match str(f.params.get("htype", "simple")):
 					"cbore":
-						txt += "\nHavşa Ø%s x %s" % [Units.format_length(float(hd["cb_d"])), Units.format_length(float(hd["cb_h"]))]
+						txt += I18n.t("\nHavşa Ø%s x %s") % [Units.format_length(float(hd["cb_d"])), Units.format_length(float(hd["cb_h"]))]
 					"csink":
-						txt += "\nHavşa Ø%s x %s°" % [Units.format_length(float(hd["cs_d"])), str(hd["cs_ang"])]
+						txt += I18n.t("\nHavşa Ø%s x %s°") % [Units.format_length(float(hd["cs_d"])), str(hd["cs_ang"])]
 					"tap":
-						txt += " (kılavuz matkabı)\nKozmetik diş: %s" % str(hd["thread"])
+						txt += I18n.t(" (kılavuz matkabı)\nKozmetik diş: %s") % str(hd["thread"])
 				panel.info(txt, Color(0.85, 0.85, 0.6))
 			panel.section("Konumlar")
 		"dome":
@@ -4383,56 +4386,56 @@ func _show_brep_feature_panel() -> void:
 func _brep_summary(f: CadFeature) -> String:
 	match f.type:
 		"fillet":
-			return "Yarıçap: %s\nKenar: %d" % [Units.format_length(float(f.params.get("r", 0.0))), (f.params.get("edges", []) as Array).size()]
+			return I18n.t("Yarıçap: %s\nKenar: %d") % [Units.format_length(float(f.params.get("r", 0.0))), (f.params.get("edges", []) as Array).size()]
 		"chamfer":
-			return "Mesafe: %s\nKenar: %d" % [Units.format_length(float(f.params.get("d", 0.0))), (f.params.get("edges", []) as Array).size()]
+			return I18n.t("Mesafe: %s\nKenar: %d") % [Units.format_length(float(f.params.get("d", 0.0))), (f.params.get("edges", []) as Array).size()]
 		"shell":
-			return "Kalınlık: %s%s\nAçık yüz: %d" % [Units.format_length(float(f.params.get("t", 0.0))),
-				" (dışa)" if bool(f.params.get("outward", false)) else "", (f.params.get("faces", []) as Array).size()]
+			return I18n.t("Kalınlık: %s%s\nAçık yüz: %d") % [Units.format_length(float(f.params.get("t", 0.0))),
+				I18n.t(" (dışa)") if bool(f.params.get("outward", false)) else "", (f.params.get("faces", []) as Array).size()]
 		"import":
-			return "Dosya: %s\nÖlçek: %s   X/Y/Z: %s / %s / %s%s" % [str(f.params.get("path", "")).get_file(), str(f.params.get("scale", 1.0)),
+			return I18n.t("Dosya: %s\nÖlçek: %s   X/Y/Z: %s / %s / %s%s") % [str(f.params.get("path", "")).get_file(), str(f.params.get("scale", 1.0)),
 				snappedf(float(f.params.get("sx", 1.0)), 0.0001), snappedf(float(f.params.get("sy", 1.0)), 0.0001), snappedf(float(f.params.get("sz", 1.0)), 0.0001),
 				_import_extra_summary(f)]
 		"draft":
-			return "Açı: %s\nYüz: %d" % [Units.format_angle(float(f.params.get("angle", 0.0))), (f.params.get("faces", []) as Array).size()]
+			return I18n.t("Açı: %s\nYüz: %d") % [Units.format_angle(float(f.params.get("angle", 0.0))), (f.params.get("faces", []) as Array).size()]
 		"rib":
-			return "Kalınlık: %s" % Units.format_length(float(f.params.get("t", 0.0)))
+			return I18n.t("Kalınlık: %s") % Units.format_length(float(f.params.get("t", 0.0)))
 		"combine":
-			var opn := {"add": "Ekle", "subtract": "Çıkar", "common": "Kesiştir"}
-			return "İşlem: %s\nGövde: %d" % [opn.get(str(f.params.get("op", "add")), ""), (f.params.get("bodies", []) as Array).size()]
+			var opn := {"add": I18n.t("Ekle"), "subtract": I18n.t("Çıkar"), "common": I18n.t("Kesiştir")}
+			return I18n.t("İşlem: %s\nGövde: %d") % [opn.get(str(f.params.get("op", "add")), ""), (f.params.get("bodies", []) as Array).size()]
 		"move_body":
 			var t3: Array = f.params.get("t", [0, 0, 0])
-			return "Öteleme: (%s, %s, %s)\nDönme: %s%s" % [Units.format_length(float(t3[0]), false), Units.format_length(float(t3[1]), false),
-				Units.format_length(float(t3[2]), false), Units.format_angle(float(f.params.get("angle", 0.0))), "  (kopya)" if bool(f.params.get("copy", false)) else ""]
+			return I18n.t("Öteleme: (%s, %s, %s)\nDönme: %s%s") % [Units.format_length(float(t3[0]), false), Units.format_length(float(t3[1]), false),
+				Units.format_length(float(t3[2]), false), Units.format_angle(float(f.params.get("angle", 0.0))), I18n.t("  (kopya)") if bool(f.params.get("copy", false)) else ""]
 		"split":
 			var spn := RefGeom.resolve_plane(doc, str(f.params.get("plane", "front")))
-			return "Düzlem: %s, ofset %s" % [spn.name if spn else "?", Units.format_length(float(f.params.get("offset", 0.0)))]
+			return I18n.t("Düzlem: %s, ofset %s") % [spn.name if spn else "?", Units.format_length(float(f.params.get("offset", 0.0)))]
 		"hole":
 			var hd := HoleTable.dims(str(f.params.get("std", "ISO")), str(f.params.get("htype", "simple")), str(f.params.get("size", "M6")), str(f.params.get("fit", "normal")))
-			var tn: String = HoleTable.TYPE_NAMES[maxi(HoleTable.TYPES.find(str(f.params.get("htype", "simple"))), 0)]
-			return "%s %s — Ø%s\n%s, %d konum%s" % [str(f.params.get("std", "ISO")), str(f.params.get("size", "")), Units.format_length(float(hd.get("d", 0.0))),
-				tn, (f.params.get("points", []) as Array).size(), ("\nKozmetik diş: " + str(hd.get("thread", ""))) if str(f.params.get("htype", "")) == "tap" else ""]
+			var tn: String = I18n.t(HoleTable.TYPE_NAMES[maxi(HoleTable.TYPES.find(str(f.params.get("htype", "simple"))), 0)])
+			return I18n.t("%s %s — Ø%s\n%s, %d konum%s") % [str(f.params.get("std", "ISO")), str(f.params.get("size", "")), Units.format_length(float(hd.get("d", 0.0))),
+				tn, (f.params.get("points", []) as Array).size(), (I18n.t("\nKozmetik diş: ") + str(hd.get("thread", ""))) if str(f.params.get("htype", "")) == "tap" else ""]
 		"dome":
-			return "Yükseklik: %s" % Units.format_length(float(f.params.get("height", 0.0)))
+			return I18n.t("Yükseklik: %s") % Units.format_length(float(f.params.get("height", 0.0)))
 		"sweep":
 			var pf := doc.get_feature(int((f.params.get("path", {}) as Dictionary).get("id", 0)))
-			return "Yol: %s" % (pf.name if pf else "seçilmedi")
+			return I18n.t("Yol: %s") % (pf.name if pf else I18n.t("seçilmedi"))
 		"loft":
-			return "Profil: %d%s" % [(f.params.get("sketches", []) as Array).size(), "  (düz)" if bool(f.params.get("ruled", false)) else ""]
+			return I18n.t("Profil: %d%s") % [(f.params.get("sketches", []) as Array).size(), I18n.t("  (düz)") if bool(f.params.get("ruled", false)) else ""]
 		"lpattern", "cpattern", "mirror", "tpattern":
-			return "Özellik: %d%s" % [(f.params.get("features", []) as Array).size(), "  (tüm gövdeler)" if bool(f.params.get("bodies", false)) else ""]
+			return I18n.t("Özellik: %d%s") % [(f.params.get("features", []) as Array).size(), I18n.t("  (tüm gövdeler)") if bool(f.params.get("bodies", false)) else ""]
 		"refplane":
-			return "Tür: %s" % {"offset": "Ofset", "angle": "Açılı", "3pt": "Üç nokta"}.get(str(f.params.get("mode", "offset")), "")
+			return I18n.t("Tür: %s") % {"offset": "Ofset", "angle": "Açılı", "3pt": "Üç nokta"}.get(str(f.params.get("mode", "offset")), "")
 		"refaxis", "refpoint", "helix", "refcsys":
 			return f.type_label()
 		"projcurve":
-			return "Taslak: %s" % (doc.get_feature(f.sketch_ref()).name if doc.get_feature(f.sketch_ref()) else "?")
+			return I18n.t("Taslak: %s") % (doc.get_feature(f.sketch_ref()).name if doc.get_feature(f.sketch_ref()) else "?")
 		"wrap":
-			return "Tür: %s, derinlik %s" % [{"emboss": "Kabartma", "deboss": "Oyma", "scribe": "Çizgi"}.get(str(f.params.get("wtype", "emboss")), ""), Units.format_length(float(f.params.get("depth", 0.0)))]
+			return I18n.t("Tür: %s, derinlik %s") % [{"emboss": "Kabartma", "deboss": I18n.t("Oyma"), "scribe": "Çizgi"}.get(str(f.params.get("wtype", "emboss")), ""), Units.format_length(float(f.params.get("depth", 0.0)))]
 		"emboss":
-			return "%s: %s" % ["Gravür" if str(f.params.get("etype", "")) == "deboss" else "Kabartma", Units.format_length(float(f.params.get("depth", 0.0)))]
+			return "%s: %s" % [I18n.t("Gravür") if str(f.params.get("etype", "")) == "deboss" else "Kabartma", Units.format_length(float(f.params.get("depth", 0.0)))]
 		"cvpattern":
-			return "Özellik: %d, örnek: %d" % [(f.params.get("features", []) as Array).size(), int(f.params.get("count", 0))]
+			return I18n.t("Özellik: %d, örnek: %d") % [(f.params.get("features", []) as Array).size(), int(f.params.get("count", 0))]
 	return ""
 
 
@@ -4441,9 +4444,9 @@ func _import_xform_panel(f: CadFeature) -> void:
 	var setp := func(v: float, k: String) -> void:
 		f.params[k] = v
 		_preview()
-	panel.number("Ölçek X", float(f.params.get("sx", 1.0)), setp.bind("sx"), "plain", 1e-6)
-	panel.number("Ölçek Y", float(f.params.get("sy", 1.0)), setp.bind("sy"), "plain", 1e-6)
-	panel.number("Ölçek Z", float(f.params.get("sz", 1.0)), setp.bind("sz"), "plain", 1e-6)
+	panel.number(I18n.t("Ölçek X"), float(f.params.get("sx", 1.0)), setp.bind("sx"), "plain", 1e-6)
+	panel.number(I18n.t("Ölçek Y"), float(f.params.get("sy", 1.0)), setp.bind("sy"), "plain", 1e-6)
+	panel.number(I18n.t("Ölçek Z"), float(f.params.get("sz", 1.0)), setp.bind("sz"), "plain", 1e-6)
 	var setv := func(v: float, k: String, i: int) -> void:
 		var arr: Array = (f.params.get(k, [0.0, 0.0, 0.0]) as Array).duplicate() if f.params.get(k) is Array else [0.0, 0.0, 0.0]
 		arr[i] = v
@@ -4451,18 +4454,18 @@ func _import_xform_panel(f: CadFeature) -> void:
 		_preview()
 	var o: Array = f.params.get("origin", [0.0, 0.0, 0.0]) if f.params.get("origin") is Array else [0.0, 0.0, 0.0]
 	var mv: Array = f.params.get("move", [0.0, 0.0, 0.0]) if f.params.get("move") is Array else [0.0, 0.0, 0.0]
-	panel.section("Ölçek merkezi / öteleme")
+	panel.section(I18n.t("Ölçek merkezi / öteleme"))
 	for i in 3:
-		panel.number("Merkez " + "XYZ"[i], float(o[i]), setv.bind("origin", i), "length")
+		panel.number(I18n.t("Merkez ") + "XYZ"[i], float(o[i]), setv.bind("origin", i), "length")
 	for i2 in 3:
-		panel.number("Öteleme " + "XYZ"[i2], float(mv[i2]), setv.bind("move", i2), "length")
+		panel.number(I18n.t("Öteleme ") + "XYZ"[i2], float(mv[i2]), setv.bind("move", i2), "length")
 	if not StlImport.is_stl(str(f.params.get("path", ""))):
 		return
-	panel.section("Bölgesel uzatma (STL)")
+	panel.section(I18n.t("Bölgesel uzatma (STL)"))
 	var axes := ["x", "y", "z"]
 	if f.params.get("stretch") is Array:
-		panel.info("Çok bölgeli uzatma: %d bölge (makro / dosyadan). Tek bölgeye dönmek için listeyi silin." % (f.params["stretch"] as Array).size(), Color(0.6, 0.65, 0.72))
-		panel.button("Uzatmayı kaldır", func() -> void:
+		panel.info(I18n.t("Çok bölgeli uzatma: %d bölge (makro / dosyadan). Tek bölgeye dönmek için listeyi silin.") % (f.params["stretch"] as Array).size(), Color(0.6, 0.65, 0.72))
+		panel.button(I18n.t("Uzatmayı kaldır"), func() -> void:
 			f.params.erase("stretch")
 			_preview()
 			_show_feature_panel.call_deferred())
@@ -4483,17 +4486,17 @@ func _import_stretch_rows(f: CadFeature, axes: Array) -> void:
 		st[k] = v
 		f.params["stretch"] = st
 		_preview()
-	panel.number("Bölge başı (özgün)", float(st.get("a", 0.0)), sets.bind("a"), "length")
-	panel.number("Bölge sonu (özgün)", float(st.get("b", 0.0)), sets.bind("b"), "length")
-	panel.number("Eklenecek boy", float(st.get("add", 0.0)), sets.bind("add"), "length")
-	panel.info("Bölgedeki köşeler orantılı uzar, sonrası kaydırılır; bölge dışındaki ayrıntılar bozulmaz.", Color(0.6, 0.65, 0.72))
+	panel.number(I18n.t("Bölge başı (özgün)"), float(st.get("a", 0.0)), sets.bind("a"), "length")
+	panel.number(I18n.t("Bölge sonu (özgün)"), float(st.get("b", 0.0)), sets.bind("b"), "length")
+	panel.number(I18n.t("Eklenecek boy"), float(st.get("add", 0.0)), sets.bind("add"), "length")
+	panel.info(I18n.t("Bölgedeki köşeler orantılı uzar, sonrası kaydırılır; bölge dışındaki ayrıntılar bozulmaz."), Color(0.6, 0.65, 0.72))
 
 
 ## Koruma bölgesi: bölgedeki (bant içindeki) ayrıntılar ölçeklenmez, yalnızca ötelenir
 func _import_protect_rows(f: CadFeature, axes: Array) -> void:
-	panel.section("Koruma bölgesi (STL)")
+	panel.section(I18n.t("Koruma bölgesi (STL)"))
 	var on := f.params.get("protect") is Dictionary and not (f.params["protect"] as Dictionary).is_empty()
-	panel.check("Bölgeyi ölçekleme (yalnızca taşı)", on, func(v: bool) -> void:
+	panel.check(I18n.t("Bölgeyi ölçekleme (yalnızca taşı)"), on, func(v: bool) -> void:
 		if v:
 			f.params["protect"] = {"axis": "x", "a": 0.0, "b": 10.0, "blend": 10.0}
 		else:
@@ -4508,16 +4511,16 @@ func _import_protect_rows(f: CadFeature, axes: Array) -> void:
 		f.params["protect"] = pr.duplicate(true)
 		_preview()
 	panel.option("Eksen", ["X", "Y", "Z"], maxi(axes.find(str(pr.get("axis", "x"))), 0), func(i: int) -> void: setp.call(axes[i], "axis"))
-	panel.number("Bölge başı (özgün)", float(pr.get("a", 0.0)), func(v: float) -> void: setp.call(v, "a"), "length")
-	panel.number("Bölge sonu (özgün)", float(pr.get("b", 0.0)), func(v: float) -> void: setp.call(v, "b"), "length")
-	panel.number("Geçiş boyu", float(pr.get("blend", 10.0)), func(v: float) -> void: setp.call(v, "blend"), "length", 0.0)
+	panel.number(I18n.t("Bölge başı (özgün)"), float(pr.get("a", 0.0)), func(v: float) -> void: setp.call(v, "a"), "length")
+	panel.number(I18n.t("Bölge sonu (özgün)"), float(pr.get("b", 0.0)), func(v: float) -> void: setp.call(v, "b"), "length")
+	panel.number(I18n.t("Geçiş boyu"), float(pr.get("blend", 10.0)), func(v: float) -> void: setp.call(v, "blend"), "length", 0.0)
 	var bands: Array = pr.get("bands", []) if pr.get("bands") is Array else []
 	var nb := 0
 	for b in bands:
 		if b is Array and not (b as Array).is_empty():
 			nb += 1
-	panel.info(("Kesit bantları: %d (makro / dosyadan); bant yoksa kesitin tamamı korunur." % nb) +
-		("\nÖteleme: %s" % str(pr["offset"]) if pr.get("offset") is Array else "\nÖteleme: normal dönüşümle bölge merkezine göre"), Color(0.6, 0.65, 0.72))
+	panel.info((I18n.t("Kesit bantları: %d (makro / dosyadan); bant yoksa kesitin tamamı korunur.") % nb) +
+		(I18n.t("\nÖteleme: %s") % str(pr["offset"]) if pr.get("offset") is Array else I18n.t("\nÖteleme: normal dönüşümle bölge merkezine göre")), Color(0.6, 0.65, 0.72))
 
 
 ## İçe aktarma özetindeki ek satırlar (uzatma, kademeli büyütme, koruma bölgesi)
@@ -4525,18 +4528,18 @@ func _import_extra_summary(f: CadFeature) -> String:
 	var out := ""
 	var st: Variant = f.params.get("stretch")
 	if st is Dictionary and absf(float((st as Dictionary).get("add", 0.0))) > 1e-9:
-		out += "\nUzatma: %s +%s mm" % [str(st.get("axis", "x")).to_upper(), snappedf(float(st.get("add", 0.0)), 0.01)]
+		out += I18n.t("\nUzatma: %s +%s mm") % [str(st.get("axis", "x")).to_upper(), snappedf(float(st.get("add", 0.0)), 0.01)]
 	elif st is Array and not (st as Array).is_empty():
 		var tot := 0.0
 		for r in st:
 			if r is Dictionary:
 				tot += float((r as Dictionary).get("add", 0.0))
-		out += "\nUzatma: %d bölge, toplam %+.2f mm" % [(st as Array).size(), tot]
+		out += I18n.t("\nUzatma: %d bölge, toplam %+.2f mm") % [(st as Array).size(), tot]
 	if f.params.get("taper") is Dictionary and not (f.params["taper"] as Dictionary).is_empty():
-		out += "\nKademeli kesit büyütme"
+		out += I18n.t("\nKademeli kesit büyütme")
 	var pr: Variant = f.params.get("protect")
 	if pr is Dictionary and not (pr as Dictionary).is_empty():
-		out += "\nKoruma bölgesi: %s %s → %s" % [str(pr.get("axis", "x")).to_upper(), snappedf(float(pr.get("a", 0.0)), 0.01), snappedf(float(pr.get("b", 0.0)), 0.01)]
+		out += I18n.t("\nKoruma bölgesi: %s %s → %s") % [str(pr.get("axis", "x")).to_upper(), snappedf(float(pr.get("a", 0.0)), 0.01), snappedf(float(pr.get("b", 0.0)), 0.01)]
 	return out
 
 
@@ -4582,7 +4585,7 @@ func _on_export_done(r: Dictionary) -> void:
 	if bool(r.get("ok", false)):
 		_set_status(I18n.t("Kaydedildi: %s (%s)") % [str(r.get("path", "")), _fmt_bytes(int(r.get("bytes", 0)))])
 	else:
-		_set_status(I18n.t("Dışa aktarılamadı: ") + str(r.get("error", "bilinmeyen hata")))
+		_set_status(I18n.t("Dışa aktarılamadı: ") + str(r.get("error", I18n.t("bilinmeyen hata"))))
 
 
 func _save_export_settings() -> void:
@@ -4599,7 +4602,7 @@ func _show_kernel_panel() -> void:
 	panel.title("Geometri Çekirdeği", Icons.get_icon("kernel", 22))
 	panel.info(k.status_text())
 	var modes := ["auto", "occ", "csg"]
-	var names := ["Otomatik (OpenCASCADE varsa)", "OpenCASCADE (B-rep)", "CSG (Godot, yalnızca üçgen ağ)"]
+	var names := [I18n.t("Otomatik (OpenCASCADE varsa)"), "OpenCASCADE (B-rep)", I18n.t("CSG (Godot, yalnızca üçgen ağ)")]
 	var on_mode := func(i: int) -> void:
 		k.set_mode(modes[i])
 		_refresh_panel()
@@ -4614,7 +4617,7 @@ func _show_kernel_panel() -> void:
 	panel.section("STL dışa aktarma (OpenCASCADE)")
 	var qnames: Array = []
 	for q in STL_PRESETS:
-		qnames.append("%s (sapma %s mm, %s°)" % [q[0], str(q[1]), str(q[2])])
+		qnames.append(I18n.t("%s (sapma %s mm, %s°)") % [I18n.t(str(q[0])), str(q[1]), str(q[2])])
 	var on_q := func(i: int) -> void:
 		_stl_quality = i
 		_save_export_settings()
@@ -4628,7 +4631,7 @@ func _show_kernel_panel() -> void:
 		panel.section("Model (B-rep)")
 		var solids := int(m.exact_mass.get("solids", 0)) if not m.exact_mass.is_empty() else 0
 		panel.info(I18n.t("Gövde: %d   Yüz: %d   Kenar: %d\nGörüntü üçgeni: %d   Geçerli: %s") % [solids, m.brep_faces.size(), m.brep_edges.size(),
-			m.tri_count(), "evet" if bool(m.brep_src.get("valid", true)) else "HAYIR"])
+			m.tri_count(), "evet" if bool(m.brep_src.get("valid", true)) else I18n.t("HAYIR")])
 	panel.spacer()
 	panel.button("Kapat", _leave_aux_mode)
 
@@ -4640,7 +4643,7 @@ var _draft_neutral_pick := false
 
 func _toggle_draft_neutral() -> void:
 	_draft_neutral_pick = not _draft_neutral_pick
-	_set_status("Tarafsız yüz için modelde düzlemsel bir yüze tıklayın." if _draft_neutral_pick else "Eğim verilecek yüzlere tıklayın.")
+	_set_status(I18n.t("Tarafsız yüz için modelde düzlemsel bir yüze tıklayın.") if _draft_neutral_pick else I18n.t("Eğim verilecek yüzlere tıklayın."))
 	_show_brep_feature_panel()
 
 
@@ -4725,21 +4728,21 @@ static func _fmt_pt(v: Variant) -> String:
 
 func _set_pick_target(t: String) -> void:
 	_pick_target = "" if _pick_target == t else t
-	var msgs := {"vertex": "Modelde bir köşeye tıklayın.", "face": "Hedef yüze tıklayın.", "dir1": "Yön için doğrusal bir kenara (veya düzlemsel yüze) tıklayın.",
-		"dir2": "Yön 2 için doğrusal bir kenara tıklayın.", "axis": "Eksen için dairesel/doğrusal kenara veya silindirik yüze tıklayın.",
-		"mirror_plane": "Aynalama düzlemi olarak düzlemsel bir yüze tıklayın.", "base_face": "Taban olarak düzlemsel bir yüze tıklayın.",
-		"points3": "Üç köşeye sırayla tıklayın.", "pt2": "İki köşeye sırayla tıklayın.", "refpoint": "Bir köşeye tıklayın.",
-		"ref_line": "Doğrusal/dairesel kenara veya silindirik yüze tıklayın.",
-		"tan_face": "Teğet düzlemin değeceği noktaya (silindir, koni, küre veya düzlem yüzünde) tıklayın.",
-		"csys_o": "Koordinat sisteminin başlangıcı için bir köşeye tıklayın.",
-		"csx": "X ekseni için doğrusal bir kenara tıklayın.", "csy": "Y ekseni için doğrusal bir kenara tıklayın."}
-	_set_status(str(msgs.get(_pick_target, "")) if _pick_target != "" else "Seçim iptal edildi.")
+	var msgs := {"vertex": I18n.t("Modelde bir köşeye tıklayın."), "face": I18n.t("Hedef yüze tıklayın."), "dir1": I18n.t("Yön için doğrusal bir kenara (veya düzlemsel yüze) tıklayın."),
+		"dir2": I18n.t("Yön 2 için doğrusal bir kenara tıklayın."), "axis": I18n.t("Eksen için dairesel/doğrusal kenara veya silindirik yüze tıklayın."),
+		"mirror_plane": I18n.t("Aynalama düzlemi olarak düzlemsel bir yüze tıklayın."), "base_face": I18n.t("Taban olarak düzlemsel bir yüze tıklayın."),
+		"points3": I18n.t("Üç köşeye sırayla tıklayın."), "pt2": I18n.t("İki köşeye sırayla tıklayın."), "refpoint": I18n.t("Bir köşeye tıklayın."),
+		"ref_line": I18n.t("Doğrusal/dairesel kenara veya silindirik yüze tıklayın."),
+		"tan_face": I18n.t("Teğet düzlemin değeceği noktaya (silindir, koni, küre veya düzlem yüzünde) tıklayın."),
+		"csys_o": I18n.t("Koordinat sisteminin başlangıcı için bir köşeye tıklayın."),
+		"csx": I18n.t("X ekseni için doğrusal bir kenara tıklayın."), "csy": I18n.t("Y ekseni için doğrusal bir kenara tıklayın.")}
+	_set_status(str(msgs.get(_pick_target, "")) if _pick_target != "" else I18n.t("Seçim iptal edildi."))
 	_show_feature_panel()
 
 
 func _pick_button(label: String, target: String) -> void:
 	var cb := func(): _set_pick_target(target)
-	var b := panel.button(("Seçimi iptal et" if _pick_target == target else label), cb, Icons.get_icon("select", 16))
+	var b := panel.button((I18n.t("Seçimi iptal et") if _pick_target == target else label), cb, Icons.get_icon("select", 16))
 	b.toggle_mode = true
 	b.button_pressed = _pick_target == target
 
@@ -4878,11 +4881,11 @@ func _pick_for_target(pos: Vector2) -> void:
 func _extrude_extra_controls(f: CadFeature, cur: String) -> void:
 	if cur == "vertex":
 		panel.info(I18n.t("Köşe: ") + _fmt_pt(f.params.get("vertex")), Color(0.55, 0.85, 1.0))
-		_pick_button("Köşe seç (modele tıkla)", "vertex")
+		_pick_button(I18n.t("Köşe seç (modele tıkla)"), "vertex")
 	if cur == "face" or cur == "face_offset":
 		var fc: Dictionary = f.params.get("face", {})
-		panel.info(I18n.t("Hedef yüz: ") + ("seçili" if not fc.is_empty() else "seçilmedi"), Color(0.55, 0.85, 1.0))
-		_pick_button("Hedef yüzü seç (modele tıkla)", "face")
+		panel.info(I18n.t("Hedef yüz: ") + (I18n.t("seçili") if not fc.is_empty() else I18n.t("seçilmedi")), Color(0.55, 0.85, 1.0))
+		_pick_button(I18n.t("Hedef yüzü seç (modele tıkla)"), "face")
 		if cur == "face_offset":
 			var on_fo := func(v: float) -> void:
 				f.params["face_off"] = v
@@ -5020,7 +5023,7 @@ func _show_sweep_panel() -> void:
 			f.params["path"] = paths[0]
 	panel.section("Seçenekler")
 	var excl: Array = [f.sketch_ref(), int((f.params.get("path", {}) as Dictionary).get("id", -1))]
-	_curve_option("Kılavuz eğrisi", "guide", excl, true)
+	_curve_option(I18n.t("Kılavuz eğrisi"), "guide", excl, true)
 	if not (f.params.get("guide", {}) as Dictionary).is_empty():
 		panel.info("Profil, kılavuza değecek şekilde ölçeklenir.", Color(0.55, 0.6, 0.66))
 	else:
@@ -5061,7 +5064,7 @@ func _show_loft_panel() -> void:
 		f.params["ruled"] = b
 		_preview()
 	panel.check("Düz geçiş (doğrusal yüzeyler)", bool(f.params.get("ruled", false)), on_r)
-	_curve_option("Kılavuz eğrisi", "guide", sel, true)
+	_curve_option(I18n.t("Kılavuz eğrisi"), "guide", sel, true)
 	if not (f.params.get("guide", {}) as Dictionary).is_empty():
 		panel.info("Kılavuz eğrisi her profilden geçmelidir.", Color(0.55, 0.6, 0.66))
 	if not f.is_cut():
@@ -5141,13 +5144,13 @@ func _axis_option(label: String, key: String, def: String, pick: String) -> void
 		labels.append(c[0])
 		vals.append(c[1])
 	if cur.begins_with("v:"):
-		labels.append("Seçilen kenar / eksen")
+		labels.append(I18n.t("Seçilen kenar / eksen"))
 		vals.append(cur)
 	var on_sel := func(i: int) -> void:
 		f.params[key] = vals[i]
 		_preview()
 	panel.option(label, labels, maxi(vals.find(cur), 0), on_sel)
-	_pick_button("Modelden seç", pick)
+	_pick_button(I18n.t("Modelden seç"), pick)
 
 
 func _show_pattern_panel() -> void:
@@ -5241,7 +5244,7 @@ func _show_pattern_panel() -> void:
 				vals.append(c[1])
 			var custom := f.params.get("plane_face") is Dictionary and not (f.params["plane_face"] as Dictionary).is_empty()
 			if custom:
-				labels.append("Seçilen yüz")
+				labels.append(I18n.t("Seçilen yüz"))
 				vals.append("custom")
 			var cur := "custom" if custom else str(f.params.get("plane", "right"))
 			var on_pl := func(i: int) -> void:
@@ -5251,7 +5254,7 @@ func _show_pattern_panel() -> void:
 				_preview()
 				_show_feature_panel()
 			panel.option("Düzlem", labels, maxi(vals.find(cur), 0), on_pl)
-			_pick_button("Düzlemsel yüz seç", "mirror_plane")
+			_pick_button(I18n.t("Düzlemsel yüz seç"), "mirror_plane")
 		"cvpattern":
 			panel.section("Eğri")
 			_curve_option("Eğri", "curve", [], false)
@@ -5364,7 +5367,7 @@ func _show_ref_panel() -> void:
 			var md := str(p.get("mode", "offset"))
 			if md == "tangent":
 				panel.info(I18n.t("Teğet nokta: %s") % _fmt_pt(p.get("tan_p")), Color(0.55, 0.85, 1.0))
-				_pick_button("Yüzeyde nokta seç (silindir, koni, düzlem...)", "tan_face")
+				_pick_button(I18n.t("Yüzeyde nokta seç (silindir, koni, düzlem...)"), "tan_face")
 			elif md != "3pt":
 				var face_base := p.get("base_plane") is Dictionary
 				var choices := RefGeom.plane_choices(doc, f.id if f.id > 0 else -1)
@@ -5374,7 +5377,7 @@ func _show_ref_panel() -> void:
 					labels.append(c[0])
 					vals.append(c[1])
 				if face_base:
-					labels.append("Seçilen yüz")
+					labels.append(I18n.t("Seçilen yüz"))
 					vals.append("face")
 				var on_b := func(i: int) -> void:
 					if vals[i] != "face":
@@ -5383,7 +5386,7 @@ func _show_ref_panel() -> void:
 					_preview()
 					_show_feature_panel()
 				panel.option("Taban", labels, maxi(vals.find("face" if face_base else str(p.get("base", "front"))), 0), on_b)
-				_pick_button("Taban için yüz seç", "base_face")
+				_pick_button(I18n.t("Taban için yüz seç"), "base_face")
 				if md == "offset":
 					var on_d := func(v: float) -> void:
 						p["dist"] = v
@@ -5407,7 +5410,7 @@ func _show_ref_panel() -> void:
 				var pts: Array = p.get("points", [])
 				for i in 3:
 					panel.info(I18n.t("Nokta %d: %s") % [i + 1, _fmt_pt(pts[i]) if i < pts.size() else "—"])
-				_pick_button("Üç köşe seç", "points3")
+				_pick_button(I18n.t("Üç köşe seç"), "points3")
 		"refaxis":
 			var modes2 := ["std", "2pt", "line", "planes"]
 			var on_m2 := func(i: int) -> void:
@@ -5424,10 +5427,10 @@ func _show_ref_panel() -> void:
 					panel.option("Eksen", ["X", "Y", "Z"], maxi(axs2.find(str(p.get("axis", "y"))), 0), on_a)
 				"2pt":
 					panel.info(I18n.t("Nokta 1: %s\nNokta 2: %s") % [_fmt_pt(p.get("p1")), _fmt_pt(p.get("p2"))])
-					_pick_button("İki köşe seç", "pt2")
+					_pick_button(I18n.t("İki köşe seç"), "pt2")
 				"line":
 					panel.info(I18n.t("Eksen: %s yönünde %s") % [_fmt_pt(p.get("o")), _fmt_pt(p.get("d"))])
-					_pick_button("Kenar / silindir seç", "ref_line")
+					_pick_button(I18n.t("Kenar / silindir seç"), "ref_line")
 				"planes":
 					var choices2 := RefGeom.plane_choices(doc, f.id if f.id > 0 else -1)
 					var labels2: Array = []
@@ -5454,20 +5457,20 @@ func _show_ref_panel() -> void:
 					p["o"] = q
 					_preview()
 				panel.number(["X", "Y", "Z"][ai], float(ov[ai]), on_o, "length")
-			_pick_button("Köşe seç", "csys_o")
+			_pick_button(I18n.t("Köşe seç"), "csys_o")
 			panel.section("Eksenler")
-			_axis_option("X ekseni", "x", "x", "csx")
+			_axis_option(I18n.t("X ekseni"), "x", "x", "csx")
 			var on_fx := func(b: bool) -> void:
 				p["flip_x"] = b
 				_preview()
 			panel.check("X'i ters çevir", bool(p.get("flip_x", false)), on_fx)
-			_axis_option("Y ekseni", "y", "y", "csy")
+			_axis_option(I18n.t("Y ekseni"), "y", "y", "csy")
 			var on_fy := func(b: bool) -> void:
 				p["flip_y"] = b
 				_preview()
 			panel.check("Y'yi ters çevir", bool(p.get("flip_y", false)), on_fy)
 			if RefGeom.csys_of(doc, f).is_empty():
-				f.error = "X ve Y eksenleri paralel olamaz"
+				f.error = I18n.t("X ve Y eksenleri paralel olamaz")
 			else:
 				f.error = ""
 			panel.info("Kütle özellikleri bu koordinat sistemine göre raporlanabilir.", Color(0.55, 0.6, 0.66))
@@ -5481,7 +5484,7 @@ func _show_ref_panel() -> void:
 					p["p"] = q
 					_preview()
 				panel.number(["X", "Y", "Z"][ai], float(pv[ai]), on_c, "length")
-			_pick_button("Köşe seç", "refpoint")
+			_pick_button(I18n.t("Köşe seç"), "refpoint")
 		"helix":
 			var sks: Array = []
 			var names: Array = []
@@ -5564,7 +5567,7 @@ func _show_ref_panel() -> void:
 				f.error = hs["error"]
 	var err := f.error
 	if f.type == "refplane" and f.plane == null:
-		err = "Düzlem tanımı geçersiz"
+		err = I18n.t("Düzlem tanımı geçersiz")
 	_error_label = panel.info((I18n.t("Hata: ") + err) if err != "" else "", Color(1.0, 0.45, 0.4))
 	panel.spacer()
 	panel.info("Enter: Tamam   Esc: İptal", Color(0.55, 0.6, 0.66))
@@ -5708,7 +5711,7 @@ func _set_rollback(index: int) -> void:
 	doc.checkpoint()
 	doc.set_rollback(index)
 	doc.commit()
-	_set_status("Geri alma çubuğu kaldırıldı: tüm özellikler hesaplanıyor." if doc.rollback < 0 else "Geri alma çubuğu: ilk %d özellik etkin, sonrakiler hesaplanmıyor." % doc.rollback)
+	_set_status(I18n.t("Geri alma çubuğu kaldırıldı: tüm özellikler hesaplanıyor.") if doc.rollback < 0 else I18n.t("Geri alma çubuğu: ilk %d özellik etkin, sonrakiler hesaplanmıyor.") % doc.rollback)
 
 
 func _move_feature(id: int, new_index: int) -> bool:
@@ -5742,18 +5745,18 @@ func _on_tree_move(data: Dictionary, target_id: int, after: bool) -> void:
 
 
 func _show_parents(f: CadFeature) -> void:
-	var lines: Array = ["%s (%s)" % [f.name, f.type_label()], "", "Ebeveynler:"]
+	var lines: Array = ["%s (%s)" % [f.name, f.type_label()], "", I18n.t("Ebeveynler:")]
 	var ps := doc.parents_of(f)
 	if ps.is_empty():
-		lines.append("  (yok)")
+		lines.append(I18n.t("  (yok)"))
 	for pid in ps:
 		var g := doc.get_feature(pid)
 		lines.append("  • %s (%s)" % [g.name, g.type_label()])
 	lines.append("")
-	lines.append("Çocuklar:")
+	lines.append(I18n.t("Çocuklar:"))
 	var cs := doc.children_of(f.id)
 	if cs.is_empty():
-		lines.append("  (yok)")
+		lines.append(I18n.t("  (yok)"))
 	for cid in cs:
 		var g2 := doc.get_feature(cid)
 		lines.append("  • %s (%s)" % [g2.name, g2.type_label()])
@@ -5839,13 +5842,13 @@ func _show_sketchfeat_panel() -> void:
 	match f.type:
 		"projcurve":
 			panel.section("Hedef yüz")
-			panel.info(I18n.t("Yüz: ") + ("seçili" if not (f.params.get("face", {}) as Dictionary).is_empty() else "seçilmedi"), Color(0.55, 0.85, 1.0))
-			_pick_button("Hedef yüzü seç", "face")
+			panel.info(I18n.t("Yüz: ") + (I18n.t("seçili") if not (f.params.get("face", {}) as Dictionary).is_empty() else I18n.t("seçilmedi")), Color(0.55, 0.85, 1.0))
+			_pick_button(I18n.t("Hedef yüzü seç"), "face")
 			panel.info("Taslak eğrisi, taslak düzlemine dik doğrultuda yüze izdüşürülür. Sonuç süpürme yolu, kılavuz veya çoğaltma eğrisi olarak kullanılabilir.", Color(0.55, 0.6, 0.66))
 		"wrap":
 			panel.section("Silindirik yüz")
-			panel.info(I18n.t("Yüz: ") + ("seçili" if not (f.params.get("face", {}) as Dictionary).is_empty() else "seçilmedi"), Color(0.55, 0.85, 1.0))
-			_pick_button("Silindirik yüzü seç", "face")
+			panel.info(I18n.t("Yüz: ") + (I18n.t("seçili") if not (f.params.get("face", {}) as Dictionary).is_empty() else I18n.t("seçilmedi")), Color(0.55, 0.85, 1.0))
+			_pick_button(I18n.t("Silindirik yüzü seç"), "face")
 			var wts := ["emboss", "deboss", "scribe"]
 			var on_wt := func(i: int) -> void:
 				f.params["wtype"] = wts[i]
@@ -6106,7 +6109,7 @@ func _dw_request_hlr() -> void:
 ## OpenCASCADE yoksa: ağ özellik kenarlarının izdüşümü (gizli çizgi kaldırılmaz).
 func _dw_mesh_geo(r: Dictionary) -> Dictionary:
 	if r.has("section"):
-		return {"error": "Kesit görünüşü OpenCASCADE çekirdeği gerektirir"}
+		return {"error": I18n.t("Kesit görünüşü OpenCASCADE çekirdeği gerektirir")}
 	var ax := {"dir": Drawing.v3(r["dir"]), "x": Drawing.v3(r["x"])}
 	var vis: Array = []
 	var fe := _dw_feature_edges()
@@ -6250,7 +6253,7 @@ func _dw_cmd(c: String) -> void:
 			var revs: Array = sh.get("revs", [])
 			var letters := "ABCDEFGHJKLMNPRSTUVWXYZ"
 			var ar := func() -> void:
-				revs.append({"rev": letters[revs.size() % letters.length()], "desc": "Açıklama", "date": Time.get_date_string_from_system(), "by": ""})
+				revs.append({"rev": letters[revs.size() % letters.length()], "desc": DrawingRender.sheet_t("Açıklama"), "date": Time.get_date_string_from_system(), "by": ""})
 				sh["revs"] = revs
 				var t: Dictionary = sh.get("title", {})
 				t["rev"] = revs[revs.size() - 1]["rev"]
@@ -6459,7 +6462,7 @@ func _dw_on_click(p: Vector2, dbl: bool, _shift: bool) -> void:
 		"balloon", "gdt", "datum", "weld":
 			_dw_pts.append(p)
 			if _dw_pts.size() == 1:
-				_set_status(I18n.t("Şimdi %s yerine tıklayın.") % {"balloon": "balonun", "gdt": "çerçevenin", "datum": "etiketin", "weld": "referans çizgisinin"}[_dw_tool])
+				_set_status(I18n.t("Şimdi %s yerine tıklayın.") % {"balloon": I18n.t("balonun"), "gdt": I18n.t("çerçevenin"), "datum": I18n.t("etiketin"), "weld": I18n.t("referans çizgisinin")}[_dw_tool])
 				return
 			var tgt := Drawing.a2(_dw_pts[0])
 			var pos2 := Drawing.a2(_dw_pts[1])
@@ -6569,7 +6572,7 @@ func _dw_dim_click(p: Vector2) -> void:
 			return
 		s["view"] = int(v["id"])
 		_dw_pts.append(s)
-		_set_status({"point": "İkinci köşeye tıklayın.", "circle": "Boyutun yerine tıklayın (çap).", "line": "Başka bir kenara (açı) veya boyutun yerine tıklayın."}[s["kind"]])
+		_set_status({"point": I18n.t("İkinci köşeye tıklayın."), "circle": I18n.t("Boyutun yerine tıklayın (çap)."), "line": I18n.t("Başka bir kenara (açı) veya boyutun yerine tıklayın.")}[s["kind"]])
 		return
 	var first: Dictionary = _dw_pts[0]
 	var v2 := Drawing.find_view(sh, int(first["view"]))
@@ -6846,7 +6849,7 @@ func _dw_sheet_panel(sh: Dictionary) -> void:
 	panel.option("Sayfa ölçeği", sc_names, maxi(Drawing.SCALES.find(float(sh.get("scale", 1.0))), 0), on_sc)
 	panel.section("Antet")
 	var t: Dictionary = sh.get("title", {})
-	for fld in [["company", "Firma"], ["title", "Başlık (boş: parça adı)"], ["number", "Resim no"], ["drawn", "Çizen"], ["checked", "Kontrol"], ["date", "Tarih"], ["material", "Malzeme (boş: parça)"]]:
+	for fld in [["company", I18n.t("Firma")], ["title", I18n.t("Başlık (boş: parça adı)")], ["number", I18n.t("Resim no")], ["drawn", I18n.t("Çizen")], ["checked", I18n.t("Kontrol")], ["date", I18n.t("Tarih")], ["material", I18n.t("Malzeme (boş: parça)")]]:
 		var key: String = fld[0]
 		var on_t := func(txt: String) -> void: _dw_set(t, key, txt)
 		panel.text_field(fld[1], str(t.get(key, "")), on_t)
@@ -6859,9 +6862,9 @@ func _dw_sheet_panel(sh: Dictionary) -> void:
 		var on_rd := func(txt: String) -> void: _dw_set(r, "desc", txt)
 		panel.text_field("Rev " + str(r.get("rev", "")), str(r.get("desc", "")), on_rd)
 	panel.section("Çıktı")
-	panel.button("PDF olarak kaydet", func(): _dw_cmd("dw_pdf"), Icons.get_icon("dw_pdf", 16))
-	panel.button("SVG olarak kaydet", func(): _dw_cmd("dw_svg"), Icons.get_icon("export", 16))
-	panel.button("DXF olarak kaydet", func(): _dw_cmd("dw_dxf"), Icons.get_icon("export", 16))
+	panel.button(I18n.t("PDF olarak kaydet"), func(): _dw_cmd("dw_pdf"), Icons.get_icon("dw_pdf", 16))
+	panel.button(I18n.t("SVG olarak kaydet"), func(): _dw_cmd("dw_svg"), Icons.get_icon("export", 16))
+	panel.button(I18n.t("DXF olarak kaydet"), func(): _dw_cmd("dw_dxf"), Icons.get_icon("export", 16))
 	panel.info("DWG için DXF dosyasını AutoCAD veya ücretsiz ODA File Converter ile dönüştürün.", Color(0.55, 0.6, 0.66))
 
 
@@ -6938,19 +6941,19 @@ func _dw_ann_panel(sh: Dictionary, a: Dictionary) -> void:
 	if a.is_empty():
 		return
 	var tp := str(a.get("type", ""))
-	var titles := {"dim": "Boyut", "note": "Not", "balloon": "Balon", "surface": "Yüzey pürüzlülüğü", "gdt": "Geometrik tolerans",
-		"datum": "Datum", "weld": "Kaynak sembolü", "centermark": "Merkez işareti", "centerline": "Merkez çizgisi"}
+	var titles := {"dim": "Boyut", "note": "Not", "balloon": "Balon", "surface": I18n.t("Yüzey pürüzlülüğü"), "gdt": I18n.t("Geometrik tolerans"),
+		"datum": "Datum", "weld": I18n.t("Kaynak sembolü"), "centermark": I18n.t("Merkez işareti"), "centerline": "Merkez çizgisi"}
 	panel.title(str(titles.get(tp, tp)), Icons.get_icon("dimension", 22))
 	match tp:
 		"dim":
 			var val := DrawingRender.dim_value(_dwd(), sh, a)
-			panel.info(I18n.t("Değer: ") + (Units.format_angle(val) if str(a.get("kind", "")) == "ang" else Units.format_length(val)) + ("   (model boyutu — ilişkili)" if a.has("src") else ""), Color(0.55, 0.85, 1.0))
+			panel.info(I18n.t("Değer: ") + (Units.format_angle(val) if str(a.get("kind", "")) == "ang" else Units.format_length(val)) + (I18n.t("   (model boyutu — ilişkili)") if a.has("src") else ""), Color(0.55, 0.85, 1.0))
 			if str(a.get("kind", "")) in ["h", "v", "a"]:
 				var ks := ["h", "v", "a"]
 				var on_k := func(i: int) -> void: _dw_set(a, "kind", ks[i])
 				panel.option("Yön", ["Yatay", "Dikey", "Hizalı"], maxi(ks.find(str(a.get("kind", "a"))), 0), on_k)
 			var on_tx := func(txt: String) -> void: _dw_set(a, "text", txt)
-			panel.text_field("Metni geçersiz kıl", str(a.get("text", "")), on_tx, "(boş: ölçülen değer)")
+			panel.text_field("Metni geçersiz kıl", str(a.get("text", "")), on_tx, I18n.t("(boş: ölçülen değer)"))
 			var tol: Dictionary = a.get("tol", {})
 			var tts := ["none", "sym", "dev", "limit", "fit"]
 			var on_tt := func(i: int) -> void:
@@ -7006,7 +7009,7 @@ func _dw_ann_panel(sh: Dictionary, a: Dictionary) -> void:
 			panel.check("Çap bölgesi (Ø)", bool(a.get("dia", false)), on_d)
 			var mods := ["", "M", "L"]
 			var on_md := func(i: int) -> void: _dw_set(a, "mod", mods[i])
-			panel.option("Malzeme koşulu", ["Yok", "Ⓜ Maksimum (MMC)", "Ⓛ Minimum (LMC)"], maxi(mods.find(str(a.get("mod", ""))), 0), on_md)
+			panel.option("Malzeme koşulu", ["Yok", I18n.t("Ⓜ Maksimum (MMC)"), I18n.t("Ⓛ Minimum (LMC)")], maxi(mods.find(str(a.get("mod", ""))), 0), on_md)
 			var on_dt := func(txt: String) -> void:
 				var parts: Array = []
 				for x in txt.split(","):
@@ -7029,7 +7032,7 @@ func _dw_ann_panel(sh: Dictionary, a: Dictionary) -> void:
 			var on_aa := func(b: bool) -> void: _dw_set(a, "all_around", b)
 			panel.check("Çepeçevre", bool(a.get("all_around", false)), on_aa)
 			var on_nt := func(txt: String) -> void: _dw_set(a, "note", txt)
-			panel.text_field("Kuyruk notu", str(a.get("note", "")), on_nt, "ör. 111 (elektrik ark)")
+			panel.text_field("Kuyruk notu", str(a.get("note", "")), on_nt, I18n.t("ör. 111 (elektrik ark)"))
 	panel.button("Sil", _dw_delete, Icons.get_icon("delete", 16))
 
 
@@ -7085,7 +7088,7 @@ func _dw_demo(stage: int) -> void:
 	var anns: Array = [
 		{"type": "dim", "view": int(front["id"]), "kind": "h", "p1": [x0, y0], "p2": [x1, y0], "off": [(x0 + x1) * 0.5, y0 - 10.0]},
 		{"type": "dim", "view": int(front["id"]), "kind": "v", "p1": [x0, y0], "p2": [x0, y1], "off": [x0 - 10.0, (y0 + y1) * 0.5], "tol": {"type": "sym", "up": 0.1}},
-		{"type": "note", "pos": [20.0, 40.0], "text": "NOTLAR:\n1. KESKİN KÖŞELERİ KIRIN.\n2. GENEL TOLERANS ISO 2768-m.", "h": 3.0},
+		{"type": "note", "pos": [20.0, 40.0], "text": DrawingRender.sheet_t("NOTLAR:\n1. KESKİN KÖŞELERİ KIRIN.\n2. GENEL TOLERANS ISO 2768-m."), "h": 3.0},
 		{"type": "surface", "pos": Drawing.a2(Drawing.view_to_sheet(sh, front, Vector2(x0, y0)) + Vector2(-16, -10)), "target": Drawing.a2(Drawing.view_to_sheet(sh, front, Vector2(x0 + bb.size.x * 0.05, y0))), "ra": "3.2", "mode": "removal"},
 		{"type": "datum", "pos": Drawing.a2(Drawing.view_to_sheet(sh, front, Vector2(x0 + bb.size.x * 0.75, y0)) + Vector2(0, -14)), "target": Drawing.a2(Drawing.view_to_sheet(sh, front, Vector2(x0 + bb.size.x * 0.75, y0))), "label": "A"},
 		{"type": "gdt", "pos": Drawing.a2(Drawing.view_to_sheet(sh, front, Vector2(x1, y1)) + Vector2(8, 6)), "target": Drawing.a2(Drawing.view_to_sheet(sh, front, Vector2(x1, y1 - bb.size.y * 0.2))), "sym": "perpendicularity", "tol": "0.05", "dia": false, "mod": "", "datums": ["A"]},
@@ -7105,7 +7108,7 @@ func _dw_demo(stage: int) -> void:
 	for a in anns:
 		a["id"] = Drawing.next_id(sh)
 		sh["anns"].append(a)
-	sh["revs"] = [{"rev": "A", "desc": "İlk yayın", "date": Time.get_date_string_from_system(), "by": "DIY"}]
+	sh["revs"] = [{"rev": "A", "desc": DrawingRender.sheet_t("İlk yayın"), "date": Time.get_date_string_from_system(), "by": "DIY"}]
 	var t: Dictionary = sh["title"]
 	t["company"] = "DIY.CAD"
 	t["number"] = "DC-0001"
@@ -7259,7 +7262,7 @@ func open_part_from_assembly(path: String, comp_id := -1) -> void:
 		_show_toolbar(0)
 		if comp_id >= 0:
 			asm_mode.show_context(comp_id)
-		_set_status((I18n.t("Parça düzenleniyor: %s — bitince 'Montaj' sekmesine tıklayın (parça kaydedilir).") % path.get_file()) if err == OK else ("Parça açılamadı: " + path))
+		_set_status((I18n.t("Parça düzenleniyor: %s — bitince 'Montaj' sekmesine tıklayın (parça kaydedilir).") % path.get_file()) if err == OK else (I18n.t("Parça açılamadı: ") + path))
 	if doc.dirty:
 		_ask_discard(go)
 	else:
@@ -7270,7 +7273,7 @@ func _return_to_assembly() -> void:
 	var p := doc.file_path
 	if doc.dirty and p != "":
 		var err := doc.save_to(p)
-		_set_status((I18n.t("Parça kaydedildi: ") + p) if err == OK else "Parça kaydedilemedi!")
+		_set_status((I18n.t("Parça kaydedildi: ") + p) if err == OK else I18n.t("Parça kaydedilemedi!"))
 	asm_mode.enter()
 	if p != "":
 		asm_mode.reload_part_file(p)

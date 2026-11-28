@@ -627,7 +627,7 @@ static func _mark_bad(active: Array, geo: Dictionary, X: Dictionary, tol: float,
 			E.append(to_world(gl[k], X[int(m["refs"][k]["comp"])]))
 		var r := mate_residuals(m, E, X)
 		var bad := _norm_inf(r) > tol * 10.0
-		m["error"] = "Eşleştirme sağlanamıyor (çelişkili veya geometri uygun değil)" if bad else ""
+		m["error"] = I18n.t("Eşleştirme sağlanamıyor (çelişkili veya geometri uygun değil)") if bad else ""
 		if bad:
 			result["bad"].append(int(m["id"]))
 

@@ -26,19 +26,19 @@ const STEEL_DENSITY := 7.85   # g/cm³
 static func label(ptype: String, size: String) -> String:
 	match ptype:
 		"shs":
-			return "Kare profil %s" % size
+			return I18n.t("Kare profil %s") % size
 		"rhs":
-			return "Dikdörtgen profil %s" % size
+			return I18n.t("Dikdörtgen profil %s") % size
 		"chs":
-			return "Boru Ø%s" % size
+			return I18n.t("Boru Ø%s") % size
 		"angle":
-			return "Köşebent L%s" % size
+			return I18n.t("Köşebent L%s") % size
 		"upn":
 			return "UPN %s" % size
 		"ipe":
 			return "IPE %s" % size
 		"flat":
-			return "Lama %s" % size
+			return I18n.t("Lama %s") % size
 	return "%s %s" % [ptype, size]
 
 
@@ -149,7 +149,7 @@ static func _half_extent(prof: Dictionary, u: Vector3, v: Vector3, d: Vector3) -
 static func build(doc: CadDocument, f: CadFeature) -> Dictionary:
 	var segs := segments(doc, f)
 	if segs.is_empty():
-		return {"error": "Taslakta çizgi yok (2B taslak veya 3B taslak seçin)"}
+		return {"error": I18n.t("Taslakta çizgi yok (2B taslak veya 3B taslak seçin)")}
 	var ptype := str(f.params.get("ptype", "shs"))
 	var psize := str(f.params.get("psize", "40x40x3"))
 	var prof := profile(ptype, psize)
@@ -342,7 +342,7 @@ static func write_cutlist_csv(path: String, rows: Array) -> Error:
 	if fa == null:
 		return FileAccess.get_open_error()
 	fa.store_buffer(PackedByteArray([0xEF, 0xBB, 0xBF]))
-	fa.store_line("No;Profil;Boy (mm);Kesim açıları;Adet;Birim kütle (g);Toplam kütle (g)")
+	fa.store_line(I18n.t("No;Profil;Boy (mm);Kesim açıları;Adet;Birim kütle (g);Toplam kütle (g)"))
 	var i := 1
 	for r in rows:
 		fa.store_line("%d;%s;%.1f;%s;%d;%.1f;%.1f" % [i, r["profile"], float(r["length"]), "%s° / %s°" % [str(r["angles"][0]), str(r["angles"][1])],

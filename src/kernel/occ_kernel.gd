@@ -53,11 +53,11 @@ func start() -> void:
 	if state == "starting" or state == "ready":
 		return
 	if not is_installed():
-		_fail("OpenCASCADE ortamı bulunamadı (occ_env). Kurulum: README → Faz 4")
+		_fail(I18n.t("OpenCASCADE ortamı bulunamadı (occ_env). Kurulum: README → Faz 4"))
 		return
 	var d := OS.execute_with_pipe(python_path(), PackedStringArray(["-u", "-X", "utf8", server_path()]), false)
 	if d.is_empty() or not d.has("stdio"):
-		_fail("Python süreci başlatılamadı")
+		_fail(I18n.t("Python süreci başlatılamadı"))
 		return
 	_io = d["stdio"]
 	_err = d["stderr"]
@@ -247,7 +247,7 @@ static func _profile(f: CadFeature, sk_f: CadFeature, d: Dictionary) -> bool:
 		return true
 	var prof := sk_f.sketch.extract_profiles()
 	if (prof["loops"] as Array).is_empty():
-		f.error = "Taslakta kapalı kontur yok"
+		f.error = I18n.t("Taslakta kapalı kontur yok")
 		return false
 	var loops: Array = []
 	for L in prof["loops"]:
@@ -264,28 +264,28 @@ static func _sweep_path(doc: CadDocument, f: CadFeature) -> Dictionary:
 ## Eğri başvurusu {kind, id} → sunucu yolu: taslak zinciri, 3B taslak, helis/spiral veya projeksiyon eğrisi.
 static func _curve_ref(doc: CadDocument, path: Variant) -> Dictionary:
 	if not (path is Dictionary) or not (path as Dictionary).has("id"):
-		return {"error": "Eğri (yol) seçilmedi"}
+		return {"error": I18n.t("Eğri (yol) seçilmedi")}
 	var pf := doc.get_feature(int(path["id"]))
 	if pf == null:
-		return {"error": "Seçili eğri bulunamadı"}
+		return {"error": I18n.t("Seçili eğri bulunamadı")}
 	if pf.type == "projcurve":
 		return {"kind": "projcurve", "id": pf.id}
 	match pf.type:
 		"sketch":
 			var ch := pf.sketch.curve_chains()
 			if ch.is_empty():
-				return {"error": "Yol taslağında çizgi yok"}
+				return {"error": I18n.t("Yol taslağında çizgi yok")}
 			return {"kind": "sketch", "plane": _plane_dict(pf.plane), "chains": ch}
 		"sketch3d":
 			if pf.sketch3d == null or pf.sketch3d.lines.is_empty():
-				return {"error": "Yol 3B taslağı boş"}
+				return {"error": I18n.t("Yol 3B taslağı boş")}
 			return {"kind": "sketch3d", "polys": RefGeom.sketch3d_polys(pf.sketch3d)}
 		"helix":
 			var h := RefGeom.helix_spec(doc, pf)
 			if h.has("error"):
 				return h
 			return {"kind": "helix", "helix": h}
-	return {"error": "Yol olarak taslak, 3B taslak veya helis seçin"}
+	return {"error": I18n.t("Yol olarak taslak, 3B taslak veya helis seçin")}
 
 
 static func _pattern_fields(doc: CadDocument, f: CadFeature, d: Dictionary) -> bool:
@@ -294,7 +294,7 @@ static func _pattern_fields(doc: CadDocument, f: CadFeature, d: Dictionary) -> b
 		"lpattern":
 			var a1 := RefGeom.resolve_axis(doc, p.get("dir1", "x"))
 			if a1.is_empty():
-				f.error = "Yön 1 geçersiz"
+				f.error = I18n.t("Yön 1 geçersiz")
 				return false
 			d["dir1"] = _v3((a1["d"] as Vector3) * (-1.0 if bool(p.get("rev1", false)) else 1.0))
 			d["count1"] = int(p.get("count1", 3))
@@ -303,7 +303,7 @@ static func _pattern_fields(doc: CadDocument, f: CadFeature, d: Dictionary) -> b
 			if d["use2"]:
 				var a2 := RefGeom.resolve_axis(doc, p.get("dir2", "z"))
 				if a2.is_empty():
-					f.error = "Yön 2 geçersiz"
+					f.error = I18n.t("Yön 2 geçersiz")
 					return false
 				d["dir2"] = _v3((a2["d"] as Vector3) * (-1.0 if bool(p.get("rev2", false)) else 1.0))
 				d["count2"] = int(p.get("count2", 2))
@@ -311,7 +311,7 @@ static func _pattern_fields(doc: CadDocument, f: CadFeature, d: Dictionary) -> b
 		"cpattern":
 			var ax := RefGeom.resolve_axis(doc, p.get("axis", "y"))
 			if ax.is_empty():
-				f.error = "Dönme ekseni geçersiz"
+				f.error = I18n.t("Dönme ekseni geçersiz")
 				return false
 			d["axis_o"] = _v3(ax["o"])
 			d["axis_d"] = _v3((ax["d"] as Vector3) * (-1.0 if bool(p.get("rev", false)) else 1.0))
@@ -325,7 +325,7 @@ static func _pattern_fields(doc: CadDocument, f: CadFeature, d: Dictionary) -> b
 			else:
 				var mp := RefGeom.resolve_plane(doc, str(p.get("plane", "right")))
 				if mp == null:
-					f.error = "Aynalama düzlemi geçersiz"
+					f.error = I18n.t("Aynalama düzlemi geçersiz")
 					return false
 				d["plane_o"] = _v3(mp.origin)
 				d["plane_n"] = _v3(mp.normal())
@@ -364,7 +364,7 @@ static func build_payload(doc: CadDocument, feats: Array) -> Array:
 			"extrude", "revolve", "sweep":
 				var sk_f := doc.get_feature(f.sketch_ref())
 				if sk_f == null or sk_f.sketch == null:
-					f.error = "Taslak bulunamadı"
+					f.error = I18n.t("Taslak bulunamadı")
 					continue
 				var thin := float(f.params.get("thin", 0.0)) if f.type == "extrude" else 0.0
 				if thin > 0.0:
@@ -373,7 +373,7 @@ static func build_payload(doc: CadDocument, feats: Array) -> Array:
 					d["thin_side"] = str(f.params.get("thin_side", "mid"))
 					d["chains"] = sk_f.sketch.curve_chains()
 					if (d["chains"] as Array).is_empty():
-						f.error = "Taslakta çizgi yok"
+						f.error = I18n.t("Taslakta çizgi yok")
 						continue
 				elif not _profile(f, sk_f, d):
 					continue
@@ -389,7 +389,7 @@ static func build_payload(doc: CadDocument, feats: Array) -> Array:
 					if gd is Dictionary and (gd as Dictionary).has("id"):
 						var gp := _curve_ref(doc, gd)
 						if gp.has("error"):
-							f.error = "Kılavuz: " + str(gp["error"])
+							f.error = I18n.t("Kılavuz: ") + str(gp["error"])
 							continue
 						d["guide"] = gp
 					d["twist"] = float(f.params.get("twist", 0.0))
@@ -441,7 +441,7 @@ static func build_payload(doc: CadDocument, feats: Array) -> Array:
 			"rib":
 				var rs := doc.get_feature(f.sketch_ref())
 				if rs == null or rs.sketch == null:
-					f.error = "Taslak bulunamadı"
+					f.error = I18n.t("Taslak bulunamadı")
 					continue
 				_plane_fields(rs, d)
 				d["curves"] = rs.sketch.all_curves()
@@ -472,7 +472,7 @@ static func build_payload(doc: CadDocument, feats: Array) -> Array:
 						continue
 					secs.append({"plane": _plane_dict(ls.plane), "curves": outer})
 				if secs.size() < 2:
-					f.error = "En az iki kapalı profilli taslak seçin"
+					f.error = I18n.t("En az iki kapalı profilli taslak seçin")
 					continue
 				d["sections"] = secs
 				d["ruled"] = bool(f.params.get("ruled", false))
@@ -480,7 +480,7 @@ static func build_payload(doc: CadDocument, feats: Array) -> Array:
 				if lg is Dictionary and (lg as Dictionary).has("id"):
 					var lgp := _curve_ref(doc, lg)
 					if lgp.has("error"):
-						f.error = "Kılavuz: " + str(lgp["error"])
+						f.error = I18n.t("Kılavuz: ") + str(lgp["error"])
 						continue
 					d["guide"] = lgp
 				d["cut"] = f.is_cut()
@@ -494,7 +494,7 @@ static func build_payload(doc: CadDocument, feats: Array) -> Array:
 				var dims := HoleTable.dims(str(f.params.get("std", "ISO")), str(f.params.get("htype", "simple")),
 					str(f.params.get("size", "M6")), str(f.params.get("fit", "normal")))
 				if dims.is_empty():
-					f.error = "Bilinmeyen delik ölçüsü"
+					f.error = I18n.t("Bilinmeyen delik ölçüsü")
 					continue
 				d.merge(dims, true)
 				d["htype"] = str(f.params.get("htype", "simple"))
@@ -509,7 +509,7 @@ static func build_payload(doc: CadDocument, feats: Array) -> Array:
 			"projcurve", "wrap", "emboss":
 				var ps := doc.get_feature(f.sketch_ref())
 				if ps == null or ps.sketch == null:
-					f.error = "Taslak bulunamadı"
+					f.error = I18n.t("Taslak bulunamadı")
 					continue
 				if f.type == "projcurve":
 					f.runtime.erase("poly")
@@ -522,7 +522,7 @@ static func build_payload(doc: CadDocument, feats: Array) -> Array:
 					for L in ps.sketch.extract_profiles()["loops"]:
 						wl.append({"depth": L["depth"], "parent": L["parent"], "curves": L["curves"]})
 					if wl.is_empty():
-						f.error = "Taslakta kapalı kontur yok"
+						f.error = I18n.t("Taslakta kapalı kontur yok")
 						continue
 					d["loops"] = wl
 					d["face"] = f.params.get("face", {})
@@ -537,7 +537,7 @@ static func build_payload(doc: CadDocument, feats: Array) -> Array:
 			"split":
 				var spl := RefGeom.resolve_plane(doc, str(f.params.get("plane", "front")))
 				if spl == null:
-					f.error = "Bölme düzlemi geçersiz"
+					f.error = I18n.t("Bölme düzlemi geçersiz")
 					continue
 				var sn := spl.normal()
 				d["plane_o"] = _v3(spl.origin + sn * float(f.params.get("offset", 0.0)))
@@ -563,7 +563,7 @@ static func build_payload(doc: CadDocument, feats: Array) -> Array:
 				if f.params.has("refine"):
 					d["refine"] = float(f.params["refine"])
 			_:
-				f.error = "Desteklenmeyen özellik"
+				f.error = I18n.t("Desteklenmeyen özellik")
 				continue
 		out.append(d)
 	return out
@@ -601,13 +601,13 @@ func _process(delta: float) -> void:
 		if msg is Dictionary:
 			_handle(msg)
 	if state == "starting" and Time.get_ticks_msec() - _start_ms > STARTUP_TIMEOUT_MS:
-		_fail("OpenCASCADE sunucusu zamanında başlamadı")
+		_fail(I18n.t("OpenCASCADE sunucusu zamanında başlamadı"))
 		return
 	_alive_check += delta
 	if _alive_check > 1.0:
 		_alive_check = 0.0
 		if _pid > 0 and not OS.is_process_running(_pid):
-			_fail("OpenCASCADE sunucusu beklenmedik şekilde kapandı")
+			_fail(I18n.t("OpenCASCADE sunucusu beklenmedik şekilde kapandı"))
 
 
 func _handle(msg: Dictionary) -> void:
@@ -619,7 +619,7 @@ func _handle(msg: Dictionary) -> void:
 			ready_changed.emit(true)
 			_flush_queue()
 		else:
-			_fail(str(msg.get("error", "OCP yüklenemedi")))
+			_fail(str(msg.get("error", I18n.t("OCP yüklenemedi"))))
 		return
 	if not _inflight.has(id):
 		return
@@ -697,7 +697,7 @@ static func _sig_changed(a: Array, b: Array) -> bool:
 func _on_rebuilt(msg: Dictionary, meta: Dictionary) -> void:
 	var feats: Dictionary = meta["feats"]
 	if not bool(msg.get("ok", false)):
-		var err := str(msg.get("error", "Çekirdek hatası"))
+		var err := str(msg.get("error", I18n.t("Çekirdek hatası")))
 		push_warning("OCC rebuild: " + err + "\n" + str(msg.get("trace", "")))
 		for fid in feats:
 			var f0: CadFeature = feats[fid]

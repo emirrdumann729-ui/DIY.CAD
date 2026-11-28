@@ -61,7 +61,7 @@ static func xform_of(p: Dictionary) -> Dictionary:
 		var a := float(r.get("a", 0.0))
 		var b := float(r.get("b", 0.0))
 		if b - a <= 1e-9:
-			x["error"] = "Uzatma bölgesi geçersiz (bitiş > başlangıç olmalı)"
+			x["error"] = I18n.t("Uzatma bölgesi geçersiz (bitiş > başlangıç olmalı)")
 			return x
 		sl.append([ax, a, b, 1.0 + float(r["add"]) / s[ax] / (b - a)])
 	x["st"] = sl
@@ -71,7 +71,7 @@ static func xform_of(p: Dictionary) -> Dictionary:
 		var ta := float(tp.get("a", 0.0))
 		var tb := float(tp.get("b", 0.0))
 		if tb - ta <= 1e-9:
-			x["error"] = "Kademeli büyütme bölgesi geçersiz (bitiş > başlangıç olmalı)"
+			x["error"] = I18n.t("Kademeli büyütme bölgesi geçersiz (bitiş > başlangıç olmalı)")
 			return x
 		var k1 := (tax + 1) % 3
 		var k2 := (tax + 2) % 3
@@ -98,7 +98,7 @@ static func _protect_of(pr: Dictionary, x: Dictionary) -> String:
 	var pa := float(pr.get("a", 0.0))
 	var pb := float(pr.get("b", 0.0))
 	if pb - pa <= 1e-9:
-		return "Koruma bölgesi geçersiz (bitiş > başlangıç olmalı)"
+		return I18n.t("Koruma bölgesi geçersiz (bitiş > başlangıç olmalı)")
 	var raw: Array = pr["bands"] if pr.get("bands") is Array else []
 	var bands: Array = []
 	for j in 2:
@@ -112,7 +112,7 @@ static func _protect_of(pr: Dictionary, x: Dictionary) -> String:
 			var lo := -INF if typeof(r[1]) == TYPE_NIL else float(r[1])
 			var hi := INF if typeof(r[2]) == TYPE_NIL else float(r[2])
 			if hi < lo:
-				return "Koruma bandı geçersiz (üst sınır alttan küçük)"
+				return I18n.t("Koruma bandı geçersiz (üst sınır alttan küçük)")
 			rows.append([float(r[0]), lo, hi])
 		rows.sort_custom(func(r1, r2): return float(r1[0]) < float(r2[0]))
 		bands.append(rows)

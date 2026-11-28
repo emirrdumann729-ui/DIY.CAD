@@ -181,7 +181,7 @@ static func axis_value_of_line(o: Vector3, d: Vector3) -> String:
 
 ## Seçim listeleri: [[etiket, değer], ...]
 static func axis_choices(doc: CadDocument, before_id := -1) -> Array:
-	var out: Array = [["X ekseni", "x"], ["Y ekseni", "y"], ["Z ekseni", "z"]]
+	var out: Array = [[I18n.t("X ekseni"), "x"], [I18n.t("Y ekseni"), "y"], [I18n.t("Z ekseni"), "z"]]
 	for f in doc.features:
 		if before_id >= 0 and f.id == before_id:
 			break
@@ -214,7 +214,7 @@ static func update(doc: CadDocument, preview: CadFeature = null) -> void:
 		match f.type:
 			"refplane":
 				f.plane = plane_of(doc, f, preview)
-				f.error = "" if f.plane != null else "Düzlem tanımı geçersiz"
+				f.error = "" if f.plane != null else I18n.t("Düzlem tanımı geçersiz")
 			"sketch":
 				if f.plane != null and f.plane.ref >= 0:
 					var rf := _find(doc, f.plane.ref, preview)
@@ -231,14 +231,14 @@ static func helix_spec(doc: CadDocument, f: CadFeature) -> Dictionary:
 	var p := f.params
 	var sk := doc.get_feature(int(p.get("sketch", 0)))
 	if sk == null or sk.sketch == null:
-		return {"error": "Helis için daire içeren bir taslak seçin"}
+		return {"error": I18n.t("Helis için daire içeren bir taslak seçin")}
 	var circ := {}
 	for e in sk.sketch.entities:
 		if e["type"] == "circle":
 			circ = e
 			break
 	if circ.is_empty():
-		return {"error": "Taslakta daire yok (helis çapı daireden alınır)"}
+		return {"error": I18n.t("Taslakta daire yok (helis çapı daireden alınır)")}
 	var r := float(circ["r"])
 	var c: Vector3 = sk.plane.to_world(sk.sketch.points[circ["c"]])
 	var axis := sk.plane.normal() * (-1.0 if bool(p.get("reverse", false)) else 1.0)
@@ -256,12 +256,12 @@ static func helix_spec(doc: CadDocument, f: CadFeature) -> Dictionary:
 			"height_pitch":
 				turns = height / maxf(pitch, 1e-9)
 	if r <= 0.0 or pitch <= 0.0 or turns <= 0.0:
-		return {"error": "Helis ölçüleri geçersiz"}
+		return {"error": I18n.t("Helis ölçüleri geçersiz")}
 	var taper := 0.0 if spiral else float(p.get("taper", 0.0))
 	if absf(taper) >= 89.0:
-		return {"error": "Koniklik açısı ±89°'den küçük olmalı"}
+		return {"error": I18n.t("Koniklik açısı ±89°'den küçük olmalı")}
 	if not spiral and r + tan(deg_to_rad(taper)) * pitch * turns <= 0.0:
-		return {"error": "Konik helisin yarıçapı sıfırın altına iniyor"}
+		return {"error": I18n.t("Konik helisin yarıçapı sıfırın altına iniyor")}
 	return {"o": arr(c), "axis": arr(axis.normalized()), "xdir": arr(xdir), "r": r, "pitch": pitch,
 		"turns": turns, "ccw": not bool(p.get("cw", false)), "spiral": spiral, "taper": taper}
 

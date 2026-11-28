@@ -1337,3 +1337,680 @@ Stüdyo	Studio
 Gün ışığı	Daylight
 Gece	Night
 HDRI dosyası	HDRI file
+Bileşene tıklayın: seç. Sol tuşla sürükleyin: eşleştirmelere uyarak taşı.	Click a component: select. Drag with the left button: move it while respecting the mates.
+Eşleştirilecek yüz / kenarlara tıklayın (ağaçtan ana düzlemler de seçilebilir); sonra paneldeki türü seçin.	Click the faces / edges to mate (main planes can also be picked in the tree); then choose the type in the panel.
+Bileşeni sürükleyerek taşıyın veya panelden sayısal öteleme girin.	Drag the component to move it or enter a numeric translation in the panel.
+Bileşeni sürükleyerek döndürün (eşleştirmeler korunur) veya panelden açı girin.	Drag the component to rotate it (mates are kept) or enter an angle in the panel.
+Patlatılacak bileşenlere tıklayın, yön ve mesafe seçip 'Adım ekle'.	Click the components to explode, choose direction and distance, then 'Add step'.
+Motor: döndürülecek bileşenin silindirik yüzüne tıklayın, hız ve süreyi girip Oynat.	Motor: click the cylindrical face of the component to rotate, enter speed and duration, then Play.
+Çoğaltılacak bileşenlere tıklayın; yön, sayı ve aralığı panelden seçip Uygula.	Click the components to pattern; choose direction, count and spacing in the panel, then Apply.
+Parça dosyası bulunamadı	Part file not found
+Alt montaj iç içe çok derin (döngü?)	Subassembly nesting too deep (loop?)
+Alt montaj dosyası açılamadı	Could not open the subassembly file
+Alt parça yüklenemedi: 	Could not load the sub-part: 
+Parça geometrisi boş	Part geometry is empty
+Montajı Farklı Kaydet	Save Assembly As
+Geri alınacak işlem yok.	Nothing to undo.
+Yinelenecek işlem yok.	Nothing to redo.
+*.dcad, *.dasm ; Parça veya alt montaj	*.dcad, *.dasm ; Part or subassembly
+*.dcad ; DIY.CAD Parça	*.dcad ; DIY.CAD Part
+Yeni parça (montaj içinde)	New part (inside the assembly)
+Montajı Kaydet	Save Assembly
+CSV yazılamadı	Could not write the CSV
+ — eşleştirmelerle konumlandırın	 — position it with mates
+Alt montaj açılamadı.	Could not open the subassembly.
+Girişim yok.	No interference.
+No;Parça;Adet;Malzeme;Birim kütle (g);Toplam kütle (g)	No;Part;Qty;Material;Unit mass (g);Total mass (g)
+\nBüyük montaj modu: kenarlar yalnız seçili bileşende	\nLarge assembly mode: edges only on the selected component
+  (tam tanımlı)	  (fully defined)
+1-2: genişlik yüzleri (yerleşen bileşen), 3-4: kanal yüzleri	1-2: width faces (placed component), 3-4: channel faces
+1-2: simetrik yüz/eksenler, 3: simetri düzlemi	1-2: symmetric faces/axes, 3: symmetry plane
+1-2: eksenler (silindirik yüzler), 3-4: çakışacak düzlemler	1-2: axes (cylindrical faces), 3-4: planes to coincide
+1: dişli 1 silindirik yüzü, 2: dişli 2 silindirik yüzü (oran yarıçaplardan)	1: cylindrical face of gear 1, 2: cylindrical face of gear 2 (ratio from the radii)
+1: kremayerin doğrusal kenarı, 2: pinyonun silindirik yüzü	1: linear edge of the rack, 2: cylindrical face of the pinion
+1: pim (silindir veya nokta), 2: kanal orta çizgisi (doğrusal kenar)	1: pin (cylinder or point), 2: slot center line (linear edge)
+Gelişmiş	Advanced
+aynı yön	same direction
+ters yön	opposite direction
+Bileşeni Döndür	Rotate Component
+<seçilmedi>	<not selected>
+Doğrusal	Linear
+Modelden seç (kenar, eksen, yüz)	Pick from the model (edge, axis, face)
+Modelde kenar / silindirik yüz / düzlemsel yüze tıklayın.	Click an edge / cylindrical face / planar face on the model.
+Çakışık	Coincident
+Teğet	Tangent
+Eş merkezli	Concentric
+Mesafe sınırı	Distance limit
+Açı sınırı	Angle limit
+Menteşe	Hinge
+Dişli	Gear
+Düzlemsel yüz	Planar face
+Konik yüz	Conical face
+Küresel yüz	Spherical face
+Doğrusal kenar	Linear edge
+Eşleştirme sağlanamıyor (çelişkili veya geometri uygun değil)	Mate cannot be satisfied (conflicting or unsuitable geometry)
+Düz Karbon Çelik (AISI 1020)	Plain Carbon Steel (AISI 1020)
+Paslanmaz Çelik (AISI 304)	Stainless Steel (AISI 304)
+Altıgen başlı cıvata (ISO 4017)	Hex bolt (ISO 4017)
+Altıgen somun (ISO 4032)	Hex nut (ISO 4032)
+Düz pul (ISO 7089)	Flat washer (ISO 7089)
+Sabit bilyalı rulman (60xx / 62xx)	Deep groove ball bearing (60xx / 62xx)
+Alüminyum 6061	Aluminum 6061
+Değişken '%s' hesaplanamadı.	Variable '%s' could not be evaluated.
+%s: '%s' hesaplanamadı.	%s: '%s' could not be evaluated.
+%s: denklem değerleri taslağın geometrisiyle çelişiyor.	%s: equation values conflict with the sketch geometry.
+D1@%s: '%s' hesaplanamadı.	D1@%s: '%s' could not be evaluated.
+Döndürme Patron/Taban	Revolved Boss/Base
+Süpürme Patron/Taban	Swept Boss/Base
+Düz delik	Simple hole
+Havşa başlı (silindirik havşa)	Counterbore (cylindrical)
+Havşa (konik)	Countersink (conical)
+Kılavuz (diş)	Tapped (thread)
+Sıkı	Tight
+Gevşek	Loose
+Bilinmeyen dışa aktarma uzantısı: 	Unknown export extension: 
+Bir makro zaten çalışıyor	A macro is already running
+Makro derlenemedi (sözdizimi hatası, konsol çıktısına bakın): 	Could not compile the macro (syntax error, see the console output): 
+Makro dosyası bulunamadı: 	Macro file not found: 
+Dökme Demir (Gri)	Gray Cast Iron
+Alüminyum 7075	Aluminum 7075
+Pirinç	Brass
+Bakır	Copper
+Plastik (3B baskı)	Plastic (3D printing)
+Meşe	Oak
+Ahşap	Wood
+Çam	Pine
+Kontrplak (Huş)	Plywood (Birch)
+derlenemedi (sözdizimi hatası)	could not be compiled (syntax error)
+Düzlem tanımı geçersiz	Invalid plane definition
+Helis için daire içeren bir taslak seçin	Select a sketch containing a circle for the helix
+Taslakta daire yok (helis çapı daireden alınır)	The sketch has no circle (the helix diameter comes from the circle)
+Helis ölçüleri geçersiz	Invalid helix dimensions
+Koniklik açısı ±89°'den küçük olmalı	Taper angle must be less than ±89°
+Konik helisin yarıçapı sıfırın altına iniyor	The conical helix radius drops below zero
+Öğe bulunamadı.	Entity not found.
+Bu öğe türü kırpılamaz (yalnızca çizgi, daire, yay).	This entity type cannot be trimmed (only lines, circles, arcs).
+Kesişim yok: öğe tamamen silindi.	No intersection: the entity was deleted entirely.
+Dairede iki kesişim yok: tamamen silindi.	The circle has no two intersections: deleted entirely.
+Kırpıldı.	Trimmed.
+Uzatma çizgi ve yaylar için çalışır.	Extend works for lines and arcs.
+Uzatılacak bir sınır bulunamadı.	No boundary to extend to was found.
+Uzatıldı.	Extended.
+Yayın uzatılacağı bir sınır bulunamadı.	No boundary to extend the arc to was found.
+Yay uzatıldı.	Arc extended.
+Dönüştürülecek kenar bulunamadı.	No edge to convert was found.
+%d öğe dönüştürüldü (kenarlara sabitlendi).	%d entities converted (fixed to the edges).
+%d kenar dönüştürüldü (B-rep, kenarlara sabitlendi).	%d edges converted (B-rep, fixed to the edges).
+Ofset uygulanamadı (seçim boş veya mesafe yayları tersine çeviriyor).	Could not offset (empty selection or the distance inverts arcs).
+Ofset oluşturuldu.	Offset created.
+Ayna ekseni bir çizgi olmalı.	The mirror axis must be a line.
+Aynalanacak öğe yok.	Nothing to mirror.
+Aynalandı.	Mirrored.
+Köşe yuvarlatma için iki çizginin birleştiği bir köşe seçin.	For a fillet select a corner where two lines meet.
+Çizgiler doğrusal; köşe yok.	The lines are collinear; there is no corner.
+Yarıçap bu köşe için çok büyük.	The radius is too large for this corner.
+Köşe yuvarlatıldı (R %s).	Corner filleted (R %s).
+Pah için iki çizginin birleştiği bir köşe seçin.	For a chamfer select a corner where two lines meet.
+Pah mesafesi bu köşe için çok büyük.	The chamfer distance is too large for this corner.
+Pah kırıldı (%s).	Corner chamfered (%s).
+Çokgen yarıçapı sıfır.	Polygon radius is zero.
+%d kenarlı çokgen.	%d-sided polygon.
+Kanal boyutları geçersiz.	Invalid slot dimensions.
+Kanal oluşturuldu.	Slot created.
+IPS (inç, pound, saniye)	IPS (inch, pound, second)
+Özel (%s, %s)	Custom (%s, %s)
+Düzlemsellik	Flatness
+Doğrusallık	Straightness
+Açısallık	Angularity
+Eş merkezlilik	Concentricity
+Çizgi profili	Line profile
+Yüzey profili	Surface profile
+Dairesel salgı	Circular runout
+Toplam salgı	Total runout
+FİRMA	COMPANY
+BAŞLIK	TITLE
+ÇİZEN	DRAWN
+TARİH	DATE
+ÖLÇEK	SCALE
+AĞIRLIK	WEIGHT
+RESİM NO	DWG NO
+1. AÇI	1ST ANGLE
+3. AÇI	3RD ANGLE
+Görünüş hesaplanamadı	Could not compute the view
+Görünüş hesaplanıyor...	Computing view...
+KESİT %s-%s	SECTION %s-%s
+GÖRÜNÜŞ %s	VIEW %s
+ÖLÇEK 	SCALE 
+PARÇA ADI	PART NAME
+AÇIKLAMA	DESCRIPTION
+Uzatma bölgesi geçersiz (bitiş > başlangıç olmalı)	Invalid stretch region (end must be > start)
+Kademeli büyütme bölgesi geçersiz (bitiş > başlangıç olmalı)	Invalid tapered growth region (end must be > start)
+Koruma bölgesi geçersiz (bitiş > başlangıç olmalı)	Invalid protected region (end must be > start)
+Koruma bandı geçersiz (üst sınır alttan küçük)	Invalid protected band (upper limit below the lower one)
+Bu ekstrüzyon seçenekleri OpenCASCADE (B-rep) çekirdeği gerektirir	These extrude options require the OpenCASCADE (B-rep) kernel
+Bu özellik OpenCASCADE (B-rep) çekirdeği gerektirir	This feature requires the OpenCASCADE (B-rep) kernel
+Taslak bulunamadı	Sketch not found
+Seçili bölgeler bulunamadı (taslak değişmiş olabilir)	Selected regions not found (the sketch may have changed)
+Taslakta kapalı kontur yok	The sketch has no closed contour
+STL okunamadı (üçgen yok)	Could not read the STL (no triangles)
+Döndürme ekseni bulunamadı	Revolve axis not found
+Döndürme ekseni geçersiz	Invalid revolve axis
+Profil döndürme ekseninin iki tarafında olamaz	The profile cannot lie on both sides of the revolve axis
+Köşe seçilmedi	No vertex selected
+Seçilen köşe ekstrüzyon yönünde değil (yönü ters çevirin)	The selected vertex is not in the extrude direction (reverse the direction)
+OpenCASCADE ortamı bulunamadı (occ_env). Kurulum: README → Faz 4	OpenCASCADE environment not found (occ_env). Setup: README → Phase 4
+Python süreci başlatılamadı	Could not start the Python process
+Eğri (yol) seçilmedi	No curve (path) selected
+Seçili eğri bulunamadı	Selected curve not found
+Yol taslağında çizgi yok	The path sketch has no lines
+Yol 3B taslağı boş	The path 3D sketch is empty
+Yol olarak taslak, 3B taslak veya helis seçin	Select a sketch, 3D sketch or helix as the path
+Yön 1 geçersiz	Direction 1 is invalid
+Yön 2 geçersiz	Direction 2 is invalid
+Dönme ekseni geçersiz	Invalid rotation axis
+Aynalama düzlemi geçersiz	Invalid mirror plane
+Taslakta çizgi yok	The sketch has no lines
+Kılavuz: 	Guide: 
+En az iki kapalı profilli taslak seçin	Select at least two sketches with closed profiles
+Bilinmeyen delik ölçüsü	Unknown hole size
+Bölme düzlemi geçersiz	Invalid split plane
+Desteklenmeyen özellik	Unsupported feature
+OpenCASCADE sunucusu zamanında başlamadı	The OpenCASCADE server did not start in time
+OpenCASCADE sunucusu beklenmedik şekilde kapandı	The OpenCASCADE server closed unexpectedly
+OCP yüklenemedi	Could not load OCP
+Çekirdek hatası	Kernel error
+İnce	Fine
+Çok ince	Very fine
+Izgaraya yakala (aç / kapat)	Grid snap (on / off)
+Taslak ızgara yakalamasını aç/kapat	Toggle sketch grid snap
+Dışa Aktar...\tCtrl+E	Export...\tCtrl+E
+STEP / IGES / STL dosyasını gövde olarak içe aktar (STL: eksen bazlı ölçek ve uzatma)	Import a STEP / IGES / STL file as a body (STL: per-axis scale and stretch)
+Aç	Open
+Farklı Kaydet	Save As
+*.stl ; STL (3B baskı)	*.stl ; STL (3D printing)
+STL olarak dışa aktar	Export as STL
+OBJ olarak dışa aktar	Export as OBJ
+STEP olarak dışa aktar	Export as STEP
+IGES olarak dışa aktar	Export as IGES
+*.stl ; STL (CSG çekirdeği: yalnız STL)	*.stl ; STL (CSG kernel: STL only)
+STL içe aktar	Import STL
+STEP / IGES / STL içe aktar	Import STEP / IGES / STL
+Makro çalıştır	Run macro
+Parçayı makro olarak kaydet	Save part as macro
+Taslağı DXF olarak dışa aktar	Export sketch as DXF
+Taslağı SVG olarak dışa aktar	Export sketch as SVG
+Ekran görüntüsü	Screenshot
+%s %s\nGodot %s ile yazılmış parametrik CAD.\n\nGeometri çekirdeği: %s\nYedek çekirdek: Godot CSG (Manifold).	%s %s\nParametric CAD written in Godot %s.\n\nGeometry kernel: %s\nFallback kernel: Godot CSG (Manifold).
+Bastır (suppress)	Suppress
+ (ve onu kullanan özellikler)	 (and the features that use it)
+ silindi. Geri almak için Ctrl+Z.	 deleted. Press Ctrl+Z to undo.
+Eksik Tanımlı (%d)	Under Defined (%d)
+ oluşturuldu.	 created.
+Orta Düzlem	Mid Plane
+Köşeye Kadar	Up To Vertex
+Yüzeye Kadar	Up To Surface
+Yüzeyden Ofset	Offset From Surface
+Merkez çizgisi 	Centerline 
+Çizgi 	Line 
+Bölge seç (taslakta tıkla)	Select region (click in the sketch)
+Bitiş: 	End: 
+kapalı	closed
+açık	open
+Tam tanımlı	Fully defined
+Eksik tanımlı	Under defined
+Aşırı tanımlı	Over defined
+  (denklemlerde bu adla kullanılır)	  (used with this name in equations)
+ör. genislik / 2	e.g. width / 2
+Taşı	Move
+Ölçekle	Scale
+Doğrusal çoğalt	Linear pattern
+Dairesel çoğalt	Circular pattern
+Aralık X	Spacing X
+Aralık Y	Spacing Y
+ör. 80 veya genislik*2	e.g. 80 or width*2
+Çevre: 	Perimeter: 
+Düzlemsel yüz, normal: (%.3f, %.3f, %.3f)	Planar face, normal: (%.3f, %.3f, %.3f)
+Eğri yüz	Curved face
+Yüz alanı: 	Face area: 
+Mesafe (paralel yüzler): 	Distance (parallel faces): 
+Yoğunluk = 	Density = 
+Kütle = 	Mass = 
+Yüzey alanı = 	Surface area = 
+Ağırlık merkezi (%s): X = %s  Y = %s  Z = %s	Center of mass (%s): X = %s  Y = %s  Z = %s
+Atalet tensörü (ağırlık merkezinde, global eksenler):	Inertia tensor (at the center of mass, global axes):
+İptal	Cancel
+Kütle birimi	Mass unit
+Uzunluk ondalık basamak	Length decimal places
+Açı ondalık basamak	Angle decimal places
+Kaydedilmemiş değişiklikler kaybolacak. Devam edilsin mi?	Unsaved changes will be lost. Continue?
+Montaj açılamadı (hata %d): %s	Could not open the assembly (error %d): %s
+parça	part
+Önceki oturum beklenmedik şekilde kapandı.\n\nOtomatik kaydedilmiş %s bulundu: %s\nKayıt zamanı: %s\n%s\n\nKurtarılsın mı?	The previous session closed unexpectedly.\n\nAn autosaved %s was found: %s\nSaved at: %s\n%s\n\nRecover it?
+(hiç kaydedilmemiş belge)	(never-saved document)
+seçili	selected
+SEÇİLMEDİ	NOT SELECTED
+%d yüz, tarafsız yüz %s	%d faces, neutral face %s
+%d gövde seçili (ilki ana gövde)	%d bodies selected (the first is the main body)
+Gövde seçilmedi — gövdelere tıklayın	No body selected — click the bodies
+Gövde seçilmedi — gövdeye tıklayın	No body selected — click the body
+Konum yok — düzlemsel yüze tıklayın	No location — click a planar face
+Yüz seçilmedi — düzlemsel yüze tıklayın	No face selected — click a planar face
+%d yüz açık bırakılacak	%d faces will be left open
+Yüz seçilmedi: kapalı (içi boş) gövde	No face selected: closed (hollow) body
+%d kenar seçili	%d edges selected
+Kenar seçilmedi — modelde kenarlara tıklayın	No edge selected — click edges on the model
+Başlangıç yarıçapı	Start radius
+Tarafsız yüzü seç (sonraki tıklama)	Select the neutral face (next click)
+\nHavşa Ø%s x %s	\nCounterbore Ø%s x %s
+\nHavşa Ø%s x %s°	\nCountersink Ø%s x %s°
+ (kılavuz matkabı)\nKozmetik diş: %s	 (tap drill)\nCosmetic thread: %s
+Yarıçap: %s\nKenar: %d	Radius: %s\nEdges: %d
+Kalınlık: %s%s\nAçık yüz: %d	Thickness: %s%s\nOpen faces: %d
+ (dışa)	 (outward)
+Dosya: %s\nÖlçek: %s   X/Y/Z: %s / %s / %s%s	File: %s\nScale: %s   X/Y/Z: %s / %s / %s%s
+Açı: %s\nYüz: %d	Angle: %s\nFaces: %d
+Kalınlık: %s	Thickness: %s
+Çıkar	Subtract
+Kesiştir	Intersect
+İşlem: %s\nGövde: %d	Operation: %s\nBodies: %d
+Öteleme: (%s, %s, %s)\nDönme: %s%s	Translation: (%s, %s, %s)\nRotation: %s%s
+Düzlem: %s, ofset %s	Plane: %s, offset %s
+\nKozmetik diş: 	\nCosmetic thread: 
+Yükseklik: %s	Height: %s
+seçilmedi	not selected
+  (düz)	  (ruled)
+Özellik: %d%s	Features: %d%s
+  (tüm gövdeler)	  (all bodies)
+Tür: %s	Type: %s
+Tür: %s, derinlik %s	Type: %s, depth %s
+Gravür	Engraving
+Özellik: %d, örnek: %d	Features: %d, instances: %d
+Ölçek X	Scale X
+Ölçek Y	Scale Y
+Ölçek Z	Scale Z
+Ölçek merkezi / öteleme	Scale center / translation
+Öteleme 	Translation 
+Bölgesel uzatma (STL)	Regional stretch (STL)
+Çok bölgeli uzatma: %d bölge (makro / dosyadan). Tek bölgeye dönmek için listeyi silin.	Multi-region stretch: %d regions (from a macro / file). Delete the list to return to a single region.
+Uzatmayı kaldır	Remove stretch
+Bölge başı (özgün)	Region start (original)
+Bölge sonu (özgün)	Region end (original)
+Bölgedeki köşeler orantılı uzar, sonrası kaydırılır; bölge dışındaki ayrıntılar bozulmaz.	Vertices in the region stretch proportionally, everything after it shifts; details outside the region are not distorted.
+Koruma bölgesi (STL)	Protected region (STL)
+Bölgeyi ölçekleme (yalnızca taşı)	Do not scale the region (move only)
+Geçiş boyu	Blend length
+Kesit bantları: %d (makro / dosyadan); bant yoksa kesitin tamamı korunur.	Section bands: %d (from a macro / file); without bands the whole section is protected.
+\nÖteleme: %s	\nOffset: %s
+\nÖteleme: normal dönüşümle bölge merkezine göre	\nOffset: by the normal transform about the region center
+\nUzatma: %d bölge, toplam %+.2f mm	\nStretch: %d regions, total %+.2f mm
+\nKademeli kesit büyütme	\nTapered section growth
+\nKoruma bölgesi: %s %s → %s	\nProtected region: %s %s → %s
+CSG (Godot, yalnızca üçgen ağ)	CSG (Godot, triangle mesh only)
+Tarafsız yüz için modelde düzlemsel bir yüze tıklayın.	Click a planar face on the model for the neutral face.
+Eğim verilecek yüzlere tıklayın.	Click the faces to draft.
+Modelde bir köşeye tıklayın.	Click a vertex on the model.
+Hedef yüze tıklayın.	Click the target face.
+Yön için doğrusal bir kenara (veya düzlemsel yüze) tıklayın.	Click a linear edge (or planar face) for the direction.
+Yön 2 için doğrusal bir kenara tıklayın.	Click a linear edge for direction 2.
+Eksen için dairesel/doğrusal kenara veya silindirik yüze tıklayın.	Click a circular/linear edge or a cylindrical face for the axis.
+Aynalama düzlemi olarak düzlemsel bir yüze tıklayın.	Click a planar face as the mirror plane.
+Taban olarak düzlemsel bir yüze tıklayın.	Click a planar face as the base.
+Üç köşeye sırayla tıklayın.	Click three vertices in order.
+İki köşeye sırayla tıklayın.	Click two vertices in order.
+Bir köşeye tıklayın.	Click a vertex.
+Doğrusal/dairesel kenara veya silindirik yüze tıklayın.	Click a linear/circular edge or a cylindrical face.
+Teğet düzlemin değeceği noktaya (silindir, koni, küre veya düzlem yüzünde) tıklayın.	Click the point where the tangent plane touches (on a cylinder, cone, sphere or plane face).
+Koordinat sisteminin başlangıcı için bir köşeye tıklayın.	Click a vertex for the coordinate system origin.
+X ekseni için doğrusal bir kenara tıklayın.	Click a linear edge for the X axis.
+Y ekseni için doğrusal bir kenara tıklayın.	Click a linear edge for the Y axis.
+Seçim iptal edildi.	Selection cancelled.
+Seçimi iptal et	Cancel selection
+Köşe seç (modele tıkla)	Select vertex (click the model)
+Hedef yüzü seç (modele tıkla)	Select target face (click the model)
+Kılavuz eğrisi	Guide curve
+Seçilen kenar / eksen	Selected edge / axis
+Modelden seç	Pick from the model
+Seçilen yüz	Selected face
+Düzlemsel yüz seç	Select planar face
+Yüzeyde nokta seç (silindir, koni, düzlem...)	Pick a point on a surface (cylinder, cone, plane...)
+Taban için yüz seç	Select face for the base
+Üç köşe seç	Select three vertices
+İki köşe seç	Select two vertices
+Kenar / silindir seç	Select edge / cylinder
+Köşe seç	Select vertex
+Geri alma çubuğu kaldırıldı: tüm özellikler hesaplanıyor.	Rollback bar removed: all features are computed.
+Geri alma çubuğu: ilk %d özellik etkin, sonrakiler hesaplanmıyor.	Rollback bar: the first %d features are active, the rest are not computed.
+Çocuklar:	Children:
+Hedef yüzü seç	Select target face
+Silindirik yüzü seç	Select cylindrical face
+Seç: görünüş veya açıklamaya tıklayın, sürükleyerek taşıyın; Delete siler.	Select: click a view or annotation, drag to move; Delete deletes.
+Model görünüşü: yerleştirmek için sayfaya tıklayın (yönelim panelden).	Model view: click on the sheet to place it (orientation from the panel).
+İzdüşüm görünüşü: seçili görünüşün sağına/soluna/üstüne/altına tıklayın.	Projected view: click to the right/left/top/bottom of the selected view.
+Kesit: seçili görünüşte kesit çizgisinin iki ucuna tıklayın.	Section: click both ends of the section line in the selected view.
+Detay: seçili görünüşte önce merkeze, sonra daire kenarına tıklayın.	Detail: in the selected view click the center first, then the circle edge.
+Yardımcı görünüş: seçili görünüşte bir kenara tıklayın (görünüş kenara dik bakar).	Auxiliary view: click an edge in the selected view (the view looks perpendicular to the edge).
+Kırık görünüş: seçili görünüşte kaldırılacak bölgenin iki sınırına tıklayın.	Broken view: click the two limits of the region to remove in the selected view.
+Akıllı boyut: köşe/daire/kenara tıklayın; ikinci öğe ve ardından boyutun yerine tıklayın.	Smart dimension: click a vertex/circle/edge; then the second item and the dimension position.
+Merkez işareti: bir daireye tıklayın.	Center mark: click a circle.
+Merkez çizgisi: iki noktaya tıklayın.	Centerline: click two points.
+Not: yerleştirmek için tıklayın (metni panelden düzenleyin).	Note: click to place (edit the text in the panel).
+Balon: önce gösterilecek noktaya, sonra balonun yerine tıklayın.	Balloon: click the point to show first, then the balloon position.
+Yüzey pürüzlülüğü: sembolün yerine tıklayın.	Surface finish: click the symbol position.
+Geometrik tolerans: önce gösterilecek noktaya, sonra çerçevenin yerine tıklayın.	Geometric tolerance: click the point to show first, then the frame position.
+Datum: önce yüzey/kenara, sonra etiketin yerine tıklayın.	Datum: click the surface/edge first, then the label position.
+Kaynak sembolü: önce kaynak yerine, sonra referans çizgisinin yerine tıklayın.	Weld symbol: click the weld location first, then the reference line position.
+Kesit görünüşü OpenCASCADE çekirdeği gerektirir	A section view requires the OpenCASCADE kernel
+Açıklama	Description
+çerçevenin	frame
+referans çizgisinin	reference line
+İkinci köşeye tıklayın.	Click the second vertex.
+Boyutun yerine tıklayın (çap).	Click the dimension position (diameter).
+Başka bir kenara (açı) veya boyutun yerine tıklayın.	Click another edge (angle) or the dimension position.
+Başlık (boş: parça adı)	Title (empty: part name)
+Çizen	Drawn by
+Malzeme (boş: parça)	Material (empty: part)
+Yüzey pürüzlülüğü	Surface finish
+Kaynak sembolü	Weld symbol
+Merkez işareti	Center mark
+   (model boyutu — ilişkili)	   (model dimension — associative)
+(boş: ölçülen değer)	(empty: measured value)
+ör. 111 (elektrik ark)	e.g. 111 (arc welding)
+NOTLAR:\n1. KESKİN KÖŞELERİ KIRIN.\n2. GENEL TOLERANS ISO 2768-m.	NOTES:\n1. BREAK SHARP EDGES.\n2. GENERAL TOLERANCE ISO 2768-m.
+İlk yayın	First release
+Parça açılamadı: 	Could not open the part: 
+Parça kaydedilemedi!	Could not save the part!
+*.dcad, *.dasm, *.ddrw, *.dcadt, *.dasmt, *.ddrwt, *.dclfp, *.dcftp ; DIY.CAD dosyaları	*.dcad, *.dasm, *.ddrw, *.dcadt, *.dasmt, *.ddrwt, *.dclfp, *.dcftp ; DIY.CAD files
+*.dcadt, *.dasmt, *.ddrwt ; DIY.CAD şablonları	*.dcadt, *.dasmt, *.ddrwt ; DIY.CAD templates
+*.dclfp ; DIY.CAD Kütüphane Unsuru Parçası	*.dclfp ; DIY.CAD Library Feature Part
+*.dcftp ; DIY.CAD Form Verme Aracı	*.dcftp ; DIY.CAD Forming Tool
+Takım yolu oluşmadı (takım çapı / işlem türü uygun değil)	No toolpath was created (tool diameter / operation type not suitable)
+Dosya bulunamadı	File not found
+Tabloda satır yok	The table has no rows
+Açık profil en az bir çizgi içermeli	An open profile must contain at least one line
+Sıfır uzunluklu çizgi	Zero-length line
+Çizgi büküm yarıçapı için çok kısa (%d. çizgi)	Line too short for the bend radius (line %d)
+Önce taban flanş oluşturun	Create a base flange first
+Taslakta kapalı kontur veya açık çizgi zinciri yok	The sketch has no closed contour or open line chain
+Kenar flanşı yalnızca taban flanşın üst / alt kenarlarına eklenebilir	An edge flange can only be added to the top / bottom edges of the base flange
+Seçilen kenar doğrusal bir taslak çizgisine ait değil	The selected edge does not belong to a linear sketch line
+Taban taslağı bulunamadı	Base sketch not found
+Kenar flanşı şimdilik yalnızca düz (kapalı profilli) taban flanşa eklenebilir	For now an edge flange can only be added to a flat (closed-profile) base flange
+Kenar seçilmedi	No edge selected
+Kenar boşlukları kenar boyundan büyük	Edge gaps are larger than the edge length
+Taban flanş yok	No base flange
+Açınımı DXF olarak kaydet	Save flat pattern as DXF
+ (boyut ve bastırma değişiklikleri bu konfigürasyona kaydedilir)	 (dimension and suppression changes are saved to this configuration)
+Tasarım tablosunu kaydet	Save design table
+Tasarım tablosunu içe aktar	Import design table
+DXF yazılamadı	Could not write the DXF
+<belirtilmemiş: çelik>	<not specified: steel>
+yük uygulanacak	load
+Çözülüyor...	Solving...
+Yer değiştirme	Displacement
+Yan adım (% çap)	Stepover (% of diameter)
+parçanın üstü, taslaktan %s yukarıda	part top, %s above the sketch
+taslak düzlemi	sketch plane
+*.hdr, *.exr, *.png, *.jpg ; Panorama görüntüsü	*.hdr, *.exr, *.png, *.jpg ; Panorama image
+HDRI / panorama seç	Choose HDRI / panorama
+*.png, *.jpg, *.webp ; Görüntü	*.png, *.jpg, *.webp ; Image
+Çıkartma görüntüsü seç	Choose decal image
+Render kaydet (2× çözünürlük)	Save render (2× resolution)
+Düzlemsel yüzey için kapalı kontur gerekli	A planar surface needs a closed contour
+Taslakta eğri yok	The sketch has no curves
+En az iki taslak seçin	Select at least two sketches
+Dikdörtgen kutu profil	Rectangular tube
+Köşebent (L)	Angle (L)
+Dikdörtgen profil %s	Rectangular profile %s
+Köşebent L%s	Angle L%s
+Taslakta çizgi yok (2B taslak veya 3B taslak seçin)	The sketch has no lines (select a 2D or 3D sketch)
+No;Profil;Boy (mm);Kesim açıları;Adet;Birim kütle (g);Toplam kütle (g)	No;Profile;Length (mm);Cut angles;Qty;Unit mass (g);Total mass (g)
+\nEksik tanımlı taslak (boyut/ilişki ekleyerek tam tanımlayın)	\nUnder defined sketch (fully define it by adding dimensions/relations)
+\nAşırı tanımlı taslak	\nOver defined sketch
+\n(Bastırılmış)	\n(Suppressed)
+\n(Geri alma çubuğunun altında: hesaplanmıyor)	\n(Below the rollback bar: not computed)
+━━━ Geri alma çubuğu ━━━	━━━ Rollback bar ━━━
+Altındaki özellikler hesaplanmaz. Sürükleyerek taşıyın; sağ tık: kaldır.	Features below it are not computed. Drag to move; right-click: remove.
+Kısayol kaldırıldı: 	Shortcut removed: 
+Varsayılan kısayollar geri yüklendi.	Default shortcuts restored.
+… tuşa basın	… press a key
+'%s' için bir tuş kombinasyonuna basın (Esc: vazgeç).	Press a key combination for '%s' (Esc: cancel).
+%s sabit bir tuştur, atanamaz.	%s is a fixed key and cannot be assigned.
+  (önceki atama kaldırıldı: %s)	  (previous assignment removed: %s)
+yüklendi	loaded
+Klasörü aç: 	Open folder: 
+3B Taslak — düzlem %s (Tab: değiştir). 	3D Sketch — plane %s (Tab: change). 
+Noktaları tıklayın; sağ tık / Esc zinciri bitirir. Eksene yakın çizim X/Y/Z'ye kilitlenir.	Click points; right-click / Esc ends the chain. Drawing near an axis locks to X/Y/Z.
+Nokta veya çizgi seçin; Delete siler, nokta koordinatları panelden girilir.	Select a point or line; Delete deletes, point coordinates are entered in the panel.
+Merkez Çizgisi	Centerline
+Köşe Dikdörtgen	Corner Rectangle
+Merkez Dikdörtgen	Center Rectangle
+Merkez Noktalı Yay	Centerpoint Arc
+Akıllı Boyut	Smart Dimension
+Düz Kanal	Straight Slot
+Taslak Köşe Yuvarlatma	Sketch Fillet
+Taslak Pahı	Sketch Chamfer
+Varlıkları Dönüştür	Convert Entities
+Eşit	Equal
+Eş Merkezli	Concentric
+Nokta-çizgi mesafesi	Point-line distance
+Öğe seçin, sürükleyin. Birden fazla öğe seçince (Shift/Ctrl) panelden ilişki ekleyebilirsiniz.	Select entities, drag. With several entities selected (Shift/Ctrl) you can add relations in the panel.
+Başlangıç noktasını tıklayın.	Click the start point.
+Sonraki noktayı tıklayın. Çift tık / sağ tık / Esc: zinciri bitir.	Click the next point. Double-click / right-click / Esc: finish the chain.
+İlk köşeyi tıklayın.	Click the first corner.
+Karşı köşeyi tıklayın.	Click the opposite corner.
+Dikdörtgenin merkezini tıklayın.	Click the center of the rectangle.
+Köşeyi tıklayın.	Click the corner.
+Dairenin merkezini tıklayın.	Click the center of the circle.
+Yarıçapı belirlemek için tıklayın.	Click to set the radius.
+Yayın merkezini tıklayın.	Click the arc center.
+Yayın başlangıç noktasını tıklayın.	Click the arc start point.
+Yayın bitiş noktasını tıklayın (fareyi istediğiniz yönde döndürün).	Click the arc end point (turn the mouse in the direction you want).
+Ölçülecek öğeyi seçin (çizgi, daire, yay, nokta). Var olan boyutu düzenlemek için etikete tıklayın.	Select the entity to dimension (line, circle, arc, point). Click a label to edit an existing dimension.
+Boyutu yerleştirmek için boş bir yere tıklayın veya ikinci öğeyi seçin.	Click an empty spot to place the dimension or select a second entity.
+Boyutu yerleştirmek için boş bir yere tıklayın.	Click an empty spot to place the dimension.
+Çokgenin merkezini tıklayın (%d kenar; panelden değiştirin).	Click the polygon center (%d sides; change in the panel).
+Bir köşeyi tıklayın.	Click a vertex.
+Kanalın ilk yay merkezini tıklayın.	Click the first arc center of the slot.
+İkinci yay merkezini tıklayın.	Click the second arc center.
+Kanal genişliğini belirlemek için tıklayın.	Click to set the slot width.
+Spline noktalarını tıklayın. İlk noktaya tıklamak kapatır; çift tık / sağ tık / Enter bitirir.	Click the spline points. Clicking the first point closes it; double-click / right-click / Enter finishes.
+Metnin yerleşeceği noktayı tıklayın (metin ve boyut panelden değişir).	Click where the text goes (text and size are changed in the panel).
+Silinecek parçaya tıklayın (en yakın kesişimler arasında kırpılır).	Click the segment to delete (trimmed between the nearest intersections).
+Uzatılacak çizginin ucuna yakın tıklayın.	Click near the end of the line to extend.
+Yuvarlatılacak köşeye tıklayın (R %s; panelden değiştirin).	Click the corner to fillet (R %s; change in the panel).
+Pah kırılacak köşeye tıklayın (%s; panelden değiştirin).	Click the corner to chamfer (%s; change in the panel).
+Elipsin merkezini tıklayın.	Click the center of the ellipse.
+Büyük eksenin ucunu tıklayın.	Click the end of the major axis.
+Küçük eksen genişliği için tıklayın.	Click to set the minor axis width.
+Parabolün tepe noktasını tıklayın.	Click the vertex of the parabola.
+Odak noktasını tıklayın (eksen yönü ve açıklık).	Click the focus point (axis direction and opening).
+Başlangıç ucunu tıklayın.	Click the start end.
+Bitiş ucunu tıklayın.	Click the finish end.
+Taslağa alınacak model yüzüne tıklayın; yüzün kenarları çizgi/yay olarak eklenir.	Click the model face to bring into the sketch; its edges are added as lines/arcs.
+İşlem uygulanamadı.	The operation could not be applied.
+Aynalamak için öğelerle birlikte tek bir merkez çizgisi (eksen) seçin.	To mirror, select a single centerline (axis) together with the entities.
+Önce öğeleri seçin.	Select entities first.
+Doğrusal çoğaltma: %d kopya.	Linear pattern: %d copies.
+Dairesel çoğaltma: %d kopya.	Circular pattern: %d copies.
+Kopyalandı.	Copied.
+Dönüştürüldü.	Converted.
+Bu değişiklik mevcut ilişki ve boyutlarla çelişiyor; geri alındı.	This change conflicts with the existing relations and dimensions; undone.
+Bu ilişki/boyut taslağı aşırı tanımlar (gereksiz veya zaten mevcut); eklenmedi.	This relation/dimension over-defines the sketch (redundant or already present); not added.
+Model yüzüne tıklayın (taslak düzleminden görünen bir yüz).	Click a model face (a face visible from the sketch plane).
+Bir öğeye tıklayın.	Click an entity.
+Bir köşe noktasına tıklayın.	Click a corner point.
+Blok için önce öğeleri seçin.	Select entities for the block first.
+Blok oluşturuldu: öğeler artık tek parça (rijit) hareket eder.	Block created: the entities now move as one rigid piece.
+Seçili öğeler zaten bir blokta.	The selected entities are already in a block.
+Blok dağıtıldı.	Block exploded.
+Blok kopyalandı.	Block copied.
+Spline oluşturuldu (%d nokta). Noktaları sürükleyerek şeklini değiştirebilirsiniz.	Spline created (%d points). Drag the points to change its shape.
+Metin eklendi. Yazıyı ve boyutunu soldaki panelden değiştirin.	Text added. Change the text and its size in the left panel.
+   [Üzerinde]	   [On]
+   [Çakışık]	   [Coincident]
+L %s   genişlik %s	L %s   width %s
+Bu seçimden boyut oluşturulamadı.	Could not create a dimension from this selection.
+Bu boyut taslağı aşırı tanımlardı; güdümlü (referans) boyut olarak eklendi.	This dimension would over-define the sketch; it was added as a driven (reference) dimension.
+Bu değer geometrik olarak mümkün değil (diğer ilişki/boyutlarla çelişiyor); geri alındı.	This value is geometrically impossible (it conflicts with other relations/dimensions); undone.
+Denklem hesaplanamadı: '%s' (tanımsız değişken veya hatalı ifade).	Could not evaluate the equation: '%s' (undefined variable or invalid expression).
+Denklemin sonucu geometriyle çelişiyor; geri alındı.	The equation result conflicts with the geometry; undone.
+Denklem bağlandı: %s = %s	Equation linked: %s = %s
+Bu ilişki seçili öğelere uygulanamaz.	This relation cannot be applied to the selected entities.
+Bu ilişki mevcut geometriyle çelişiyor; eklenmedi.	This relation conflicts with the existing geometry; not added.
+İlişki eklendi: 	Relation added: 
+ (güdümlü)	 (driven)
+Değer, mevcut ilişki/boyutlar nedeniyle tam uygulanamadı. Değiştirmek için ilgili boyutu düzenleyin.	The value could not be fully applied because of existing relations/dimensions. Edit the related dimension to change it.
+ — DIY.CAD (Montaj)	 — DIY.CAD (Assembly)
+*.dasm ; DIY.CAD Montaj	*.dasm ; DIY.CAD Assembly
+*.dasm ; DIY.CAD Montaj (alt montaj)	*.dasm ; DIY.CAD Assembly (subassembly)
+Malzeme listesini kaydet	Save bill of materials
+Montaj kaydedilemedi (hata %d)	Could not save the assembly (error %d)
+ (sabit)	 (fixed)
+ (alt montaj)	 (subassembly)
+Serbestlik derecesi: %d	Degrees of freedom: %d
+Serbestlik derecesi: %d%s	Degrees of freedom: %d%s
+1-2: vida ve somun eksenleri	1-2: screw and nut axes
+Mekanik	Mechanical
+CSV olarak kaydet	Save as CSV
+Dairesel	Circular
+ ekseni	 axis
+Paralel	Parallel
+Dik	Perpendicular
+Kilit	Lock
+Simetrik	Symmetric
+Kremayer-pinyon	Rack and pinion
+Vida	Screw
+Kam	Cam
+X Ekseni	X Axis
+Y Ekseni	Y Axis
+Z Ekseni	Z Axis
+Dairesel kenar	Circular edge
+Kenar	Edge
+Silindirik pim (ISO 2338)	Cylindrical pin (ISO 2338)
+Loft Patron/Taban	Lofted Boss/Base
+Makroda 'func run(m: MacroApi)' yok: 	The macro has no 'func run(m: MacroApi)': 
+Metal	Metal
+Bronz	Bronze
+Titanyum (Ti-6Al-4V)	Titanium (Ti-6Al-4V)
+TPU (esnek)	TPU (flexible)
+Naylon (PA12)	Nylon (PA12)
+Plastik	Plastic
+Akrilik (PMMA)	Acrylic (PMMA)
+Polikarbonat (PC)	Polycarbonate (PC)
+setup(api) yok	no setup(api)
+X ekseni	X axis
+Y ekseni	Y axis
+Z ekseni	Z axis
+MMGS (milimetre, gram, saniye)	MMGS (millimeter, gram, second)
+CGS (santimetre, gram, saniye)	CGS (centimeter, gram, second)
+MKS (metre, kilogram, saniye)	MKS (meter, kilogram, second)
+Dimetrik	Dimetric
+Dairesellik	Circularity
+Silindiriklik	Cylindricity
+Diklik	Perpendicularity
+Paralellik	Parallelism
+Simetri	Symmetry
+KONTROL	CHECKED
+MALZEME	MATERIAL
+BOYUT	SIZE
+SAYFA 1/1   	SHEET 1/1   
+DETAY %s (%s)	DETAIL %s (%s)
+ADET	QTY
+ONAY	APPROVED
+Sayfa: %.1f, %.1f mm	Sheet: %.1f, %.1f mm
+*.gd ; DIY.CAD makrosu (GDScript)	*.gd ; DIY.CAD macro (GDScript)
+Kaydedilen makroyu sakla	Save the recorded macro
+*.png ; PNG resmi	*.png ; PNG image
+Σ Derinlik denklemi: =	Σ Depth equation: =
+Taslak yatay ekseni (x)	Sketch horizontal axis (x)
+Taslak dikey ekseni (y)	Sketch vertical axis (y)
+Referans: 	Reference: 
+\nDerinlik: 	\nDepth: 
+ (Taslak)	 (Sketch)
+%s — serbestlik derecesi: %d	%s — degrees of freedom: %d
+Nokta: X %s  Y %s  Z %s	Point: X %s  Y %s  Z %s
+Alan: 	Area: 
+Mesafe: 	Distance: 
+Normal mesafe: 	Normal distance: 
+Toplam alan: 	Total area: 
+Hacim = 	Volume = 
+Asal atalet momentleri: Px = %s   Py = %s   Pz = %s	Principal moments of inertia: Px = %s   Py = %s   Pz = %s
+Global (orijin)	Global (origin)
+Birim sistemi	Unit system
+Uzunluk birimi	Length unit
+Kaydedilemedi! Hata kodu: %d	Could not save! Error code: %d
+ — Belge kurtarma	 — Document recovery
+Dosya: 	File: 
+%d delik konumu	%d hole locations
+Mesafe 1	Distance 1
+ISO (metrik)	ISO (metric)
+Delik Ø%s	Hole Ø%s
+Mesafe: %s\nKenar: %d	Distance: %s\nEdges: %d
+Ekle	Add
+  (kopya)	  (copy)
+%s %s — Ø%s\n%s, %d konum%s	%s %s — Ø%s\n%s, %d locations%s
+Yol: %s	Path: %s
+Profil: %d%s	Profiles: %d%s
+Taslak: %s	Sketch: %s
+Oyma	Deboss
+Merkez 	Center 
+Eklenecek boy	Length to add
+\nUzatma: %s +%s mm	\nStretch: %s +%s mm
+bilinmeyen hata	unknown error
+Otomatik (OpenCASCADE varsa)	Automatic (OpenCASCADE if available)
+%s (sapma %s mm, %s°)	%s (deviation %s mm, %s°)
+HAYIR	NO
+X ve Y eksenleri paralel olamaz	X and Y axes cannot be parallel
+Ebeveynler:	Parents:
+  (yok)	  (none)
+Teknik resmi PDF olarak kaydet	Save drawing as PDF
+Teknik resmi SVG olarak kaydet	Save drawing as SVG
+Teknik resmi DXF olarak kaydet	Save drawing as DXF
+Firma	Company
+Resim no	Drawing no.
+Kontrol	Checked
+Tarih	Date
+PDF olarak kaydet	Save as PDF
+SVG olarak kaydet	Save as SVG
+DXF olarak kaydet	Save as DXF
+Geometrik tolerans	Geometric tolerance
+Ⓜ Maksimum (MMC)	Ⓜ Maximum (MMC)
+Ⓛ Minimum (LMC)	Ⓛ Minimum (LMC)
+*.ddrw ; DIY.CAD Teknik Resim	*.ddrw ; DIY.CAD Drawing
+Taslakta profil yok	The sketch has no profile
+Kesim listesini kaydet	Save cut list
+  (etkin)	  (active)
+    sil: 	    delete: 
+G-kod kaydedildi: 	G-code saved: 
+    Kuvvet (N)	    Force (N)
+von Mises gerilme	von Mises stress
+*.nc ; G-kod	*.nc ; G-code
+*.gcode ; G-kod	*.gcode ; G-code
+Malzemeden (PBR)	From material (PBR)
+Mat	Matte
+Parlak	Glossy
+Render kaydedilemedi	Could not save the render
+Kare kutu profil	Square tube
+Boru	Pipe
+U profil (UPN)	U channel (UPN)
+I profil (IPE)	I beam (IPE)
+Lama	Flat bar
+Kare profil %s	Square profile %s
+Boru Ø%s	Pipe Ø%s
+Lama %s	Flat bar %s
+\nHata: 	\nError: 
+hata: 	error: 
+Orta Nokta	Midpoint
+Yatay mesafe	Horizontal distance
+Dikey mesafe	Vertical distance
+   [Orta nokta]	   [Midpoint]
+%d kenar   R %s	%d sides   R %s
+%d nokta%s	%d points%s
+balonun	the balloon
+etiketin	the label
+sabitlenecek	fixed
+montaj	assembly
+devre dışı	disabled
+Eşdoğrusal	Collinear
+%s seçildi. 'Taslak' ile çizime başlayın.	%s selected. Start drawing with 'Sketch'.
+%s seçildi (%s). Çift tık: düzenle.	%s selected (%s). Double-click: edit.

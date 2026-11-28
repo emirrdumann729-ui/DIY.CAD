@@ -40,11 +40,11 @@ static func extrude_vectors(f: CadFeature, plane: SketchPlane) -> Dictionary:
 		# Köşeye Kadar: derinlik, seçilen noktanın taslak düzlemine uzaklığı
 		var v = f.params.get("vertex")
 		if not (v is Array) or (v as Array).size() < 3:
-			return {"error": "Köşe seçilmedi"}
+			return {"error": I18n.t("Köşe seçilmedi")}
 		var dv := extrude_dir(f, plane)
 		var dd := (Vector3(float(v[0]), float(v[1]), float(v[2])) - plane.origin).dot(dv)
 		if dd <= 1e-6:
-			return {"error": "Seçilen köşe ekstrüzyon yönünde değil (yönü ters çevirin)"}
+			return {"error": I18n.t("Seçilen köşe ekstrüzyon yönünde değil (yönü ters çevirin)")}
 		return {"offset": Vector3.ZERO, "vec": dv * dd}
 	if end == "midplane":
 		return {"offset": -n * depth * 0.5, "vec": n * depth}
@@ -66,11 +66,11 @@ static func revolve_frame(f: CadFeature, sk_f: CadFeature, loops: Array = [], do
 	var p := f.params
 	var ax := CsgKernel.revolve_axis(sk_f, p.get("axis", "y"), doc)
 	if ax.is_empty():
-		return {"error": "Döndürme ekseni bulunamadı"}
+		return {"error": I18n.t("Döndürme ekseni bulunamadı")}
 	var a2: Vector2 = ax[0]
 	var ad: Vector2 = (ax[1] - ax[0])
 	if ad.length() < 1e-9:
-		return {"error": "Döndürme ekseni geçersiz"}
+		return {"error": I18n.t("Döndürme ekseni geçersiz")}
 	ad = ad.normalized()
 	if bool(p.get("reverse", false)):
 		ad = -ad
@@ -86,7 +86,7 @@ static func revolve_frame(f: CadFeature, sk_f: CadFeature, loops: Array = [], do
 	for L in loops:
 		for q in L["poly"]:
 			if (q - a2).dot(perp) < -1e-4:
-				return {"error": "Profil döndürme ekseninin iki tarafında olamaz"}
+				return {"error": I18n.t("Profil döndürme ekseninin iki tarafında olamaz")}
 	var plane := sk_f.plane
 	var X3 := plane.dir_to_world(perp)
 	var Y3 := plane.dir_to_world(ad)

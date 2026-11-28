@@ -19,6 +19,23 @@ const TXT_H := 3.5
 const ARROW := 3.0
 const BLACK := Color(0, 0, 0)
 const SEL := Color(0.1, 0.4, 1.0)
+static var _sheet_en := {}
+
+
+## Sayfa (antet, görünüş etiketleri) metni: tr özgün, en/de sözlükten; ru/zh İngilizce
+## (DXF ANSI_1254 yazılır — Kiril yok; PDF Arial gömer — Çince glif yok).
+static func sheet_t(s: String) -> String:
+	match I18n.current:
+		"tr":
+			return s
+		"en", "de":
+			return I18n.t(s)
+	if _sheet_en.is_empty():
+		_sheet_en = I18n.load_dict("en")
+		_sheet_en["__loaded"] = true
+	return str(_sheet_en.get(s, s))
+
+
 const GDT_NAMES := {"position": "Konum", "flatness": "Düzlemsellik", "straightness": "Doğrusallık", "circularity": "Dairesellik",
 	"cylindricity": "Silindiriklik", "perpendicularity": "Diklik", "parallelism": "Paralellik", "angularity": "Açısallık",
 	"concentricity": "Eş merkezlilik", "symmetry": "Simetri", "profile_line": "Çizgi profili", "profile_surface": "Yüzey profili",
@@ -132,26 +149,26 @@ static func _title_block(P: Array, doc: Object, sh: Dictionary, opts: Dictionary
 		title = doc.part_name
 	var mat := str(t.get("material", ""))
 	if mat == "":
-		mat = doc.material if doc.material != "" else "—"
+		mat = sheet_t(doc.material) if doc.material != "" else "—"
 	var weight := str(t.get("weight", ""))
 	if weight == "" and opts.has("mass"):
 		weight = Units.format_mass(float(opts["mass"]))
-	_txt(P, Vector2(o.x + 1.5, o.y + 37.2), 1.8, "FİRMA")
+	_txt(P, Vector2(o.x + 1.5, o.y + 37.2), 1.8, sheet_t("FİRMA"))
 	_txt(P, Vector2(o.x + 2, o.y + 31.5), 3.5, str(t.get("company", "")))
-	_txt(P, Vector2(o.x + w * 0.5 + 1.5, o.y + 27.2), 1.8, "BAŞLIK")
+	_txt(P, Vector2(o.x + w * 0.5 + 1.5, o.y + 27.2), 1.8, sheet_t("BAŞLIK"))
 	_txt(P, Vector2(o.x + w * 0.5 + 2.0, o.y + 21.6), 4.5, title)
-	var cells := [["ÇİZEN", str(t.get("drawn", ""))], ["KONTROL", str(t.get("checked", ""))], ["TARİH", str(t.get("date", ""))], ["MALZEME", mat],
-		["ÖLÇEK", Drawing.scale_text(float(sh.get("scale", 1.0)))], ["AĞIRLIK", weight], ["BOYUT", str(sh.get("size", "A3"))], ["REV", str(t.get("rev", ""))]]
+	var cells := [[sheet_t("ÇİZEN"), str(t.get("drawn", ""))], [sheet_t("KONTROL"), str(t.get("checked", ""))], [sheet_t("TARİH"), str(t.get("date", ""))], [sheet_t("MALZEME"), mat],
+		[sheet_t("ÖLÇEK"), Drawing.scale_text(float(sh.get("scale", 1.0)))], [sheet_t("AĞIRLIK"), weight], [sheet_t("BOYUT"), str(sh.get("size", "A3"))], ["REV", str(t.get("rev", ""))]]
 	for i in cells.size():
 		var cx: float = o.x + (i % 4) * w * 0.25 + 1.5
 		var cy: float = o.y + (10.0 if i < 4 else 0.0)
 		_txt(P, Vector2(cx, cy + 7.0), 1.8, cells[i][0])
 		_txt(P, Vector2(cx, cy + 2.0), 3.0, cells[i][1])
-	_txt(P, Vector2(o.x + 1.5, o.y + 27.2), 1.8, "RESİM NO")
+	_txt(P, Vector2(o.x + 1.5, o.y + 27.2), 1.8, sheet_t("RESİM NO"))
 	_txt(P, Vector2(o.x + 2.0, o.y + 21.8), 3.5, str(t.get("number", "")))
 	# İzdüşüm sembolü (sol üst hücrede: kesik koni iki görünüşü)
 	_projection_symbol(P, Vector2(o.x + w * 0.5 - 22, o.y + 25), str(sh.get("proj", "first")))
-	_txt(P, Vector2(o.x + w - 2, o.y + 36.0), 2.0, "SAYFA 1/1   " + ("1. AÇI" if str(sh.get("proj", "first")) == "first" else "3. AÇI"), "r")
+	_txt(P, Vector2(o.x + w - 2, o.y + 36.0), 2.0, sheet_t("SAYFA 1/1   ") + (sheet_t("1. AÇI") if str(sh.get("proj", "first")) == "first" else sheet_t("3. AÇI")), "r")
 
 
 static func _projection_symbol(P: Array, c: Vector2, proj: String) -> void:
@@ -256,9 +273,9 @@ static func _view(P: Array, sh: Dictionary, v: Dictionary, geo: Dictionary, opts
 		var p0 := Drawing.v2(v["pos"])
 		bb = Rect2(p0 - Vector2(15, 10), Vector2(30, 20))
 		if str(g.get("error", "")) != "":
-			_txt(P, p0, 2.5, "Görünüş hesaplanamadı", "c", 0.0, Color(0.8, 0.1, 0.1))
+			_txt(P, p0, 2.5, sheet_t("Görünüş hesaplanamadı"), "c", 0.0, Color(0.8, 0.1, 0.1))
 		else:
-			_txt(P, p0, 2.5, "Görünüş hesaplanıyor...", "c", 0.0, Color(0.5, 0.5, 0.5))
+			_txt(P, p0, 2.5, sheet_t("Görünüş hesaplanıyor..."), "c", 0.0, Color(0.5, 0.5, 0.5))
 	# Kırık çizgileri
 	for br in v.get("breaks", []):
 		var s := Drawing.view_scale(sh, v)
@@ -279,13 +296,13 @@ static func _view(P: Array, sh: Dictionary, v: Dictionary, geo: Dictionary, opts
 	var label := ""
 	match str(v.get("type", "")):
 		"section":
-			label = "KESİT %s-%s" % [str((v.get("section", {}) as Dictionary).get("label", "A")), str((v.get("section", {}) as Dictionary).get("label", "A"))]
+			label = sheet_t("KESİT %s-%s") % [str((v.get("section", {}) as Dictionary).get("label", "A")), str((v.get("section", {}) as Dictionary).get("label", "A"))]
 		"detail":
-			label = "DETAY %s (%s)" % [str((v.get("detail", {}) as Dictionary).get("label", "B")), Drawing.scale_text(Drawing.view_scale(sh, v))]
+			label = sheet_t("DETAY %s (%s)") % [str((v.get("detail", {}) as Dictionary).get("label", "B")), Drawing.scale_text(Drawing.view_scale(sh, v))]
 		"aux":
-			label = "GÖRÜNÜŞ %s" % str(v.get("label", ""))
+			label = sheet_t("GÖRÜNÜŞ %s") % str(v.get("label", ""))
 	if label == "" and float(v.get("scale", 0.0)) > 0.0 and absf(float(v["scale"]) - float(sh.get("scale", 1.0))) > 1e-9:
-		label = "ÖLÇEK " + Drawing.scale_text(float(v["scale"]))
+		label = sheet_t("ÖLÇEK ") + Drawing.scale_text(float(v["scale"]))
 	if label != "":
 		_txt(P, Vector2(bb.get_center().x, bb.position.y - 8.0), 3.5, label, "c", 0.0, col)
 
@@ -753,7 +770,7 @@ static func _table(P: Array, origin: Vector2, cols: Array, rows: Array, header: 
 
 
 static func bom_rows(doc: Object) -> Array:
-	return [["1", doc.part_name, doc.material if doc.material != "" else "—", "1"]]
+	return [["1", doc.part_name, sheet_t(doc.material) if doc.material != "" else "—", "1"]]
 
 
 static func _bom(P: Array, doc: Object, sh: Dictionary, opts := {}) -> void:
@@ -764,7 +781,7 @@ static func _bom(P: Array, doc: Object, sh: Dictionary, opts := {}) -> void:
 	var w := 180.0
 	# Antetin hemen üstüne, satırlar aşağıdan yukarıya (ISO düzeni: başlık en altta)
 	var o := Vector2(size.x - m - w, m + Drawing.TITLE_H)
-	_table(P, o, cols, rows, ["NO", "PARÇA ADI", "MALZEME", "ADET"])
+	_table(P, o, cols, rows, ["NO", sheet_t("PARÇA ADI"), sheet_t("MALZEME"), sheet_t("ADET")])
 
 
 static func _revs(P: Array, sh: Dictionary) -> void:
@@ -775,4 +792,4 @@ static func _revs(P: Array, sh: Dictionary) -> void:
 	for r in sh.get("revs", []):
 		rows.append([str(r.get("rev", "")), str(r.get("desc", "")), str(r.get("date", "")), str(r.get("by", ""))])
 	var h := 6.0 * (rows.size() + 1)
-	_table(P, Vector2(size.x - m - 180.0, size.y - m - h), cols, rows, ["REV", "AÇIKLAMA", "TARİH", "ONAY"], true)
+	_table(P, Vector2(size.x - m - 180.0, size.y - m - h), cols, rows, ["REV", sheet_t("AÇIKLAMA"), sheet_t("TARİH"), sheet_t("ONAY")], true)

@@ -35,30 +35,30 @@ func rebuild(doc: CadDocument, preview: CadFeature = null) -> void:
 			continue
 		if f.type == "extrude" and (str(f.params.get("end", "blind")) in FeatureGeom.UNTIL_ENDS or float(f.params.get("thin", 0.0)) > 0.0
 				or float(f.params.get("draft", 0.0)) != 0.0 or bool(f.params.get("dir2", false))):
-			f.error = "Bu ekstrüzyon seçenekleri OpenCASCADE (B-rep) çekirdeği gerektirir"
+			f.error = I18n.t("Bu ekstrüzyon seçenekleri OpenCASCADE (B-rep) çekirdeği gerektirir")
 			continue
 		if f.type == "import" and StlImport.is_stl(str(f.params.get("path", ""))):
 			_add_stl(f)
 			continue
 		if f.type in GeoKernel.BREP_ONLY:
-			f.error = "Bu özellik OpenCASCADE (B-rep) çekirdeği gerektirir"
+			f.error = I18n.t("Bu özellik OpenCASCADE (B-rep) çekirdeği gerektirir")
 			continue
 		var sk_f := doc.get_feature(f.sketch_ref())
 		if sk_f == null or sk_f.sketch == null:
-			f.error = "Taslak bulunamadı"
+			f.error = I18n.t("Taslak bulunamadı")
 			continue
 		var loops: Array = []
 		var regions = f.params.get("regions", [])
 		if regions is Array and not (regions as Array).is_empty():
 			loops = region_loops(sk_f.sketch, regions)
 			if loops.is_empty():
-				f.error = "Seçili bölgeler bulunamadı (taslak değişmiş olabilir)"
+				f.error = I18n.t("Seçili bölgeler bulunamadı (taslak değişmiş olabilir)")
 				continue
 		else:
 			var prof := sk_f.sketch.extract_profiles()
 			loops = prof["loops"]
 			if loops.is_empty():
-				f.error = "Taslakta kapalı kontur yok"
+				f.error = I18n.t("Taslakta kapalı kontur yok")
 				continue
 		match f.type:
 			"extrude":
@@ -153,7 +153,7 @@ func _add_stl(f: CadFeature) -> void:
 		_stl_cache[key] = StlImport.read(path)
 	var tris: PackedVector3Array = _stl_cache[key]
 	if tris.is_empty():
-		f.error = "STL okunamadı (üçgen yok)"
+		f.error = I18n.t("STL okunamadı (üçgen yok)")
 		return
 	var cm := CSGMesh3D.new()
 	cm.mesh = StlImport.to_mesh(StlImport.transformed(tris, f.params))
@@ -216,12 +216,12 @@ func _add_revolve(f: CadFeature, sk_f: CadFeature, loops: Array, doc: CadDocumen
 	var p := f.params
 	var ax := revolve_axis(sk_f, p.get("axis", "y"), doc)
 	if ax.is_empty():
-		f.error = "Döndürme ekseni bulunamadı"
+		f.error = I18n.t("Döndürme ekseni bulunamadı")
 		return
 	var a2: Vector2 = ax[0]
 	var ad: Vector2 = (ax[1] - ax[0])
 	if ad.length() < 1e-9:
-		f.error = "Döndürme ekseni geçersiz"
+		f.error = I18n.t("Döndürme ekseni geçersiz")
 		return
 	ad = ad.normalized()
 	if bool(p.get("reverse", false)):
@@ -237,7 +237,7 @@ func _add_revolve(f: CadFeature, sk_f: CadFeature, loops: Array, doc: CadDocumen
 	for L in loops:
 		for q in L["poly"]:
 			if (q - a2).dot(perp) < -1e-4:
-				f.error = "Profil döndürme ekseninin iki tarafında olamaz"
+				f.error = I18n.t("Profil döndürme ekseninin iki tarafında olamaz")
 				return
 	var plane := sk_f.plane
 	var X3 := plane.dir_to_world(perp)

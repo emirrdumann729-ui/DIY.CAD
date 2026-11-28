@@ -77,11 +77,11 @@ func load_all() -> void:
 		var s := GDScript.new()
 		s.source_code = src
 		if s.reload() != OK:
-			it["error"] = "derlenemedi (sözdizimi hatası)"
+			it["error"] = I18n.t("derlenemedi (sözdizimi hatası)")
 			continue
 		var obj: Object = s.new()
 		if obj == null or not obj.has_method("setup"):
-			it["error"] = "setup(api) yok"
+			it["error"] = I18n.t("setup(api) yok")
 			continue
 		var api := PluginApi.new(app, id, str(it["name"]))
 		obj.setup(api)

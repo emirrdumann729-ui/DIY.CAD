@@ -103,7 +103,7 @@ static func variable_values(doc: CadDocument) -> Dictionary:
 		var n := str(v.get("name", ""))
 		var r = evaluate(str(v.get("expr", "")), ctx)
 		if r == null:
-			errors.append("Değişken '%s' hesaplanamadı." % n)
+			errors.append(I18n.t("Değişken '%s' hesaplanamadı.") % n)
 			continue
 		vals[n] = r
 		ctx[n] = r
@@ -128,7 +128,7 @@ static func apply(doc: CadDocument) -> Dictionary:
 				var r = evaluate(ex, ctx)
 				if r == null:
 					if _pass == 0:
-						errors.append("%s: '%s' hesaplanamadı." % [full_name(c, f.name), ex])
+						errors.append(I18n.t("%s: '%s' hesaplanamadı.") % [full_name(c, f.name), ex])
 					continue
 				var mm: float = r if c["type"] == "angle" else Units.from_display(r)
 				if c["type"] == "angle":
@@ -142,7 +142,7 @@ static func apply(doc: CadDocument) -> Dictionary:
 			if changed:
 				any_changed = true
 				if not SketchSolver.solve_sketch(f.sketch) and _pass == 1:
-					errors.append("%s: denklem değerleri taslağın geometrisiyle çelişiyor." % f.name)
+					errors.append(I18n.t("%s: denklem değerleri taslağın geometrisiyle çelişiyor.") % f.name)
 		for f in doc.features:
 			for key in ["depth", "angle"]:
 				var ex2 := str(f.params.get(key + "_expr", ""))
@@ -151,7 +151,7 @@ static func apply(doc: CadDocument) -> Dictionary:
 				var r2 = evaluate(ex2, ctx)
 				if r2 == null:
 					if _pass == 0:
-						errors.append("D1@%s: '%s' hesaplanamadı." % [f.name, ex2])
+						errors.append(I18n.t("D1@%s: '%s' hesaplanamadı.") % [f.name, ex2])
 					continue
 				var val: float = Units.from_display(r2) if key == "depth" else clampf(r2, 0.1, 360.0)
 				if absf(val - float(f.params.get(key, 0.0))) > 1e-9:

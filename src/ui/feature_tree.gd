@@ -83,18 +83,18 @@ func _add_feature_item(parent: TreeItem, f: CadFeature, selected: Dictionary) ->
 	it.set_metadata(0, {"kind": "feature", "id": f.id})
 	var tip := f.type_label()
 	if prefix == "(-) ":
-		tip += "\nEksik tanımlı taslak (boyut/ilişki ekleyerek tam tanımlayın)"
+		tip += I18n.t("\nEksik tanımlı taslak (boyut/ilişki ekleyerek tam tanımlayın)")
 	elif prefix == "(+) ":
-		tip += "\nAşırı tanımlı taslak"
+		tip += I18n.t("\nAşırı tanımlı taslak")
 	if f.error != "":
-		tip += "\nHata: " + f.error
+		tip += I18n.t("\nHata: ") + f.error
 		it.set_custom_color(0, UiTheme.adapt(Color(1.0, 0.45, 0.35)))
 	if f.suppressed:
 		it.set_custom_color(0, UiTheme.adapt(Color(0.55, 0.55, 0.6)))
-		tip += "\n(Bastırılmış)"
+		tip += I18n.t("\n(Bastırılmış)")
 	if _doc and _doc.is_rolled_back(f):
 		it.set_custom_color(0, UiTheme.adapt(Color(0.45, 0.45, 0.5)))
-		tip += "\n(Geri alma çubuğunun altında: hesaplanmıyor)"
+		tip += I18n.t("\n(Geri alma çubuğunun altında: hesaplanmıyor)")
 	it.set_tooltip_text(0, tip)
 	if selected.get("kind", "") == "feature" and selected.get("id", -1) == f.id:
 		it.select(0)
@@ -112,7 +112,7 @@ func rebuild(doc: CadDocument, selected: Dictionary) -> void:
 	root.set_icon(0, Icons.get_icon("part", 18))
 	root.set_metadata(0, {"kind": "part"})
 	var mat := create_item(root)
-	mat.set_text(0, (I18n.t("Malzeme: ") + doc.material) if doc.material != "" else I18n.t("Malzeme") + " " + I18n.t("<belirtilmemiş>"))
+	mat.set_text(0, (I18n.t("Malzeme: ") + I18n.t(doc.material)) if doc.material != "" else I18n.t("Malzeme") + " " + I18n.t("<belirtilmemiş>"))
 	mat.set_icon(0, Icons.get_icon("material", 18))
 	mat.set_metadata(0, {"kind": "material"})
 	mat.set_tooltip_text(0, "Çift tıklayın veya sağ tıklayın: malzemeyi düzenle")
@@ -147,10 +147,10 @@ func rebuild(doc: CadDocument, selected: Dictionary) -> void:
 
 func _add_rollback_item(root: TreeItem) -> void:
 	var rb := create_item(root)
-	rb.set_text(0, "━━━ Geri alma çubuğu ━━━")
+	rb.set_text(0, I18n.t("━━━ Geri alma çubuğu ━━━"))
 	rb.set_custom_color(0, UiTheme.adapt(Color(0.95, 0.75, 0.3)))
 	rb.set_metadata(0, {"kind": "rollback"})
-	rb.set_tooltip_text(0, "Altındaki özellikler hesaplanmaz. Sürükleyerek taşıyın; sağ tık: kaldır.")
+	rb.set_tooltip_text(0, I18n.t("Altındaki özellikler hesaplanmaz. Sürükleyerek taşıyın; sağ tık: kaldır."))
 
 
 # ---------------------------------------------------------------- sürükle-bırak (özellik sırası, geri alma çubuğu)
