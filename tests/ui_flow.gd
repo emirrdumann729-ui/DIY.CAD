@@ -770,6 +770,27 @@ func _run() -> void:
 	app._pending_file_action = "dxf"
 	app._on_file_selected(tmp.path_join("ui.dxf"))
 	check(FileAccess.get_file_as_string(tmp.path_join("ui.dxf")).contains("CIRCLE"), "DXF yazıldı (daire içeriyor)")
+	# Tek Dışa Aktar penceresi: tüm formatlar listede, seçilen formatla yazma
+	app._cmd("export_all")
+	await settle()
+	var ed: ExportDialog = app.export_dlg
+	var n_items := 0
+	var it := ed.tree.get_root().get_first_child()
+	while it:
+		n_items += it.get_child_count()
+		it = it.get_next()
+	check(ed.visible and n_items == ExportFormats.FORMATS.size(), "Dışa Aktar penceresi: %d format" % n_items)
+	check(app._export_reason(ExportFormats.by_id("x_t")) != "" and app._export_reason(ExportFormats.by_id("ply")) == "" and app._export_reason(ExportFormats.by_id("dw_pdf")) != "", "uygunluk: kapalı format / ağ / teknik resim")
+	ed.hide()
+	var exp_ids := ["ply", "glb", "xml", "zip", "dcadt"]
+	if DisplayServer.get_name() != "headless":
+		exp_ids.append("png")
+	for id in exp_ids:
+		var ep := tmp.path_join("ui_exp")
+		app._pending_file_action = "exp:" + id
+		app._on_file_selected(ep)
+		var full := ExportFormats.with_ext(ep, ExportFormats.by_id(id))
+		check(FileAccess.file_exists(full) and FileAccess.get_file_as_bytes(full).size() > 20, "Dışa Aktar → %s" % full.get_file())
 
 	await phase2()
 	await phase3()

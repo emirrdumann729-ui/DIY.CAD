@@ -35,6 +35,7 @@ func _initialize() -> void:
 	run_plugins()
 	run_i18n_fmt()
 	run_stl()
+	run_export()
 	print("")
 	print("PRO SONUÇ: %d başarılı, %d başarısız" % [passes, fails])
 	quit(1 if fails > 0 else 0)
@@ -145,11 +146,22 @@ func run_i18n() -> void:
 	check(TranslationServer.translate("Özellikler") == "Features" and I18n.t("Seçenekler") == "Options", "otomatik çeviri sunucusu")
 	I18n.set_language("tr", false)
 	check(I18n.t("Seçenekler") == "Seçenekler", "Türkçeye dönüş")
-	var missing := 0
-	for k in d:
-		if str(d[k]).strip_edges() == "":
-			missing += 1
-	check(missing == 0, "boş çeviri yok")
+	check(I18n.LANGS.keys() == ["tr", "en", "de", "ru", "zh"], "diller: Türkçe, İngilizce, Almanca, Rusça, Çince")
+	var expect := {"de": ["Optionen", "Skizze"], "ru": ["Параметры", "Эскиз"], "zh": ["选项", "草图"]}
+	for lang in I18n.LANGS:
+		if lang == "tr":
+			continue
+		var dl := I18n.load_dict(lang)
+		var missing := 0
+		for k in d:
+			if not dl.has(k) or str(dl[k]).strip_edges() == "":
+				missing += 1
+		check(dl.size() == d.size() and missing == 0, "%s sözlüğü tam (%d girdi, %d eksik)" % [lang, dl.size(), missing])
+		check(str(dl.get("Türkçe", "")) == "Türkçe" and str(dl.get("English", "")) == "English", "%s: dil adları çevrilmez" % lang)
+		if expect.has(lang):
+			I18n.set_language(lang, false)
+			check(I18n.t("Seçenekler") == expect[lang][0] and TranslationServer.translate("Taslak") == expect[lang][1], "%s: çeviri sunucusu" % lang)
+	I18n.set_language("tr", false)
 
 
 func run_theme() -> void:
@@ -225,23 +237,33 @@ func run_i18n_fmt() -> void:
 	check(d.has(k) and str(d[k]).count("%") == 4, "biçimli mesaj çevirisi belirteçleri korur")
 	var re := RegEx.new()
 	re.compile("%[-+ 0#]*\\d*(?:\\.\\d+)?[sdfiexXc]")
-	var bad := 0
-	for key in d:
-		var a: Array = []
-		for m in re.search_all(str(key)):
-			a.append(m.get_string())
-		var b: Array = []
-		for m2 in re.search_all(str(d[key])):
-			b.append(m2.get_string())
-		if a != b:
-			bad += 1
-	check(bad == 0, "tüm çevirilerde biçim belirteçleri aynı sırada (%d uyumsuz)" % bad)
-	var ws := 0
-	for key2 in d:
-		if str(key2).ends_with(" ") != str(d[key2]).ends_with(" "):
-			ws += 1
-	check(ws == 0, "sondaki boşluklar korunur (birleştirilen metinler için, %d uyumsuz)" % ws)
-	check(FileAccess.file_exists("res://i18n/help_en.txt") and FileAccess.get_file_as_string("res://i18n/help_en.txt").begins_with("MOUSE"), "İngilizce yardım metni")
+	var heads := {"en": "MOUSE", "de": "MAUS", "ru": "МЫШЬ", "zh": "鼠标"}
+	for lang in I18n.LANGS:
+		if lang == "tr":
+			continue
+		var dl := I18n.load_dict(lang)
+		var bad := 0
+		var ws := 0
+		var nl := 0
+		for key in dl:
+			var a: Array = []
+			for m in re.search_all(str(key)):
+				a.append(m.get_string())
+			var b: Array = []
+			for m2 in re.search_all(str(dl[key])):
+				b.append(m2.get_string())
+			if a != b:
+				bad += 1
+			if str(key).ends_with(" ") != str(dl[key]).ends_with(" "):
+				ws += 1
+			if lang != "en" and str(d.get(key, "")).count("\n") != str(dl[key]).count("\n"):
+				nl += 1      # iki satırlı araç çubuğu düğmeleri İngilizcedeki gibi kalır
+		check(bad == 0, "%s: biçim belirteçleri aynı sırada (%d uyumsuz)" % [lang, bad])
+		check(ws == 0, "%s: sondaki boşluklar korunur (birleştirilen metinler için, %d uyumsuz)" % [lang, ws])
+		check(nl == 0, "%s: satır sayısı İngilizceyle aynı (iki satırlı düğmeler, %d uyumsuz)" % [lang, nl])
+		var hp := "res://i18n/help_%s.txt" % lang
+		var htxt := FileAccess.get_file_as_string(hp) if FileAccess.file_exists(hp) else ""
+		check(htxt.begins_with(str(heads.get(lang, "?"))) and (htxt.contains("Ctrl+E") or htxt.contains("Strg+E")), "%s yardım metni" % lang)
 
 ## Test için ikili STL kutu yazar (x0..x1 × y0..y1 × z0..z1, dış normallere göre CCW)
 static func write_box_stl(path: String, lo: Vector3, hi: Vector3, ascii := false) -> void:
@@ -344,3 +366,145 @@ func run_stl() -> void:
 	check(gp.is_equal_approx(Vector3(50, 9, 5)), "profilli, üstü sınırsız katman (ara konumda NaN yok): %s" % str(gp))
 	check(str(StlImport.xform_of({"protect": {"axis": "x", "a": 5.0, "b": 1.0}})["error"]) != "", "geçersiz koruma bölgesi hata verir")
 	check(str(StlImport.xform_of({"protect": {"axis": "x", "a": 0.0, "b": 1.0, "bands": [[5.0, 2.0]]}})["error"]) != "", "ters bant hata verir")
+
+
+func run_export() -> void:
+	print("== Dışa aktarma formatları")
+	var ids := {}
+	var dup := false
+	var desc_ok := true
+	for f in ExportFormats.FORMATS:
+		dup = dup or ids.has(f["id"])
+		ids[f["id"]] = true
+		desc_ok = desc_ok and str(f.get("desc", "")) != "" and not (f["ext"] as Array).is_empty()
+	check(not dup and desc_ok and ExportFormats.FORMATS.size() >= 45, "format listesi: %d format, kimlikler benzersiz, açıklama ve uzantı var" % ExportFormats.FORMATS.size())
+	var untr: Array = []
+	for lang in ["en", "de", "ru", "zh"]:
+		var dl := I18n.load_dict(lang)
+		for f in ExportFormats.FORMATS:
+			for k in ["group", "label", "desc"]:
+				if not dl.has(str(f[k])) and not untr.has(lang + ":" + str(f[k])):
+					untr.append(lang + ":" + str(f[k]))
+	check(untr.is_empty(), "format metinlerinin tüm dillerde çevirisi var %s" % str(untr.slice(0, 3)))
+	check(ExportFormats.with_ext("a/b", ExportFormats.by_id("step203")) == "a/b.step" and ExportFormats.with_ext("a/b.STP", ExportFormats.by_id("step214")) == "a/b.STP", "uzantı tamamlama")
+	var p := TMP.path_join("kutu_exp.stl")
+	write_box_stl(p, Vector3(0, 0, 0), Vector3(100, 10, 20))
+	var tris := StlImport.read(p)
+	var groups := ExportFormats.one_group(tris, "Kutu", Color(0.8, 0.2, 0.1))
+	for id in ["stl", "obj", "3mf", "amf", "ply", "off", "fbx", "glb", "gltf", "wrl", "xaml", "ifc", "html"]:
+		var out := TMP.path_join("kutu_exp." + id)
+		var err := ExportFormats.write_mesh(id, out, tris, groups, "Kutu")
+		check(err == OK and FileAccess.get_file_as_bytes(out).size() > 50, "%s yazıldı (%d bayt)" % [id, FileAccess.get_file_as_bytes(out).size()])
+	check(ExportFormats.write_mesh("ply", TMP.path_join("bos.ply"), PackedVector3Array(), []) != OK, "boş ağ hata verir")
+	var ply := FileAccess.get_file_as_bytes(TMP.path_join("kutu_exp.ply")).get_string_from_ascii()
+	check(ply.begins_with("ply\nformat binary_little_endian") and ply.contains("element vertex 8") and ply.contains("element face 12"), "PLY: 8 köşe, 12 yüz")
+	check(FileAccess.get_file_as_string(TMP.path_join("kutu_exp.off")).split("\n")[2] == "8 12 0", "OFF: 8 köşe, 12 yüz")
+	var zr := ZIPReader.new()
+	var model := ""
+	if zr.open(TMP.path_join("kutu_exp.3mf")) == OK:
+		model = zr.read_file("3D/3dmodel.model").get_string_from_utf8()
+		check(zr.get_files().has("[Content_Types].xml") and zr.get_files().has("_rels/.rels"), "3MF paket yapısı")
+		zr.close()
+	check(model.count("<vertex ") == 8 and model.count("<triangle ") == 12 and model.contains('unit="millimeter"') and model.contains("#CC331A"), "3MF: 8 köşe, 12 üçgen, mm, renk")
+	for id in ["amf", "xaml", "3mf_model"]:
+		var txt := model if id == "3mf_model" else FileAccess.get_file_as_string(TMP.path_join("kutu_exp." + id))
+		check(_xml_ok(txt), "%s geçerli XML" % id)
+	check(FileAccess.get_file_as_string(TMP.path_join("kutu_exp.amf")).count("<triangle>") == 12, "AMF: 12 üçgen")
+	var gj = JSON.parse_string(FileAccess.get_file_as_string(TMP.path_join("kutu_exp.gltf")))
+	check(gj is Dictionary and int(gj["accessors"][0]["count"]) == 36 and is_equal_approx(float(gj["accessors"][0]["max"][0]), 0.1), "glTF: 36 köşe, metre birimi")
+	var aabbs := {}
+	for id in ["glb", "gltf"]:
+		var gd := GLTFDocument.new()
+		var st := GLTFState.new()
+		var e := gd.append_from_file(ProjectSettings.globalize_path(TMP.path_join("kutu_exp." + id)), st)
+		var scene := gd.generate_scene(st) if e == OK else null
+		aabbs[id] = _scene_aabb(scene)
+		if scene:
+			scene.free()
+	check(aabbs["glb"].size.is_equal_approx(Vector3(0.1, 0.01, 0.02)) and aabbs["gltf"].size.is_equal_approx(Vector3(0.1, 0.01, 0.02)), "GLB / glTF Godot ile geri okundu: %s" % str(aabbs["glb"].size))
+	if ClassDB.class_exists("FBXDocument"):
+		var fd: Object = ClassDB.instantiate("FBXDocument")
+		var fs: Object = ClassDB.instantiate("FBXState")
+		var fe: int = fd.call("append_from_file", ProjectSettings.globalize_path(TMP.path_join("kutu_exp.fbx")), fs)
+		var fsc: Node = fd.call("generate_scene", fs) if fe == OK else null
+		var fb := _scene_aabb(fsc)
+		check(fe == OK and fb.size.length() > 0.0, "FBX Godot ile geri okundu: %s" % str(fb.size))
+		if fsc:
+			fsc.free()
+	var ifc := FileAccess.get_file_as_string(TMP.path_join("kutu_exp.ifc"))
+	check(ifc.begins_with("ISO-10303-21;") and ifc.contains("FILE_SCHEMA(('IFC4'))") and ifc.contains("IFCTRIANGULATEDFACESET") and ifc.contains("IFCBUILDINGELEMENTPROXY") and ifc.strip_edges().ends_with("END-ISO-10303-21;"), "IFC4 yapısı")
+	check(FileAccess.get_file_as_string(TMP.path_join("kutu_exp.wrl")).begins_with("#VRML V2.0 utf8") and FileAccess.get_file_as_string(TMP.path_join("kutu_exp.wrl")).contains("IndexedFaceSet"), "VRML yapısı")
+	var html := FileAccess.get_file_as_string(TMP.path_join("kutu_exp.html"))
+	check(html.begins_with("<!DOCTYPE html>") and html.contains("getContext('webgl'") and not html.contains("__POS__"), "HTML görüntüleyici (veri gömülü)")
+	check(FileAccess.file_exists(TMP.path_join("kutu_exp.mtl")) and FileAccess.get_file_as_string(TMP.path_join("kutu_exp.obj")).count("\nf ") == 12, "OBJ + MTL")
+	# Görüntüler
+	var img := Image.create(64, 48, false, Image.FORMAT_RGBA8)
+	img.fill(Color(0.2, 0.4, 0.8))
+	img.set_pixel(5, 7, Color(1, 0, 0))
+	for id in ["png", "jpg", "bmp", "tif", "psd"]:
+		var out := TMP.path_join("resim." + id)
+		check(ExportFormats.write_image(out, img, id) == OK and FileAccess.file_exists(out), "%s görüntüsü yazıldı" % id)
+	var bmp := Image.new()
+	bmp.load_bmp_from_buffer(FileAccess.get_file_as_bytes(TMP.path_join("resim.bmp")))
+	check(bmp.get_size() == Vector2i(64, 48) and bmp.get_pixel(5, 7).r > 0.95 and bmp.get_pixel(20, 20).b > 0.75, "BMP geri okundu (boyut ve pikseller)")
+	var tif := FileAccess.get_file_as_bytes(TMP.path_join("resim.tif"))
+	check(tif[0] == 0x49 and tif[1] == 0x49 and tif.decode_u16(2) == 42 and tif.size() == 8 + 2 + 11 * 12 + 4 + 8 + 64 * 48 * 4, "TIFF başlığı ve boyutu")
+	var psd := FileAccess.get_file_as_bytes(TMP.path_join("resim.psd"))
+	check(psd.slice(0, 4).get_string_from_ascii() == "8BPS" and psd[13] == 3 and psd[17] == 48 and psd[21] == 64 and psd.size() == 26 + 12 + 2 + 64 * 48 * 3, "PSD başlığı ve boyutu")
+	var jp := Image.new()
+	check(jp.load_jpg_from_buffer(FileAccess.get_file_as_bytes(TMP.path_join("resim.jpg"))) == OK and jp.get_width() == 64, "JPEG geri okundu")
+	# XML ve ZIP
+	var xp := TMP.path_join("veri.xml")
+	ExportFormats.write_xml(xp, "diycad", {"part": {"name": "Kutu & <1>"}, "features": [{"name": "Ekstrüzyon1"}, {"name": "Kesme1"}], "mass": 12.5})
+	var xt := FileAccess.get_file_as_string(xp)
+	check(_xml_ok(xt) and xt.contains("<feature>") and xt.contains("Kutu &amp; &lt;1&gt;"), "XML yapısı ve kaçışlar")
+	var zp := TMP.path_join("paket.zip")
+	ExportFormats.write_zip(zp, [{"name": "a.xml", "path": xp}, {"name": "b.ply", "path": TMP.path_join("kutu_exp.ply")}])
+	var zr2 := ZIPReader.new()
+	check(zr2.open(zp) == OK and zr2.get_files().size() == 2 and zr2.read_file("a.xml").get_string_from_utf8() == xt, "ZIP paketi")
+	zr2.close()
+	# Yerel dosya türleri
+	var doc := CadDocument.new()
+	doc.part_name = "Şablon"
+	var dp := TMP.path_join("resim.ddrw")
+	check(doc.write_copy(dp) == OK and doc.file_path == "", "yerel kopya yazıldı, belge durumu değişmedi")
+	var doc2 := CadDocument.new()
+	check(doc2.load_from(dp) == OK and doc2.doc_kind == "drawing", "teknik resim dosyası (.ddrw) türüyle açıldı")
+	doc.write_copy(TMP.path_join("sablon.dcadt"))
+	check(doc2.load_from(TMP.path_join("sablon.dcadt")) == OK and doc2.doc_kind == "part_template", "parça şablonu (.dcadt)")
+
+
+static func _xml_ok(txt: String) -> bool:
+	var x := XMLParser.new()
+	if x.open_buffer(txt.to_utf8_buffer()) != OK:
+		return false
+	var depth := 0
+	var seen := false
+	while true:
+		var e := x.read()
+		if e == ERR_FILE_EOF:
+			break
+		if e != OK:
+			return false
+		if x.get_node_type() == XMLParser.NODE_ELEMENT and not x.is_empty():
+			depth += 1
+			seen = true
+		elif x.get_node_type() == XMLParser.NODE_ELEMENT_END:
+			depth -= 1
+	return seen and depth == 0
+
+
+static func _scene_aabb(n: Node) -> AABB:
+	var bb := AABB()
+	if n == null:
+		return bb
+	var first := true
+	var stack: Array = [n]
+	while not stack.is_empty():
+		var c: Node = stack.pop_back()
+		if c is MeshInstance3D and (c as MeshInstance3D).mesh:
+			var b := (c as MeshInstance3D).mesh.get_aabb()
+			bb = b if first else bb.merge(b)
+			first = false
+		stack.append_array(c.get_children())
+	return bb

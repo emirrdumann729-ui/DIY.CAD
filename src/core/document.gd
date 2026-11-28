@@ -9,6 +9,10 @@ const VERSION := 2
 const MAX_UNDO := 100
 
 var part_name := "Parça1"
+## Dosya türü (uzantıdan): part | part_template | drawing | drawing_template | library_feature | forming_tool
+const KIND_BY_EXT := {"dcad": "part", "dcadt": "part_template", "ddrw": "drawing", "ddrwt": "drawing_template",
+	"dclfp": "library_feature", "dcftp": "forming_tool"}
+var doc_kind := "part"
 var material := ""          # Materials.LIST içindeki ad; boş = belirtilmemiş
 var variables: Array = []   # global değişkenler [{name, expr}]
 var features: Array = []
@@ -304,15 +308,26 @@ func clear() -> void:
 
 
 func save_to(path: String) -> Error:
-	var fa := FileAccess.open(path, FileAccess.WRITE)
-	if fa == null:
-		return FileAccess.get_open_error()
-	fa.store_string(JSON.stringify(to_dict(), "\t"))
-	fa.close()
+	var err := write_copy(path)
+	if err != OK:
+		return err
+	doc_kind = str(KIND_BY_EXT.get(path.get_extension().to_lower(), "part"))
 	file_path = path
 	part_name = path.get_file().get_basename()
 	dirty = false
 	changed.emit()
+	return OK
+
+
+## Belgenin bir kopyasını yazar (belge durumu değişmez); dosya türü uzantıdan: .dcad / .dcadt / .ddrw / .ddrwt / .dclfp / .dcftp
+func write_copy(path: String) -> Error:
+	var d := to_dict()
+	d["doc_kind"] = str(KIND_BY_EXT.get(path.get_extension().to_lower(), "part"))
+	var fa := FileAccess.open(path, FileAccess.WRITE)
+	if fa == null:
+		return FileAccess.get_open_error()
+	fa.store_string(JSON.stringify(d, "\t"))
+	fa.close()
 	return OK
 
 
@@ -324,6 +339,7 @@ func load_from(path: String) -> Error:
 	if typeof(data) != TYPE_DICTIONARY or data.get("format", "") != FORMAT:
 		return ERR_FILE_CORRUPT
 	load_dict(data)
+	doc_kind = str(data.get("doc_kind", KIND_BY_EXT.get(path.get_extension().to_lower(), "part")))
 	file_path = path
 	part_name = path.get_file().get_basename()
 	dirty = false

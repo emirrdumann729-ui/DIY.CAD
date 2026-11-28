@@ -112,7 +112,7 @@ func rebuild(doc: CadDocument, selected: Dictionary) -> void:
 	root.set_icon(0, Icons.get_icon("part", 18))
 	root.set_metadata(0, {"kind": "part"})
 	var mat := create_item(root)
-	mat.set_text(0, ("Malzeme: " + doc.material) if doc.material != "" else "Malzeme <belirtilmemiş>")
+	mat.set_text(0, (I18n.t("Malzeme: ") + doc.material) if doc.material != "" else I18n.t("Malzeme") + " " + I18n.t("<belirtilmemiş>"))
 	mat.set_icon(0, Icons.get_icon("material", 18))
 	mat.set_metadata(0, {"kind": "material"})
 	mat.set_tooltip_text(0, "Çift tıklayın veya sağ tıklayın: malzemeyi düzenle")

@@ -129,7 +129,7 @@ func _general() -> Control:
 	iv.min_value = 0.5
 	iv.max_value = 120.0
 	iv.step = 0.5
-	iv.suffix = "dk"
+	iv.suffix = I18n.t("dk")
 	iv.value = float(AppSettings.get_v("autosave", "interval_min"))
 	iv.value_changed.connect(func(x: float) -> void:
 		AppSettings.set_v("autosave", "interval_min", x)
@@ -149,7 +149,7 @@ func _general() -> Control:
 		app._set_status("Son dosyalar listesi temizlendi."))
 	v.add_child(clr)
 	v.add_child(HSeparator.new())
-	_note(v, "Ayarlar dosyası: " + ProjectSettings.globalize_path(AppSettings.PATH) + "\nOtomatik kayıtlar: " + ProjectSettings.globalize_path(Autosave.DIR))
+	_note(v, I18n.t("Ayarlar dosyası: ") + ProjectSettings.globalize_path(AppSettings.PATH) + "\n" + I18n.t("Otomatik kayıtlar: ") + ProjectSettings.globalize_path(Autosave.DIR))
 	return m
 
 

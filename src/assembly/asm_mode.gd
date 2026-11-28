@@ -752,7 +752,7 @@ func build_toolbar(cm: Control) -> void:
 		["Malzeme\nListesi", "asm_bom", "Montaj malzeme listesi (BOM), CSV", "asm_bom"],
 		["Kütle\nÖzellikleri", "asm_mass", "Toplam kütle ve ağırlık merkezi", "asm_mass"],
 		["Parçayı\nAç", "asm_open", "Seçili bileşenin parçasını düzenlemek için aç", "asm_open"],
-		["STEP\nÇıktısı", "step", "Montajı STEP olarak dışa aktar", "asm_step"],
+		["Dışa\nAktar", "export", "Montajı dışa aktar: STEP, STL, 3MF, glTF, görüntü, XML... (Ctrl+E)", "asm_export_all"],
 	]
 	for it in items:
 		if it.is_empty():
@@ -805,6 +805,8 @@ func cmd(c: String) -> void:
 	if asm == null:
 		return
 	match c:
+		"asm_export_all":
+			app._cmd("export_all")
 		"asm_insert":
 			app._file_dialog(false, ["*.dcad, *.dasm ; Parça veya alt montaj", "*.dcad ; DIY.CAD Parça", "*.dasm ; DIY.CAD Montaj (alt montaj)"], "Bileşen Ekle", "asm_insert")
 		"asm_toolbox":
@@ -1449,11 +1451,11 @@ func run_interference() -> void:
 var interf_ids: Array = []
 
 
-func export_step(path: String) -> void:
+func export_step(path: String, schema := "AP214IS") -> void:
 	if not _vp().kernel.is_brep():
 		app._set_status("Montaj STEP çıktısı OpenCASCADE çekirdeği gerektirir.")
 		return
-	_vp().kernel.request_asm("asm_export", {"comps": _occ_comps(), "path": path, "format": "step"})
+	_vp().kernel.request_asm("asm_export", {"comps": _occ_comps(), "path": path, "format": "step", "schema": schema})
 	app._set_status(I18n.t("Montaj dışa aktarılıyor: ") + path)
 
 

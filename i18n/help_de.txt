@@ -1,0 +1,61 @@
+MAUS
+  Mittlere Taste ziehen ....... drehen
+  Rechte Taste ziehen ......... drehen (oder Mausgesten, siehe Optionen)
+  Strg + mittlere/rechte Taste  verschieben
+  Umschalt + mittlere Taste ... zoomen
+  Rad ......................... zum Mauszeiger zoomen
+  Linksklick .................. auswählen   (Doppelklick: bearbeiten)
+
+TASTATUR (anpassbar: Extras → Optionen → Tastenkürzel)
+  F ........................... Zoomen auf Gesamtansicht
+  Strg+1..7 ................... Vorne, Hinten, Links, Rechts, Oben, Unten, Isometrisch
+  Strg+8 ...................... Normal auf
+  Pfeiltasten ................. Ansicht um 15° drehen
+  Strg+Z / Strg+Y ............. rückgängig / wiederholen
+  Strg+S / Strg+O / Strg+N .... speichern / öffnen / neu
+  Strg+E ...................... Exportieren (alle Formate)
+  Entf ........................ löschen      F2: umbenennen
+  Esc ......................... abbrechen / Werkzeug verlassen
+  Enter ....................... OK im Feature-Panel
+
+SKIZZIERMODUS
+  L Linie   N Mittellinie   R Rechteck   C Kreis   A Bogen
+  D Intelligente Bemaßung   S auswählen   G Rasterfang
+  P Polygon   T trimmen   E verlängern
+  =Ausdruck in ein Bemaßungsfeld eingeben, um eine Gleichung zu verknüpfen (z. B. =width/2)
+  Doppelklick / Rechtsklick: Linienzug beenden
+  Doppelklick auf eine Bemaßung: Wert ändern
+  Umschalt/Strg + Klick: Mehrfachauswahl → Beziehung im Panel hinzufügen
+  Blau = unterbestimmt, schwarz = vollständig definiert, rot = überbestimmt
+
+BAUGRUPPE (Datei → Neue Baugruppe / .dasm)
+  Komponente einfügen: Teildatei; die erste Komponente ist fixiert (f), unterbestimmt (-)
+  Links ziehen: Komponente unter Beachtung ihrer Verknüpfungen bewegen
+  Verknüpfung: Flächen/Kanten anklicken → Typ wählen (★ vorgeschlagen)
+  Doppelklick auf eine Komponente (Baum): Teil bearbeiten; Registerkarte „Baugruppe“: zurück
+  Neues Teil: Teil in der Baugruppe (andere Komponenten transparent, Skizze auf ihren Flächen)
+  Komponentenmuster, Unterbaugruppe (.dasm einfügen), Registerkarte „Zeichnung“: Baugruppenzeichnung
+  Große Baugruppen: automatisches LOD; der Modus für große Baugruppen zeigt Kanten nur an der Auswahl
+
+BLECH / SCHWEISSKONSTRUKTIONEN / FLÄCHEN / ANALYSE (Registerkarten)
+  Basislasche: geschlossenes Profil → Platte, offener Linienzug → gebogenes Blech
+  Kantenlasche / Saum: Basiskanten anklicken; Abwicklung, Abwicklungs-DXF mit Biegelinien
+  Strukturbauteil: Profil auf Skizzen- / 3D-Skizzenlinien; Zuschnittsliste (CSV)
+  Auswerten → Konfiguration: Bemaßungs- / Unterdrückungssätze, Konstruktionstabelle (CSV)
+  Flächen: extrudierte / rotierte / ausgeformte / ebene Fläche, zusammenfügen, aufdicken, trimmen
+  Analyse: statische FEA (fixierte + Lastflächen anklicken), Formschrägenanalyse, CAM-G-Code, Visualisierung
+
+OPTIONEN, MAKROS UND PLUG-INS (Menü Extras)
+  Optionen: Sprache, Design, Oberflächenskalierung, automatisches Speichern, Sicherung
+  Tastenkürzel: Befehl doppelklicken, Taste drücken (jedem Befehl kann eine Taste zugewiesen werden)
+  Mausgesten: rechte Taste halten + in eine Richtung ziehen → Befehlsring
+  Makro ausführen / Makroaufzeichnung starten-stoppen / Teil als Makro speichern
+  Plug-ins: Ordner plugins/, Registerkarte „Plug-ins“; in den Optionen aktivieren / deaktivieren
+  Datei → Zuletzt verwendete Dateien; Dokumentwiederherstellung beim Start nach einem Absturz
+
+ZEICHNUNG (Registerkarte)
+  Beim ersten Öffnen wird ein A3-Blatt mit den Standard-3-Ansichten und einer isometrischen Ansicht erstellt
+  Linksklick: auswählen / platzieren   Ziehen: Ansicht oder Beschriftung verschieben
+  Rad: zoomen   Rechte/mittlere Taste: verschieben   F: auf Blatt einpassen
+  Entf: gewählte Ansicht/Beschriftung löschen   Esc: Werkzeug loslassen / Auswahl aufheben
+  Exportieren (Strg+E): PDF, DXF, SVG, AI, Bilder (DXF mit AutoCAD / ODA in DWG umwandeln)

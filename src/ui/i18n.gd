@@ -1,10 +1,10 @@
 class_name I18n
 extends RefCounted
-## Dil desteği (Faz 9): arayüz metinleri Türkçe yazılır; İngilizce için res://i18n/en.txt sözlüğü
-## ("türkçe<TAB>english", \n kaçışlı) Godot'nun otomatik çevirisine (TranslationServer) yüklenir.
+## Dil desteği (Faz 9): arayüz metinleri Türkçe yazılır; diğer diller için res://i18n/<dil>.txt sözlüğü (en, de, ru, zh)
+## ("türkçe<TAB>çeviri", \n kaçışlı) Godot'nun otomatik çevirisine (TranslationServer) yüklenir.
 ## Düğme, etiket, menü, sekme ve ipucu metinleri dil değişince kendiliğinden güncellenir.
 
-const LANGS := {"tr": "Türkçe", "en": "English"}
+const LANGS := {"tr": "Türkçe", "en": "English", "de": "Deutsch", "ru": "Русский", "zh": "中文"}
 const DICT_PATH := "res://i18n/%s.txt"
 
 static var current := "tr"

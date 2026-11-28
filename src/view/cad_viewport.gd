@@ -387,7 +387,15 @@ func show_cursor_text(text: String, pos: Vector2) -> void:
 
 
 func screenshot(path: String) -> Error:
+	var img := screenshot_image()
+	return img.save_png(path) if img else ERR_UNAVAILABLE
+
+
+## Görünümün görüntüsü (saydam arka plan degradeyle birleştirilmiş)
+func screenshot_image() -> Image:
 	var img := subviewport.get_texture().get_image()
+	if img == null or img.is_empty():
+		return null      # ekransız (headless) çalışma
 	# Arka plan saydam olduğundan degrade ile birleştir
 	var out := Image.create(img.get_width(), img.get_height(), false, Image.FORMAT_RGBA8)
 	for y in out.get_height():
@@ -396,7 +404,7 @@ func screenshot(path: String) -> Error:
 		out.fill_rect(Rect2i(0, y, out.get_width(), 1), c)
 	img.convert(Image.FORMAT_RGBA8)
 	out.blend_rect(img, Rect2i(Vector2i.ZERO, img.get_size()), Vector2i.ZERO)
-	return out.save_png(path)
+	return out
 
 
 func _on_view_changed() -> void:

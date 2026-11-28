@@ -5,9 +5,9 @@
 A **parametric, feature-based** CAD program written in Godot 4.7.
 Goals and phases: [ROADMAP.md](ROADMAP.md)
 
-**Current version: 0.9.3 — STL import (per-axis scale, regional stretch, tapered growth, protected region) + Phase 9 (complete): background mesh processing, LOD for large assemblies, plugins, English UI, Windows packaging, auto-save, keyboard shortcuts, mouse gestures, macros** (previous: Phase 8). Release notes: [CHANGELOG.md](CHANGELOG.md)
+**Current version: 0.9.4 — one Export dialog for 40+ formats, UI in Turkish / English / German / Russian / Chinese, STL import (per-axis scale, regional stretch, tapered growth, protected region) + Phase 9 (complete): background mesh processing, LOD for large assemblies, plugins, Windows packaging, auto-save, keyboard shortcuts, mouse gestures, macros** (previous: Phase 8). Release notes: [CHANGELOG.md](CHANGELOG.md)
 
-The user interface is Turkish by default; switch to English under **Tools → Options → General → Language** (applies instantly) or start with `--lang=en`. Menu and tool names below are given as they appear in the English UI.
+The user interface is Turkish by default; switch to English, German, Russian or Chinese under **Tools → Options → General → Language** (applies instantly) or start with `--lang=en` (`de`, `ru`, `zh`). Menu and tool names below are given as they appear in the English UI.
 
 ## Download (Windows, no Godot needed)
 
@@ -52,7 +52,7 @@ Command-line options (after `--`):
 5. Draw a **Circle** (C) and give its diameter with Smart Dimension.
 6. Press **Extrude**, enter the depth, **OK**.
 7. Pick a material with **Evaluate → Material** and see the weight with **Mass Properties**.
-8. Get a 3D-printable file with **File → Export as STL**.
+8. Get a 3D-printable file with **File → Export... (Ctrl+E) → STL**.
 
 Click a face and press **Sketch** again to draw on that face (to add a boss or a cut).
 
@@ -110,7 +110,7 @@ bottom right or **Tools → Geometry kernel**; STL quality is set there as well.
 | Combine Bodies | Click bodies (the first is the main body), choose the operation: add / subtract / common |
 | Move/Copy Body | Click a body, enter ΔX/ΔY/ΔZ and the rotation axis/angle; "Copy" keeps the original |
 | Split | Pick a main plane + offset; both sides become separate bodies or only one side is kept |
-| STEP / IGES export | File menu or the STEP button — transfer to other CAD programs |
+| Export (Ctrl+E) | One dialog for every format (File → Export... or the Export button): DIY.CAD part / assembly / drawing / templates, STEP AP203 / AP214 / AP242, IGES, BREP, STL, 3MF, AMF, OBJ, PLY, OFF, FBX, glTF / GLB, VRML, XAML, IFC, HTML 3D viewer, sketch DXF / SVG, drawing PDF / DXF / SVG / AI, PNG / JPEG / BMP / TIFF / PSD, XML report, ZIP package. Formats that cannot be written (Parasolid, ACIS, JT, DWG...) are greyed out with the reason and a recommended alternative |
 | Import | Adds a STEP/IGES file as a body; you can sketch on it and cut/extrude |
 
 While selecting, the model is shown as it was before the edited feature; the "Preview result" box shows the result.
@@ -222,7 +222,7 @@ that references part files by relative path. Only the **Assembly** tab is shown 
 | Keyboard shortcuts | Tools → Options → Keyboard shortcuts: more than 170 commands (menus, all toolbars, sketch tools); double-click a row and press a key. The sketch context (L, C, R...) is separate; menus show the new shortcut |
 | Mouse gestures | Options → Mouse gestures → "Right-drag: Mouse gestures": hold the right button and pull in a direction → command on an 8-way ring (part: views, sketch: drawing tools, assembly); each direction is assignable. Rotation moves to the middle button, Ctrl + right button pans |
 | Theme / scale | Dark or light theme (after restart), UI scale 75–200% (instant) |
-| Language | Türkçe / English (instant): menus, tabs, toolbars, tooltips, panel labels, options; dictionary `i18n/en.txt` (`turkish<TAB>english`) |
+| Language | Türkçe / English / Deutsch / Русский / 中文 (instant): menus, tabs, toolbars, tooltips, panel labels, options, Help; dictionaries `i18n/<lang>.txt` (`turkish<TAB>translation`) |
 | Run macro | Tools → Run macro: a `.gd` file containing `func run(m: MacroApi)`. Samples are in `macros/` (parametric flange, plate with holes, batch export). Command line: `DIY.CAD.bat -- --macro=file.gd` |
 | Macro recording | Tools → Start / stop macro recording: the features added in between become a macro (ids are remapped when played on a non-empty part). "Save part as macro" generates a macro that rebuilds the whole part |
 | STL import | Features → Import: an `.stl` (binary / ASCII) becomes a body (OpenCASCADE: sewn solid; CSG: mesh body). The panel has **Scale X / Y / Z**, scale center, translation and **regional stretch** (axis, region start / end in original coordinates, length to add in mm): geometry in the region stretches proportionally, the rest is not distorted. **Protected region**: the selected range (and the section bands given from a macro) is only moved, not scaled — details such as holes / slots / joints keep their original size while the surroundings grow. **Tapered section growth** (`taper`: mm added to the section, increasing linearly along the region), multi-region stretch (`stretch` list) and protection bands (`protect.bands`) can be given from a macro. Then File → STL to export — for resizing existing STLs |
@@ -287,12 +287,12 @@ src/kernel/   Kernel selector (GeoKernel), OpenCASCADE bridge (OccKernel), CSG f
 occ/          OpenCASCADE server (Python, OCP) — runs with the Python in occ_env
 src/view/     3D view, CAD camera, sketch editor (dimension/relation drawing), axis triad
 src/ui/       Feature tree, property panel, number field, SVG icons, shortcuts (Keymap), mouse gestures (MouseGesture), theme (UiTheme), language (I18n), Options window
-src/io/       STL, OBJ, DXF, SVG export; STL import
+src/io/       Export formats (ExportFormats: mesh, image, XML / ZIP writers), STL, OBJ, DXF, SVG export; STL import
 src/special/  Phase 8: sheet metal (SheetMetal), weldments (Weldment), configurations (Configs), surfaces (Surfaces), static + draft analysis (Fea), CAM (Cam), UI + visualization (SpecialUI)
 src/assembly/ Assembly: document (CadAssembly), mate solver (MateSolver), reference geometry (MateGeom), view (AssemblyView), mode controller (AssemblyMode), fasteners (Toolbox), LOD (AsmLod)
 src/drawing/  Drawings: data model and projection geometry (Drawing), sheet rendering (DrawingRender), PDF/SVG/DXF (DrawingExport), canvas (DrawingCanvas)
 plugins/      Sample plugins (Quick Box, Part Info); src/core/plugin_api.gd + plugins.gd
-macros/       Sample macros; i18n/ English dictionary and help; installer/ Inno Setup script; tools/ icon generator
+macros/       Sample macros; i18n/ dictionaries and help (en, de, ru, zh); installer/ Inno Setup script; tools/ icon generator
 tests/        selftest.gd (unit), solver_test.gd (constraint solver), ops_test.gd (sketch operations), drawing_test.gd (drawings), assembly_test.gd (mate solver), special_test.gd (sheet metal, weldments, configurations, CAM, analysis), pro_test.gd (settings, shortcuts, macros, language, STL import), occ_test.gd (B-rep), ui_flow.gd (end-to-end)
 ```
 

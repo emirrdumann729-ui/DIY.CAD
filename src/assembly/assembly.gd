@@ -370,6 +370,21 @@ func save_to(path: String) -> Error:
 	return OK
 
 
+## Montajın bir kopyası (ör. şablon .dasmt): bileşen yolları mutlak yazılır, montaj durumu değişmez
+func write_copy(path: String, kind := "assembly") -> Error:
+	var d := to_dict(false)
+	for c in d["comps"]:
+		if (c["src"] as Dictionary).has("path"):
+			c["src"] = {"path": resolve_path(str(c["src"]["path"]), base_dir())}
+	d["doc_kind"] = kind
+	var fa := FileAccess.open(path, FileAccess.WRITE)
+	if fa == null:
+		return FileAccess.get_open_error()
+	fa.store_string(JSON.stringify(d, "  "))
+	fa.close()
+	return OK
+
+
 func load_from(path: String) -> Error:
 	if not FileAccess.file_exists(path):
 		return ERR_FILE_NOT_FOUND

@@ -23,7 +23,7 @@
 %s: çoğaltılacak özellikleri panelden işaretleyin.	%s: check the features to pattern in the panel.
 (%s, %s) — tam tanımlı	(%s, %s) — fully defined
 (liste boş)	(list is empty)
-1. Ağaçtan veya ekrandan bir düzlem seçin.\n2. 'Taslak' ile çizime başlayın, dikdörtgen/daire çizin.\n3. Ölçüleri bu panelden girin.\n4. 'Ekstrüzyon' ile katı oluşturun.\n5. Dosya > STL ile 3B baskı çıktısı alın.	1. Select a plane in the tree or on screen.\n2. Start drawing with 'Sketch'; draw a rectangle/circle.\n3. Enter dimensions in this panel.\n4. Create a solid with 'Extrude'.\n5. File > STL for 3D printing output.
+1. Ağaçtan veya ekrandan bir düzlem seçin.\n2. 'Taslak' ile çizime başlayın, dikdörtgen/daire çizin.\n3. Ölçüleri bu panelden girin.\n4. 'Ekstrüzyon' ile katı oluşturun.\n5. Dışa Aktar (Ctrl+E) ile STL, STEP ve diğer formatlarda çıktı alın.	1. Select a plane in the tree or on screen.\n2. Start drawing with 'Sketch'; draw a rectangle/circle.\n3. Enter dimensions in this panel.\n4. Create a solid with 'Extrude'.\n5. Export (Ctrl+E) to STL, STEP and other formats.
 1. açı (ISO / Avrupa)	First angle (ISO / Europe)
 3. açı (ANSI / Amerika)	Third angle (ANSI / America)
 3B Taslak	3D Sketch
@@ -1174,3 +1174,132 @@ odak uzaklığı 	focal length
 ■ Negatif eğim (ters yöne bakar): %%%.1f	■ Negative draft (faces away): %.1f%%
 ■ Pozitif eğim (çekme yönüne bakar): %%%.1f	■ Positive draft (faces pull direction): %.1f%%
 ● Makro kaydı başladı: eklediğiniz özellikler kaydedilir. Durdurmak için Araçlar → Makro kaydı.	● Macro recording started: the features you add are recorded. Stop with Tools → Macro recording.
+Dışa Aktar	Export
+Dışa Aktar...	Export...
+Dışa aktar...	Export...
+Dışa\nAktar	Export
+Format seçin (çift tıklama da olur). Gri olanlar şu an kullanılamaz — nedeni seçince aşağıda yazar.	Choose a format (double-click works too). Grey ones are not available right now — select one to see why below.
+Tüm formatlara dışa aktar: STEP, IGES, STL, 3MF, OBJ, glTF, DXF, PDF, görüntü... (Ctrl+E)	Export to any format: STEP, IGES, STL, 3MF, OBJ, glTF, DXF, PDF, images... (Ctrl+E)
+Taslağı (DXF, SVG) veya modeli dışa aktar (Ctrl+E)	Export the sketch (DXF, SVG) or the model (Ctrl+E)
+Sayfayı dışa aktar: PDF, DXF, SVG, AI, görüntü... (Ctrl+E)	Export the sheet: PDF, DXF, SVG, AI, images... (Ctrl+E)
+Montajı dışa aktar: STEP, STL, 3MF, glTF, görüntü, XML... (Ctrl+E)	Export the assembly: STEP, STL, 3MF, glTF, images, XML... (Ctrl+E)
+Dışa aktarıldı: 	Exported: 
+Yazılamadı (hata %d): %s	Could not write (error %d): %s
+Bu format desteklenmiyor.	This format is not supported.
+Montaj açıkken parça dosyası yazılamaz: bileşeni Parçayı Aç ile açın.	A part file cannot be written while an assembly is open: open the component with Open Part.
+Montaj resmi montaj dosyasının (.dasm) içinde saklanır.	The assembly drawing is stored inside the assembly file (.dasm).
+Montaj açık değil.	No assembly is open.
+OpenCASCADE çekirdeği gerekli (Araçlar → Geometri çekirdeği; kurulum: OCC_Kur.bat).	The OpenCASCADE kernel is required (Tools → Geometry kernel; setup: OCC_Kur.bat).
+Montajda yalnızca STEP yazılabilir.	Only STEP can be written for assemblies.
+Önce bir taslak seçin (ağaçtan veya taslak modunda).	Select a sketch first (in the tree or in sketch mode).
+Teknik Resim sekmesinde kullanılır.	Available on the Drawing tab.
+DIY.CAD	DIY.CAD
+3B katı (B-rep)	3D solid (B-rep)
+3B ağ / baskı / görselleştirme	3D mesh / printing / visualization
+2B çizim	2D drawing
+Görüntü	Image
+Veri / paket	Data / package
+DIY.CAD Parça	DIY.CAD Part
+DIY.CAD Montaj	DIY.CAD Assembly
+DIY.CAD Teknik Resim	DIY.CAD Drawing
+DIY.CAD Parça Şablonu	DIY.CAD Part Template
+DIY.CAD Montaj Şablonu	DIY.CAD Assembly Template
+DIY.CAD Teknik Resim Şablonu	DIY.CAD Drawing Template
+DIY.CAD Kütüphane Unsuru Parçası	DIY.CAD Library Feature Part
+DIY.CAD Form Verme Aracı (Sac)	DIY.CAD Forming Tool (Sheet Metal)
+STEP AP214	STEP AP214
+STEP AP203	STEP AP203
+STEP AP242	STEP AP242
+IGES	IGES
+OpenCASCADE BREP	OpenCASCADE BREP
+Parasolid (X_T / X_B)	Parasolid (X_T / X_B)
+ACIS (SAT)	ACIS (SAT)
+VDA-FS	VDA-FS
+JT	JT
+STL	STL
+3MF	3MF
+AMF	AMF
+Wavefront OBJ	Wavefront OBJ
+PLY	PLY
+OFF	OFF
+FBX	FBX
+glTF ikili (GLB)	glTF binary (GLB)
+glTF (JSON)	glTF (JSON)
+VRML 97 (WRL)	VRML 97 (WRL)
+XAML 3B	XAML 3D
+IFC4 (BIM)	IFC4 (BIM)
+HTML 3B görüntüleyici	HTML 3D viewer
+3DXML / CGR	3DXML / CGR
+U3D / 3B PDF	U3D / 3D PDF
+HOOPS (HSF / HCG)	HOOPS (HSF / HCG)
+eDrawings (EPRT / EASM / EDRW / EXE)	eDrawings (EPRT / EASM / EDRW / EXE)
+Taslak DXF (R12)	Sketch DXF (R12)
+Taslak SVG	Sketch SVG
+Teknik resim PDF	Drawing PDF
+Teknik resim DXF	Drawing DXF
+Teknik resim SVG	Drawing SVG
+Adobe Illustrator (AI)	Adobe Illustrator (AI)
+DWG	DWG
+PNG	PNG
+JPEG	JPEG
+BMP	BMP
+TIFF	TIFF
+Photoshop (PSD)	Photoshop (PSD)
+XML veri (özellikler, kütle, malzeme listesi)	XML data (features, mass, bill of materials)
+ZIP paket	ZIP package
+Parametrik parça dosyası (özellik ağacı, taslaklar, teknik resim sayfaları).	Parametric part file (feature tree, sketches, drawing sheets).
+Montaj dosyası (bileşenler, eşleştirmeler, patlatma, montaj resmi).	Assembly file (components, mates, explode, assembly drawing).
+Teknik resim dosyası: parça ve resim sayfaları birlikte; açılınca Teknik Resim sekmesinde açılır.	Drawing file: the part together with its drawing sheets; opens on the Drawing tab.
+Parça şablonu: açılınca yeni (adsız) parça olarak başlar; birimler, malzeme, özellikler hazır gelir.	Part template: opens as a new (untitled) part with units, material and features preset.
+Montaj şablonu: açılınca yeni (adsız) montaj olarak başlar.	Assembly template: opens as a new (untitled) assembly.
+Teknik resim şablonu: sayfa boyutu, antet ve görünüş yerleşimi yeni resimde hazır gelir.	Drawing template: sheet size, title block and view layout preset for a new drawing.
+Tekrar kullanılacak unsur (delik, cep, kanal...) için kütüphane parçası.	Library part for a reusable feature (hole, pocket, slot...).
+Sac metalde ezme / kabartma için form verme aracı parçası.	Forming tool part for sheet metal (louvers, embosses...).
+Evrensel katı model formatı (renk / katman bilgili AP214). Diğer CAD programlarına aktarım için önerilir.	Universal solid model format (AP214 with colors / layers). Recommended for transfer to other CAD programs.
+Evrensel katı model formatı (yapılandırma kontrollü AP203).	Universal solid model format (configuration-controlled AP203).
+Evrensel katı model formatının yeni sürümü (AP242).	The newer version of the universal solid model format (AP242).
+Yüzey ve tel kafes değişim formatı.	Surface and wireframe exchange format.
+OpenCASCADE'in kendi kesin geometri formatı.	OpenCASCADE's native exact geometry format.
+Parasolid ticari, lisanslı bir çekirdeğin formatıdır; açık kaynak yazıcısı yok. Yerine STEP kullanın — Parasolid tabanlı programlar STEP'i sorunsuz açar.	Parasolid is the format of a commercial, licensed kernel; there is no open-source writer. Use STEP instead — Parasolid-based programs open STEP without problems.
+ACIS ticari, lisanslı bir çekirdeğin formatıdır; açık kaynak yazıcısı yok. Yerine STEP kullanın.	ACIS is the format of a commercial, licensed kernel; there is no open-source writer. Use STEP instead.
+Eski otomotiv yüzey formatı; kullanılan OpenCASCADE sürümünde yazıcısı yok. Yerine STEP veya IGES kullanın.	Legacy automotive surface format; the OpenCASCADE version in use has no writer for it. Use STEP or IGES instead.
+JT yazmak için ticari bir geliştirme kiti gerekir. Yerine STEP AP242 veya glTF kullanın.	Writing JT requires a commercial SDK. Use STEP AP242 or glTF instead.
+3B baskı ve hızlı prototipleme ağ formatı (ikili). OpenCASCADE açıksa kalite ayarı Araçlar → Geometri çekirdeği'nden.	Mesh format for 3D printing and rapid prototyping (binary). With OpenCASCADE, set the quality under Tools → Geometry kernel.
+3D Manufacturing Format: birimli, renkli 3B baskı formatı (montajda bileşen başına nesne).	3D Manufacturing Format: 3D printing format with units and colors (one object per component in assemblies).
+Additive Manufacturing File: eklemeli imalat için XML ağ formatı (renkli).	Additive Manufacturing File: XML mesh format for additive manufacturing (with colors).
+Genel 3B geometri ve render formatı.	General 3D geometry and rendering format.
+Polygon File Format (ikili) — 3B tarayıcı ve ağ işleme programları.	Polygon File Format (binary) — 3D scanners and mesh processing programs.
+Object File Format (metin).	Object File Format (text).
+Animasyon ve oyun motoru formatı (ASCII FBX 7.4).	Animation and game engine format (ASCII FBX 7.4).
+Web ve AR / VR için 3B iletim formatı, tek dosya.	3D transmission format for the web and AR / VR, single file.
+Web ve AR / VR için 3B iletim formatı (veriler dosyanın içinde).	3D transmission format for the web and AR / VR (data embedded in the file).
+Sanal gerçeklik modelleme dili.	Virtual Reality Modeling Language.
+WPF Viewport3D sahnesi (MeshGeometry3D).	WPF Viewport3D scene (MeshGeometry3D).
+Yapı bilgi modellemesi: bileşenler üçgen yüzlü IfcBuildingElementProxy olarak (Z yukarı).	Building information modeling: components as triangulated IfcBuildingElementProxy (Z up).
+Tarayıcıda açılan tek dosyalık 3B görüntüleyici (döndür / yakınlaştır). Paylaşım için eDrawings benzeri.	Single-file 3D viewer that opens in a browser (rotate / zoom). eDrawings-like file for sharing.
+Belirli bir üreticinin kapalı formatları; açık yazıcı yok. Görselleştirme için glTF / GLB veya HTML kullanın.	Closed formats of a specific vendor; there is no open writer. Use glTF / GLB or HTML for visualization.
+Henüz desteklenmiyor. Paylaşım için HTML görüntüleyici veya GLB kullanın.	Not supported yet. Use the HTML viewer or GLB for sharing.
+Ticari HOOPS kütüphanesinin kapalı formatları; açık yazıcı yok. Yerine glTF / GLB kullanın.	Closed formats of the commercial HOOPS library; there is no open writer. Use glTF / GLB instead.
+Belirli bir üreticinin kapalı görüntüleyici formatları. Yerine HTML 3B görüntüleyici (tek dosya, her tarayıcıda açılır) veya PDF kullanın.	Closed viewer formats of a specific vendor. Use the HTML 3D viewer (single file, opens in any browser) or PDF instead.
+Seçili / düzenlenen taslak: lazer ve CNC kesim.	The selected / edited sketch: laser and CNC cutting.
+Seçili / düzenlenen taslak, vektörel.	The selected / edited sketch, vector.
+Etkin teknik resim sayfası, vektörel PDF.	The active drawing sheet, vector PDF.
+Etkin teknik resim sayfası (katmanlı R12).	The active drawing sheet (layered R12).
+Etkin teknik resim sayfası, vektörel.	The active drawing sheet, vector.
+Etkin teknik resim sayfası; PDF uyumlu AI (Illustrator doğrudan açar).	The active drawing sheet; PDF-compatible AI (Illustrator opens it directly).
+DWG kapalı bir formattır. DXF olarak kaydedip ücretsiz ODA File Converter veya AutoCAD ile DWG'ye çevirin.	DWG is a closed format. Save as DXF and convert it to DWG with the free ODA File Converter or AutoCAD.
+Kayıpsız görüntü.	Lossless image.
+Sıkıştırılmış görüntü.	Compressed image.
+Windows bitmap (24 bit).	Windows bitmap (24-bit).
+Sıkıştırmasız, yüksek kaliteli görüntü.	Uncompressed, high-quality image.
+Tek katmanlı Photoshop belgesi.	Single-layer Photoshop document.
+Belge bilgisi, özellik ağacı, malzeme ve kütle özellikleri; montajda malzeme listesi.	Document info, feature tree, material and mass properties; bill of materials for assemblies.
+Paylaşım paketi: DIY.CAD dosyası + STL + HTML görüntüleyici + PNG + XML.	Sharing package: DIY.CAD file + STL + HTML viewer + PNG + XML.
+Eklentiler	Plug-ins
+Eklenti bulunamadı.	No plug-ins found.
+Eklenti değişikliği yeniden başlatınca uygulanır.	Plug-in changes take effect after a restart.
+Eklenti paneli parça ekranında açılır.	The plug-in panel opens in the part view.
+Eklenti: setup(api: PluginApi) içeren .gd dosyası (src/core/plugin_api.gd). Açma / kapama yeniden başlatınca uygulanır.	Plug-in: a .gd file containing setup(api: PluginApi) (src/core/plugin_api.gd). Enabling / disabling takes effect after a restart.
+Çift tıklayın veya sağ tıklayın: malzemeyi düzenle	Double-click or right-click: edit the material
+dk	min
+Otomatik kayıtlar: 	Autosaves: 

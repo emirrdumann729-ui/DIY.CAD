@@ -7,7 +7,7 @@ extends Control
 ##   feature : özellik paneli açık (Ekstrüzyon / Döndürme / Yuvarlatma / Pah / Kabuk), canlı önizleme
 
 const APP_NAME := "DIY.CAD"
-const APP_VERSION := "0.9.3 — Faz 9"
+const APP_VERSION := "0.9.4 — Faz 9"
 const STL_PRESETS := [["Kaba", 0.1, 20.0], ["Normal", 0.02, 10.0], ["İnce", 0.005, 5.0], ["Çok ince", 0.001, 2.0]]
 
 var doc := CadDocument.new()
@@ -33,6 +33,7 @@ var kernel_label: Button
 var props_dialog: AcceptDialog
 var context_menu: PopupMenu
 var file_dialog: FileDialog
+var export_dlg: ExportDialog
 var confirm_dialog: ConfirmationDialog
 var info_dialog: AcceptDialog
 var view_menu: PopupMenu
@@ -166,11 +167,7 @@ func _build_ui() -> void:
 	var file_m := _menu(menu_row, "Dosya", [
 		["Yeni\tCtrl+N", "new"], ["Yeni Montaj", "new_asm"], ["Aç...\tCtrl+O", "open"], ["Kaydet\tCtrl+S", "save"],
 		["Farklı Kaydet...\tCtrl+Shift+S", "save_as"], [],
-		["STL olarak dışa aktar (3B baskı)...", "export_stl"], ["OBJ olarak dışa aktar...", "export_obj"],
-		["STEP olarak dışa aktar (B-rep)...", "export_step"], ["IGES olarak dışa aktar (B-rep)...", "export_iges"],
-		["STEP / IGES içe aktar...", "import_step"],
-		["Taslağı DXF olarak dışa aktar (lazer kesim)...", "export_dxf"],
-		["Taslağı SVG olarak dışa aktar...", "export_svg"], ["Ekran görüntüsü (PNG)...", "export_png"], [],
+		["Dışa Aktar...\tCtrl+E", "export_all"], ["STEP / IGES içe aktar...", "import_step"], [],
 		["Örnek parçayı aç", "demo"], ["Örnek montajı aç", "demo_asm"], ["Örnek: isim plakası (metin, spline, denklemler)", "demo2"], [], ["Çıkış", "quit"]])
 	file_m.name = "FileMenu"
 	recent_menu = PopupMenu.new()
@@ -267,8 +264,7 @@ func _build_ui() -> void:
 	_tb(toolbar_features, "Gövde Taşı\nKopyala", "move_body", "Gövdeyi taşı, döndür veya kopyala", _cmd.bind("move_body"))
 	_tb(toolbar_features, "Böl", "split", "Gövdeleri bir ana düzlemle böl", _cmd.bind("split"))
 	toolbar_features.add_child(VSeparator.new())
-	_tb(toolbar_features, "STL\nÇıktısı", "export", "Modeli 3B baskı için STL olarak dışa aktar", _cmd.bind("export_stl"))
-	_tb(toolbar_features, "STEP\nÇıktısı", "step", "Modeli STEP (B-rep) olarak dışa aktar — diğer CAD programları için", _cmd.bind("export_step"))
+	_tb(toolbar_features, "Dışa\nAktar", "export", "Tüm formatlara dışa aktar: STEP, IGES, STL, 3MF, OBJ, glTF, DXF, PDF, görüntü... (Ctrl+E)", _cmd.bind("export_all"))
 	_tb(toolbar_features, "İçe\nAktar", "import", "STEP / IGES / STL dosyasını gövde olarak içe aktar (STL: eksen bazlı ölçek ve uzatma)", _cmd.bind("import_step"))
 	toolbar_features.add_child(VSeparator.new())
 	_tb(toolbar_features, "Denklemler", "equations", "Global değişkenler ve boyut denklemleri", _cmd.bind("equations"))
@@ -316,7 +312,7 @@ func _build_ui() -> void:
 	_tb(toolbar_sketch, "Sil", "delete", "Seçili öğeleri sil (Delete)", _cmd.bind("delete"), false, 58)
 	toolbar_sketch.add_child(VSeparator.new())
 	_tb(toolbar_sketch, "Ekstrüzyon", "extrude", "Taslaktan çık ve ekstrüzyon uygula", _cmd.bind("extrude"), false, 58)
-	_tb(toolbar_sketch, "DXF\nÇıktısı", "export", "Taslağı DXF olarak dışa aktar (lazer kesim / CNC)", _cmd.bind("export_dxf"), false, 58)
+	_tb(toolbar_sketch, "Dışa\nAktar", "export", "Taslağı (DXF, SVG) veya modeli dışa aktar (Ctrl+E)", _cmd.bind("export_all"), false, 58)
 
 	toolbar_eval = HBoxContainer.new()
 	toolbar_eval.set_meta("group", "Değerlendir")
@@ -427,6 +423,9 @@ func _build_ui() -> void:
 	file_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 	file_dialog.file_selected.connect(_on_file_selected)
 	add_child(file_dialog)
+	export_dlg = ExportDialog.new()
+	export_dlg.chosen.connect(_export_chosen)
+	add_child(export_dlg)
 	confirm_dialog = ConfirmationDialog.new()
 	confirm_dialog.title = APP_NAME
 	confirm_dialog.ok_button_text = "Evet"
@@ -674,7 +673,7 @@ func _build_view_overlay() -> void:
 
 # ================================================================ KOMUTLAR
 
-const DW_KEEP_CMDS := ["undo", "redo", "save", "save_as", "new", "open", "delete", "fit", "rename", "help", "about", "quit"]
+const DW_KEEP_CMDS := ["undo", "redo", "save", "save_as", "new", "open", "delete", "fit", "rename", "help", "about", "quit", "export_all"]
 
 func _cmd(c: String) -> void:
 	if mode == "assembly" and asm_mode.handle_cmd(c):
@@ -689,7 +688,7 @@ func _cmd(c: String) -> void:
 		"new":
 			_ask_discard(func(): _new_document())
 		"open":
-			_ask_discard(func(): _file_dialog(false, ["*.dcad, *.dasm ; DIY.CAD Parça / Montaj", "*.dcad ; DIY.CAD Parça", "*.dasm ; DIY.CAD Montaj"], "Aç", "open"))
+			_ask_discard(func(): _file_dialog(false, OPEN_FILTERS, "Aç", "open"))
 		"new_asm":
 			_ask_discard(_new_assembly)
 		"sm_base", "sm_edge", "sm_flat", "sm_dxf", "weld", "weld_cutlist", "configs", "sm_hem", "fea", "draft_an", "cam", "render", \
@@ -701,6 +700,8 @@ func _cmd(c: String) -> void:
 			_save()
 		"save_as":
 			_file_dialog(true, ["*.dcad ; DIY.CAD Parça"], "Farklı Kaydet", "save", doc.part_name + ".dcad")
+		"export_all":
+			_open_export_dialog()
 		"export_stl":
 			if viewport.model.is_empty():
 				_set_status("Dışa aktarılacak katı model yok. Önce bir ekstrüzyon oluşturun.")
@@ -2180,7 +2181,7 @@ func _show_idle_panel() -> void:
 	var nb := int(viewport.model.exact_mass.get("solids", 1 if not viewport.model.is_empty() else 0)) if not viewport.model.exact_mass.is_empty() else (1 if not viewport.model.is_empty() else 0)
 	panel.info(I18n.t("Özellik: %d   Taslak: %d   Gövde: %d   Üçgen: %d") % [n_feat, doc.sketches().size(), nb, viewport.model.tri_count()])
 	panel.section("Başlarken")
-	panel.info("1. Ağaçtan veya ekrandan bir düzlem seçin.\n2. 'Taslak' ile çizime başlayın, dikdörtgen/daire çizin.\n3. Ölçüleri bu panelden girin.\n4. 'Ekstrüzyon' ile katı oluşturun.\n5. Dosya > STL ile 3B baskı çıktısı alın.")
+	panel.info("1. Ağaçtan veya ekrandan bir düzlem seçin.\n2. 'Taslak' ile çizime başlayın, dikdörtgen/daire çizin.\n3. Ölçüleri bu panelden girin.\n4. 'Ekstrüzyon' ile katı oluşturun.\n5. Dışa Aktar (Ctrl+E) ile STL, STEP ve diğer formatlarda çıktı alın.")
 	panel.section("Fare")
 	panel.info("Orta tuş / sağ tuş sürükle: döndür\nCtrl + orta/sağ tuş: kaydır\nTekerlek: yakınlaştır   F: sığdır")
 	panel.button("Örnek parçayı aç", func(): _cmd("demo"), Icons.get_icon("part", 18))
@@ -3201,6 +3202,9 @@ static func _ensure_ext(path: String, ext: String) -> String:
 
 func _on_file_selected(path: String) -> void:
 	var err := OK
+	if _pending_file_action.begins_with("exp:"):
+		_export_write(_pending_file_action.substr(4), path)
+		return
 	match _pending_file_action:
 		"sm_dxf", "weld_csv", "cfg_csv_out", "cfg_csv_in", "cam_nc", "render_png", "render_hdri", "decal_img":
 			special.on_file(_pending_file_action, path)
@@ -3220,7 +3224,8 @@ func _on_file_selected(path: String) -> void:
 			asm_mode.on_file(_pending_file_action, path)
 			return
 		"open":
-			if path.get_extension().to_lower() == "dasm":
+			var oext := path.get_extension().to_lower()
+			if oext in ["dasm", "dasmt"]:
 				if mode == "sketch":
 					editor.end()
 				if mode == "sketch3d":
@@ -3228,7 +3233,12 @@ func _on_file_selected(path: String) -> void:
 				_leave_aux_mode()
 				var aerr := asm_mode.open_file(path)
 				_set_status((I18n.t("Montaj açıldı: ") + path) if aerr == OK else ("Montaj açılamadı (hata %d): %s" % [aerr, path]))
-				if aerr == OK:
+				if aerr == OK and oext == "dasmt":
+					# şablon: yeni (adsız) montaj olarak başlar
+					asm_mode.asm.file_path = ""
+					asm_mode.asm.name = "Montaj1"
+					asm_mode.update_title()
+				elif aerr == OK:
 					_note_file(path, "asm")
 				return
 			_close_assembly_ui()
@@ -3244,7 +3254,15 @@ func _on_file_selected(path: String) -> void:
 			if err == OK:
 				_fit_after_build = true
 				_set_status(I18n.t("Açıldı: ") + path)
-				_note_file(path, "part")
+				if oext in ["dcadt", "ddrwt"]:
+					# şablon: yeni (adsız) belge olarak başlar
+					doc.file_path = ""
+					doc.part_name = "Parça1"
+					_update_title()
+				else:
+					_note_file(path, "part")
+				if oext in ["ddrw", "ddrwt"]:
+					_show_toolbar.call_deferred(3)
 			else:
 				_set_status(I18n.t("Dosya açılamadı (hata %d): %s") % [err, path])
 			return
@@ -3448,6 +3466,7 @@ KLAVYE
   Ok tuşları .................. görünümü 15° döndür
   Ctrl+Z / Ctrl+Y ............. geri al / yinele
   Ctrl+S / Ctrl+O / Ctrl+N .... kaydet / aç / yeni
+  Ctrl+E ...................... Dışa Aktar (tüm formatlar)
   Delete ...................... sil      F2: yeniden adlandır
   Esc ......................... iptal / araçtan çık
   Enter ....................... özellik panelinde Tamam
@@ -3492,7 +3511,7 @@ TEKNİK RESİM (sekme)
   Sol tık: seç / yerleştir   Sürükle: görünüş veya açıklamayı taşı
   Tekerlek: yakınlaştır   Sağ/orta tuş: kaydır   F: sayfaya sığdır
   Delete: seçili görünüş/açıklamayı sil   Esc: aracı bırak / seçimi kaldır
-  Çıktı: PDF, SVG, DXF (DWG için DXF'i AutoCAD / ODA ile dönüştürün)"""
+  Dışa Aktar (Ctrl+E): PDF, DXF, SVG, AI, resimler (DWG için DXF'i AutoCAD / ODA ile dönüştürün)"""
 	var hp := "res://i18n/help_%s.txt" % I18n.current
 	if I18n.current != "tr" and FileAccess.file_exists(hp):
 		info_dialog.dialog_text = FileAccess.get_file_as_string(hp)
@@ -3608,7 +3627,7 @@ func _handle_cmdline() -> void:
 			doc.load_from(a)
 			_fit_after_build = true
 			AppSettings.add_recent(a)
-		elif a.get_extension().to_lower() == "dasm" and FileAccess.file_exists(a):
+		elif a.get_extension().to_lower() in ["dasm", "dasmt", "ddrw", "dcadt", "ddrwt", "dclfp", "dcftp"] and FileAccess.file_exists(a):
 			_open_path.call_deferred(a)
 	for a in args:
 		if a == "--demo":
@@ -5953,9 +5972,7 @@ func _build_drawing_toolbar(cm: Control) -> void:
 		["Kaynak\nSembolü", "dw_weld", "Kaynak sembolü (köşe / alın)", "dw_weld"], [],
 		["Malzeme\nListesi", "dw_bom", "Malzeme listesini göster / gizle", "dw_bom"],
 		["Revizyon\nEkle", "dw_rev", "Revizyon tablosuna satır ekle", "dw_rev"], [],
-		["PDF", "dw_pdf", "Sayfayı PDF olarak kaydet", "dw_pdf"],
-		["SVG", "dw_svg", "Sayfayı SVG olarak kaydet", "dw_svg"],
-		["DXF", "dw_dxf", "Sayfayı DXF olarak kaydet (DWG için AutoCAD/ODA ile dönüştürülebilir)", "dw_dxf"],
+		["Dışa\nAktar", "export", "Sayfayı dışa aktar: PDF, DXF, SVG, AI, görüntü... (Ctrl+E)", "dw_export_all"],
 		["Yazdır", "dw_print", "PDF'i varsayılan uygulamada aç ve yazdır", "dw_print"],
 	]
 	for it in items:
@@ -6192,6 +6209,8 @@ func _dw_cmd(c: String) -> void:
 		sh = _dw_sheet()
 		_dw_render()
 	match c:
+		"dw_export_all":
+			_open_export_dialog()
 		"dw_select":
 			_dw_set_tool("select")
 		"dw_sheetprops":
@@ -7381,3 +7400,238 @@ func _dw_auto_balloons(sh: Dictionary) -> int:
 		sh["anns"].append({"id": Drawing.next_id(sh), "type": "balloon", "pos": Drawing.a2(pos), "target": Drawing.a2(tgt), "num": str(it[0]), "auto": true})
 		n += 1
 	return n
+
+
+# ================================================================ DIŞA AKTAR (tek pencere, tüm formatlar)
+
+const OPEN_FILTERS := ["*.dcad, *.dasm, *.ddrw, *.dcadt, *.dasmt, *.ddrwt, *.dclfp, *.dcftp ; DIY.CAD dosyaları",
+	"*.dcad ; DIY.CAD Parça", "*.dasm ; DIY.CAD Montaj", "*.ddrw ; DIY.CAD Teknik Resim",
+	"*.dcadt, *.dasmt, *.ddrwt ; DIY.CAD şablonları", "*.dclfp ; DIY.CAD Kütüphane Unsuru Parçası", "*.dcftp ; DIY.CAD Form Verme Aracı"]
+
+
+func _open_export_dialog() -> void:
+	export_dlg.open(_export_reason, str(AppSettings.get_v("export", "last", "")))
+
+
+func _export_in_asm() -> bool:
+	return asm_mode != null and asm_mode.is_open() and (mode == "assembly" or (mode == "drawing" and _dw_in_asm))
+
+
+func _export_has_mesh() -> bool:
+	if not _export_in_asm():
+		return not viewport.model.is_empty()
+	for c in asm_mode.asm.comps:
+		var m: ModelMesh = asm_mode.parts.get(asm_mode.asm.key_of(c), {}).get("model")
+		if m != null and not m.is_empty() and not bool(c.get("suppressed", false)):
+			return true
+	return false
+
+
+## "" = kullanılabilir; değilse neden
+func _export_reason(f: Dictionary) -> String:
+	var in_asm := _export_in_asm()
+	match str(f["need"]):
+		"none":
+			return "Bu format desteklenmiyor."
+		"native_part":
+			return "Montaj açıkken parça dosyası yazılamaz: bileşeni Parçayı Aç ile açın." if in_asm else ""
+		"native_drw":
+			return "Montaj resmi montaj dosyasının (.dasm) içinde saklanır." if in_asm else ""
+		"native_asm":
+			return "" if in_asm else "Montaj açık değil."
+		"mesh":
+			return "" if _export_has_mesh() else "Dışa aktarılacak katı model yok."
+		"brep":
+			if not (viewport.kernel.is_brep() and viewport.kernel.occ.is_ready()):
+				return "OpenCASCADE çekirdeği gerekli (Araçlar → Geometri çekirdeği; kurulum: OCC_Kur.bat)."
+			if in_asm:
+				return "" if str(f["id"]).begins_with("step") else "Montajda yalnızca STEP yazılabilir."
+			return "Dışa aktarılacak katı model yok." if viewport.model.is_empty() else ""
+		"sketch":
+			return "" if not in_asm and _sketch_for_export() != null else "Önce bir taslak seçin (ağaçtan veya taslak modunda)."
+		"drawing":
+			return "" if mode == "drawing" and not _dw_sheet().is_empty() else "Teknik Resim sekmesinde kullanılır."
+	return ""
+
+
+func _export_basename() -> String:
+	if _export_in_asm():
+		return asm_mode.asm.name
+	return doc.part_name
+
+
+func _export_chosen(id: String) -> void:
+	var f := ExportFormats.by_id(id)
+	if f.is_empty():
+		return
+	AppSettings.set_v("export", "last", id)
+	var base := _export_basename()
+	if str(f["need"]) == "sketch":
+		var sk := _sketch_for_export()
+		if sk:
+			base = sk.name
+	_file_dialog(true, [ExportFormats.filter_of(f)], I18n.t("Dışa Aktar") + " — " + I18n.t(str(f["label"])), "exp:" + id, base + "." + str(f["ext"][0]))
+
+
+## Dışa aktarılacak üçgenler: {tris, groups} (montajda bileşen başına grup, montaj konumunda)
+func _export_mesh() -> Dictionary:
+	var tris := PackedVector3Array()
+	var groups: Array = []
+	if _export_in_asm():
+		for c in asm_mode.asm.comps:
+			if bool(c.get("suppressed", false)) or bool(c.get("hidden", false)):
+				continue
+			var p: Dictionary = asm_mode.parts.get(asm_mode.asm.key_of(c), {})
+			var m: ModelMesh = p.get("model")
+			if m == null or m.is_empty():
+				continue
+			var xf: Transform3D = c["xf"]
+			var start := tris.size() / 3
+			for v in m.ccw_triangles():
+				tris.append(xf * v)
+			var col: Variant = p.get("color", Materials.color_of(str(p.get("material", ""))))
+			groups.append({"name": str(c.get("name", "")), "color": col if col is Color else Color(0.72, 0.75, 0.8),
+				"start": start, "count": tris.size() / 3 - start})
+	else:
+		tris = viewport.model.ccw_triangles()
+		groups = ExportFormats.one_group(tris, doc.part_name, Materials.color_of(doc.material))
+	return {"tris": tris, "groups": groups}
+
+
+## Görüntü: teknik resimde sayfa tuvali, diğer modlarda 3B görünüm (ekransız çalışmada null)
+func _export_image() -> Image:
+	if mode == "drawing":
+		var img := get_viewport().get_texture().get_image()
+		if img == null or img.is_empty():
+			return null
+		var vis := get_viewport().get_visible_rect().size
+		var k := Vector2(img.get_size()) / vis if vis.x > 0.0 and vis.y > 0.0 else Vector2.ONE
+		var gr := drawing_canvas.get_global_rect()
+		var r := Rect2i(Vector2i(gr.position * k), Vector2i(gr.size * k)).intersection(Rect2i(Vector2i.ZERO, img.get_size()))
+		return img.get_region(r) if r.has_area() else img
+	return viewport.screenshot_image()
+
+
+static func _xml_safe(v: Variant) -> Variant:
+	if v is Vector3:
+		return {"x": v.x, "y": v.y, "z": v.z}
+	return v
+
+
+## XML veri dışa aktarımı için belge bilgisi
+func _export_info() -> Dictionary:
+	var d := {"program": APP_NAME, "version": APP_VERSION, "date": Time.get_datetime_string_from_system(false, true), "units": "mm"}
+	if _export_in_asm():
+		var a: CadAssembly = asm_mode.asm
+		d["assembly"] = {"name": a.name, "file": a.file_path, "component_count": a.comps.size(), "mate_count": a.mates.size()}
+		var rows: Array = []
+		for r in asm_mode.bom_rows():
+			rows.append({"no": r["no"], "name": r["name"], "quantity": r["qty"], "material": r["material"], "mass_g": float(r["mass"])})
+		d["bill_of_materials"] = rows
+		return d
+	d["part"] = {"name": doc.part_name, "file": doc.file_path, "material": doc.material}
+	var fl: Array = []
+	for f in doc.features:
+		fl.append({"id": f.id, "name": f.name, "type": f.type, "suppressed": f.suppressed})
+	d["features"] = fl
+	if not viewport.model.is_empty():
+		var mp := viewport.model.mass_properties(Materials.density_of(doc.material))
+		d["mass_properties"] = {"volume_mm3": float(mp["volume"]), "area_mm2": float(mp["area"]), "mass_g": float(mp["mass"]),
+			"center_of_mass_mm": _xml_safe(mp["center"])}
+		var bb: AABB = viewport.model.aabb
+		d["bounding_box_mm"] = {"min": _xml_safe(bb.position), "max": _xml_safe(bb.end), "size": _xml_safe(bb.size)}
+	return d
+
+
+func _export_write(id: String, path: String) -> void:
+	var f := ExportFormats.by_id(id)
+	if f.is_empty():
+		return
+	path = ExportFormats.with_ext(path, f)
+	var err := OK
+	match id:
+		"dcad":
+			_pending_file_action = "save"
+			_on_file_selected(path)
+			return
+		"dcadt", "dclfp", "dcftp", "ddrw", "ddrwt":
+			err = doc.write_copy(path)
+		"dasm":
+			asm_mode.on_file("asm_save", path)
+			return
+		"dasmt":
+			err = asm_mode.asm.write_copy(path, "assembly_template")
+		"step214", "step203", "step242":
+			if _export_in_asm():
+				asm_mode.export_step(path, str(f["schema"]))
+			else:
+				viewport.kernel.request_export("step", path, {"schema": str(f["schema"])})
+				_set_status(I18n.t("Dışa aktarılıyor: ") + path)
+			return
+		"iges", "brep":
+			viewport.kernel.request_export(id, path)
+			_set_status(I18n.t("Dışa aktarılıyor: ") + path)
+			return
+		"stl":
+			if not _export_in_asm():
+				_pending_file_action = "stl"
+				_on_file_selected(path)
+				return
+			err = Exporters.write_stl(path, _export_mesh()["tris"], asm_mode.asm.name)
+		"obj":
+			if not _export_in_asm():
+				err = Exporters.write_obj(path, viewport.model, doc.part_name)
+			else:
+				var mo := _export_mesh()
+				err = ExportFormats.write_obj_tris(path, mo["tris"], mo["groups"])
+		"3mf", "amf", "ply", "off", "fbx", "glb", "gltf", "wrl", "xaml", "ifc", "html":
+			var m := _export_mesh()
+			err = ExportFormats.write_mesh(id, path, m["tris"], m["groups"], _export_basename())
+		"sk_dxf", "sk_svg":
+			_pending_file_action = id.substr(3)
+			_on_file_selected(path)
+			return
+		"dw_pdf", "dw_svg", "dw_dxf":
+			err = _dw_export(id, path)
+		"dw_ai":
+			err = _dw_export("dw_pdf", path)
+		"png", "jpg", "bmp", "tif", "psd":
+			err = ExportFormats.write_image(path, _export_image(), id)
+		"xml":
+			err = ExportFormats.write_xml(path, "diycad", _export_info())
+		"zip":
+			err = _export_zip(path)
+		_:
+			err = ERR_UNAVAILABLE
+	_set_status((I18n.t("Dışa aktarıldı: ") + path) if err == OK else (I18n.t("Yazılamadı (hata %d): %s") % [err, path]))
+
+
+## Paylaşım paketi: DIY.CAD dosyası + STL + HTML görüntüleyici + PNG + XML
+func _export_zip(path: String) -> Error:
+	var tmp := OS.get_user_data_dir().path_join("export_tmp")
+	DirAccess.make_dir_recursive_absolute(tmp)
+	var base := _export_basename()
+	var safe := base.validate_filename()
+	var files: Array = []
+	var native := tmp.path_join(safe + (".dasm" if _export_in_asm() else ".dcad"))
+	var nerr := asm_mode.asm.write_copy(native) if _export_in_asm() else doc.write_copy(native)
+	if nerr == OK:
+		files.append({"name": native.get_file(), "path": native})
+	if _export_has_mesh():
+		var m := _export_mesh()
+		var stl := tmp.path_join(safe + ".stl")
+		if Exporters.write_stl(stl, m["tris"], base) == OK:
+			files.append({"name": stl.get_file(), "path": stl})
+		var html := tmp.path_join(safe + ".html")
+		if ExportFormats.write_html(html, m["tris"], m["groups"], base) == OK:
+			files.append({"name": html.get_file(), "path": html})
+	var png := tmp.path_join(safe + ".png")
+	if ExportFormats.write_image(png, _export_image(), "png") == OK:
+		files.append({"name": png.get_file(), "path": png})
+	var xml := tmp.path_join(safe + ".xml")
+	if ExportFormats.write_xml(xml, "diycad", _export_info()) == OK:
+		files.append({"name": xml.get_file(), "path": xml})
+	var err := ExportFormats.write_zip(path, files)
+	for fi in files:
+		DirAccess.remove_absolute(str(fi["path"]))
+	return err

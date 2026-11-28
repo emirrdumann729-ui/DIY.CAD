@@ -170,6 +170,8 @@ CSG only produces triangle meshes; fillets, shells, STEP etc. need **real face/e
 - [x] **Performance**: processing of the kernel result (vertex welding, adjacency, edges, smoothed normals) on a **background thread** (WorkerThreadPool; longest freeze 1072 → 234 ms), fast normals with a compressed adjacency list; **LOD for large assemblies** (ImporterMesh.generate_lods) and large assembly mode
 - [x] **Release notes** (CHANGELOG.md), **Windows packaging**: export preset + icon, `Paketle.bat`, Inno Setup installer script (per-user install, file association, optional OpenCASCADE setup); the installed version looks for the `occ_env` / `occ` / `macros` / `plugins` folders next to the .exe
 - [x] **More translation**: formatted status / panel messages and the Help text in English (~1170 strings, format specifiers verified by tests); **plugin interface** (PluginApi: command + button, custom panel, events, macro API; enable / disable in Options; 2 sample plugins)
+- [x] **Export dialog** (v0.9.4): all output formats in one place (Ctrl+E), 48 entries; new DIY.CAD file types (templates, drawing file, library feature, forming tool) and new writers (STEP schemas, BREP, 3MF, AMF, PLY, OFF, FBX, glTF / GLB, VRML, XAML, IFC4, HTML viewer, AI, images, XML, ZIP)
+- [x] **German, Russian and Chinese UI** (v0.9.4): full dictionaries (~1300 strings) and Help; format specifiers, trailing spaces and two-line button labels verified by tests
 
 ---
 
@@ -210,7 +212,7 @@ CSG only produces triangle meshes; fillets, shells, STEP etc. need **real face/e
 - Surface trim is only against standard planes (with offset); knit only joins surfaces whose edges coincide (within tolerance).
 - CAM is 2.5-axis: only (planar) sketch contours are machined, the toolpath is the tool center, there is no lead-in/out ramp and no cutter compensation (G41/G42); check the G-code in a simulator before running it on a machine.
 - Visualization is real-time (Godot Forward+): no ray tracing; the HDRI panorama is used as ambient light and reflection, decals are not saved (per session).
-- In the English UI, menus, tabs, toolbars, tooltips, panel labels, status messages and Help are translated; feature names (Ekstrüzyon1...), material names and some rare error messages stay Turkish. Theme changes apply after a restart.
+- In the translated UIs (English, German, Russian, Chinese), menus, tabs, toolbars, tooltips, panel labels, status messages and Help are translated; feature names (Ekstrüzyon1...), material names and some rare error messages stay Turkish. Drawing PDFs embed Arial, which has no Chinese glyphs: for Chinese text on a drawing use SVG or an image export. Theme changes apply after a restart.
 - Macros are GDScript code with access to the whole application: only run macros you trust. Macro recording records only **added** features (edits / deletions are not recorded).
 - Auto-save may lose the latest changes within the save interval; drawing edits are part of the part's record.
 - In the CSG kernel Boolean operations are computed with Godot's CSG nodes on the main thread (CSG does not work outside the scene tree); parts with many holes may freeze briefly — the OpenCASCADE kernel is not affected because it runs in a separate process. LOD is chosen with Godot's screen-size criterion in perspective and orthographic views.

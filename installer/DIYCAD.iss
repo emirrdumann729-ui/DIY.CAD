@@ -3,7 +3,7 @@
 ; install folder with OCC_Kur.bat.
 
 #define AppName "DIY.CAD"
-#define AppVersion "0.9.3"
+#define AppVersion "0.9.4"
 #define AppExe "DIY.CAD.exe"
 
 [Setup]

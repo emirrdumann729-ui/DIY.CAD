@@ -5,7 +5,7 @@
 Godot 4.7 ile yazılmış, **parametrik ve özellik tabanlı** bir CAD programı.
 Hedef ve aşamalar için: [ROADMAP.md](ROADMAP.md)
 
-**Şu anki sürüm: 0.9.3 — STL içe aktarma (eksen bazlı ölçek, bölgesel uzatma, kademeli büyütme, koruma bölgesi) + Faz 9 (tamamlandı): arka planda ağ işleme, büyük montajlar için LOD, eklentiler, İngilizce arayüz, Windows paketleme, otomatik kaydetme, kısayollar, fare hareketleri, makrolar** (önceki: Faz 8). Sürüm notları: [CHANGELOG.md](CHANGELOG.md)
+**Şu anki sürüm: 0.9.4 — tek Dışa Aktar penceresinde 40+ format, Türkçe / İngilizce / Almanca / Rusça / Çince arayüz, STL içe aktarma (eksen bazlı ölçek, bölgesel uzatma, kademeli büyütme, koruma bölgesi) + Faz 9 (tamamlandı): arka planda ağ işleme, büyük montajlar için LOD, eklentiler, Windows paketleme, otomatik kaydetme, kısayollar, fare hareketleri, makrolar** (önceki: Faz 8). Sürüm notları: [CHANGELOG.md](CHANGELOG.md)
 
 ## İndir (Windows, Godot gerekmez)
 
@@ -50,7 +50,7 @@ Komut satırı seçenekleri (`--` işaretinden sonra):
 5. **Daire** (C) çiz, Akıllı Boyut ile çapını ver.
 6. **Ekstrüzyon** düğmesine bas, derinliği gir, **Tamam**.
 7. **Değerlendir → Malzeme** ile malzeme seç, **Kütle Özellikleri** ile ağırlığı gör.
-8. **Dosya → STL olarak dışa aktar** ile 3B yazıcıya hazır dosyayı al.
+8. **Dosya → Dışa Aktar... (Ctrl+E) → STL** ile 3B yazıcıya hazır dosyayı al.
 
 Bir yüzeye tıklayıp tekrar **Taslak** dersen o yüzeyin üzerine çizersin (patron/kesme eklemek için).
 
@@ -108,7 +108,7 @@ Kurulu değilse program otomatik olarak CSG çekirdeğiyle çalışır. Sağ alt
 | Gövdeleri Birleştir | Gövdelere tıkla (ilki ana gövde), işlemi seç: ekle / çıkar / kesiştir |
 | Gövde Taşı/Kopyala | Gövdeye tıkla, ΔX/ΔY/ΔZ ve dönme eksen/açısını gir; "Kopyala" orijinali korur |
 | Böl | Ana düzlem + ofset seç; her iki taraf ayrı gövde olur ya da yalnızca bir taraf kalır |
-| STEP / IGES çıktısı | Dosya menüsü veya STEP düğmesi — diğer CAD programlarına aktarım |
+| Dışa Aktar (Ctrl+E) | Tüm formatlar tek pencerede (Dosya → Dışa Aktar... veya Dışa Aktar düğmesi): DIY.CAD parça / montaj / teknik resim / şablonlar, STEP AP203 / AP214 / AP242, IGES, BREP, STL, 3MF, AMF, OBJ, PLY, OFF, FBX, glTF / GLB, VRML, XAML, IFC, HTML 3B görüntüleyici, taslak DXF / SVG, teknik resim PDF / DXF / SVG / AI, PNG / JPEG / BMP / TIFF / PSD, XML rapor, ZIP paketi. Yazılamayan formatlar (Parasolid, ACIS, JT, DWG...) gri görünür; nedeni ve önerilen alternatif yazar |
 | İçe aktar | STEP/IGES dosyasını gövde olarak ekler; üzerine taslak çizip kesme/ekstrüzyon yapılabilir |
 
 Seçim sırasında model, düzenlenen özellikten önceki hâliyle gösterilir; "Sonucu önizle" kutusu sonucu gösterir.
@@ -220,7 +220,7 @@ parça dosyalarına göreli yolla başvurur. Üstte yalnızca **Montaj** sekmesi
 | Klavye kısayolları | Araçlar → Seçenekler → Klavye kısayolları: 170'ten fazla komut (menüler, tüm araç çubukları, taslak araçları); satıra çift tıkla, tuşa bas. Taslak bağlamı (L, C, R...) ayrıdır; menüler yeni kısayolu gösterir |
 | Fare hareketleri | Seçenekler → Fare hareketleri → "Sağ tuşla sürükleme: Fare hareketleri": sağ tuşu basılı tutup bir yöne çek → 8 yönlü halkada komut (parça: görünümler, taslak: çizim araçları, montaj); her yön atanabilir. Döndürme orta tuşa geçer, Ctrl + sağ tuş kaydırır |
 | Tema / ölçek | Koyu veya açık tema (yeniden başlatınca), arayüz ölçeği %75–%200 (anında) |
-| Dil | Türkçe / English (anında): menüler, sekmeler, araç çubukları, ipuçları, panel etiketleri, seçenekler; sözlük `i18n/en.txt` (`türkçe<TAB>english`) |
+| Dil | Türkçe / English / Deutsch / Русский / 中文 (anında): menüler, sekmeler, araç çubukları, ipuçları, panel etiketleri, seçenekler, yardım; sözlükler `i18n/<dil>.txt` (`türkçe<TAB>çeviri`) |
 | Makro çalıştır | Araçlar → Makro çalıştır: `func run(m: MacroApi)` içeren `.gd` dosyası. Örnekler `macros/` klasöründe (parametrik flanş, delikli plaka, toplu çıktı). Komut satırı: `DIY.CAD.bat -- --macro=dosya.gd` |
 | Makro kaydı | Araçlar → Makro kaydını başlat / durdur: aradaki özellikler makroya dönüşür (dolu parçaya oynatılırsa kimlikler eşlenir). "Parçayı makro olarak kaydet" tüm parçayı yeniden kuran makro üretir |
 | STL içe aktarma | Özellikler → İçe Aktar: `.stl` (ikili / ASCII) gövde olur (OpenCASCADE: dikilmiş katı; CSG: ağ gövdesi). Panelde **Ölçek X / Y / Z**, ölçek merkezi, öteleme ve **bölgesel uzatma** (eksen, bölge başı / sonu özgün koordinatta, eklenecek boy mm): bölgedeki geometri orantılı uzar, dışı bozulmaz. **Koruma bölgesi**: seçilen aralık (ve makrodan verilen kesit bantları) ölçeklenmeden yalnızca taşınır — delik / yuva / geçme gibi ayrıntılar özgün ölçüde kalır, çevresi büyür. Makrodan **kademeli kesit büyütme** (`taper`: bölge boyunca kesite doğrusal artan mm), çok bölgeli uzatma (`stretch` listesi) ve koruma bantları (`protect.bands`) da verilebilir. Sonra Dosya → STL ile dışa aktar — mevcut STL'leri yeniden boyutlandırmak için |
@@ -285,12 +285,12 @@ src/kernel/   Çekirdek seçici (GeoKernel), OpenCASCADE köprüsü (OccKernel),
 occ/          OpenCASCADE sunucusu (Python, OCP) — occ_env içindeki Python ile çalışır
 src/view/     3B görünüm, CAD kamerası, taslak editörü (boyut/ilişki çizimi), eksen göstergesi
 src/ui/       Özellik ağacı, özellik paneli, sayı alanı, SVG ikonlar, kısayollar (Keymap), fare hareketleri (MouseGesture), tema (UiTheme), dil (I18n), Seçenekler penceresi
-src/io/       STL, OBJ, DXF, SVG dışa aktarma
+src/io/       Dışa aktarma formatları (ExportFormats: ağ, resim, XML / ZIP yazıcıları), STL, OBJ, DXF, SVG dışa aktarma; STL içe aktarma
 src/special/  Faz 8: sac metal (SheetMetal), kaynaklı konstrüksiyon (Weldment), konfigürasyonlar (Configs), yüzeyler (Surfaces), statik analiz + eğim analizi (Fea), CAM (Cam), arayüz + görselleştirme (SpecialUI)
 src/assembly/ Montaj: belge (CadAssembly), eşleştirme çözücüsü (MateSolver), referans geometrisi (MateGeom), görünüm (AssemblyView), mod denetleyicisi (AssemblyMode), bağlantı elemanları (Toolbox), LOD (AsmLod)
 src/drawing/  Teknik resim: veri modeli ve izdüşüm geometrisi (Drawing), sayfa çizimi (DrawingRender), PDF/SVG/DXF (DrawingExport), tuval (DrawingCanvas)
 plugins/      Örnek eklentiler (Hızlı Kutu, Parça Bilgisi); src/core/plugin_api.gd + plugins.gd
-macros/       Örnek makrolar; i18n/ İngilizce sözlük ve yardım; installer/ Inno Setup betiği; tools/ simge üretici
+macros/       Örnek makrolar; i18n/ sözlükler ve yardım (en, de, ru, zh); installer/ Inno Setup betiği; tools/ simge üretici
 tests/        selftest.gd (birim), solver_test.gd (kısıt çözücü), ops_test.gd (taslak işlemleri), drawing_test.gd (teknik resim), assembly_test.gd (montaj çözücüsü), special_test.gd (sac metal, kaynak, konfigürasyon, CAM, analiz), pro_test.gd (ayarlar, kısayollar, makro, dil), occ_test.gd (B-rep), ui_flow.gd (uçtan uca)
 ```
 

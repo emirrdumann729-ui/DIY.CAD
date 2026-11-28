@@ -3928,6 +3928,25 @@ def write_stl(shape, path, lin, ang, ascii_mode):
     return True
 
 
+STEP_SCHEMAS = ("AP203", "AP214IS", "AP242DIS")
+
+
+def _step_writer(schema=None):
+    """STEP yazıcısı; schema: AP203 | AP214IS (varsayılan) | AP242DIS"""
+    from OCP.Interface import Interface_Static
+    w = STEPControl_Writer()
+    sc = str(schema or "AP214IS")
+    if sc not in STEP_SCHEMAS:
+        raise KernelError("Bilinmeyen STEP şeması: %s" % sc)
+    Interface_Static.SetCVal_s("write.step.schema", sc)
+    return w
+
+
+def _step_schema_reset():
+    from OCP.Interface import Interface_Static
+    Interface_Static.SetCVal_s("write.step.schema", "AP214IS")
+
+
 def cmd_export(req):
     part = ST.part
     if part is None or part.empty():
@@ -3936,9 +3955,10 @@ def cmd_export(req):
     fmt = req["format"]
     path = req["path"]
     if fmt == "step":
-        w = STEPControl_Writer()
+        w = _step_writer(req.get("schema"))
         w.Transfer(shape, STEPControl_AsIs)
         ok = w.Write(path) == IFSelect_RetDone
+        _step_schema_reset()
     elif fmt == "iges":
         w = IGESControl_Writer("MM", 0)
         w.AddShape(shape)
@@ -4083,9 +4103,10 @@ def cmd_asm_export(req):
     path = req["path"]
     fmt = req.get("format", "step")
     if fmt == "step":
-        w = STEPControl_Writer()
+        w = _step_writer(req.get("schema"))
         w.Transfer(comp, STEPControl_AsIs)
         ok = w.Write(path) == IFSelect_RetDone
+        _step_schema_reset()
     elif fmt == "stl":
         ok = write_stl(comp, path, float(req.get("lin", 0.01)), math.radians(float(req.get("ang_deg", 10.0))), bool(req.get("ascii", False)))
     else:

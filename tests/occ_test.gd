@@ -308,6 +308,15 @@ func _run() -> void:
 	kernel.request_export("stl", stl_path, {"lin": 0.01, "ang_deg": 5.0})
 	var rs: Dictionary = await kernel.export_done
 	check(bool(rs.get("ok", false)) and int(rs.get("bytes", 0)) > 84, "STL yazıldı (%d bayt)" % int(rs.get("bytes", 0)))
+	for sc in [["AP203", "CONFIG_CONTROL_DESIGN"], ["AP214IS", "AUTOMOTIVE_DESIGN"], ["AP242DIS", "AP242_MANAGED_MODEL_BASED"]]:
+		var sp2 := tmp_dir.path_join("kutu_%s.step" % sc[0])
+		kernel.request_export("step", sp2, {"schema": sc[0]})
+		var rsc: Dictionary = await kernel.export_done
+		check(bool(rsc.get("ok", false)) and FileAccess.get_file_as_string(sp2).contains(sc[1]), "STEP %s şemasıyla yazıldı" % sc[0])
+	var bp := tmp_dir.path_join("kutu.brep")
+	kernel.request_export("brep", bp)
+	var rb: Dictionary = await kernel.export_done
+	check(bool(rb.get("ok", false)) and FileAccess.get_file_as_string(bp).begins_with("DBRep_DrawableShape"), "OpenCASCADE BREP yazıldı")
 	var doc8 := new_doc()
 	var imp := doc8.new_feature("import", "İçe Aktarılan")
 	imp.params = {"path": step_path, "scale": 1.0}

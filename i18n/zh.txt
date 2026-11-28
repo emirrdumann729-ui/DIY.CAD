@@ -1,0 +1,1306 @@
+# DIY.CAD Simplified Chinese dictionary. Format: turkish<TAB>chinese, 
+ = new line.
+# Generated from en.txt keys; Godot auto-translates texts that match a key exactly.
+    Yön	    方向
+  İptal  	  取消  
+%d balon yerleştirildi.	已放置 %d 个零件序号。
+%d bölge seçili (vurgulu alanlar).	已选择 %d 个区域（高亮区域）。
+%d eşleştirme sağlanamıyor (ağaçta ⚠).	%d 个配合无法满足（树中标记为 ⚠）。
+%d girişim (kırmızı hacimler):	%d 处干涉（红色体积）：
+%d ilişki/boyut seçili.	已选择 %d 个几何关系/尺寸。
+%d model boyutu görünüşlere aktarıldı.	已将 %d 个模型尺寸导入视图。
+%d nokta, %s. Şekli değiştirmek için noktaları sürükleyin.	%d 个点，%s。拖动点以改变形状。
+%d öğe seçili.	已选择 %d 个实体。
+%d.  %s   × %d\n     Boy %s   Açılar %s° / %s°   %s	%d.  %s   × %d\n     长度 %s   角度 %s° / %s°   %s
+%s eklendi — eşleştirmelerle konumlandırın (örn. eş merkezli + çakışık).	已插入 %s — 请用配合定位（例如同轴心 + 重合）。
+%s eşleştirmesi sağlanamadı: hizalamayı çevirin veya silin.	%s 配合无法满足：请反转对齐或将其删除。
+%s için %d referans gerekli (%d seçili).	%s 需要 %d 个参考（已选 %d 个）。
+%s: %d kapalı kontur. Ekstrüzyon veya Döndürme uygulayabilirsiniz.	%s：%d 个闭合轮廓。可以进行拉伸或旋转。
+%s: %d çizgi, toplam uzunluk %s.	%s：%d 条直线，总长 %s。
+%s: %d örnek	%s：%d 个实例
+%s: değerleri panelden girin; referans geometri ekranda önizlenir.	%s：在面板中输入数值；参考几何体会在屏幕上预览。
+%s: kapalı kontur yok — katı oluşturmak için konturu kapatın.	%s：没有闭合轮廓 — 请闭合轮廓以生成实体。
+%s: kenarlara tıklayın (yüze tıklamak tüm kenarlarını ekler); tekrar tıklamak kaldırır.	%s：单击边线（单击面会添加其所有边线）；再次单击可移除。
+%s: çoğaltılacak özellikleri panelden işaretleyin.	%s：在面板中勾选要阵列的特征。
+(%s, %s) — tam tanımlı	(%s, %s) — 完全定义
+(liste boş)	（列表为空）
+1. Ağaçtan veya ekrandan bir düzlem seçin.\n2. 'Taslak' ile çizime başlayın, dikdörtgen/daire çizin.\n3. Ölçüleri bu panelden girin.\n4. 'Ekstrüzyon' ile katı oluşturun.\n5. Dışa Aktar (Ctrl+E) ile STL, STEP ve diğer formatlarda çıktı alın.	1. 在树中或屏幕上选择一个基准面。\n2. 用"草图"开始绘制；绘制矩形/圆。\n3. 在此面板中输入尺寸。\n4. 用"拉伸"生成实体。\n5. 导出 (Ctrl+E) 为 STL、STEP 等格式。
+1. açı (ISO / Avrupa)	第一角投影（ISO / 欧洲）
+3. açı (ANSI / Amerika)	第三角投影（ANSI / 美国）
+3B Taslak	3D 草图
+3B Taslak: noktaları tıklayın. Tab ile çizim düzlemini (XY / XZ / YZ) değiştirin; eksene yakın çizgiler X/Y/Z'ye kilitlenir.	3D 草图：单击各点。按 Tab 切换绘图平面（XY / XZ / YZ）；靠近坐标轴的直线锁定到 X/Y/Z。
+3B taslak, Faz 5'teki süpürme (sweep) özelliği için yol olarak kullanılacak.	3D 草图用作扫描特征的路径。
+3B taslaktan çık	退出 3D 草图
+<belirtilmemiş>	<未指定>
+ANSI (inç)	ANSI（英寸）
+ASCII STL (varsayılan: ikili)	ASCII STL（默认：二进制）
+Ad	名称
+Ad boş veya zaten var.	名称为空或已存在。
+Ad: 	名称： 
+Adet (orijinal dahil)	数量（含原始）
+Adım	步骤
+Adım ekle	添加步骤
+Adım ve tur	螺距和圈数
+Adımlar	步骤
+Akma dayanımı (MPa)	屈服强度 (MPa)
+Akıllı Boyut (taslakta)	智能尺寸（在草图中）
+Akıllı Boyut (taslakta)\tD	智能尺寸（在草图中）\tD
+Akıllı Boyut taslak içinde kullanılır. Önce bir taslak açın.	智能尺寸在草图中使用。请先打开一个草图。
+Akıllı\nBoyut	智能\n尺寸
+Alt	下视
+Alt montaj açıldı: 	已打开子装配体： 
+Alt sapma	下偏差
+Alt\tCtrl+6	下视\tCtrl+6
+Alın	对接
+Ana eksen	长轴
+Analiz	分析
+Analiz başarısız: 	分析失败： 
+Analiz tamam: en büyük von Mises %.2f MPa, en büyük yer değiştirme %s (%d eleman, %.1f sn)	分析完成：最大 von Mises %.2f MPa，最大位移 %s（%d 个单元，%.1f 秒）
+Analiz çözülüyor...	正在求解分析...
+Antet	标题栏
+Aracı bırak (Esc)	释放工具 (Esc)
+Aralık	间距
+Aralık 2	间距 2
+Arayüz görünümü	界面外观
+Arayüz ölçeği	界面缩放
+Araç	工具
+Araçlar	工具
+Arka	后视
+Arka\tCtrl+2	后视\tCtrl+2
+Asal atalet momentleri	主惯性矩
+Atalet tensörü (%s·%s²)	惯性张量 (%s·%s²)
+Atlanan örnek: %d	跳过的实例：%d
+Atlanan örnekleri geri getir	恢复跳过的实例
+Ayarlar dosyası: 	设置文件： 
+Aynala	镜向
+Aynalama düzlemi	镜向面
+Aynalama taslak içinde kullanılır.	镜向在草图中使用。
+Aynı düzlemsel yüzde her tıklama bir delik konumu ekler.\nEnter: Tamam   Esc: İptal	在同一平面上，每次单击添加一个孔位置。\nEnter：确定   Esc：取消
+Aç (Ctrl+O)	打开 (Ctrl+O)
+Aç...	打开...
+Aç...\tCtrl+O	打开...\tCtrl+O
+Açı	角度
+Açı - mesafe	角度 - 距离
+Açı boyutunun yerine tıklayın.	单击放置角度尺寸的位置。
+Açı: 	角度： 
+Açık	浅色
+Açık profil	开环轮廓
+Açık taslak çizgisinden gövdeye dayanan kaburga	由开环草图线到实体的筋
+Açıldı: 	已打开： 
+Açılı	成角度
+Açınım	展开
+Açınım hesaplanamadı: 	无法计算展开： 
+Açınım kaydedildi: %s (%s × %s)	展开已保存：%s（%s × %s）
+Açınım\nDXF	展开\nDXF
+Açınımı büküm çizgileriyle DXF olarak kaydet (lazer / abkant)	将带折弯线的展开保存为 DXF（激光 / 折弯机）
+Açınımı göster / bük (düz sac)	显示展开 / 折弯（平板）
+Ağ yoğunluğu	网格密度
+Ağırlık merkezi (%s)%s	质心 (%s)%s
+Aşağı	向下
+Aşağı taşı	下移
+Aşırı Tanımlı	过定义
+Bakış yönünü çevir	反转视向
+Balon	零件序号
+Bastırmayı kaldır	解除压缩
+Bastırılmış	已压缩
+Bağlam	关联
+Bağlantı Elemanları	紧固件
+Bağlantı Elemanı Ekle	插入紧固件
+Bağlantı elemanları kütüphaneden üretilir; ölçüsünü panelden değiştirin.	紧固件由库生成；在面板中更改尺寸。
+Bağlantı elemanı	紧固件
+Bağlantı elemanı: 	紧固件： 
+Bağlantı\nElemanları	紧固件
+Başa dön	回到开始
+Başlangıç açısı	起始角度
+Başlangıç boşluğu	起始间隙
+Başlangıç noktası	起点
+Başlarken	入门
+Belge kurtarma	文档恢复
+Belge kurtarıldı: %s — kaydetmeyi unutmayın.	文档已恢复：%s — 别忘了保存。
+Belge Özellikleri	文档属性
+Belge Özellikleri (birimler)...	文档属性（单位）...
+Belge özellikleri güncellendi: 	文档属性已更新： 
+Belge özellikleri...	文档属性...
+Belge özellikleri: birim sistemi ve ondalık hassasiyet	文档属性：单位系统和小数位数
+Bileşen Ekle	插入零部件
+Bileşen eklendi: %s%s	已插入零部件：%s%s
+Bileşen Çoğaltma	零部件阵列
+Bileşen: %d   (sabit: %d, eksik tanımlı: %d)\nEşleştirme: %d	零部件：%d   （固定：%d，欠定义：%d）\n配合：%d
+Bileşen\nEkle	插入\n零部件
+Bileşen\nÇoğaltma	零部件\n阵列
+Bileşeni Sil	删除零部件
+Bileşeni Taşı	移动零部件
+Bileşeni sürükle veya sayısal ötele	拖动零部件或按数值平移
+Bileşeni sürükleyerek veya açıyla döndür	拖动或按角度旋转零部件
+Bileşeni\nDöndür	旋转\n零部件
+Bileşeni\nTaşı	移动\n零部件
+Bileşenler arası çakışan hacimleri bul (OpenCASCADE)	查找零部件之间的重叠体积 (OpenCASCADE)
+Bileşenleri doğrusal veya dairesel çoğalt	线性或圆周阵列零部件
+Bilgi	信息
+Bir dairenin çevresine tıklayın.	单击圆的边缘。
+Bir görünüşteki köşe, daire veya kenara tıklayın.	在视图中单击顶点、圆或边线。
+Bir kenara dik bakan görünüş	垂直于边线的视图
+Bir yöne	单向
+Birim sistemi (tıklayın: değiştir)	单位系统（单击：更改）
+Birim sistemi: 	单位系统： 
+Birimler	单位
+Bitiş	终止
+Bitiş açısı	终止角度
+Bitiş boşluğu	终止间隙
+Bitiş koşulu	终止条件
+Bitiş noktası	终点
+Bitiş yarıçapı	终止半径
+Blok	块
+Blok: 	块： 
+Bloklar taslak içinde oluşturulur.	块在草图中创建。
+Bloğu dağıt	炸开块
+Bloğu kopyala (+10, +10)	复制块 (+10, +10)
+Boyut	尺寸
+Boyut (a)	尺寸 (a)
+Boyut: 	尺寸： 
+Boyutun yerine tıklayın (yukarı/aşağı: yatay, sağ/sol: dikey ölçü).	单击放置尺寸的位置（上/下：水平尺寸，左/右：竖直尺寸）。
+Boş 3B taslak kaldırıldı.	已删除空的 3D 草图。
+Boş taslak kaldırıldı.	已删除空草图。
+Bu araç için önce bir katı model oluşturun (ör. Ekstrüzyon).	请先为此工具创建实体模型（例如拉伸）。
+Bu bağlamı varsayılana döndür	将此情境重置为默认值
+Bu düzlemde taslak çiz	在此基准面上绘制草图
+Bu işlem taslak içinde kullanılır. Önce bir taslak açın.	此操作在草图中使用。请先打开一个草图。
+Bu noktaya bağlı öğe: %d	连接到此点的实体：%d
+Bu yüzeye taslak çiz	在此面上绘制草图
+Bu özellik OpenCASCADE (B-rep) çekirdeği gerektirir: Araçlar → Geometri çekirdeği.	此特征需要 OpenCASCADE（B-rep）内核：工具 → 几何内核。
+Burada kapalı bir bölge yok.	此处没有闭合区域。
+Böl	分割
+Böl: bölme düzlemini ve korunacak tarafı panelden seçin.	分割：在面板中选择分割平面和要保留的一侧。
+Bölge seç: profil taslağında kullanılacak kapalı alanlara tıklayın (tekrar tıklamak kaldırır).	选择区域：单击轮廓草图中要使用的闭合区域（再次单击可移除）。
+Bölge seçmeyi bitir	完成区域选择
+Bölme düzlemi	分割平面
+Bükme açısı	折弯角度
+Büküm payı: %s   Açınım şeridi: %s	折弯余量：%s   平板条：%s
+Büküm payı: BA = açı × (R + K·T)	折弯余量：BA = 角度 × (R + K·T)
+Büküm yarıçapı	折弯半径
+Büküm yarıçapı (R)	折弯半径 (R)
+Büküm yönünü çevir	反转折弯方向
+Büküm: %d   Açınım boyu: %s	折弯：%d   展开长度：%s
+Büyük yarı eksen	长半轴
+Büyük yarı eksen: %s\nKüçük yarı eksen: %s\nAçı: %s	长半轴：%s\n短半轴：%s\n角度：%s
+Büyütme	缩放
+CAM — G-kod	CAM — G 代码
+CAM\nG-kod	CAM\nG 代码
+Cep	型腔
+Cıvata, somun, pul, pim, rulman (Toolbox)	螺栓、螺母、垫圈、销、轴承（库）
+DWG için DXF dosyasını AutoCAD veya ücretsiz ODA File Converter ile dönüştürün.	如需 DWG，请用 AutoCAD 或免费的 ODA File Converter 转换 DXF 文件。
+DXF olarak dışa aktar	导出为 DXF
+DXF\nÇıktısı	DXF\n导出
+Daire	圆
+Daire taslağı	圆草图
+Dairesel Çoğaltma	圆周阵列
+Daireye merkez işareti	圆上的中心符号线
+Dalma (mm/dk)	下刀 (mm/min)
+Datum	基准
+Datum özellik sembolü	基准特征符号
+Datumlar	基准
+Delik	孔
+Delik Sihirbazı: düzlemsel bir yüzde delik konumlarına tıklayın; ölçüyü panelden seçin.	异型孔向导：在平面上单击孔位置；在面板中选择尺寸。
+Delik türü	孔类型
+Delik\nSihirbazı	异型孔\n向导
+Denklem	方程式
+Denklem bağlandı: D1 = 	已链接方程式：D1 = 
+Denklem hesaplanamadı: '%s'	无法计算方程式：'%s'
+Denklem uyarısı: 	方程式警告： 
+Denklemle sürülen boyutlar	由方程式驱动的尺寸
+Denklemler	方程式
+Denklemler...	方程式...
+Derinlik	深度
+Derinlik 2	深度 2
+Detay\nGörünüşü	局部\n视图
+Devir (dev/dk)	主轴 (rpm)
+Değer	数值
+Değer: 	数值： 
+Değeri yazıp Enter'a basın. '=' ile denklem: =genislik/2  (Esc: vazgeç)	输入数值并按 Enter。用 '=' 输入方程式：=width/2  （Esc：取消）
+Değerlendir	评估
+Değişken ekle	添加变量
+Değişken yarıçap (kenar boyunca doğrusal)	可变半径（沿边线线性变化）
+Dikdörtgen	矩形
+Dikey	竖直
+Dikiş toleransı	缝合公差
+Dil / Language	语言 / Language
+Dil değiştirildi.	语言已更改。
+Diğer yöne	另一方向
+Dosya	文件
+Dosya açılamadı (hata %d): %s	无法打开文件（错误 %d）：%s
+Dosya bulunamadı, listeden çıkarıldı: 	找不到文件，已从列表中移除： 
+Dosya bulunamadı: 	找不到文件： 
+Doğrusal / dairesel / tablo güdümlü çoğaltma ve aynalama	线性 / 圆周 / 表格驱动阵列及镜向
+Doğrusal statik sonlu eleman analizi: von Mises gerilme, yer değiştirme	线性静态有限元分析：von Mises 应力、位移
+Doğrusal veya dairesel bir kenar ya da silindirik yüz seçin.	选择直线或圆形边线或圆柱面。
+Doğrusal Çoğaltma	线性阵列
+Durdur	停止
+Döndür	旋转
+Döndürerek Kesme	旋转切除
+Döndürerek\nKesme	旋转\n切除
+Döndürme	旋转
+Döndürme (orijinden geçen eksen)	旋转（轴通过原点）
+Döndürme ekseni	旋转轴
+Döndürme\nPatron/Taban	旋转\n凸台/基体
+Döndürülmüş Yüzey	旋转曲面
+Döndürülmüş profil ile malzeme keser	用旋转轮廓切除材料
+Döndürülmüş\nYüzey	旋转\n曲面
+Dönme ekseni	旋转轴
+Dönüştür / çoğalt (%d öğe)	变换 / 阵列（%d 个实体）
+Düz geçiş (doğrusal yüzeyler)	直纹（平直曲面）
+Düz geçiş (ruled)	直纹
+Düz kanal: iki yay merkezi + genişlik	直槽口：两个圆弧中心 + 宽度
+Düzen	编辑
+Düzgün çokgen: merkez + köşe (kenar sayısı panelden) (P)	正多边形：中心 + 顶点（边数在面板中）(P)
+Düzlem	基准面
+Düzlem (Tab)	基准面 (Tab)
+Düzlem 1	基准面 1
+Düzlem 2	基准面 2
+Düzlem ofseti	基准面偏移
+Düzlem: %s\nÖğe sayısı: %d\nKapalı kontur: %d\nAçık kontur: %d	基准面：%s\n实体：%d\n闭合轮廓：%d\n开环轮廓：%d
+Düzlem: %s\nÖğe: %d   Nokta: %d\nBoyut: %d   İlişki: %d\nKapalı kontur: %d   Açık: %d	基准面：%s\n实体：%d   点：%d\n尺寸：%d   几何关系：%d\n闭合轮廓：%d   开环：%d
+Düzleme Dik	正视于
+Düzleme Dik\tCtrl+8	正视于\tCtrl+8
+Düzleme dik görünüm (Ctrl+8)	正视于 (Ctrl+8)
+Düzleme dik görünüm için bir düzlem, yüz veya taslak seçin.	选择基准面、面或草图以正视于。
+Düzlemleri göster	显示基准面
+Düzlemsel Yüzey	平面区域
+Düzlemsel bir yüz seçin.	选择一个平面。
+Düzlemsel yüz seçildi. 'Taslak' ile bu yüzeye çizebilirsiniz.	已选择平面。可以用"草图"在其上绘制。
+Düzlemsel yüze kubbe ekle	在平面上添加圆顶
+Düzlemsel\nYüzey	平面\n区域
+Dış kontur	外轮廓
+Dışa aktar (CSV)	导出 (CSV)
+Dışa aktarılacak katı model yok.	没有可导出的实体模型。
+Dışa aktarılacak katı model yok. Önce bir ekstrüzyon oluşturun.	没有可导出的实体模型。请先创建拉伸。
+Dışa aktarılamadı: 	无法导出： 
+Dışa aktarılıyor: 	正在导出： 
+Dışa doğru eğim	向外拔模
+Dışa doğru kabuk	向外抽壳
+Ebeveyn / Çocuk...	父子关系...
+Ekle (birleşim)	添加（合并）
+Ekle (etkin değerlerden kopyala)	添加（复制当前值）
+Ekran görüntüsü (PNG)...	屏幕截图 (PNG)...
+Ekran uzayı yansıma (SSR)	屏幕空间反射 (SSR)
+Ekrana Sığdır	整屏显示全图
+Ekrana Sığdır\tF	整屏显示全图\tF
+Ekrana sığdır (F)	整屏显示全图 (F)
+Eksen	基准轴
+Eksen: %s yönünde %s	基准轴：沿 %s 通过 %s
+Eksen: taslaktaki merkez çizgisi (yoksa taslağın dikey ekseni).	轴：草图中的中心线（否则为草图的竖直轴）。
+Eksenler	基准轴
+Ekstrüde Yüzey	拉伸曲面
+Ekstrüde\nYüzey	拉伸\n曲面
+Ekstrüzyon	拉伸
+Ekstrüzyon Kesme	拉伸切除
+Ekstrüzyon Patron/Taban	拉伸凸台/基体
+Ekstrüzyon uygula	应用拉伸
+Ekstrüzyon\nKesme	拉伸\n切除
+Ekstrüzyon\nPatron/Taban	拉伸\n凸台/基体
+Elips	椭圆
+Elips: merkez, büyük eksen ucu, küçük eksen	椭圆：中心、长轴端点、短轴
+En az	最小
+En az bir sabit yüz ve bir yük yüzü seçin.	请至少选择一个固定面和一个载荷面。
+En az eğim açısı	最小拔模角度
+En büyük von Mises: %.2f MPa\nEn büyük yer değiştirme: %s\nGüvenlik katsayısı (akma): %.2f\nEleman: %d   Düğüm: %d	最大 von Mises：%.2f MPa\n最大位移：%s\n安全系数（屈服）：%.2f\n单元：%d   节点：%d
+En çok	最大
+English	English
+Enter: Tamam   Esc: İptal	Enter：确定   Esc：取消
+Enter: Tamam   Esc: İptal\nSayı alanlarına ifade yazabilirsiniz (ör. 25.4*2).	Enter：确定   Esc：取消\n数字框中可以输入表达式（例如 25.4*2）。
+Etkin konfigürasyon veya tek konfigürasyon silinemez.	无法删除活动配置或唯一配置。
+Etkin sayfa	活动图纸
+Etkin: 	活动： 
+Etkinleştir: 	激活： 
+Evet	是
+Eğim	拔模
+Eğim Analizi	拔模分析
+Eğim açısı	拔模角度
+Eğim parametreleri	拔模参数
+Eğim verilecek yüzler	拔模面
+Eğim: eğim verilecek yüzlere tıklayın; tarafsız yüz için paneldeki düğmeyi kullanın.	拔模：单击要拔模的面；中性面请使用面板中的按钮。
+Eğim\nAnalizi	拔模\n分析
+Eğri	曲线
+Eğri Güdümlü Çoğaltma	曲线驱动的阵列
+Eğri yüzey seçildi (üzerine taslak çizilemez).	已选择曲面（不能在其上绘制草图）。
+Eğriyi izle (döndürerek yerleştir)	沿曲线（旋转实例）
+Eşit aralık (360°'de son örnek başa denk gelmez)	等间距（360° 时最后一个实例不与第一个重合）
+Eşit aralık (eğri boyunca)	等间距（沿曲线）
+Eşit mesafe	等距
+Eşleştir	配合
+Eşleştirme iki farklı bileşen arasında olmalı.	配合必须在两个不同的零部件之间。
+Eşleştirmeler	配合
+Eşleştirmeyi Sil	删除配合
+Fare	鼠标
+Fare hareketi	鼠标笔势
+Fare hareketleri	鼠标笔势
+Fare hareketleri (döndürme: orta tuş)	鼠标笔势（旋转：中键）
+Fare ve kısayollar	鼠标和快捷键
+Farklı Kaydet...	另存为...
+Farklı Kaydet...\tCtrl+Shift+S	另存为...\tCtrl+Shift+S
+Flanş	法兰
+Flanş boyu (L)	法兰长度 (L)
+G-kod yazılamadı	无法写入 G 代码
+G-kodu kaydet	保存 G 代码
+GD&T kontrol çerçevesi	形位公差框格
+Genel	常规
+Genişlik	宽度
+Geometri Çekirdeği	几何内核
+Geometri çekirdeği (tıklayın: seçenekler)	几何内核（单击：选项）
+Geometri çekirdeği ve dışa aktarma...	几何内核和导出...
+Geometrik\nTolerans	形位\n公差
+Geri Al	撤销
+Geri Al (Ctrl+Z)	撤销 (Ctrl+Z)
+Geri Al\tCtrl+Z	撤销\tCtrl+Z
+Geri alma çubuğunu bunun altına taşı	将退回控制棒移到此下方
+Geri almayı kaldır (tümünü hesapla)	取消退回（全部计算）
+Geçersiz değişken adı: harf ile başlamalı, boşluk içermemeli.	变量名无效：必须以字母开头且不含空格。
+Geçme	配合
+Geçme (H7 vb.)	配合（H7 等）
+Girişim Tespiti	干涉检查
+Girişim hesaplanamadı: 	无法计算干涉： 
+Girişim tespiti OpenCASCADE çekirdeği gerektirir.	干涉检查需要 OpenCASCADE 内核。
+Girişim yok ✓	无干涉 ✓
+Girişim: %d çakışma	干涉：%d 处重叠
+Girişim\nTespiti	干涉\n检查
+Gizle	隐藏
+Gizle /\nGöster	隐藏 /\n显示
+Gizli	已隐藏
+Gizli çizgiler	隐藏线
+Global değişkenler	全局变量
+Global değişkenler ve boyut denklemleri	全局变量和尺寸方程式
+Gravür (oy)	雕刻（凹陷）
+Grup	组
+Gölgeler	阴影
+Gönye (45°)	斜接 (45°)
+Görsel-\nleştirme	可视\n化
+Görselleştirme	可视化
+Görüntü açılamadı: 	无法打开图像： 
+Görünüm	视图
+Görünüm yönü	视向
+Görünümü döndür	旋转视图
+Görünür (kesikli)	可见（虚线）
+Görünüş veya açıklama seç, sürükle	选择视图或注解，拖动
+Görünüşler hesaplanamadı: 	无法计算视图： 
+Görünüşü sil	删除视图
+Göster	显示
+Gösterim	显示
+Gövde	实体
+Gövde Taşı/Kopyala	移动/复制实体
+Gövde Taşı/Kopyala: taşınacak gövdeye tıklayın, ötelemeyi ve dönmeyi panelden girin.	移动/复制实体：单击要移动的实体，在面板中输入平移和旋转。
+Gövde Taşı\nKopyala	移动/复制\n实体
+Gövde seçili	已选择实体
+Gövde: %d   Yüz: %d   Kenar: %d\nGörüntü üçgeni: %d   Geçerli: %s	实体：%d   面：%d   边线：%d\n显示三角形：%d   有效：%s
+Gövdeler	实体
+Gövdeleri Birleştir	组合实体
+Gövdeleri Birleştir: gövdelere tıklayın (ilk tıklanan ana gövde).	组合实体：单击各实体（第一个单击的为主实体）。
+Gövdeleri bir ana düzlemle böl	用主基准面分割实体
+Gövdeleri ekle / çıkar / kesiştir	添加 / 删减 / 共同实体
+Gövdeleri\nBirleştir	组合\n实体
+Gövdeyi içten boşalt; seçili yüzler açık kalır (OpenCASCADE çekirdeği)	将实体抽空；所选面保持开口（OpenCASCADE 内核）
+Gövdeyi taşı, döndür veya kopyala	移动、旋转或复制实体
+Güdümlü (referans) boyut	从动（参考）尺寸
+Güvenli Z	安全 Z
+Güç kırpma: silinecek parçaya tıklayın (T)	强劲剪裁：单击要删除的线段 (T)
+HDRI / panorama görüntüsü açılamadı: 	无法打开 HDRI / 全景图像： 
+HDRI / panorama yükle	加载 HDRI / 全景
+Hacim, kütle, ağırlık merkezi ve atalet momentleri	体积、质量、质心和惯性矩
+Hakkında	关于
+Hareket Etüdü	运动算例
+Hareket durdu: eşleştirmeler bu konumda sağlanamıyor (kilitlenme).	运动已停止：此位置无法满足配合（卡死）。
+Hareket etüdü bitti (%.0f°).	运动算例已完成 (%.0f°)。
+Hareket etüdü oynatılıyor...	正在播放运动算例...
+Hareket\nEtüdü	运动\n算例
+Harf	字母
+Hata: 	错误： 
+Hatve (tur başına)	螺距（每圈）
+Hazır. Bir düzlem seçip 'Taslak' komutuyla çizime başlayın.	就绪。选择一个基准面，然后用"草图"命令开始绘制。
+Hedef yüz	目标面
+Hedef yüz: 	目标面： 
+Helis	螺旋线
+Helis (silindirik / konik)	螺旋线（圆柱 / 圆锥）
+Helis / Spiral	螺旋线 / 涡状线
+Henüz değişken yok. Örnek: genislik = 80, sonra boyuta '=genislik/2' yazın.	尚无变量。示例：width = 80，然后在尺寸中输入 '=width/2'。
+Her iki taraf (ayrı gövdeler)	两侧（单独实体）
+Her taslakta bir kapalı kontur olmalı; profiller farklı (paralel veya açılı) düzlemlerde olur.\nEnter: Tamam   Esc: İptal	每个草图需要一个闭合轮廓；各轮廓位于不同的（平行或倾斜）基准面上。\nEnter：确定   Esc：取消
+Her örnek için mm cinsinden öteleme; örnekleri ; ile ayırın.	每个实例的平移量 (mm)；用 ; 分隔实例。
+Herhangi	任意
+Hesaplanıyor...	正在计算...
+Hizalamayı çevir (%s)	反转对齐 (%s)
+Hizalı	对齐
+Hız (dev/dk)	转速 (rpm)
+IGES olarak dışa aktar (B-rep)...	导出为 IGES (B-rep)...
+Izgara yakalamayı aç/kapat (G)	切换网格捕捉 (G)
+Izgaraya\nYakala	网格\n捕捉
+K-faktörü	K 因子
+Kabartma	浮雕
+Kabartma (dışa)	浮雕（向外）
+Kabartma (yükselt)	浮雕（凸起）
+Kabuk	抽壳
+Kabuk parametreleri	抽壳参数
+Kabuk: açık kalacak yüzlere tıklayın (tekrar tıklamak kaldırır), kalınlığı panelden girin.	抽壳：单击要保持开口的面（再次单击可移除），在面板中输入厚度。
+Kaburga	筋
+Kaburga OpenCASCADE (B-rep) çekirdeği gerektirir: Araçlar → Geometri çekirdeği.	筋需要 OpenCASCADE（B-rep）内核：工具 → 几何内核。
+Kaburga, taslak düzleminin iki yanına eşit kalınlıkta, çizgiden gövdeye kadar uzanır.\nEnter: Tamam   Esc: İptal	筋在草图基准面两侧以相同厚度延伸，从直线延伸到实体。\nEnter：确定   Esc：取消
+Kaldırılacak yüzler	要移除的面
+Kaldırılmış	已移除
+Kalite	品质
+Kalınlaştır	加厚
+Kalınlık	厚度
+Kalınlık (T)	厚度 (T)
+Kalınlık yönünü çevir	反转厚度方向
+Kalıp çekme yönüne göre eğim açıları ve ayırma çizgisi	相对于开模方向的拔模角度和分型线
+Kam profili çıkarılamadı: 2. seçim kamın yan (ekstrüzyon) yüzü olmalı.	无法提取凸轮轮廓：第 2 个选择必须是凸轮的侧（拉伸）面。
+Kanal	槽口
+Kapalı bir şeklin içine yazıp Ekstrüzyon Kesme ile gravür, tek başına Ekstrüzyon ile kabartma yapılır.	在闭合形状内书写，使用"拉伸切除"雕刻，或仅用"拉伸"制作浮雕。
+Kapalı konturdan düz yüzey	由闭合轮廓生成平面
+Kapalı konturlar düz yüzeye dönüşür (delikler korunur).	闭合轮廓变为平面（保留孔）。
+Kapalı konturlu bir taslak çizin.	绘制带闭合轮廓的草图。
+Kapalı profil: düz sac plaka. Kenarlarına Kenar Flanş eklenebilir.	闭合轮廓：平板钣金。可在其边线上添加边线法兰。
+Kapalı profilden sac plaka veya açık profilden bükümlü sac	由闭合轮廓生成平板，或由开环轮廓生成折弯钣金
+Kapalıysa katı oluştur	闭合时生成实体
+Kapat	关闭
+Kapat (Esc)	关闭 (Esc)
+Karakteristik	特性
+Karşı taraf	对侧
+Katı model yok.	没有实体模型。
+Katılarla birleştir	与实体合并
+Kaydederken önceki sürümü yedekle (.bak)	保存时备份上一版本 (.bak)
+Kaydedildi: 	已保存： 
+Kaydedildi: %s (%s)	已保存：%s (%s)
+Kaydet	保存
+Kaydet (Ctrl+S)	保存 (Ctrl+S)
+Kaydet\tCtrl+S	保存\tCtrl+S
+Kaydetme	保存
+Kaydı sil	删除记录
+Kaynak sembolü (köşe / alın)	焊接符号（角焊 / 坡口）
+Kaynak\nSembolü	焊接\n符号
+Kaynaklar	焊件
+Kenar / silindir ekseni	边线 / 圆柱轴
+Kenar Flanş	边线法兰
+Kenar sayısı	边数
+Kenar-Flanş	边线法兰
+Kenar\nFlanş	边线\n法兰
+Kenara tıklayın: ekle/kaldır. Yüze tıklayın: tüm kenarları.\nEnter: Tamam   Esc: İptal	单击边线：添加/移除。单击面：其所有边线。\nEnter：确定   Esc：取消
+Kenarları göster	显示边线
+Kenarı 180° geri kıvır (açık kıvırma, boşluk = 2R)	将边线折回 180°（开环褶边，间隙 = 2R）
+Kesikli turuncu çizgi önizlemedir. Kapalı zincirde varsayılan dışa doğrudur. Ofset kenarları tek bir mesafe boyutuna bağlanır.	橙色虚线为预览。闭合链默认向外。等距边线由单个距离尺寸关联。
+Kesim Listesi	切割清单
+Kesim listesi kaydedildi: 	切割清单已保存： 
+Kesim\nListesi	切割\n清单
+Kesit harfi	剖面字母
+Kesit\nGörünüşü	剖面\n视图
+Kesiştir (ortak hacim)	相交（公共体积）
+Klavye kısayolları	键盘快捷键
+Komut	命令
+Komut, grup veya kısayol ara...	搜索命令、组或快捷键...
+Konfigürasyon	配置
+Konfigürasyon eklendi: 	已添加配置： 
+Konfigürasyon: 	配置： 
+Konfigürasyonlar	配置
+Konfigürasyonlar ve tasarım tablosu (CSV)	配置和系列零件设计表 (CSV)
+Koniklik açısı	锥度角
+Konum	位置
+Konum X	位置 X
+Konum Y	位置 Y
+Konumlar	位置
+Koordinat Sistemi	坐标系
+Koordinat sistemi	坐标系
+Kopya oluştur (orijinali koru)	创建副本（保留原件）
+Kopyala (orijinal gövde kalır)	复制（保留原实体）
+Korunacak	保留
+Korunan tarafı çevir	反转保留侧
+Koyu	深色
+Kubbe	圆顶
+Kubbe: düzlemsel bir yüze tıklayın.	圆顶：单击一个平面。
+Kullanılabilir boyut adları	可用尺寸名称
+Kurtar	恢复
+Kuyruk notu	尾部注释
+Kör	给定深度
+Köşe Yuvarlatma	圆角
+Köşe birleşimi	边角处理
+Köşe kaynağı	角焊缝
+Köşe noktasına (iki çizginin birleştiği yer) tıklayın. Eklenen yarıçap boyutu sonradan değiştirilebilir; köşeye bağlı boyutlar sanal köşede (×) kalır.	单击一个角点（两条直线相交处）。添加的半径尺寸可稍后更改；连接到该角的尺寸保留在虚拟交点 (×) 处。
+Köşe noktasına tıklayın. İki eşit mesafe boyutu eklenir.	单击一个角点。将添加两个相等的距离尺寸。
+Köşe yuvarlatma	圆角
+Köşe: 	角： 
+Köşe\nDikdörtgen	边角\n矩形
+Köşe\nYuvarlat	绘制\n圆角
+Köşe\nYuvarlatma	圆角
+Köşeye tıklayın; mesafe panelden	单击一个角；距离取自面板
+Köşeye tıklayın; yarıçap panelden (F değil, panel)	单击一个角；半径取自面板
+Kütle = %s\nHacim = %s\nYüzey alanı = %s	质量 = %s\n体积 = %s\n表面积 = %s
+Kütle Özellikleri	质量属性
+Kütle Özellikleri...	质量属性...
+Kütle özellikleri bu koordinat sistemine göre raporlanabilir.	可以相对于此坐标系报告质量属性。
+Kütle özellikleri hesaplandı. Pembe işaret ağırlık merkezidir.	已计算质量属性。粉色标记为质心。
+Kütle: %s\nHacim: %s³\nAğırlık merkezi:\n  X %s  Y %s  Z %s	质量：%s\n体积：%s³\n质心：\n  X %s  Y %s  Z %s
+Kütle\nÖzellikleri	质量\n属性
+Küçük eksen Akıllı Boyut ile (elipse tıklayın), büyük eksen merkez-uç mesafesiyle ölçülendirilir.	短轴用智能尺寸标注（单击椭圆），长轴用中心到端点的距离标注。
+Küçük yarı eksen	短半轴
+Kılavuz eğrisi her profilden geçmelidir.	引导线必须穿过每个轮廓。
+Kırp	剪裁
+Kırpma düzlemi	剪裁基准面
+Kırık\nGörünüş	断裂\n视图
+Kırıkları kaldır	移除断裂
+Kısayol	快捷键
+Kısayol ata...	分配快捷键...
+Kısayolu kaldır	移除快捷键
+Kıvırma	褶边
+Listeden malzeme seçin; model rengi önizlenir.	从列表中选择材料；将预览模型颜色。
+Listeyi temizle	清空列表
+Loft	放样
+Loft Kesme	放样切割
+Loft Yüzey	放样曲面
+Loft ile malzeme kes	用放样切除材料
+Loft yüzey için en az iki taslak gerekli.	放样曲面至少需要两个草图。
+Loft\nKesme	放样\n切割
+Loft\nYüzey	放样\n曲面
+Lxx = %s   Lxy = %s   Lxz = %s\nLyx = %s   Lyy = %s   Lyz = %s\nLzx = %s   Lzy = %s   Lzz = %s	Lxx = %s   Lxy = %s   Lxz = %s\nLyx = %s   Lyy = %s   Lyz = %s\nLzx = %s   Lzy = %s   Lzz = %s
+Makro bitti: 	宏已完成： 
+Makro hatası: 	宏错误： 
+Makro kaydı durdu: kayıt süresince özellik eklenmedi.	宏录制已停止：录制期间未添加任何特征。
+Makro kaydını başlat / durdur	开始 / 停止录制宏
+Makro çalıştır...	运行宏...
+Makro çalışıyor: 	正在运行宏： 
+Malzeme	材料
+Malzeme Listesi	材料明细表
+Malzeme koşulu	材料条件
+Malzeme listesi	材料明细表
+Malzeme listesi kaydedildi: 	材料明细表已保存： 
+Malzeme listesindeki her kalem için balon (montaj resminde)	每个材料明细表项目一个零件序号（在装配体工程图中）
+Malzeme listesini göster / gizle	显示 / 隐藏材料明细表
+Malzeme seçilmediği için yoğunluk 1 g/cm³ (su) varsayıldı.	未选择材料，因此假定密度为 1 g/cm³（水）。
+Malzeme tarafını çevir	反转材料侧
+Malzeme yok: kütle hesabında 1 g/cm³ kullanılır.	无材料：质量按 1 g/cm³ 计算。
+Malzeme...	材料...
+Malzeme: 	材料： 
+Malzeme\nListesi	材料\n明细表
+Malzemesi belirtilmeyen parçalarda varsayılan yoğunluk kullanılır.	无材料的零件使用默认密度。
+Malzemeyi değiştir...	更改材料...
+Malzemeyi düzenle...	编辑材料...
+Malzemeyi kaldır	移除材料
+Mavi çizgi: olası ayırma çizgisi (%d kenar).	蓝线：可能的分型线（%d 条边线）。
+Merkez X	中心 X
+Merkez Y	中心 Y
+Merkez ve köşeden dikdörtgen	由中心和角点生成矩形
+Merkez ve yarıçaptan daire (C)	由圆心和半径生成圆 (C)
+Merkez çizgisi	中心线
+Merkez çizgisine göre aynala	关于中心线镜向
+Merkez, başlangıç ve bitişten yay (A)	由圆心、起点和终点生成圆弧 (A)
+Merkez\nDikdörtgen	中心\n矩形
+Merkez\nYay	圆心\n圆弧
+Merkez\nÇizgisi	中心\n线
+Merkez\nİşareti	中心\n符号线
+Merkezi orijine taşı	将中心移到原点
+Merkezi, sonra bir köşeyi tıklayın. Köşeler yapı çemberi üzerinde, kenarlar eşit kalır.	单击中心，然后单击一个顶点。顶点保持在构造圆上，各边保持相等。
+Mesafe	距离
+Mesafe / açı	距离 / 角度
+Mesafe 2	距离 2
+Metin	文字
+Metin notu (isteğe bağlı oklu)	文字注释（可选引线）
+Metni geçersiz kıl	覆盖文字
+Mevcut ilişkiler ve boyutlar	现有几何关系和尺寸
+Model (B-rep)	模型 (B-rep)
+Model rengi malzemeye göre önizlenir. Tamam ile parçaya uygulanır.	按材料预览模型颜色。确定后应用到零件。
+Model yüzünün kenarlarını taslağa çizgi/yay olarak al	将模型面的边线转换为草图直线/圆弧
+Model üzerinde bir yüze veya köşe noktasına tıklayın. İkinci seçimle mesafe veya açı ölçülür. Boş yere tıklamak seçimi temizler.	单击模型上的面或顶点。第二个选择会测量距离或角度。单击空白处清除选择。
+Model\nBoyutları	模型\n项目
+Model\nGörünüşü	模型\n视图
+Modelde %s yüze tıklayın (tekrar tıklamak kaldırır).	单击模型上的%s面（再次单击可移除）。
+Modelde açık kalacak yüzlere tıklayın.\nEnter: Tamam   Esc: İptal	单击模型上要保持开口的面。\nEnter：确定   Esc：取消
+Modelde yüz veya kenara tıklayın.	单击模型上的面或边线。
+Modeldeki tüm yüzey gövdelerinin ofseti alınır (negatif: ters yön).	模型中的所有曲面实体都会等距（负值：反方向）。
+Modeli 3B baskı için STL olarak dışa aktar	将模型导出为 STL 用于 3D 打印
+Modeli STEP (B-rep) olarak dışa aktar — diğer CAD programları için	将模型导出为 STEP (B-rep) — 用于其他 CAD 程序
+Montaj	装配体
+Montaj Kütle Özellikleri	装配体质量属性
+Montaj STEP çıktısı OpenCASCADE çekirdeği gerektirir.	装配体 STEP 导出需要 OpenCASCADE 内核。
+Montaj açıldı: 	已打开装配体： 
+Montaj dışa aktarılamadı: 	无法导出装配体： 
+Montaj dışa aktarılıyor: 	正在导出装配体： 
+Montaj içinde yeni parça oluştur ve diğer bileşenleri görerek modelle	在装配体中新建零件，并在看到其他零部件的同时建模
+Montaj kaydedildi: 	装配体已保存： 
+Montaj kaydedildi: %s (%d bayt)	装配体已保存：%s（%d 字节）
+Montaj kendi içine alt montaj olarak eklenemez.	装配体不能作为子装配体插入到自身中。
+Montaj malzeme listesi (BOM), CSV	装配体材料明细表 (BOM)，CSV
+Montaja ekle	添加到装配体
+Montajı STEP olarak dışa aktar	将装配体导出为 STEP
+Motor ekseni: 	马达轴： 
+Motorla döndür, eşleştirmeler hareketi taşır	用马达旋转；配合传递运动
+Nokta	点
+Nokta %d: %s	点 %d：%s
+Nokta 1: %s\nNokta 2: %s	点 1：%s\n点 2：%s
+Noktalardan geçen eğri (S ile değil; çift tık/Enter bitirir)	通过点的曲线（不用 S；双击/Enter 完成）
+Normal tarafı (+)	法向侧 (+)
+Not	注释
+Numara	编号
+OBJ olarak dışa aktar...	导出为 OBJ...
+OCP (OpenCASCADE) sürümü: %s\nSon yeniden oluşturma: %.0f ms	OCP (OpenCASCADE) 版本：%s\n上次重建：%.0f ms
+Odak uzaklığı: %s\nŞekli değiştirmek için tepe, odak veya uç noktalarını sürükleyin; uçlar parabol üzerinde kalır.	焦距：%s\n拖动顶点、焦点或端点以更改形状；端点保持在抛物线上。
+Ofset	等距
+Ofset (%d öğe)	等距（%d 个实体）
+Ofset (normal yönünde)	等距（沿法线）
+Ofset (paralel)	等距（平行）
+Ofset Yüzey	等距曲面
+Ofset mesafesi	等距距离
+Ofset...	等距...
+Ofset\nYüzey	等距\n曲面
+Ok tarafı	箭头侧
+OpenCASCADE	OpenCASCADE
+OpenCASCADE ortamı kurulu değil (occ_env). README → 'Faz 4: OpenCASCADE kurulumu'.	未安装 OpenCASCADE 环境 (occ_env)。README → 'Phase 4: OpenCASCADE setup'。
+OpenCASCADE: gerçek yüzey/kenar topolojisi, köşe yuvarlatma, pah, kabuk, STEP/IGES.\nCSG: yalnızca ekstrüzyon/döndürme, üçgen ağ.	OpenCASCADE：真实的面/边线拓扑、圆角、倒角、抽壳、STEP/IGES。\nCSG：仅拉伸/旋转，三角网格。
+Oran A (yarıçap/diş)	比率 A（半径/齿数）
+Oran B (yarıçap/diş)	比率 B（半径/齿数）
+Orijin	原点
+Orta (iki yana)	中间（两侧）
+Orta düzlem	两侧对称
+Orta tuş / sağ tuş sürükle: döndür\nCtrl + orta/sağ tuş: kaydır\nTekerlek: yakınlaştır   F: sığdır	中键 / 右键拖动：旋转\nCtrl + 中键/右键：平移\n滚轮：缩放   F：整屏显示
+Ortam	环境
+Ortam kapatma (SSAO)	环境光遮蔽 (SSAO)
+Otomatik kaydet (çökme kurtarma)	自动保存（崩溃恢复）
+Otomatik kaydetme aralığı	自动保存间隔
+Otomatik patlat	自动爆炸
+Otomatik: taslaktaki tüm kapalı konturlar kullanılıyor.	自动：使用草图中的所有闭合轮廓。
+Otomatik\nBalon	自动\n零件序号
+Otomatiğe dön	恢复自动
+Oyma (içe)	凹陷（向内）
+Oynat	播放
+PBR malzeme, ortam, gölge, çıkartma ve yüksek çözünürlüklü render	PBR 材料、环境、阴影、贴图和高分辨率渲染
+PDF varsayılan uygulamada açıldı; oradan yazdırabilirsiniz.	PDF 已在默认应用程序中打开；可从那里打印。
+PDF'i varsayılan uygulamada aç ve yazdır	在默认应用程序中打开 PDF 并打印
+Pah	倒角
+Pah kırılacak kenarlar	要倒角的边线
+Pah parametreleri	倒角参数
+Pah türü	倒角类型
+Panoya kopyala	复制到剪贴板
+Parabol	抛物线
+Parabol: tepe, odak, iki uç	抛物线：顶点、焦点、两个端点
+Parametreler	参数
+Parlama (glow)	辉光
+Parça	零件
+Parça boş.	零件为空。
+Parça dosyası (.dcad) ekle	插入零件文件 (.dcad)
+Parça dosyası oluşturulamadı: 	无法创建零件文件： 
+Parça düzenleniyor: %s — bitince 'Montaj' sekmesine tıklayın (parça kaydedilir).	正在编辑零件：%s — 完成后单击"装配体"选项卡（零件将被保存）。
+Parça kaydedildi: 	零件已保存： 
+Parça numarası balonu	零件序号
+Parça üstü (ham malzeme)	零件顶部（毛坯）
+Parça: 	零件： 
+Parçada yapısal üye yok.	零件没有结构构件。
+Parçada zaten bir taban flanş var (tek sac gövde).	零件已有基体法兰（单一钣金实体）。
+Parçalar yükleniyor (%d)...	正在加载零件 (%d)...
+Parçanın malzemesini seç (yoğunluk ve görünüm)	选择零件材料（密度和外观）
+Parçayı Aç	打开零件
+Parçayı makro olarak kaydet...	将零件另存为宏...
+Parçayı\nAç	打开\n零件
+Paso derinliği	切深
+Patlat / Topla	爆炸 / 解除爆炸
+Patlat /\nTopla	爆炸 /\n解除爆炸
+Patlatma adımları oluştur	创建爆炸步骤
+Patlatılmış Görünüm	爆炸视图
+Patlatılmış görünümü aç / kapat	切换爆炸视图
+Patlatılmış\nGörünüm	爆炸\n视图
+Perspektif	透视图
+Pinyon hatve yarıçapı	小齿轮节圆半径
+Poisson oranı	泊松比
+Pozlama	曝光
+Profil	轮廓
+Profil (açık çizgi)	轮廓（开环线）
+Profil bölgeleri	轮廓区域
+Profil dönüşü	轮廓旋转
+Profil taslak normali doğrultusunda gövdenin ilk karşılaştığı yüzeylere izdüşer; kabartma yüzeyi izleyerek sabit kalınlıkta eklenir.	轮廓沿草图法线投影到实体的第一组面上；浮雕以恒定厚度沿曲面分布。
+Profil yolun başında ve yola dik olmalıdır. Helis yolu için profili helisin başlangıç noktasına çizin.\nEnter: Tamam   Esc: İptal	轮廓必须位于路径起点并与之垂直。对于螺旋线路径，在螺旋线起点处绘制轮廓。\nEnter：确定   Esc：取消
+Profil, boy, açı ve adetlere göre kesim listesi (CSV)	按轮廓、长度、角度和数量的切割清单 (CSV)
+Profil, kılavuza değecek şekilde ölçeklenir.	轮廓缩放至接触引导线。
+Profili bir yol (taslak, 3B taslak veya helis) boyunca süpür	沿路径扫描轮廓（草图、3D 草图或螺旋线）
+Profiller (ağaç sırasıyla)	轮廓（按树顺序）
+Profiller arasında geçiş katısı	轮廓之间的过渡实体
+Projeksiyon Eğrisi	投影曲线
+Px = %s\nPy = %s\nPz = %s	Px = %s\nPy = %s\nPz = %s
+Ra (µm)	Ra (µm)
+Referans Düzlem	参考基准面
+Referans Eksen	参考基准轴
+Referans Nokta	参考点
+Referans boyut (parantez)	参考尺寸（括号）
+Referans düzlem geçersiz.	参考基准面无效。
+Referans düzlem, eksen, nokta ve helis	参考基准面、基准轴、点和螺旋线
+Referans\nGeometri	参考\n几何体
+Render alınamadı (görüntü boş).	无法渲染（空图像）。
+Render kaydedildi: %s (%d × %d)	渲染已保存：%s (%d × %d)
+Render kaydet (2×)	保存渲染 (2×)
+Rev 	版本 
+Revizyon tablosuna satır ekle	在修订表中添加一行
+Revizyon\nEkle	添加\n修订
+STEP / IGES dosyasını gövde olarak içe aktar	将 STEP / IGES 文件作为实体导入
+STEP / IGES içe aktar...	导入 STEP / IGES...
+STEP olarak dışa aktar (B-rep)...	导出为 STEP (B-rep)...
+STEP/IGES için OpenCASCADE çekirdeği gerekli (Araçlar → Geometri çekirdeği).	STEP/IGES 需要 OpenCASCADE 内核（工具 → 几何内核）。
+STEP\nÇıktısı	STEP\n导出
+STL dışa aktarma (OpenCASCADE)	STL 导出 (OpenCASCADE)
+STL olarak dışa aktar (3B baskı)...	导出为 STL（3D 打印）...
+STL yazılıyor (%s kalite)...	正在写入 STL（%s 品质）...
+STL\nÇıktısı	STL\n导出
+SVG olarak dışa aktar	导出为 SVG
+Saat yönünde	顺时针
+Sabit	固定
+Sabit bileşen döndürülemez: başka bir bileşen seçin.	固定的零部件无法旋转：请选择其他零部件。
+Sabit bileşen taşınamaz (Sabitle / Serbest ile serbest bırakın).	固定的零部件无法移动（用"固定 / 浮动"释放）。
+Sabit yüz(ler) ve yük yüz(ler)i seçip Çalıştır'a basın. Ağ: vokselli altı yüzlü elemanlar.	选择固定面和载荷面，然后按"运行"。网格：体素六面体单元。
+Sabitle /\nSerbest	固定 /\n浮动
+Sac	图纸
+Sac Metal	钣金
+Sac metal ve kaynaklı konstrüksiyon OpenCASCADE (B-rep) çekirdeği gerektirir: Araçlar → Geometri çekirdeği.	钣金和焊件需要 OpenCASCADE（B-rep）内核：工具 → 几何内核。
+Sacın büküm yarıçapını kullan (%s)	使用钣金折弯半径 (%s)
+Sapma +/-	偏差 +/-
+Sarma	包覆
+Satır ayırmak için | kullanın.	用 | 分行。
+Satıra çift tıklayın veya 'Kısayol ata' deyip tuş kombinasyonuna basın. Esc, Enter, ok tuşları ve Tab sabittir.	双击某行或按"分配快捷键"，然后按组合键。Esc、Enter、方向键和 Tab 是固定的。
+Sayfa	图纸
+Sayfa biçimi	图纸格式
+Sayfa boyutu, standart, izdüşüm açısı, antet, sayfalar	图纸大小、标准、投影类型、标题栏、图纸
+Sayfa ölçeği	图纸比例
+Sayfa: 	图纸： 
+Sayfayı DXF olarak kaydet (DWG için AutoCAD/ODA ile dönüştürülebilir)	将图纸保存为 DXF（可用 AutoCAD/ODA 转换为 DWG）
+Sayfayı PDF olarak kaydet	将图纸保存为 PDF
+Sayfayı SVG olarak kaydet	将图纸保存为 SVG
+Sayısal giriş için bir bileşen seçin.	选择一个零部件以进行数值输入。
+Sağ	右视
+Sağ Düzlem	右视基准面
+Sağ Düzlem (YZ)	右视基准面 (YZ)
+Sağ alt	右下
+Sağ tuşla sürükleme	右键拖动
+Sağ tuşu basılı tutup bir yöne çekin; halkada vurgulanan komut bırakınca çalışır. Ctrl + sağ tuş her zaman kaydırır.	按住右键朝某个方向拖动；松开时执行高亮的命令。Ctrl + 右键始终平移。
+Sağ üst	右上
+Sağ\tCtrl+4	右视\tCtrl+4
+Seç	选择
+Seçenekler	选项
+Seçenekler (kısayollar, fare, tema, dil)...	选项（快捷键、鼠标、主题、语言）...
+Seçilen yönelimde (ön, üst, izometrik...) görünüş ekle	按所选方向添加视图（前视、上视、等轴测...）
+Seçilenleri sil	删除所选
+Seçili bileşen: %d	所选零部件：%d
+Seçili bileşeni gizle veya göster	隐藏或显示所选零部件
+Seçili bileşeni sabitle veya serbest bırak	固定或浮动所选零部件
+Seçili bileşenin parçasını düzenlemek için aç	打开所选零部件的零件进行编辑
+Seçili düzlem veya düzlemsel yüzey üzerinde yeni taslak	在所选基准面或平面上新建草图
+Seçili görünüşte doğrusal bir kenara tıklayın.	单击所选视图中的直线边线。
+Seçili görünüşte kesit çizgisi çiz	在所选视图中绘制剖切线
+Seçili görünüşten izdüşüm görünüşü türet	从所选视图派生投影视图
+Seçili görünüşün bir bölgesini büyüt	放大所选视图的区域
+Seçili kenar: %d (taban flanşın üst / alt kenarlarına tıklayın)	所选边线：%d（单击基体法兰的上 / 下边线）
+Seçili kenarlara pah kır (OpenCASCADE çekirdeği)	对所选边线倒角（OpenCASCADE 内核）
+Seçili kenarları yuvarlat (OpenCASCADE çekirdeği)	对所选边线圆角（OpenCASCADE 内核）
+Seçili yüz düzlemsel değil. Düzlemsel bir yüz veya ana düzlem seçin.	所选面不是平面。请选择平面或主基准面。
+Seçili öğelerden rijit blok oluştur	从所选实体创建刚性块
+Seçili öğelere geometrik ilişki ekle (yatay, dikey, paralel, teğet...)	为所选实体添加几何关系（水平、竖直、平行、相切...）
+Seçili öğeleri seçili merkez çizgisine göre aynala	关于所选中心线镜向所选实体
+Seçili öğeleri sil (Delete)	删除所选实体 (Delete)
+Seçili öğeleri yapı (construction) geometrisine çevir / geri al	将所选实体切换为构造几何线
+Seçili öğelerin ofsetini al (zincirler köşeleriyle birlikte)	等距所选实体（链及其角一起）
+Seçili: 	已选择： 
+Seçim ve nokta sürükleme (Esc)	选择并拖动点 (Esc)
+Seçim yapmak için paneldeki 'Sonucu önizle' kutusunu kapatın.	在面板中关闭"预览结果"以进行选择。
+Seçim: %d	选择：%d
+Seçimden blok oluştur	从所选创建块
+Seçime uygun ilişkiler soldaki panelde listelendi.	适用于所选内容的几何关系列在左侧面板中。
+Seçimi temizle	清除选择
+Seçimler (%d)	选择 (%d)
+Sil	删除
+Sil\tDelete	删除\tDelete
+Silindirik yüz	圆柱面
+Silindirik yüz, dairesel veya doğrusal kenar seçin (dönme ekseni).	选择圆柱面或圆形或直线边线（旋转轴）。
+Simetrik ±	对称 ±
+Sol	左视
+Sol alt	左下
+Sol alt X	左下 X
+Sol alt Y	左下 Y
+Sol üst	左上
+Sol\tCtrl+3	左视\tCtrl+3
+Son Dosyalar	最近的文件
+Son dosyalar	最近的文件
+Son dosyalar listesi temizlendi.	最近文件列表已清除。
+Son dosyalar listesini temizle	清除最近文件列表
+Sonrakine Kadar	成形到下一面
+Sonucu birleştir	合并结果
+Sonucu birleştir (kapalıysa ayrı gövde)	合并结果（闭合时为单独实体）
+Sonucu önizle (seçim kapalı)	预览结果（关闭选择）
+Sonuçlar	结果
+Sonuçları temizle	清除结果
+Spiral (düzlemsel)	涡状线（平面）
+Spiralde adım, her turdaki yarıçap artışıdır.	对于涡状线，螺距是每圈的半径增量。
+Spline	样条曲线
+Standart	标准
+Standart delikler: düz, havşa başlı, havşa, kılavuz (ISO / ANSI)	标准孔：简单直孔、柱形沉头孔、锥形沉头孔、螺纹孔（ISO / ANSI）
+Standart, gelişmiş ve mekanik eşleştirmeler	标准、高级和机械配合
+Standart\n3 Görünüş	标准\n三视图
+Statik Analiz	静态分析
+Statik analiz OpenCASCADE çekirdeği gerektirir.	静态分析需要 OpenCASCADE 内核。
+Statik\nAnaliz	静态\n分析
+Süpürme	扫描
+Süpürme Kesme	扫描切除
+Süpürme ve loft OpenCASCADE (B-rep) çekirdeği gerektirir: Araçlar → Geometri çekirdeği.	扫描和放样需要 OpenCASCADE（B-rep）内核：工具 → 几何内核。
+Süpürme\nKesme	扫描\n切除
+Süpürülen profille malzeme kes	用扫描轮廓切除材料
+Süre (sn)	时长 (s)
+Sürüklerken çarpışmada dur	拖动时在碰撞处停止
+Sürükleyici boyut geometriyi belirler; güdümlü boyut yalnızca ölçer.	驱动尺寸定义几何体；从动尺寸仅测量。
+Sütunlar: D1@Taslak1 (boyut), D1@Ekstrüzyon1 (derinlik), $BASTIR@Özellik (1/0). Değerler ekran biriminde.	列：D1@Sketch1（尺寸）、D1@Extrude1（深度）、$SUPPRESS@Feature (1/0)。数值采用显示单位。
+Sınır koşulları	边界条件
+Sınır: en az	极限：最小
+Sınır: en çok	极限：最大
+Sınırlar	极限
+Taban	基体
+Taban Flanş	基体法兰
+Taban flanşın kenarına bükülmüş flanş	在基体法兰的边线处折弯的法兰
+Taban flanşın üst veya alt kenarlarına tıklayın (birden çok kenar seçilebilir).	单击基体法兰的上或下边线（可选择多条边线）。
+Taban-Flanş	基体法兰
+Taban\nFlanş	基体\n法兰
+Tabanın dikey ekseni	基体的竖直轴
+Tabanın yatay ekseni	基体的水平轴
+Tablo Güdümlü Çoğaltma	表格驱动的阵列
+Tablolar	表格
+Takım çapı	刀具直径
+Talaş kaldırmalı	需要加工
+Talaş kaldırmasız	禁止加工
+Tam Tanımlı	完全定义
+Tam tanımlı (siyah). Değiştirmek için boyutunu çift tıklayıp düzenleyin.	完全定义（黑色）。双击其尺寸进行更改。
+Tamam	确定
+Tanım	定义
+Tanım durumu	定义状态
+Taraf	侧
+Tarafsız yüz düzlemsel olmalı.	中性面必须是平面。
+Tarafsız yüz seçildi. Şimdi eğim verilecek yüzlere tıklayın.	已选择中性面。现在单击要拔模的面。
+Tarafsız yüzü seçmeyi iptal et	取消中性面选择
+Tasarım tablosu	设计表
+Tasarım tablosu kaydedildi: 	设计表已保存： 
+Tasarım tablosu okunamadı: 	无法读取设计表： 
+Tasarım tablosu: %d konfigürasyon, %d parametre.	设计表：%d 个配置，%d 个参数。
+Taslak	草图
+Taslak / 3B taslak çizgileri boyunca standart profil	沿草图 / 3D 草图直线的标准轮廓
+Taslak araçları	草图工具
+Taslak araçları için önce bir taslak açın (Özellikler > Taslak).	使用草图工具前请先打开草图（特征 > 草图）。
+Taslak boyutlarını görünüşlere aktar (ilişkili)	将草图尺寸导入视图（关联）
+Taslak boş.	草图为空。
+Taslak düzlemi	草图基准面
+Taslak düzlemi silindir eksenine paralel olmalı (ör. silindire teğet referans düzlem). Taslak yay uzunluğu korunarak sarılır.	草图基准面必须平行于圆柱轴（例如与圆柱相切的参考基准面）。草图按弧长保持不变进行包覆。
+Taslak eğrilerini merkez çizgisi etrafında döndür	绕中心线旋转草图曲线
+Taslak eğrilerini yüzey olarak uzat	将草图曲线拉伸为曲面
+Taslak eğrisi, taslak düzlemine dik doğrultuda yüze izdüşürülür. Sonuç süpürme yolu, kılavuz veya çoğaltma eğrisi olarak kullanılabilir.	草图曲线垂直于草图基准面投影到面上。结果可用作扫描路径、引导线或阵列曲线。
+Taslak ilişki simgelerini göster/gizle	显示/隐藏草图几何关系图标
+Taslak için bir düzlem (Ön / Üst / Sağ) veya modelin düzlemsel bir yüzünü tıklayın.	单击基准面（前视 / 上视 / 右视）或模型的平面以绘制草图。
+Taslak metni — kabartma/gravür için ekstrüzyonla kullanılır	草图文字 — 与拉伸配合用于浮雕/雕刻
+Taslak orijini sabittir. Diğer öğeleri orijine ilişkilendirmek veya boyutlandırmak için birlikte seçin.	草图原点是固定的。将其与其他实体一起选择，可将它们与原点建立关系或标注尺寸。
+Taslak profiliyle malzeme keser	用草图轮廓切除材料
+Taslak çiz	绘制草图
+Taslaktan 2.5 eksen kontur / cep frezeleme G-kodu	由草图生成 2.5 轴轮廓 / 型腔铣削 G 代码
+Taslaktan çık	退出草图
+Taslaktan çık ve ekstrüzyon uygula	退出草图并应用拉伸
+Taslaktan\nÇık	退出\n草图
+Taslağı DXF olarak dışa aktar (lazer kesim / CNC)	将草图导出为 DXF（激光切割 / CNC）
+Taslağı DXF olarak dışa aktar (lazer kesim)...	将草图导出为 DXF（激光切割）...
+Taslağı SVG olarak dışa aktar...	将草图导出为 SVG...
+Taslağı belirli bir mesafe boyunca uzatarak katı oluşturur	将草图拉伸一定距离生成实体
+Taslağı bir eksen etrafında döndürerek katı oluşturur	将草图绕轴旋转生成实体
+Taslağı düzenle	编辑草图
+Taslağı kapat ve modeli güncelle	关闭草图并更新模型
+Taslağı silindirik yüze sar: kabartma, oyma veya çizgi	将草图包覆到圆柱面上：浮雕、凹陷或刻划
+Taslağı yüzeyi izleyerek kabart veya oy (gravür)	沿曲面对草图进行浮雕或凹陷（雕刻）
+Taşı / kopyala / döndür / çoğalt...	移动 / 复制 / 旋转 / 阵列...
+Taşı /\nÇoğalt	移动 /\n阵列
+Taşı, kopyala, döndür, ölçekle, doğrusal/dairesel çoğalt	移动、复制、旋转、缩放、线性/圆周阵列
+Taşınamaz: bir özellik ebeveyninden önce veya çocuğundan sonra olamaz.	无法移动：特征不能位于其父特征之前或子特征之后。
+Teknik Resim	工程图
+Teknik Resim: araç çubuğundan görünüş, boyut ve açıklama ekleyin. Tekerlek: yakınlaştır, sağ/orta tuş: kaydır.	工程图：从工具栏添加视图、尺寸和注解。滚轮：缩放，右键/中键：平移。
+Tema (yeniden başlatınca)	主题（重启后）
+Tema bir sonraki açılışta uygulanacak.	主题将在下次启动时应用。
+Ters taraf (-)	对侧 (-)
+Ters yön	反向
+Ters yön (taslağın arkasına)	反向（草图后方）
+Ters yön 2	反向 2
+Teğet kenarlar	切边
+Teğet nokta: %s	切点：%s
+Tolerans	公差
+Toplam açı	总角度
+Toplam açı (360: eşit aralık)	总角度（360：等间距）
+Toplam kütle ve ağırlık merkezi	总质量和质心
+Toplam parça adedi: %d	零件总数：%d
+Toplam profil boyu: %s	轮廓总长度：%s
+Tur sayısı	圈数
+Turuncu: takım merkezi yolları (her paso derinliğinde). Z0 = %s; X/Y taslak eksenleri.	橙色：刀具中心路径（每个切深处）。Z0 = %s；X/Y 为草图轴。
+Tüm dairelere merkez işareti	所有圆上的中心符号线
+Tüm gövdeleri çoğalt	阵列所有实体
+Tümünden	完全贯穿
+Tür	类型
+Tür: 	类型： 
+Tür: %s — %d referans	类型：%s — %d 个参考
+Türkçe	Türkçe
+Tıklama	单击选取
+Uyarı: gerilme akma dayanımını aşıyor!	警告：应力超过屈服强度！
+Uyarı: taslakta %d açık/dallanan/kesişen kontur var, yok sayıldı. Kesişen eğrilerden oluşan alanları kullanmak için 'Bölge seç'e tıklayın.	警告：草图中有 %d 个开环/分支/相交轮廓，已忽略。单击"选择区域"以使用相交曲线形成的区域。
+Uygula	应用
+Uygun eğri yok (taslak zinciri, 3B taslak, helis veya projeksiyon eğrisi oluşturun).	没有合适的曲线（创建草图链、3D 草图、螺旋线或投影曲线）。
+Uzat	延伸
+Uzayda çizgi zinciri (süpürme yolu için). Tab: çizim düzlemini değiştir	空间中的直线链（用作扫描路径）。Tab：更改绘图平面
+Uzun görünüşün ortasını kaldır	移除长视图的中间部分
+Uzunluk	长度
+Uzunluk, çap, yarıçap, açı boyutu	长度、直径、半径、角度尺寸
+Uzunluk: 	长度： 
+Uzunluk: %s	长度：%s
+Uzunluk: %s\nAçı: %s\nBaşlangıç: (%s, %s)\nBitiş: (%s, %s)	长度：%s\n角度：%s\n起点：(%s, %s)\n终点：(%s, %s)
+V alın kaynağı	V 形坡口焊
+Varlıkları\nDönüştür	转换\n实体引用
+Varsayılanlara dön	恢复默认值
+Vazgeç	取消
+Vazgeçildi.	已取消。
+Vida hatvesi	螺距
+X'i ters çevir	翻转 X
+XY (Ön)	XY（前视）
+XZ (Üst)	XZ（上视）
+Y'yi ters çevir	翻转 Y
+YZ (Sağ)	YZ（右视）
+Yakalanacak öğe yok: köşe, daire veya kenara tıklayın.	没有可捕捉的对象：单击顶点、圆或边线。
+Yapı geometrisi (construction)	构造几何线
+Yapı geometrisi aç/kapat	切换构造几何线
+Yapı/eksen çizgisi — döndürme ve ayna ekseni (N)	构造/轴线 — 旋转和镜向轴 (N)
+Yapı\nGeometrisi	构造\n几何线
+Yapısal Üye	结构构件
+Yapısal\nÜye	结构\n构件
+Yardım	帮助
+Yardımcı\nGörünüş	辅助\n视图
+Yarıçap	半径
+Yarıçap: %s\nMerkez: (%s, %s)\nAçılar: %s → %s	半径：%s\n中心：(%s, %s)\n角度：%s → %s
+Yatay	水平
+Yay	圆弧
+Yazdır	打印
+Yazı	文字
+Yazı boyutu	文字大小
+Yazı yüksekliği	文字高度
+Yeni	新建
+Yeni (Ctrl+N)	新建 (Ctrl+N)
+Yeni Montaj	新建装配体
+Yeni konfigürasyon	新建配置
+Yeni metin	新文字
+Yeni montaj. 'Bileşen Ekle' ile parça (.dcad) ekleyin; ilk bileşen sabitlenir.	新装配体。用"插入零部件"添加零件 (.dcad)；第一个零部件是固定的。
+Yeni parça '%s' montaj bağlamında açıldı: diğer bileşenlerin düzlemsel yüzlerine tıklayıp taslak açabilirsiniz. Bitince 'Montaj' sekmesi.	已在装配体环境中打开新零件 '%s'：单击其他零部件的平面以开始草图。完成后使用"装配体"选项卡。
+Yeni parça için önce montajı kaydedin (parça montajın yanına kaydedilir).	新建零件前请先保存装配体（零件保存在装配体旁边）。
+Yeni parça.	新零件。
+Yeni sayfa ekle	添加新图纸
+Yeni\nParça	新建\n零件
+Yeni\tCtrl+N	新建\tCtrl+N
+Yeniden Adlandır	重命名
+Yeniden Adlandır\tF2	重命名\tF2
+Yeniden adlandır	重命名
+Yeniden hesapla	重新计算
+Yerleştirmek için taslakta bir noktaya tıklayın.	在草图中单击一点以放置。
+Yinele	重做
+Yinele (Ctrl+Y)	重做 (Ctrl+Y)
+Yinele\tCtrl+Y	重做\tCtrl+Y
+Yok	无
+Yok. Bir boyutun değer kutusuna '=' ile başlayan ifade yazın (ör. =genislik/2).	无。在尺寸数值框中输入以 '=' 开头的表达式（例如 =width/2）。
+Yol	路径
+Yol haritası	路线图
+Yol yok: bir taslakta açık çizgi zinciri, 3B taslak veya helis oluşturun.	无路径：在草图中创建开环直线链、3D 草图或螺旋线。
+Yol: %d   Paso: %d\nKesme boyu: %s\nTahmini süre: %.1f dk	路径：%d   走刀：%d\n切削长度：%s\n预计时间：%.1f 分钟
+Yoğunluk: 	密度： 
+Yoğunluk: %s (%s g/cm³)	密度：%s (%s g/cm³)
+Yukarı	向上
+Yukarı taşı	上移
+Yuvarlatma parametreleri	圆角参数
+Yuvarlatılacak kenarlar	要圆角的边线
+Yön	方向
+Yön / eksen	方向 / 轴
+Yön 1	方向 1
+Yön 2	方向 2
+Yön 2 bitişi	方向 2 终止条件
+Yön için modelden kenar / eksen / yüz seçin.	在模型上选择边线 / 轴 / 面作为方向。
+Yön: 	方向： 
+Yönelim	方向
+Yönü ters çevir	反向
+Yönü ters çevir (içe / diğer taraf)	反向（向内 / 另一侧）
+Yönü yeniden seç	重新选择方向
+Yönü çevir	反向
+Yönü çevir (diğer yüzden ölç)	反向（从另一个面测量）
+Yükseklik	高度
+Yükseklik / derinlik	高度 / 深度
+Yükseklik ve adım	高度和螺距
+Yükseklik ve tur	高度和圈数
+Yüz	面
+Yüz alanı, mesafe, açı ve koordinat ölç	测量面面积、距离、角度和坐标
+Yüz seçili	已选择面
+Yüz: 	面： 
+Yüze dik (bastırma)	垂直于面（推）
+Yüzey	曲面
+Yüzey Dikme	缝合曲面
+Yüzey Kırp	剪裁曲面
+Yüzey işleme sembolü (Ra)	表面粗糙度符号 (Ra)
+Yüzey\nDikme	缝合\n曲面
+Yüzey\nKırp	剪裁\n曲面
+Yüzey\nPürüzlülüğü	表面\n粗糙度
+Yüzeye teğet	与曲面相切
+Yüzeyi kalınlaştırarak katı oluştur	通过加厚曲面生成实体
+Yüzeyler	曲面
+Yüzeyleri bir ana düzlemle kırp	用主基准面剪裁曲面
+Yüzeyleri birleştir; kapalıysa katı oluştur	缝合曲面；闭合时生成实体
+Yüzeylerin paralel kopyası	曲面的平行副本
+Yüzlere kalıptan çıkma eğimi ver (tarafsız yüze göre)	为面添加拔模以便脱模（相对于中性面）
+Z0 referansı	Z0 参考
+Zemin (gölge yakalayıcı)	地面（阴影捕捉）
+Zincirleme çizgi (L)	连续直线 (L)
+en büyük: 	最大： 
+odak uzaklığı 	焦距 
+Çalıştır	运行
+Çap	直径
+Çap bölgesi (Ø)	直径区域 (Ø)
+Çap: %s\nMerkez: (%s, %s)	直径：%s\n中心：(%s, %s)
+Çarpışma algılama OpenCASCADE çekirdeği gerektirir.	碰撞检查需要 OpenCASCADE 内核。
+Çarpışma: %s ↔ %s — bileşen son çarpışmasız konumda durdu.	碰撞：%s ↔ %s — 零部件停在最后一个无碰撞位置。
+Çarpışmada dur (OpenCASCADE)	在碰撞处停止 (OpenCASCADE)
+Çekirdek	内核
+Çekirdek: 	内核： 
+Çekme yönü	开模方向
+Çekme yönünü ters çevir	反转开模方向
+Çepeçevre	全周
+Çizgi	直线
+Çizgi (yüzeyi böl)	直线（分割面）
+Çizgi: %d   Nokta: %d\nToplam uzunluk: %s	直线：%d   点：%d\n总长度：%s
+Çizgiler (taslak / 3B taslak)	直线（草图 / 3D 草图）
+Çizgiyi ilk kesiştiği öğeye uzat (E)	将直线延伸到遇到的第一个实体 (E)
+Çokgen	多边形
+Çoğaltma	阵列
+Çoğaltma OpenCASCADE (B-rep) çekirdeği gerektirir: Araçlar → Geometri çekirdeği.	阵列需要 OpenCASCADE（B-rep）内核：工具 → 几何内核。
+Çoğaltmayı Sil	删除阵列
+Çoğaltılabilecek özellik yok (ekstrüzyon, döndürme, süpürme, loft, delik).	没有可阵列的特征（拉伸、旋转、扫描、放样、孔）。
+Çoğaltılacak	要阵列的对象
+Çoğaltılacak: 	要阵列的对象： 
+Çıkar (ana gövdeden)	删减（从主实体）
+Çıkartma boyu	贴图大小
+Çıkartma ekle (görüntü seç, sonra yüze tıkla)	添加贴图（选择图像，然后单击一个面）
+Çıkartma yerleştirildi.	贴图已放置。
+Çıkartmalar (decal)	贴图
+Çıkartmaları temizle (%d)	清除贴图 (%d)
+Çıkartmanın yerleşeceği yüze tıklayın.	单击要放置贴图的面。
+Çıktı	输出
+Çıkış	退出
+Ölç	测量
+Ölç...	测量...
+Ölç: model üzerinde yüz veya köşe noktasına tıklayın (en fazla 2 seçim). Esc: kapat.	测量：单击模型上的面或顶点（最多 2 个选择）。Esc：关闭。
+Ölçek	缩放
+Ölçü	尺寸
+Ön	前视
+Ön Düzlem	前视基准面
+Ön Düzlem (XY)	前视基准面 (XY)
+Ön, üst, yan ve izometrik görünüşleri yerleştir	放置前视、上视、侧视和等轴测视图
+Ön\tCtrl+1	前视\tCtrl+1
+Önce bir bileşen seçin.	请先选择一个零部件。
+Önce bir görünüş seçin (Seç aracıyla görünüşe tıklayın).	请先选择一个视图（用选择工具单击视图）。
+Önce bir görünüş seçin.	请先选择一个视图。
+Önce bir katı model oluşturun (ör. Ekstrüzyon).	请先创建实体模型（例如拉伸）。
+Önce bir katı model oluşturun.	请先创建实体模型。
+Önce bir taslak çizin (kapalı profil: plaka, açık çizgi zinciri: bükümlü sac).	请先绘制草图（闭合轮廓：平板，开环直线链：折弯钣金）。
+Önce bir taslak çizin veya seçin.	请先绘制或选择草图。
+Önce daire içeren bir taslak çizin (helis çapı ve merkezi daireden alınır).	请先绘制包含圆的草图（螺旋线的直径和中心取自该圆）。
+Önce dışa aktarılacak taslağı seçin (ağaçtan veya taslak modunda).	请先选择要导出的草图（在树中或草图模式下）。
+Önce kapalı konturlu bir taslak çizin veya ağaçtan bir taslak seçin.	请先绘制带闭合轮廓的草图，或在树中选择草图。
+Önce listeden bir komut seçin.	请先从列表中选择一个命令。
+Önce montajı kaydedin, sonra alt montajı açın.	请先保存装配体，然后打开子装配体。
+Önce motor eksenini seçin (silindirik yüz).	请先选择马达轴（圆柱面）。
+Önce patlatılacak bileşenlere tıklayın.	请先单击要爆炸的零部件。
+Önce taban flanş oluşturun.	请先创建基体法兰。
+Önce çizgilerden oluşan bir taslak veya 3B taslak çizin / seçin.	请先绘制 / 选择由直线组成的草图或 3D 草图。
+Önce çoğaltılacak bileşen(ler)e tıklayın.	请先单击要阵列的零部件。
+Önce öğeleri seçin (Shift/Ctrl ile çoklu seçim), sonra tekrar tıklayın.	请先选择实体（用 Shift/Ctrl 多选），然后再次单击。
+Örnek montajı aç	打开示例装配体
+Örnek parça yüklendi: plaka, silindir, döndürülmüş yaka, kanal ve delik.	已加载示例零件：平板、圆柱、旋转凸缘、槽口和孔。
+Örnek parçayı aç	打开示例零件
+Örnek sayısı	实例数
+Örnek sayısı 2	实例数 2
+Örnek: isim plakası (metin, spline, denklemler)	示例：铭牌（文字、样条曲线、方程式）
+Örnekler eğrinin başlangıcına göre konumlanır; ilk örnek seçili özelliğin kendisidir.	实例相对于曲线起点定位；第一个实例即所选特征本身。
+Ötele	平移
+Öteleme	平移
+Öteleme tablosu	平移表
+Özel	自定义
+Özellik taşındı.	特征已移动。
+Özellik: %d   Taslak: %d   Gövde: %d   Üçgen: %d	特征：%d   草图：%d   实体：%d   三角形：%d
+Özellikler	特征
+Özelliği düzenle	编辑特征
+Öğeler: 	实体： 
+Öğeleri ölçülendir: çizgi = uzunluk, daire = çap, yay = yarıçap, iki çizgi = açı (D)	标注实体：直线 = 长度，圆 = 直径，圆弧 = 半径，两条直线 = 角度 (D)
+Üst	上视
+Üst Düzlem	上视基准面
+Üst Düzlem (XZ)	上视基准面 (XZ)
+Üst sapma	上偏差
+Üst\tCtrl+5	上视\tCtrl+5
+Üye: %d   Toplam boy: %s	构件：%d   总长度：%s
+Üç nokta	三点
+Üçgen: %d   LOD'lu parça: %d%s	三角形：%d   带 LOD 的零件：%d%s
+İfade	表达式
+İki düzlem kesişimi	两个基准面的交线
+İki köşeden dikdörtgen (R)	由两个角点生成矩形 (R)
+İki mesafe	两个距离
+İki nokta	两点
+İki nokta arasında eksen çizgisi	两点之间的轴线
+İki taraf	两侧
+İki veya daha çok taslak arasında yüzey	两个或多个草图之间的曲面
+İki yön (Yön 2)	两个方向（方向 2）
+İki yöne (orta)	两个方向（中间）
+İlerleme (mm/dk)	进给 (mm/min)
+İlişki ekle	添加几何关系
+İlişki eklemek için öğeleri seçin (Shift/Ctrl ile çoklu seçim); uygun ilişkiler soldaki panelde listelenir.	选择实体以添加几何关系（用 Shift/Ctrl 多选）；合适的几何关系列在左侧面板中。
+İlişki: 	几何关系： 
+İlişki\nEkle	添加\n几何关系
+İlişkiler taslak içinde eklenir. Önce bir taslak açın.	几何关系在草图中添加。请先打开草图。
+İlişkileri\nGöster	显示\n几何关系
+İnce özellik (açık taslaklar da)	薄壁特征（也适用于开环草图）
+İpucu: bileşeni sol tuşla sürükleyin; eşleştirmeler korunarak hareket eder. (f) sabit, (-) eksik tanımlı.	提示：用左键拖动零部件；它会在保持配合的情况下移动。(f) 固定，(-) 欠定义。
+İpuçları	提示
+İsim plakası: köşe yuvarlatma, altıgen, kanal, spline ve metin. Genişliği Denklemler panelinden değiştirin.	铭牌：圆角、六边形、槽口、样条曲线和文字。在"方程式"面板中更改宽度。
+İzdüşüm	投影
+İzdüşüm\nGörünüşü	投影\n视图
+İzometrik	等轴测
+İzometrik\tCtrl+7	等轴测\tCtrl+7
+İç kontur (delikler)	内轮廓（孔）
+İçe Aktarılan Gövde	输入的实体
+İçe aktar (CSV)	导入 (CSV)
+İçe aktarma için OpenCASCADE çekirdeği gerekli (Araçlar → Geometri çekirdeği).	导入需要 OpenCASCADE 内核（工具 → 几何内核）。
+İçe aktarılan dosya	导入的文件
+İçe aktarılıyor: 	正在导入： 
+İçe\nAktar	导入
+İşlem	操作
+Şekil değiştirmiş hal (×%s)	变形形状 (×%s)
+Şimdi %s yerine tıklayın.	现在单击%s的放置位置。
+Σ Açı denklemi: =	Σ 角度方程式：=
+Σ Bu boyut denklemle sürülüyor; değeri değişkenler değişince güncellenir.	Σ 此尺寸由方程式驱动；变量更改时其值会更新。
+• Mavi = eksik tanımlı, siyah = tam tanımlı.\n• Akıllı Boyut (D): çizgiye tıklayıp yerleştirin; değeri yazın.\n• İki öğeyi Shift ile seçin → panelden ilişki (paralel, teğet...) ekleyin.\n• Boyut etiketine çift tıklayınca değer değişir; taslak kendini günceller.\n• Noktaları sürükleyin: ilişkiler korunur.	• 蓝色 = 欠定义，黑色 = 完全定义。\n• 智能尺寸 (D)：单击直线并放置；输入数值。\n• 按住 Shift 选择两个实体 → 从面板添加几何关系（平行、相切...）。\n• 双击尺寸标签可更改其数值；草图会自动更新。\n• 拖动点：几何关系保持不变。
+■ Eğim gerekli (dik duvar): %%%.1f	■ 需要拔模（竖直壁）：%.1f%%
+■ Negatif eğim (ters yöne bakar): %%%.1f	■ 负拔模（背离开模方向）：%.1f%%
+■ Pozitif eğim (çekme yönüne bakar): %%%.1f	■ 正拔模（朝向开模方向）：%.1f%%
+● Makro kaydı başladı: eklediğiniz özellikler kaydedilir. Durdurmak için Araçlar → Makro kaydı.	● 已开始录制宏：添加的特征将被录制。通过 工具 → 录制宏 停止。
+Dışa Aktar	导出
+Dışa Aktar...	导出...
+Dışa aktar...	导出...
+Dışa\nAktar	导出
+Format seçin (çift tıklama da olur). Gri olanlar şu an kullanılamaz — nedeni seçince aşağıda yazar.	选择一种格式（也可双击）。灰色格式当前不可用 — 选中它可在下方查看原因。
+Tüm formatlara dışa aktar: STEP, IGES, STL, 3MF, OBJ, glTF, DXF, PDF, görüntü... (Ctrl+E)	导出为任意格式：STEP、IGES、STL、3MF、OBJ、glTF、DXF、PDF、图像... (Ctrl+E)
+Taslağı (DXF, SVG) veya modeli dışa aktar (Ctrl+E)	导出草图（DXF、SVG）或模型 (Ctrl+E)
+Sayfayı dışa aktar: PDF, DXF, SVG, AI, görüntü... (Ctrl+E)	导出图纸：PDF、DXF、SVG、AI、图像... (Ctrl+E)
+Montajı dışa aktar: STEP, STL, 3MF, glTF, görüntü, XML... (Ctrl+E)	导出装配体：STEP、STL、3MF、glTF、图像、XML... (Ctrl+E)
+Dışa aktarıldı: 	已导出： 
+Yazılamadı (hata %d): %s	无法写入（错误 %d）：%s
+Bu format desteklenmiyor.	不支持此格式。
+Montaj açıkken parça dosyası yazılamaz: bileşeni Parçayı Aç ile açın.	打开装配体时无法写入零件文件：请用"打开零件"打开该零部件。
+Montaj resmi montaj dosyasının (.dasm) içinde saklanır.	装配体工程图保存在装配体文件 (.dasm) 中。
+Montaj açık değil.	没有打开的装配体。
+OpenCASCADE çekirdeği gerekli (Araçlar → Geometri çekirdeği; kurulum: OCC_Kur.bat).	需要 OpenCASCADE 内核（工具 → 几何内核；安装：OCC_Kur.bat）。
+Montajda yalnızca STEP yazılabilir.	装配体只能写入 STEP。
+Önce bir taslak seçin (ağaçtan veya taslak modunda).	请先选择草图（在树中或草图模式下）。
+Teknik Resim sekmesinde kullanılır.	在"工程图"选项卡中可用。
+DIY.CAD	DIY.CAD
+3B katı (B-rep)	3D 实体 (B-rep)
+3B ağ / baskı / görselleştirme	3D 网格 / 打印 / 可视化
+2B çizim	2D 工程图
+Görüntü	图像
+Veri / paket	数据 / 包
+DIY.CAD Parça	DIY.CAD 零件
+DIY.CAD Montaj	DIY.CAD 装配体
+DIY.CAD Teknik Resim	DIY.CAD 工程图
+DIY.CAD Parça Şablonu	DIY.CAD 零件模板
+DIY.CAD Montaj Şablonu	DIY.CAD 装配体模板
+DIY.CAD Teknik Resim Şablonu	DIY.CAD 工程图模板
+DIY.CAD Kütüphane Unsuru Parçası	DIY.CAD 库特征零件
+DIY.CAD Form Verme Aracı (Sac)	DIY.CAD 成形工具（钣金）
+STEP AP214	STEP AP214
+STEP AP203	STEP AP203
+STEP AP242	STEP AP242
+IGES	IGES
+OpenCASCADE BREP	OpenCASCADE BREP
+Parasolid (X_T / X_B)	Parasolid (X_T / X_B)
+ACIS (SAT)	ACIS (SAT)
+VDA-FS	VDA-FS
+JT	JT
+STL	STL
+3MF	3MF
+AMF	AMF
+Wavefront OBJ	Wavefront OBJ
+PLY	PLY
+OFF	OFF
+FBX	FBX
+glTF ikili (GLB)	glTF 二进制 (GLB)
+glTF (JSON)	glTF (JSON)
+VRML 97 (WRL)	VRML 97 (WRL)
+XAML 3B	XAML 3D
+IFC4 (BIM)	IFC4 (BIM)
+HTML 3B görüntüleyici	HTML 3D 查看器
+3DXML / CGR	3DXML / CGR
+U3D / 3B PDF	U3D / 3D PDF
+HOOPS (HSF / HCG)	HOOPS (HSF / HCG)
+eDrawings (EPRT / EASM / EDRW / EXE)	eDrawings (EPRT / EASM / EDRW / EXE)
+Taslak DXF (R12)	草图 DXF (R12)
+Taslak SVG	草图 SVG
+Teknik resim PDF	工程图 PDF
+Teknik resim DXF	工程图 DXF
+Teknik resim SVG	工程图 SVG
+Adobe Illustrator (AI)	Adobe Illustrator (AI)
+DWG	DWG
+PNG	PNG
+JPEG	JPEG
+BMP	BMP
+TIFF	TIFF
+Photoshop (PSD)	Photoshop (PSD)
+XML veri (özellikler, kütle, malzeme listesi)	XML 数据（特征、质量、材料明细表）
+ZIP paket	ZIP 包
+Parametrik parça dosyası (özellik ağacı, taslaklar, teknik resim sayfaları).	参数化零件文件（特征树、草图、工程图图纸）。
+Montaj dosyası (bileşenler, eşleştirmeler, patlatma, montaj resmi).	装配体文件（零部件、配合、爆炸、装配体工程图）。
+Teknik resim dosyası: parça ve resim sayfaları birlikte; açılınca Teknik Resim sekmesinde açılır.	工程图文件：零件及其工程图图纸；在"工程图"选项卡中打开。
+Parça şablonu: açılınca yeni (adsız) parça olarak başlar; birimler, malzeme, özellikler hazır gelir.	零件模板：以预设单位、材料和特征的新（未命名）零件打开。
+Montaj şablonu: açılınca yeni (adsız) montaj olarak başlar.	装配体模板：以新（未命名）装配体打开。
+Teknik resim şablonu: sayfa boyutu, antet ve görünüş yerleşimi yeni resimde hazır gelir.	工程图模板：为新工程图预设图纸大小、标题栏和视图布局。
+Tekrar kullanılacak unsur (delik, cep, kanal...) için kütüphane parçası.	可重复使用特征的库零件（孔、型腔、槽口...）。
+Sac metalde ezme / kabartma için form verme aracı parçası.	钣金成形工具零件（百叶窗、凸起...）。
+Evrensel katı model formatı (renk / katman bilgili AP214). Diğer CAD programlarına aktarım için önerilir.	通用实体模型格式（带颜色 / 图层的 AP214）。推荐用于传输到其他 CAD 程序。
+Evrensel katı model formatı (yapılandırma kontrollü AP203).	通用实体模型格式（配置控制的 AP203）。
+Evrensel katı model formatının yeni sürümü (AP242).	通用实体模型格式的较新版本 (AP242)。
+Yüzey ve tel kafes değişim formatı.	曲面和线框交换格式。
+OpenCASCADE'in kendi kesin geometri formatı.	OpenCASCADE 的原生精确几何格式。
+Parasolid ticari, lisanslı bir çekirdeğin formatıdır; açık kaynak yazıcısı yok. Yerine STEP kullanın — Parasolid tabanlı programlar STEP'i sorunsuz açar.	Parasolid 是商业授权内核的格式；没有开源写入器。请改用 STEP — 基于 Parasolid 的程序可以顺利打开 STEP。
+ACIS ticari, lisanslı bir çekirdeğin formatıdır; açık kaynak yazıcısı yok. Yerine STEP kullanın.	ACIS 是商业授权内核的格式；没有开源写入器。请改用 STEP。
+Eski otomotiv yüzey formatı; kullanılan OpenCASCADE sürümünde yazıcısı yok. Yerine STEP veya IGES kullanın.	旧版汽车曲面格式；所用 OpenCASCADE 版本没有其写入器。请改用 STEP 或 IGES。
+JT yazmak için ticari bir geliştirme kiti gerekir. Yerine STEP AP242 veya glTF kullanın.	写入 JT 需要商业 SDK。请改用 STEP AP242 或 glTF。
+3B baskı ve hızlı prototipleme ağ formatı (ikili). OpenCASCADE açıksa kalite ayarı Araçlar → Geometri çekirdeği'nden.	用于 3D 打印和快速原型制作的网格格式（二进制）。使用 OpenCASCADE 时，在 工具 → 几何内核 中设置品质。
+3D Manufacturing Format: birimli, renkli 3B baskı formatı (montajda bileşen başına nesne).	3D Manufacturing Format：带单位和颜色的 3D 打印格式（装配体中每个零部件一个对象）。
+Additive Manufacturing File: eklemeli imalat için XML ağ formatı (renkli).	Additive Manufacturing File：用于增材制造的 XML 网格格式（带颜色）。
+Genel 3B geometri ve render formatı.	通用 3D 几何和渲染格式。
+Polygon File Format (ikili) — 3B tarayıcı ve ağ işleme programları.	Polygon File Format（二进制）— 3D 扫描仪和网格处理程序。
+Object File Format (metin).	Object File Format（文本）。
+Animasyon ve oyun motoru formatı (ASCII FBX 7.4).	动画和游戏引擎格式 (ASCII FBX 7.4)。
+Web ve AR / VR için 3B iletim formatı, tek dosya.	用于 Web 和 AR / VR 的 3D 传输格式，单文件。
+Web ve AR / VR için 3B iletim formatı (veriler dosyanın içinde).	用于 Web 和 AR / VR 的 3D 传输格式（数据嵌入文件中）。
+Sanal gerçeklik modelleme dili.	Virtual Reality Modeling Language。
+WPF Viewport3D sahnesi (MeshGeometry3D).	WPF Viewport3D 场景 (MeshGeometry3D)。
+Yapı bilgi modellemesi: bileşenler üçgen yüzlü IfcBuildingElementProxy olarak (Z yukarı).	建筑信息模型：零部件为三角化的 IfcBuildingElementProxy（Z 向上）。
+Tarayıcıda açılan tek dosyalık 3B görüntüleyici (döndür / yakınlaştır). Paylaşım için eDrawings benzeri.	在浏览器中打开的单文件 3D 查看器（旋转 / 缩放）。类似 eDrawings 的共享文件。
+Belirli bir üreticinin kapalı formatları; açık yazıcı yok. Görselleştirme için glTF / GLB veya HTML kullanın.	特定厂商的封闭格式；没有开放的写入器。请使用 glTF / GLB 或 HTML 进行可视化。
+Henüz desteklenmiyor. Paylaşım için HTML görüntüleyici veya GLB kullanın.	尚不支持。请使用 HTML 查看器或 GLB 进行共享。
+Ticari HOOPS kütüphanesinin kapalı formatları; açık yazıcı yok. Yerine glTF / GLB kullanın.	商业 HOOPS 库的封闭格式；没有开放的写入器。请改用 glTF / GLB。
+Belirli bir üreticinin kapalı görüntüleyici formatları. Yerine HTML 3B görüntüleyici (tek dosya, her tarayıcıda açılır) veya PDF kullanın.	特定厂商的封闭查看器格式。请改用 HTML 3D 查看器（单文件，可在任何浏览器中打开）或 PDF。
+Seçili / düzenlenen taslak: lazer ve CNC kesim.	所选 / 正在编辑的草图：激光和 CNC 切割。
+Seçili / düzenlenen taslak, vektörel.	所选 / 正在编辑的草图，矢量。
+Etkin teknik resim sayfası, vektörel PDF.	活动工程图图纸，矢量 PDF。
+Etkin teknik resim sayfası (katmanlı R12).	活动工程图图纸（分层 R12）。
+Etkin teknik resim sayfası, vektörel.	活动工程图图纸，矢量。
+Etkin teknik resim sayfası; PDF uyumlu AI (Illustrator doğrudan açar).	活动工程图图纸；与 PDF 兼容的 AI（Illustrator 可直接打开）。
+DWG kapalı bir formattır. DXF olarak kaydedip ücretsiz ODA File Converter veya AutoCAD ile DWG'ye çevirin.	DWG 是封闭格式。请保存为 DXF，并用免费的 ODA File Converter 或 AutoCAD 转换为 DWG。
+Kayıpsız görüntü.	无损图像。
+Sıkıştırılmış görüntü.	压缩图像。
+Windows bitmap (24 bit).	Windows 位图（24 位）。
+Sıkıştırmasız, yüksek kaliteli görüntü.	未压缩的高品质图像。
+Tek katmanlı Photoshop belgesi.	单图层 Photoshop 文档。
+Belge bilgisi, özellik ağacı, malzeme ve kütle özellikleri; montajda malzeme listesi.	文档信息、特征树、材料和质量属性；装配体的材料明细表。
+Paylaşım paketi: DIY.CAD dosyası + STL + HTML görüntüleyici + PNG + XML.	共享包：DIY.CAD 文件 + STL + HTML 查看器 + PNG + XML。
+Eklentiler	插件
+Eklenti bulunamadı.	未找到插件。
+Eklenti değişikliği yeniden başlatınca uygulanır.	插件更改将在重启后生效。
+Eklenti paneli parça ekranında açılır.	插件面板在零件界面中打开。
+Eklenti: setup(api: PluginApi) içeren .gd dosyası (src/core/plugin_api.gd). Açma / kapama yeniden başlatınca uygulanır.	插件：包含 setup(api: PluginApi) 的 .gd 文件 (src/core/plugin_api.gd)。启用 / 禁用在重启后生效。
+Çift tıklayın veya sağ tıklayın: malzemeyi düzenle	双击或右键单击：编辑材料
+dk	分钟
+Otomatik kayıtlar: 	自动保存： 

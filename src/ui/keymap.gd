@@ -11,7 +11,7 @@ const DEFAULTS := [
 	["global", "Ctrl+S", "save"], ["global", "Ctrl+Shift+S", "save_as"], ["global", "Ctrl+O", "open"], ["global", "Ctrl+N", "new"],
 	["global", "Ctrl+1", "view_front"], ["global", "Ctrl+2", "view_back"], ["global", "Ctrl+3", "view_left"],
 	["global", "Ctrl+4", "view_right"], ["global", "Ctrl+5", "view_top"], ["global", "Ctrl+6", "view_bottom"],
-	["global", "Ctrl+7", "view_iso"], ["global", "Ctrl+8", "normal"],
+	["global", "Ctrl+7", "view_iso"], ["global", "Ctrl+8", "normal"], ["global", "Ctrl+E", "export_all"],
 	["global", "F", "fit"], ["global", "Delete", "delete"], ["global", "F2", "rename"],
 	["sketch", "L", "tool:line"], ["sketch", "N", "tool:centerline"], ["sketch", "R", "tool:rect"], ["sketch", "C", "tool:circle"],
 	["sketch", "A", "tool:arc"], ["sketch", "S", "tool:select"], ["sketch", "D", "tool:dimension"], ["sketch", "T", "tool:trim"],

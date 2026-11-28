@@ -2,6 +2,13 @@
 
 Detailed feature list: [ROADMAP.md](ROADMAP.md). Usage: [README.md](README.md).
 
+## 0.9.4
+- **Export dialog**: every output format in one place — File → Export... (Ctrl+E) and the Export button on the Features, Sketch, Drawing and Assembly toolbars. 48 entries in groups (DIY.CAD, 3D solid, 3D mesh / printing / visualization, 2D drawing, image, data / package); formats that do not apply right now or cannot be written are greyed out with the reason and a recommended alternative.
+- **New DIY.CAD file types**: part / assembly / drawing templates (`.dcadt`, `.dasmt`, `.ddrwt` — they open as a new untitled document), drawing file (`.ddrw`, opens on the Drawing tab), library feature part (`.dclfp`) and forming tool (`.dcftp`).
+- **New export formats**: STEP AP203 / AP214 / AP242 (schema selectable), OpenCASCADE BREP, 3MF, AMF, PLY, OFF, FBX (ASCII 7.4), glTF / GLB, VRML 97, XAML 3D, IFC4, a self-contained HTML 3D viewer, Adobe Illustrator (PDF-compatible AI), PNG / JPEG / BMP / TIFF / PSD, an XML report (features, mass properties, bill of materials) and a ZIP sharing package (DIY.CAD file + STL + HTML viewer + PNG + XML). Assemblies are written with each component's placement and color.
+- **German, Russian and Chinese (Simplified) UI** next to Turkish and English: full dictionaries (~1300 strings each) and the Help text; Tools → Options → General → Language or `--lang=de|ru|zh`. Chinese text uses the system's CJK font.
+- Smaller: Ctrl+E shortcut; the getting-started hint points to Export; the Plugins tab, plugin options, autosave interval unit and the material row in the feature tree are translated.
+
 ## 0.9.3
 - **Protected region** for STL import: within a selected range along an axis, the protected layer of the section (e.g. the top part) and the strip inside it (e.g. center ±h) are only moved, not scaled; below the layer / at the strip edge and at the ends of the region they blend into the normal scaling (the strip has no effect outside the layer — the transform never folds). Details that mate with other parts, such as holes, slots and joints, keep their original size while the body grows around them. Layer and strip limits can vary along the axis as a profile.
 - **Multi-region stretch**: `stretch` now also accepts a list of regions (separate + / − mm per region).

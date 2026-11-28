@@ -13,6 +13,7 @@ KEYBOARD (customizable: Tools → Options → Keyboard shortcuts)
   Arrow keys .................. rotate the view by 15°
   Ctrl+Z / Ctrl+Y ............. undo / redo
   Ctrl+S / Ctrl+O / Ctrl+N .... save / open / new
+  Ctrl+E ...................... Export (all formats)
   Delete ...................... delete      F2: rename
   Esc ......................... cancel / leave the tool
   Enter ....................... OK in the feature panel
@@ -57,4 +58,4 @@ DRAWING (tab)
   Left click: select / place   Drag: move a view or annotation
   Wheel: zoom   Right/middle button: pan   F: fit to sheet
   Delete: delete the selected view/annotation   Esc: release the tool / clear selection
-  Output: PDF, SVG, DXF (convert DXF to DWG with AutoCAD / ODA)
+  Export (Ctrl+E): PDF, DXF, SVG, AI, images (convert DXF to DWG with AutoCAD / ODA)
